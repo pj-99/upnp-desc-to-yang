@@ -1,0 +1,342 @@
+module sensor-transport-generic {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/sensor-transport-generic";
+  prefix "sensor-transport-generic";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "sensor-transport-generic";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses sensor-transport-generic-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping sensor-transport-generic-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-sensorid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SensorID";
+      }
+
+      leaf a-arg-type-sensorurn {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SensorURN";
+      }
+
+      leaf a-arg-type-sensorclientid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SensorClientID";
+      }
+
+      leaf a-arg-type-datarecords {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataRecords";
+      }
+
+      leaf a-arg-type-datarecordcount {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_DataRecordCount";
+      }
+
+      leaf a-arg-type-transporturl {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransportURL";
+      }
+
+      leaf a-arg-type-sensorrecordinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SensorRecordInfo";
+      }
+
+      leaf a-arg-type-transportconnectionid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransportConnectionID";
+      }
+
+      leaf a-arg-type-sensordatatypeenable {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_SensorDataTypeEnable";
+      }
+
+      leaf a-arg-type-transportconnections {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransportConnections";
+      }
+
+    }
+
+  }
+
+  grouping sensor-transport-generic-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-sensorid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sensorurn {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sensorclientid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecords {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecordcount {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transporturl {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sensorrecordinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transportconnectionid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sensordatatypeenable {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transportconnections {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping sensor-transport-generic-action {
+    description "Service actions";
+    action connect-sensor {
+      description "Action ConnectSensor";
+      input {
+        leaf sensor-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SensorID";
+        }
+
+        leaf sensor-client-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SensorClientID";
+        }
+
+        leaf sensor-u-r-n {
+          type string;
+          description "Related to A_ARG_TYPE_SensorURN";
+        }
+
+        leaf sensor-record-info {
+          type string;
+          description "Related to A_ARG_TYPE_SensorRecordInfo";
+        }
+
+        leaf sensor-data-type-enable {
+          type boolean;
+          description "Related to A_ARG_TYPE_SensorDataTypeEnable";
+        }
+
+        leaf transport-u-r-l {
+          type string;
+          description "Related to A_ARG_TYPE_TransportURL";
+        }
+
+      }
+
+      output {
+        leaf transport-connection-i-d {
+          type leafref {
+            path "../../state/a-arg-type-transportconnectionid";
+          }
+
+          description "Related to A_ARG_TYPE_TransportConnectionID";
+        }
+
+      }
+
+    }
+
+    action disconnect-sensor {
+      description "Action DisconnectSensor";
+      input {
+        leaf sensor-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SensorID";
+        }
+
+        leaf transport-u-r-l {
+          type string;
+          description "Related to A_ARG_TYPE_TransportURL";
+        }
+
+        leaf transport-connection-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TransportConnectionID";
+        }
+
+      }
+
+    }
+
+    action read-sensor {
+      description "Action ReadSensor";
+      input {
+        leaf sensor-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SensorID";
+        }
+
+        leaf sensor-client-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SensorClientID";
+        }
+
+        leaf sensor-u-r-n {
+          type string;
+          description "Related to A_ARG_TYPE_SensorURN";
+        }
+
+        leaf sensor-record-info {
+          type string;
+          description "Related to A_ARG_TYPE_SensorRecordInfo";
+        }
+
+        leaf sensor-data-type-enable {
+          type boolean;
+          description "Related to A_ARG_TYPE_SensorDataTypeEnable";
+        }
+
+        leaf data-record-count {
+          type uint32;
+          description "Related to A_ARG_TYPE_DataRecordCount";
+        }
+
+      }
+
+      output {
+        leaf data-records {
+          type leafref {
+            path "../../state/a-arg-type-datarecords";
+          }
+
+          description "Related to A_ARG_TYPE_DataRecords";
+        }
+
+      }
+
+    }
+
+    action write-sensor {
+      description "Action WriteSensor";
+      input {
+        leaf sensor-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SensorID";
+        }
+
+        leaf sensor-u-r-n {
+          type string;
+          description "Related to A_ARG_TYPE_SensorURN";
+        }
+
+        leaf data-records {
+          type string;
+          description "Related to A_ARG_TYPE_DataRecords";
+        }
+
+      }
+
+    }
+
+    action get-sensor-transport-connections {
+      description "Action GetSensorTransportConnections";
+      input {
+        leaf sensor-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SensorID";
+        }
+
+      }
+
+      output {
+        leaf transport-connections {
+          type leafref {
+            path "../../state/a-arg-type-transportconnections";
+          }
+
+          description "Related to A_ARG_TYPE_TransportConnections";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping sensor-transport-generic-top {
+    description "Service top";
+    container sensor-transport-generic {
+      description "Service";
+      uses sensor-transport-generic-state-top;
+      uses sensor-transport-generic-state-attributes-top;
+      uses sensor-transport-generic-action;
+    }
+
+  }
+
+  grouping sensor-transport-generic-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses sensor-transport-generic-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

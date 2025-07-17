@@ -1,0 +1,1615 @@
+module wlan-configuration {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wlan-configuration";
+  prefix "wlan-configuration";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wlan-configuration";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wlan-configuration-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wlan-configuration-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf insecure-out-of-band-access-enabled {
+        type boolean;
+        config false;
+        description "InsecureOutOfBandAccessEnabled";
+      }
+
+      leaf s-s-i-d {
+        type string;
+        description "SSID";
+      }
+
+      leaf b-s-s-i-d {
+        type string;
+        config false;
+        description "BSSID";
+      }
+
+      leaf beacon-type {
+        type enumeration {
+          enum  NONE {
+            description "None";
+          }
+
+          enum  BASIC {
+            description "Basic";
+          }
+
+          enum  WPA {
+            description "WPA";
+          }
+
+          enum  11I {
+            description "11i";
+          }
+
+          enum  BASICAND_WPA {
+            description "BasicandWPA";
+          }
+
+          enum  BASICAND11I {
+            description "Basicand11i";
+          }
+
+          enum  WPAAND11I {
+            description "WPAand11i";
+          }
+
+          enum  BASICAND_WPAAND11I {
+            description "BasicandWPAand11i";
+          }
+
+        }
+
+        description "BeaconType";
+      }
+
+      leaf beacon-advertisement-enabled {
+        type boolean;
+        config false;
+        description "BeaconAdvertisementEnabled";
+      }
+
+      leaf radio-enabled {
+        type boolean;
+        config false;
+        description "RadioEnabled";
+      }
+
+      leaf location-description {
+        type string;
+        description "LocationDescription";
+      }
+
+      leaf regulatory-domain {
+        type string;
+        description "RegulatoryDomain";
+      }
+
+      leaf total-p-s-k-failures {
+        type uint32;
+        config false;
+        description "TotalPSKFailures";
+      }
+
+      leaf total-integrity-failures {
+        type uint32;
+        config false;
+        description "TotalIntegrityFailures";
+      }
+
+      leaf channel {
+        type uint8;
+        description "Channel";
+      }
+
+      leaf possible-channels {
+        type string;
+        config false;
+        description "PossibleChannels";
+      }
+
+      leaf channels-in-use {
+        type string;
+        config false;
+        description "ChannelsInUse";
+      }
+
+      leaf device-operation-mode {
+        type enumeration {
+          enum  INFRASTRUCTURE_ACCESS_POINT {
+            description "InfrastructureAccessPoint";
+          }
+
+          enum  WIRELESS_BRIDGE_POINT_TO_POINT {
+            description "WirelessBridgePointToPoint";
+          }
+
+          enum  WIRELESS_BRIDGE_POINT_TO_MULTIPOINT {
+            description "WirelessBridgePointToMultipoint";
+          }
+
+          enum  WIRELESS_REPEATER {
+            description "WirelessRepeater";
+          }
+
+          enum  WIRELESS_STA {
+            description "WirelessSTA";
+          }
+
+        }
+
+        description "DeviceOperationMode";
+      }
+
+      leaf distance-from-root {
+        type uint8;
+        config false;
+        description "DistanceFromRoot";
+      }
+
+      leaf peer-b-s-s-i-d {
+        type string;
+        config false;
+        description "PeerBSSID";
+      }
+
+      leaf basic-data-transmission-rates {
+        type string;
+        config false;
+        description "BasicDataTransmissionRates";
+      }
+
+      leaf operational-data-transmission-rates {
+        type string;
+        config false;
+        description "OperationalDataTransmissionRates";
+      }
+
+      leaf possible-data-transmission-rates {
+        type string;
+        config false;
+        description "PossibleDataTransmissionRates";
+      }
+
+      leaf auto-rate-fall-back-enabled {
+        type boolean;
+        config false;
+        description "AutoRateFallBackEnabled";
+      }
+
+      leaf total-bytes-sent {
+        type uint32;
+        config false;
+        description "TotalBytesSent";
+      }
+
+      leaf total-bytes-received {
+        type uint32;
+        config false;
+        description "TotalBytesReceived";
+      }
+
+      leaf total-packets-sent {
+        type uint32;
+        config false;
+        description "TotalPacketsSent";
+      }
+
+      leaf total-packets-received {
+        type uint32;
+        config false;
+        description "TotalPacketsReceived";
+      }
+
+      leaf total-associations {
+        type uint16;
+        config false;
+        description "TotalAssociations";
+      }
+
+      leaf associated-device-m-a-c-address {
+        type string;
+        config false;
+        description "AssociatedDeviceMACAddress";
+      }
+
+      leaf associated-device-i-p-address {
+        type string;
+        config false;
+        description "AssociatedDeviceIPAddress";
+      }
+
+      leaf associated-device-authentication-state {
+        type boolean;
+        config false;
+        description "AssociatedDeviceAuthenticationState";
+      }
+
+      leaf authentication-service-mode {
+        type enumeration {
+          enum  NONE {
+            description "None";
+          }
+
+          enum  LINK_AUTHENTICATION {
+            description "LinkAuthentication";
+          }
+
+          enum  RADIUS_CLIENT {
+            description "RadiusClient";
+          }
+
+        }
+
+        description "AuthenticationServiceMode";
+      }
+
+      leaf w-e-p-key-index {
+        type uint8;
+        config false;
+        description "WEPKeyIndex";
+      }
+
+      leaf w-e-p-key {
+        type string;
+        config false;
+        description "WEPKey";
+      }
+
+      leaf key-passphrase {
+        type string;
+        config false;
+        description "KeyPassphrase";
+      }
+
+      leaf w-e-p-encryption-level {
+        type enumeration {
+          enum  DISABLED {
+            description "Disabled";
+          }
+
+          enum  40-BIT {
+            description "40-bit";
+          }
+
+          enum  104-BIT {
+            description "104-bit";
+          }
+
+        }
+
+        config false;
+        description "WEPEncryptionLevel";
+      }
+
+      leaf pre-shared-key {
+        type string;
+        description "PreSharedKey";
+      }
+
+      leaf pre-shared-key-index {
+        type uint8;
+        config false;
+        description "PreSharedKeyIndex";
+      }
+
+      leaf basic-encryption-modes {
+        type enumeration {
+          enum  NONE {
+            description "None";
+          }
+
+          enum  WEPENCRYPTION {
+            description "WEPEncryption";
+          }
+
+        }
+
+        config false;
+        description "BasicEncryptionModes";
+      }
+
+      leaf basic-authentication-mode {
+        type enumeration {
+          enum  NONE {
+            description "None";
+          }
+
+          enum  EAPAUTHENTICATION {
+            description "EAPAuthentication";
+          }
+
+        }
+
+        config false;
+        description "BasicAuthenticationMode";
+      }
+
+      leaf w-p-a-encryption-modes {
+        type enumeration {
+          enum  WEPENCRYPTION {
+            description "WEPEncryption";
+          }
+
+          enum  TKIPENCRYPTION {
+            description "TKIPEncryption";
+          }
+
+          enum  WEPAND_TKIPENCRYPTION {
+            description "WEPandTKIPEncryption";
+          }
+
+          enum  AESENCRYPTION {
+            description "AESEncryption";
+          }
+
+          enum  WEPAND_AESENCRYPTION {
+            description "WEPandAESEncryption";
+          }
+
+          enum  TKIPAND_AESENCRYPTION {
+            description "TKIPandAESEncryption";
+          }
+
+          enum  WEPAND_TKIPAND_AESENCRYPTION {
+            description "WEPandTKIPandAESEncryption";
+          }
+
+        }
+
+        config false;
+        description "WPAEncryptionModes";
+      }
+
+      leaf w-p-a-authentication-mode {
+        type enumeration {
+          enum  PSKAUTHENTICATION {
+            description "PSKAuthentication";
+          }
+
+          enum  EAPAUTHENTICATION {
+            description "EAPAuthentication";
+          }
+
+        }
+
+        config false;
+        description "WPAAuthenticationMode";
+      }
+
+      leaf i-e-e-e11i-encryption-modes {
+        type enumeration {
+          enum  WEPENCRYPTION {
+            description "WEPEncryption";
+          }
+
+          enum  TKIPENCRYPTION {
+            description "TKIPEncryption";
+          }
+
+          enum  WEPAND_TKIPENCRYPTION {
+            description "WEPandTKIPEncryption";
+          }
+
+          enum  AESENCRYPTION {
+            description "AESEncryption";
+          }
+
+          enum  WEPAND_AESENCRYPTION {
+            description "WEPandAESEncryption";
+          }
+
+          enum  TKIPAND_AESENCRYPTION {
+            description "TKIPandAESEncryption";
+          }
+
+          enum  WEPAND_TKIPAND_AESENCRYPTION {
+            description "WEPandTKIPandAESEncryption";
+          }
+
+        }
+
+        config false;
+        description "IEEE11iEncryptionModes";
+      }
+
+      leaf i-e-e-e11i-authentication-mode {
+        type enumeration {
+          enum  TKIPAUTHENTICATION {
+            description "TKIPAuthentication";
+          }
+
+          enum  EAPAUTHENTICATION {
+            description "EAPAuthentication";
+          }
+
+          enum  EAPAND_TKIPAUTHENTICATION {
+            description "EAPandTKIPAuthentication";
+          }
+
+        }
+
+        config false;
+        description "IEEE11iAuthenticationMode";
+      }
+
+    }
+
+  }
+
+  grouping wlan-configuration-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container insecure-out-of-band-access-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container s-s-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container b-s-s-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container beacon-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container beacon-advertisement-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container radio-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container location-description {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container regulatory-domain {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-p-s-k-failures {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-integrity-failures {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container channel {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container possible-channels {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container channels-in-use {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-operation-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container distance-from-root {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container peer-b-s-s-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container basic-data-transmission-rates {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container operational-data-transmission-rates {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container possible-data-transmission-rates {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container auto-rate-fall-back-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-bytes-sent {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-bytes-received {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-packets-sent {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-packets-received {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-associations {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container associated-device-m-a-c-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container associated-device-i-p-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container associated-device-authentication-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container authentication-service-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container w-e-p-key-index {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container w-e-p-key {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container key-passphrase {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container w-e-p-encryption-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container pre-shared-key {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container pre-shared-key-index {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container basic-encryption-modes {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container basic-authentication-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container w-p-a-encryption-modes {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container w-p-a-authentication-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container i-e-e-e11i-encryption-modes {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container i-e-e-e11i-authentication-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wlan-configuration-action {
+    description "Service actions";
+    action set-insecure-out-of-band-access-mode {
+      description "Action SetInsecureOutOfBandAccessMode";
+      input {
+        leaf new-insecure-out-of-band-access-enabled {
+          type boolean;
+          description "Related to InsecureOutOfBandAccessEnabled";
+        }
+
+      }
+
+    }
+
+    action get-insecure-out-of-band-access-mode {
+      description "Action GetInsecureOutOfBandAccessMode";
+      output {
+        leaf new-insecure-out-of-band-access-enabled {
+          type leafref {
+            path "../../state/insecure-out-of-band-access-enabled";
+          }
+
+          description "Related to InsecureOutOfBandAccessEnabled";
+        }
+
+      }
+
+    }
+
+    action set-s-s-i-d {
+      description "Action SetSSID";
+      input {
+        leaf new-s-s-i-d {
+          type string;
+          description "Related to SSID";
+        }
+
+      }
+
+    }
+
+    action get-s-s-i-d {
+      description "Action GetSSID";
+      output {
+        leaf new-s-s-i-d {
+          type leafref {
+            path "../../state/s-s-i-d";
+          }
+
+          description "Related to SSID";
+        }
+
+      }
+
+    }
+
+    action get-b-s-s-i-d {
+      description "Action GetBSSID";
+      output {
+        leaf new-b-s-s-i-d {
+          type leafref {
+            path "../../state/b-s-s-i-d";
+          }
+
+          description "Related to BSSID";
+        }
+
+      }
+
+    }
+
+    action set-beacon-type {
+      description "Action SetBeaconType";
+      input {
+        leaf new-beacon-type {
+          type string;
+          description "Related to BeaconType";
+        }
+
+      }
+
+    }
+
+    action get-beacon-type {
+      description "Action GetBeaconType";
+      output {
+        leaf new-beacon-type {
+          type leafref {
+            path "../../state/beacon-type";
+          }
+
+          description "Related to BeaconType";
+        }
+
+      }
+
+    }
+
+    action set-beacon-advertisement {
+      description "Action SetBeaconAdvertisement";
+      input {
+        leaf new-beacon-advertisement-enabled {
+          type boolean;
+          description "Related to BeaconAdvertisementEnabled";
+        }
+
+      }
+
+    }
+
+    action get-beacon-advertisement {
+      description "Action GetBeaconAdvertisement";
+      output {
+        leaf new-beacon-advertisement-enabled {
+          type leafref {
+            path "../../state/beacon-advertisement-enabled";
+          }
+
+          description "Related to BeaconAdvertisementEnabled";
+        }
+
+      }
+
+    }
+
+    action set-radio-mode {
+      description "Action SetRadioMode";
+      input {
+        leaf new-radio-enabled {
+          type boolean;
+          description "Related to RadioEnabled";
+        }
+
+      }
+
+    }
+
+    action get-radio-mode {
+      description "Action GetRadioMode";
+      output {
+        leaf new-radio-enabled {
+          type leafref {
+            path "../../state/radio-enabled";
+          }
+
+          description "Related to RadioEnabled";
+        }
+
+      }
+
+    }
+
+    action set-location-description {
+      description "Action SetLocationDescription";
+      input {
+        leaf new-location-description {
+          type string;
+          description "Related to LocationDescription";
+        }
+
+      }
+
+    }
+
+    action get-location-description {
+      description "Action GetLocationDescription";
+      output {
+        leaf new-location-description {
+          type leafref {
+            path "../../state/location-description";
+          }
+
+          description "Related to LocationDescription";
+        }
+
+      }
+
+    }
+
+    action set-regulatory-domain {
+      description "Action SetRegulatoryDomain";
+      input {
+        leaf new-regulatory-domain {
+          type string;
+          description "Related to RegulatoryDomain";
+        }
+
+      }
+
+    }
+
+    action get-regulatory-domain {
+      description "Action GetRegulatoryDomain";
+      output {
+        leaf new-regulatory-domain {
+          type leafref {
+            path "../../state/regulatory-domain";
+          }
+
+          description "Related to RegulatoryDomain";
+        }
+
+      }
+
+    }
+
+    action get-failure-status-info {
+      description "Action GetFailureStatusInfo";
+      output {
+        leaf new-total-integrity-failures {
+          type leafref {
+            path "../../state/total-integrity-failures";
+          }
+
+          description "Related to TotalIntegrityFailures";
+        }
+
+        leaf new-total-p-s-k-failures {
+          type leafref {
+            path "../../state/total-p-s-k-failures";
+          }
+
+          description "Related to TotalPSKFailures";
+        }
+
+      }
+
+    }
+
+    action set-channel {
+      description "Action SetChannel";
+      input {
+        leaf new-channel {
+          type uint8;
+          description "Related to Channel";
+        }
+
+      }
+
+    }
+
+    action get-channel-info {
+      description "Action GetChannelInfo";
+      output {
+        leaf new-channel {
+          type leafref {
+            path "../../state/channel";
+          }
+
+          description "Related to Channel";
+        }
+
+        leaf new-possible-channels {
+          type leafref {
+            path "../../state/possible-channels";
+          }
+
+          description "Related to PossibleChannels";
+        }
+
+      }
+
+    }
+
+    action get-channels-in-use {
+      description "Action GetChannelsInUse";
+      output {
+        leaf new-channels-in-use {
+          type leafref {
+            path "../../state/channels-in-use";
+          }
+
+          description "Related to ChannelsInUse";
+        }
+
+      }
+
+    }
+
+    action set-device-operation-mode {
+      description "Action SetDeviceOperationMode";
+      input {
+        leaf new-device-operation-mode {
+          type string;
+          description "Related to DeviceOperationMode";
+        }
+
+        leaf new-s-s-i-d {
+          type string;
+          description "Related to SSID";
+        }
+
+        leaf new-b-s-s-i-d {
+          type string;
+          description "Related to PeerBSSID";
+        }
+
+        leaf new-channel {
+          type uint8;
+          description "Related to Channel";
+        }
+
+        leaf new-basic-data-transmission-rates {
+          type string;
+          description "Related to BasicDataTransmissionRates";
+        }
+
+        leaf new-operational-data-transmission-rates {
+          type string;
+          description "Related to OperationalDataTransmissionRates";
+        }
+
+        leaf new-distance-from-root {
+          type uint8;
+          description "Related to DistanceFromRoot";
+        }
+
+      }
+
+    }
+
+    action get-device-operation-mode {
+      description "Action GetDeviceOperationMode";
+      output {
+        leaf new-device-operation-mode {
+          type leafref {
+            path "../../state/device-operation-mode";
+          }
+
+          description "Related to DeviceOperationMode";
+        }
+
+        leaf new-s-s-i-d {
+          type leafref {
+            path "../../state/s-s-i-d";
+          }
+
+          description "Related to SSID";
+        }
+
+        leaf new-b-s-s-i-d {
+          type leafref {
+            path "../../state/peer-b-s-s-i-d";
+          }
+
+          description "Related to PeerBSSID";
+        }
+
+        leaf new-channel {
+          type leafref {
+            path "../../state/channel";
+          }
+
+          description "Related to Channel";
+        }
+
+        leaf new-basic-data-transmission-rates {
+          type leafref {
+            path "../../state/basic-data-transmission-rates";
+          }
+
+          description "Related to BasicDataTransmissionRates";
+        }
+
+        leaf new-operational-data-transmission-rates {
+          type leafref {
+            path "../../state/operational-data-transmission-rates";
+          }
+
+          description "Related to OperationalDataTransmissionRates";
+        }
+
+        leaf new-distance-from-root {
+          type leafref {
+            path "../../state/distance-from-root";
+          }
+
+          description "Related to DistanceFromRoot";
+        }
+
+      }
+
+    }
+
+    action set-data-transmission-rates {
+      description "Action SetDataTransmissionRates";
+      input {
+        leaf new-basic-data-transmission-rates {
+          type string;
+          description "Related to BasicDataTransmissionRates";
+        }
+
+        leaf new-operational-data-transmission-rates {
+          type string;
+          description "Related to OperationalDataTransmissionRates";
+        }
+
+      }
+
+    }
+
+    action get-data-transmission-rate-info {
+      description "Action GetDataTransmissionRateInfo";
+      output {
+        leaf new-basic-data-transmission-rates {
+          type leafref {
+            path "../../state/basic-data-transmission-rates";
+          }
+
+          description "Related to BasicDataTransmissionRates";
+        }
+
+        leaf new-operational-data-transmission-rates {
+          type leafref {
+            path "../../state/operational-data-transmission-rates";
+          }
+
+          description "Related to OperationalDataTransmissionRates";
+        }
+
+        leaf new-possible-data-transmission-rates {
+          type leafref {
+            path "../../state/possible-data-transmission-rates";
+          }
+
+          description "Related to PossibleDataTransmissionRates";
+        }
+
+      }
+
+    }
+
+    action set-auto-rate-fall-back-mode {
+      description "Action SetAutoRateFallBackMode";
+      input {
+        leaf new-auto-rate-fall-back-enabled {
+          type boolean;
+          description "Related to AutoRateFallBackEnabled";
+        }
+
+      }
+
+    }
+
+    action get-auto-rate-fall-back-mode {
+      description "Action GetAutoRateFallBackMode";
+      output {
+        leaf new-auto-rate-fall-back-enabled {
+          type leafref {
+            path "../../state/auto-rate-fall-back-enabled";
+          }
+
+          description "Related to AutoRateFallBackEnabled";
+        }
+
+      }
+
+    }
+
+    action get-byte-statistics {
+      description "Action GetByteStatistics";
+      output {
+        leaf new-total-bytes-sent {
+          type leafref {
+            path "../../state/total-bytes-sent";
+          }
+
+          description "Related to TotalBytesSent";
+        }
+
+        leaf new-total-bytes-received {
+          type leafref {
+            path "../../state/total-bytes-received";
+          }
+
+          description "Related to TotalBytesReceived";
+        }
+
+      }
+
+    }
+
+    action get-packet-statistics {
+      description "Action GetPacketStatistics";
+      output {
+        leaf new-total-packets-sent {
+          type leafref {
+            path "../../state/total-packets-sent";
+          }
+
+          description "Related to TotalPacketsSent";
+        }
+
+        leaf new-total-packets-received {
+          type leafref {
+            path "../../state/total-packets-received";
+          }
+
+          description "Related to TotalPacketsReceived";
+        }
+
+      }
+
+    }
+
+    action get-total-associations {
+      description "Action GetTotalAssociations";
+      output {
+        leaf new-total-associations {
+          type leafref {
+            path "../../state/total-associations";
+          }
+
+          description "Related to TotalAssociations";
+        }
+
+      }
+
+    }
+
+    action get-generic-associated-device-info {
+      description "Action GetGenericAssociatedDeviceInfo";
+      input {
+        leaf new-associated-device-index {
+          type uint16;
+          description "Related to TotalAssociations";
+        }
+
+      }
+
+      output {
+        leaf new-associated-device-m-a-c-address {
+          type leafref {
+            path "../../state/associated-device-m-a-c-address";
+          }
+
+          description "Related to AssociatedDeviceMACAddress";
+        }
+
+        leaf new-associated-device-i-p-address {
+          type leafref {
+            path "../../state/associated-device-i-p-address";
+          }
+
+          description "Related to AssociatedDeviceIPAddress";
+        }
+
+        leaf new-associated-device-authentication-state {
+          type leafref {
+            path "../../state/associated-device-authentication-state";
+          }
+
+          description "Related to AssociatedDeviceAuthenticationState";
+        }
+
+      }
+
+    }
+
+    action get-specific-associated-device-info {
+      description "Action GetSpecificAssociatedDeviceInfo";
+      input {
+        leaf new-associated-device-m-a-c-address {
+          type string;
+          description "Related to AssociatedDeviceMACAddress";
+        }
+
+      }
+
+      output {
+        leaf new-associated-device-i-p-address {
+          type leafref {
+            path "../../state/associated-device-i-p-address";
+          }
+
+          description "Related to AssociatedDeviceIPAddress";
+        }
+
+        leaf new-associated-device-authentication-state {
+          type leafref {
+            path "../../state/associated-device-authentication-state";
+          }
+
+          description "Related to AssociatedDeviceAuthenticationState";
+        }
+
+      }
+
+    }
+
+    action set-authentication-service-mode {
+      description "Action SetAuthenticationServiceMode";
+      input {
+        leaf new-authentication-service-mode {
+          type string;
+          description "Related to AuthenticationServiceMode";
+        }
+
+      }
+
+    }
+
+    action get-authentication-service-mode {
+      description "Action GetAuthenticationServiceMode";
+      output {
+        leaf new-authentication-service-mode {
+          type leafref {
+            path "../../state/authentication-service-mode";
+          }
+
+          description "Related to AuthenticationServiceMode";
+        }
+
+      }
+
+    }
+
+    action set-security-keys {
+      description "Action SetSecurityKeys";
+      input {
+        leaf new-w-e-p-key0 {
+          type string;
+          description "Related to WEPKey";
+        }
+
+        leaf new-w-e-p-key1 {
+          type string;
+          description "Related to WEPKey";
+        }
+
+        leaf new-w-e-p-key2 {
+          type string;
+          description "Related to WEPKey";
+        }
+
+        leaf new-w-e-p-key3 {
+          type string;
+          description "Related to WEPKey";
+        }
+
+        leaf new-pre-shared-key {
+          type string;
+          description "Related to PreSharedKey";
+        }
+
+        leaf new-key-passphrase {
+          type string;
+          description "Related to KeyPassphrase";
+        }
+
+      }
+
+    }
+
+    action get-security-keys {
+      description "Action GetSecurityKeys";
+      output {
+        leaf new-w-e-p-key0 {
+          type leafref {
+            path "../../state/w-e-p-key";
+          }
+
+          description "Related to WEPKey";
+        }
+
+        leaf new-w-e-p-key1 {
+          type leafref {
+            path "../../state/w-e-p-key";
+          }
+
+          description "Related to WEPKey";
+        }
+
+        leaf new-w-e-p-key2 {
+          type leafref {
+            path "../../state/w-e-p-key";
+          }
+
+          description "Related to WEPKey";
+        }
+
+        leaf new-w-e-p-key3 {
+          type leafref {
+            path "../../state/w-e-p-key";
+          }
+
+          description "Related to WEPKey";
+        }
+
+        leaf new-pre-shared-key {
+          type leafref {
+            path "../../state/pre-shared-key";
+          }
+
+          description "Related to PreSharedKey";
+        }
+
+        leaf new-key-passphrase {
+          type leafref {
+            path "../../state/key-passphrase";
+          }
+
+          description "Related to KeyPassphrase";
+        }
+
+      }
+
+    }
+
+    action set-default-w-e-p-key-index {
+      description "Action SetDefaultWEPKeyIndex";
+      input {
+        leaf new-default-w-e-p-key-index {
+          type uint8;
+          description "Related to WEPKeyIndex";
+        }
+
+      }
+
+    }
+
+    action get-default-w-e-p-key-index {
+      description "Action GetDefaultWEPKeyIndex";
+      output {
+        leaf new-default-w-e-p-key-index {
+          type leafref {
+            path "../../state/w-e-p-key-index";
+          }
+
+          description "Related to WEPKeyIndex";
+        }
+
+      }
+
+    }
+
+    action set-pre-shared-key {
+      description "Action SetPreSharedKey";
+      input {
+        leaf new-pre-shared-key-index {
+          type uint8;
+          description "Related to PreSharedKeyIndex";
+        }
+
+        leaf new-pre-shared-key {
+          type string;
+          description "Related to PreSharedKey";
+        }
+
+        leaf new-p-s-k-passphrase {
+          type string;
+          description "Related to KeyPassphrase";
+        }
+
+      }
+
+    }
+
+    action get-pre-shared-key {
+      description "Action GetPreSharedKey";
+      input {
+        leaf new-pre-shared-key-index {
+          type uint8;
+          description "Related to PreSharedKeyIndex";
+        }
+
+      }
+
+      output {
+        leaf new-pre-shared-key {
+          type leafref {
+            path "../../state/pre-shared-key";
+          }
+
+          description "Related to PreSharedKey";
+        }
+
+        leaf new-p-s-k-passphrase {
+          type leafref {
+            path "../../state/key-passphrase";
+          }
+
+          description "Related to KeyPassphrase";
+        }
+
+      }
+
+    }
+
+    action set-basic-beacon-security-properties {
+      description "Action SetBasicBeaconSecurityProperties";
+      input {
+        leaf new-basic-encryption-modes {
+          type string;
+          description "Related to BasicEncryptionModes";
+        }
+
+        leaf new-basic-authentication-mode {
+          type string;
+          description "Related to BasicAuthenticationMode";
+        }
+
+      }
+
+    }
+
+    action get-basic-beacon-security-properties {
+      description "Action GetBasicBeaconSecurityProperties";
+      output {
+        leaf new-basic-encryption-modes {
+          type leafref {
+            path "../../state/basic-encryption-modes";
+          }
+
+          description "Related to BasicEncryptionModes";
+        }
+
+        leaf new-basic-authentication-mode {
+          type leafref {
+            path "../../state/basic-authentication-mode";
+          }
+
+          description "Related to BasicAuthenticationMode";
+        }
+
+      }
+
+    }
+
+    action set-w-p-a-beacon-security-properties {
+      description "Action SetWPABeaconSecurityProperties";
+      input {
+        leaf new-w-p-a-encryption-modes {
+          type string;
+          description "Related to WPAEncryptionModes";
+        }
+
+        leaf new-w-p-a-authentication-mode {
+          type string;
+          description "Related to WPAAuthenticationMode";
+        }
+
+      }
+
+    }
+
+    action get-w-p-a-beacon-security-properties {
+      description "Action GetWPABeaconSecurityProperties";
+      output {
+        leaf new-w-p-a-encryption-modes {
+          type leafref {
+            path "../../state/w-p-a-encryption-modes";
+          }
+
+          description "Related to WPAEncryptionModes";
+        }
+
+        leaf new-w-p-a-authentication-mode {
+          type leafref {
+            path "../../state/w-p-a-authentication-mode";
+          }
+
+          description "Related to WPAAuthenticationMode";
+        }
+
+      }
+
+    }
+
+    action set11i-beacon-security-properties {
+      description "Action Set11iBeaconSecurityProperties";
+      input {
+        leaf new-i-e-e-e11i-encryption-modes {
+          type string;
+          description "Related to IEEE11iEncryptionModes";
+        }
+
+        leaf new-i-e-e-e11i-authentication-mode {
+          type string;
+          description "Related to IEEE11iAuthenticationMode";
+        }
+
+      }
+
+    }
+
+    action get11i-beacon-security-properties {
+      description "Action Get11iBeaconSecurityProperties";
+      output {
+        leaf new-i-e-e-e11i-encryption-modes {
+          type leafref {
+            path "../../state/i-e-e-e11i-encryption-modes";
+          }
+
+          description "Related to IEEE11iEncryptionModes";
+        }
+
+        leaf new-i-e-e-e11i-authentication-mode {
+          type leafref {
+            path "../../state/i-e-e-e11i-authentication-mode";
+          }
+
+          description "Related to IEEE11iAuthenticationMode";
+        }
+
+      }
+
+    }
+
+    action factory-default-reset {
+      description "Action FactoryDefaultReset";
+    }
+
+    action reset-authentication {
+      description "Action ResetAuthentication";
+    }
+
+  }
+
+  grouping wlan-configuration-top {
+    description "Service top";
+    container wlan-configuration {
+      description "Service";
+      uses wlan-configuration-state-top;
+      uses wlan-configuration-state-attributes-top;
+      uses wlan-configuration-action;
+    }
+
+  }
+
+  grouping wlan-configuration-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wlan-configuration-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

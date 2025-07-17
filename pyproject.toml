@@ -1,0 +1,28 @@
+[project]
+name = "upnpdesc2yang"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "pj", email = "Pinjiang1220@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pytest>=8.4.1",
+]
+
+[project.scripts]
+upnpdesc2yang = "upnpdesc2yang:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+skip-string-normalization = false
+
+[tool.isort]
+profile = "black"
+line_length = 88

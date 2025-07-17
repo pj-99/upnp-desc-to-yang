@@ -1,0 +1,309 @@
+module digital-security-camera-settings {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/digital-security-camera-settings";
+  prefix "digital-security-camera-settings";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "digital-security-camera-settings";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses digital-security-camera-settings-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping digital-security-camera-settings-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf automatic-white-balance {
+        type boolean;
+        default true;
+        description "AutomaticWhiteBalance";
+      }
+
+      leaf fixed-white-balance {
+        type uint32 {
+          range "0 .. 10000";
+        }
+
+        default 3000;
+        description "FixedWhiteBalance";
+      }
+
+      leaf available-rotations {
+        type string;
+        config false;
+        description "AvailableRotations";
+      }
+
+      leaf default-rotation {
+        type string;
+        description "DefaultRotation";
+      }
+
+      leaf brightness {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 50;
+        description "Brightness";
+      }
+
+      leaf color-saturation {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 50;
+        description "ColorSaturation";
+      }
+
+    }
+
+  }
+
+  grouping digital-security-camera-settings-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container automatic-white-balance {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container fixed-white-balance {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container available-rotations {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container default-rotation {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container brightness {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container color-saturation {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping digital-security-camera-settings-action {
+    description "Service actions";
+    action set-automatic-white-balance {
+      description "Action SetAutomaticWhiteBalance";
+      input {
+        leaf new-automatic-white-balance {
+          type boolean;
+          description "Related to AutomaticWhiteBalance";
+        }
+
+      }
+
+    }
+
+    action get-automatic-white-balance {
+      description "Action GetAutomaticWhiteBalance";
+      output {
+        leaf ret-automatic-white-balance {
+          type leafref {
+            path "../../state/automatic-white-balance";
+          }
+
+          description "Related to AutomaticWhiteBalance";
+        }
+
+      }
+
+    }
+
+    action set-fixed-white-balance {
+      description "Action SetFixedWhiteBalance";
+      input {
+        leaf new-fixed-white-balance {
+          type uint32;
+          description "Related to FixedWhiteBalance";
+        }
+
+      }
+
+    }
+
+    action get-fixed-white-balance {
+      description "Action GetFixedWhiteBalance";
+      output {
+        leaf ret-fixed-white-balance {
+          type leafref {
+            path "../../state/fixed-white-balance";
+          }
+
+          description "Related to FixedWhiteBalance";
+        }
+
+      }
+
+    }
+
+    action get-available-rotations {
+      description "Action GetAvailableRotations";
+      output {
+        leaf ret-available-rotations {
+          type leafref {
+            path "../../state/available-rotations";
+          }
+
+          description "Related to AvailableRotations";
+        }
+
+      }
+
+    }
+
+    action set-default-rotation {
+      description "Action SetDefaultRotation";
+      input {
+        leaf new-rotation {
+          type string;
+          description "Related to DefaultRotation";
+        }
+
+      }
+
+    }
+
+    action get-default-rotation {
+      description "Action GetDefaultRotation";
+      output {
+        leaf ret-rotation {
+          type leafref {
+            path "../../state/default-rotation";
+          }
+
+          description "Related to DefaultRotation";
+        }
+
+      }
+
+    }
+
+    action set-brightness {
+      description "Action SetBrightness";
+      input {
+        leaf new-brightness {
+          type uint8;
+          description "Related to Brightness";
+        }
+
+      }
+
+    }
+
+    action get-brightness {
+      description "Action GetBrightness";
+      output {
+        leaf ret-brightness {
+          type leafref {
+            path "../../state/brightness";
+          }
+
+          description "Related to Brightness";
+        }
+
+      }
+
+    }
+
+    action increase-brightness {
+      description "Action IncreaseBrightness";
+    }
+
+    action decrease-brightness {
+      description "Action DecreaseBrightness";
+    }
+
+    action set-color-saturation {
+      description "Action SetColorSaturation";
+      input {
+        leaf new-color-saturation {
+          type uint8;
+          description "Related to ColorSaturation";
+        }
+
+      }
+
+    }
+
+    action get-color-saturation {
+      description "Action GetColorSaturation";
+      output {
+        leaf ret-color-saturation {
+          type leafref {
+            path "../../state/color-saturation";
+          }
+
+          description "Related to ColorSaturation";
+        }
+
+      }
+
+    }
+
+    action increase-color-saturation {
+      description "Action IncreaseColorSaturation";
+    }
+
+    action decrease-color-saturation {
+      description "Action DecreaseColorSaturation";
+    }
+
+  }
+
+  grouping digital-security-camera-settings-top {
+    description "Service top";
+    container digital-security-camera-settings {
+      description "Service";
+      uses digital-security-camera-settings-state-top;
+      uses digital-security-camera-settings-state-attributes-top;
+      uses digital-security-camera-settings-action;
+    }
+
+  }
+
+  grouping digital-security-camera-settings-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses digital-security-camera-settings-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

@@ -1,0 +1,272 @@
+module hvac-setpoint-schedule {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/hvac-setpoint-schedule";
+  prefix "hvac-setpoint-schedule";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "hvac-setpoint-schedule";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses hvac-setpoint-schedule-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping hvac-setpoint-schedule-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-dayofweek {
+        type enumeration {
+          enum  SUN {
+            description "Sun";
+          }
+
+          enum  MON {
+            description "Mon";
+          }
+
+          enum  TUE {
+            description "Tue";
+          }
+
+          enum  WED {
+            description "Wed";
+          }
+
+          enum  THU {
+            description "Thu";
+          }
+
+          enum  FRI {
+            description "Fri";
+          }
+
+          enum  SAT {
+            description "Sat";
+          }
+
+          enum  ALL {
+            description "All";
+          }
+
+          enum  WEEKDAYS {
+            description "Weekdays";
+          }
+
+          enum  WEEKEND {
+            description "Weekend";
+          }
+
+          enum  STANDBY {
+            description "Standby";
+          }
+
+          enum  * {
+            description "*";
+          }
+
+        }
+
+        default ALL;
+        config false;
+        description "A_ARG_TYPE_DayOfWeek";
+      }
+
+      leaf a-arg-type-eventname {
+        type enumeration {
+          enum  HOME {
+            description "Home";
+          }
+
+          enum  WAKE {
+            description "Wake";
+          }
+
+          enum  SLEEP {
+            description "Sleep";
+          }
+
+          enum  AWAY {
+            description "Away";
+          }
+
+        }
+
+        default HOME;
+        config false;
+        description "A_ARG_TYPE_EventName";
+      }
+
+      leaf a-arg-type-starttime {
+        type uint16 {
+          range "0 .. 1439";
+        }
+
+        default 0;
+        config false;
+        description "A_ARG_TYPE_StartTime";
+      }
+
+      leaf a-arg-type-heatingsetpoint {
+        type int32 {
+          range "0 .. 3500";
+        }
+
+        default 1500;
+        config false;
+        description "A_ARG_TYPE_HeatingSetpoint";
+      }
+
+      leaf a-arg-type-coolingsetpoint {
+        type int32 {
+          range "0 .. 3500";
+        }
+
+        default 2500;
+        config false;
+        description "A_ARG_TYPE_CoolingSetpoint";
+      }
+
+      leaf events-per-day {
+        type string;
+        config false;
+        description "EventsPerDay";
+      }
+
+    }
+
+  }
+
+  grouping hvac-setpoint-schedule-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-dayofweek {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-eventname {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-starttime {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-heatingsetpoint {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-coolingsetpoint {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container events-per-day {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping hvac-setpoint-schedule-action {
+    description "Service actions";
+    action set-event-parameters {
+      description "Action SetEventParameters";
+      input {
+        leaf submitted-day-of-week {
+          type string;
+          description "Related to A_ARG_TYPE_DayOfWeek";
+        }
+
+        leaf submitted-event-name {
+          type string;
+          description "Related to A_ARG_TYPE_EventName";
+        }
+
+        leaf new-start-time {
+          type uint16;
+          description "Related to A_ARG_TYPE_StartTime";
+        }
+
+        leaf new-heating-setpoint {
+          type int32;
+          description "Related to A_ARG_TYPE_HeatingSetpoint";
+        }
+
+        leaf new-cooling-setpoint {
+          type int32;
+          description "Related to A_ARG_TYPE_CoolingSetpoint";
+        }
+
+      }
+
+    }
+
+    action get-events-per-day {
+      description "Action GetEventsPerDay";
+      input {
+        leaf submitted-day-of-week {
+          type string;
+          description "Related to A_ARG_TYPE_DayOfWeek";
+        }
+
+      }
+
+      output {
+        leaf current-events-per-day {
+          type leafref {
+            path "../../state/events-per-day";
+          }
+
+          description "Related to EventsPerDay";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping hvac-setpoint-schedule-top {
+    description "Service top";
+    container hvac-setpoint-schedule {
+      description "Service";
+      uses hvac-setpoint-schedule-state-top;
+      uses hvac-setpoint-schedule-state-attributes-top;
+      uses hvac-setpoint-schedule-action;
+    }
+
+  }
+
+  grouping hvac-setpoint-schedule-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses hvac-setpoint-schedule-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

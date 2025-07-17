@@ -1,0 +1,648 @@
+module link-authentication {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/link-authentication";
+  prefix "link-authentication";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "link-authentication";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses link-authentication-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping link-authentication-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf number-of-entries {
+        type uint16;
+        default 0;
+        config false;
+        description "NumberOfEntries";
+      }
+
+      leaf identifier {
+        type string;
+        config false;
+        description "Identifier";
+      }
+
+      leaf secret {
+        type string;
+        config false;
+        description "Secret";
+      }
+
+      leaf secret-type {
+        type enumeration {
+          enum  TEXT_PASSWORD {
+            description "TextPassword";
+          }
+
+          enum  X509_CERTIFICATE {
+            description "X509Certificate";
+          }
+
+          enum  PUBLIC_KEY {
+            description "PublicKey";
+          }
+
+          enum  PUBLIC_KEY_HASH160 {
+            description "PublicKeyHash160";
+          }
+
+        }
+
+        config false;
+        description "SecretType";
+      }
+
+      leaf auth-type {
+        type enumeration {
+          enum  SHARED_SECRET {
+            description "SharedSecret";
+          }
+
+          enum  VALIDATE_CREDENTIALS {
+            description "ValidateCredentials";
+          }
+
+        }
+
+        config false;
+        description "AuthType";
+      }
+
+      leaf auth-state {
+        type enumeration {
+          enum  UNCONFIGURED {
+            description "Unconfigured";
+          }
+
+          enum  FAILED {
+            description "Failed";
+          }
+
+          enum  SUCCEEDED {
+            description "Succeeded";
+          }
+
+        }
+
+        default UNCONFIGURED;
+        config false;
+        description "AuthState";
+      }
+
+      leaf credential-state {
+        type enumeration {
+          enum  UNCONFIGURED {
+            description "Unconfigured";
+          }
+
+          enum  PENDING {
+            description "Pending";
+          }
+
+          enum  ACCEPTED {
+            description "Accepted";
+          }
+
+          enum  DENIED {
+            description "Denied";
+          }
+
+        }
+
+        default UNCONFIGURED;
+        config false;
+        description "CredentialState";
+      }
+
+      leaf description {
+        type string;
+        config false;
+        description "Description";
+      }
+
+      leaf m-a-c-address {
+        type string;
+        config false;
+        description "MACAddress";
+      }
+
+      leaf credential-duration {
+        type uint32;
+        default 0;
+        config false;
+        description "CredentialDuration";
+      }
+
+      leaf last-change {
+        type string;
+        config false;
+        description "LastChange";
+      }
+
+      leaf linked-identifier {
+        type string;
+        config false;
+        description "LinkedIdentifier";
+      }
+
+      leaf last-error {
+        type string;
+        config false;
+        description "LastError";
+      }
+
+    }
+
+  }
+
+  grouping link-authentication-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container number-of-entries {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container identifier {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container secret {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container secret-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container auth-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container auth-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container credential-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container description {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container m-a-c-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container credential-duration {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container last-change {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container linked-identifier {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container last-error {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping link-authentication-action {
+    description "Service actions";
+    action get-generic-entry {
+      description "Action GetGenericEntry";
+      input {
+        leaf new-index {
+          type uint16;
+          description "Related to NumberOfEntries";
+        }
+
+      }
+
+      output {
+        leaf new-identifier {
+          type leafref {
+            path "../../state/identifier";
+          }
+
+          description "Related to Identifier";
+        }
+
+        leaf new-secret {
+          type leafref {
+            path "../../state/secret";
+          }
+
+          description "Related to Secret";
+        }
+
+        leaf new-secret-type {
+          type leafref {
+            path "../../state/secret-type";
+          }
+
+          description "Related to SecretType";
+        }
+
+        leaf new-auth-type {
+          type leafref {
+            path "../../state/auth-type";
+          }
+
+          description "Related to AuthType";
+        }
+
+        leaf new-auth-state {
+          type leafref {
+            path "../../state/auth-state";
+          }
+
+          description "Related to AuthState";
+        }
+
+        leaf new-credential-state {
+          type leafref {
+            path "../../state/credential-state";
+          }
+
+          description "Related to CredentialState";
+        }
+
+        leaf new-description {
+          type leafref {
+            path "../../state/description";
+          }
+
+          description "Related to Description";
+        }
+
+        leaf new-m-a-c-address {
+          type leafref {
+            path "../../state/m-a-c-address";
+          }
+
+          description "Related to MACAddress";
+        }
+
+        leaf new-credential-duration {
+          type leafref {
+            path "../../state/credential-duration";
+          }
+
+          description "Related to CredentialDuration";
+        }
+
+        leaf new-linked-identifier {
+          type leafref {
+            path "../../state/linked-identifier";
+          }
+
+          description "Related to LinkedIdentifier";
+        }
+
+      }
+
+    }
+
+    action get-specific-entry {
+      description "Action GetSpecificEntry";
+      input {
+        leaf new-identifier-key {
+          type string;
+          description "Related to Identifier";
+        }
+
+      }
+
+      output {
+        leaf new-identifier {
+          type leafref {
+            path "../../state/identifier";
+          }
+
+          description "Related to Identifier";
+        }
+
+        leaf new-secret {
+          type leafref {
+            path "../../state/secret";
+          }
+
+          description "Related to Secret";
+        }
+
+        leaf new-secret-type {
+          type leafref {
+            path "../../state/secret-type";
+          }
+
+          description "Related to SecretType";
+        }
+
+        leaf new-auth-type {
+          type leafref {
+            path "../../state/auth-type";
+          }
+
+          description "Related to AuthType";
+        }
+
+        leaf new-auth-state {
+          type leafref {
+            path "../../state/auth-state";
+          }
+
+          description "Related to AuthState";
+        }
+
+        leaf new-credential-state {
+          type leafref {
+            path "../../state/credential-state";
+          }
+
+          description "Related to CredentialState";
+        }
+
+        leaf new-description {
+          type leafref {
+            path "../../state/description";
+          }
+
+          description "Related to Description";
+        }
+
+        leaf new-m-a-c-address {
+          type leafref {
+            path "../../state/m-a-c-address";
+          }
+
+          description "Related to MACAddress";
+        }
+
+        leaf new-credential-duration {
+          type leafref {
+            path "../../state/credential-duration";
+          }
+
+          description "Related to CredentialDuration";
+        }
+
+        leaf new-linked-identifier {
+          type leafref {
+            path "../../state/linked-identifier";
+          }
+
+          description "Related to LinkedIdentifier";
+        }
+
+      }
+
+    }
+
+    action add-entry {
+      description "Action AddEntry";
+      input {
+        leaf new-identifier {
+          type string;
+          description "Related to Identifier";
+        }
+
+        leaf new-secret {
+          type string;
+          description "Related to Secret";
+        }
+
+        leaf new-secret-type {
+          type string;
+          description "Related to SecretType";
+        }
+
+        leaf new-auth-type {
+          type string;
+          description "Related to AuthType";
+        }
+
+        leaf new-auth-state {
+          type string;
+          description "Related to AuthState";
+        }
+
+        leaf new-credential-state {
+          type string;
+          description "Related to CredentialState";
+        }
+
+        leaf new-description {
+          type string;
+          description "Related to Description";
+        }
+
+        leaf new-m-a-c-address {
+          type string;
+          description "Related to MACAddress";
+        }
+
+        leaf new-credential-duration {
+          type uint32;
+          description "Related to CredentialDuration";
+        }
+
+        leaf new-linked-identifier {
+          type string;
+          description "Related to LinkedIdentifier";
+        }
+
+      }
+
+      output {
+        leaf new-number-of-entries {
+          type leafref {
+            path "../../state/number-of-entries";
+          }
+
+          description "Related to NumberOfEntries";
+        }
+
+      }
+
+    }
+
+    action update-entry {
+      description "Action UpdateEntry";
+      input {
+        leaf new-identifier {
+          type string;
+          description "Related to Identifier";
+        }
+
+        leaf new-secret {
+          type string;
+          description "Related to Secret";
+        }
+
+        leaf new-secret-type {
+          type string;
+          description "Related to SecretType";
+        }
+
+        leaf new-auth-type {
+          type string;
+          description "Related to AuthType";
+        }
+
+        leaf new-auth-state {
+          type string;
+          description "Related to AuthState";
+        }
+
+        leaf new-credential-state {
+          type string;
+          description "Related to CredentialState";
+        }
+
+        leaf new-description {
+          type string;
+          description "Related to Description";
+        }
+
+        leaf new-m-a-c-address {
+          type string;
+          description "Related to MACAddress";
+        }
+
+        leaf new-credential-duration {
+          type uint32;
+          description "Related to CredentialDuration";
+        }
+
+        leaf new-linked-identifier {
+          type string;
+          description "Related to LinkedIdentifier";
+        }
+
+      }
+
+      output {
+        leaf new-number-of-entries {
+          type leafref {
+            path "../../state/number-of-entries";
+          }
+
+          description "Related to NumberOfEntries";
+        }
+
+      }
+
+    }
+
+    action delete-entry {
+      description "Action DeleteEntry";
+      input {
+        leaf new-identifier {
+          type string;
+          description "Related to Identifier";
+        }
+
+      }
+
+      output {
+        leaf new-number-of-entries {
+          type leafref {
+            path "../../state/number-of-entries";
+          }
+
+          description "Related to NumberOfEntries";
+        }
+
+      }
+
+    }
+
+    action get-number-of-entries {
+      description "Action GetNumberOfEntries";
+      output {
+        leaf new-number-of-entries {
+          type leafref {
+            path "../../state/number-of-entries";
+          }
+
+          description "Related to NumberOfEntries";
+        }
+
+      }
+
+    }
+
+    action factory-default-reset {
+      description "Action FactoryDefaultReset";
+    }
+
+    action reset-authentication {
+      description "Action ResetAuthentication";
+    }
+
+  }
+
+  grouping link-authentication-top {
+    description "Service top";
+    container link-authentication {
+      description "Service";
+      uses link-authentication-state-top;
+      uses link-authentication-state-attributes-top;
+      uses link-authentication-action;
+    }
+
+  }
+
+  grouping link-authentication-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses link-authentication-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

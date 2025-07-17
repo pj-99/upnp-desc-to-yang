@@ -1,0 +1,405 @@
+module wan-cable-link-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wan-cable-link-config";
+  prefix "wan-cable-link-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wan-cable-link-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wan-cable-link-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wan-cable-link-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf cable-link-config-state {
+        type enumeration {
+          enum  NOT_READY {
+            description "notReady";
+          }
+
+          enum  DS_SYNC_COMPLETE {
+            description "dsSyncComplete";
+          }
+
+          enum  US_PARAM_ACQUIRED {
+            description "usParamAcquired";
+          }
+
+          enum  RANGING_COMPLETE {
+            description "rangingComplete";
+          }
+
+          enum  IP_COMPLETE {
+            description "ipComplete";
+          }
+
+          enum  TOD_ESTABLISHED {
+            description "todEstablished";
+          }
+
+          enum  PARAM_TRANSFER_COMPLETE {
+            description "paramTransferComplete";
+          }
+
+          enum  REGISTRATION_COMPLETE {
+            description "registrationComplete";
+          }
+
+          enum  OPERATIONAL {
+            description "operational";
+          }
+
+          enum  ACCESS_DENIED {
+            description "accessDenied";
+          }
+
+        }
+
+        config false;
+        description "CableLinkConfigState";
+      }
+
+      leaf link-type {
+        type enumeration {
+          enum  ETHERNET {
+            description "Ethernet";
+          }
+
+        }
+
+        config false;
+        description "LinkType";
+      }
+
+      leaf downstream-frequency {
+        type uint32;
+        config false;
+        description "DownstreamFrequency";
+      }
+
+      leaf downstream-modulation {
+        type enumeration {
+          enum  64_QAM {
+            description "64QAM";
+          }
+
+          enum  256_QAM {
+            description "256QAM";
+          }
+
+        }
+
+        config false;
+        description "DownstreamModulation";
+      }
+
+      leaf upstream-frequency {
+        type uint32;
+        config false;
+        description "UpstreamFrequency";
+      }
+
+      leaf upstream-modulation {
+        type enumeration {
+          enum  QPSK {
+            description "QPSK";
+          }
+
+          enum  16_QAM {
+            description "16QAM";
+          }
+
+        }
+
+        config false;
+        description "UpstreamModulation";
+      }
+
+      leaf upstream-channel-i-d {
+        type uint32;
+        config false;
+        description "UpstreamChannelID";
+      }
+
+      leaf upstream-power-level {
+        type uint32;
+        config false;
+        description "UpstreamPowerLevel";
+      }
+
+      leaf config-file {
+        type string;
+        config false;
+        description "ConfigFile";
+      }
+
+      leaf t-f-t-p-server {
+        type string;
+        config false;
+        description "TFTPServer";
+      }
+
+      leaf b-p-i-encryption-enabled {
+        type boolean;
+        config false;
+        description "BPIEncryptionEnabled";
+      }
+
+    }
+
+  }
+
+  grouping wan-cable-link-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container cable-link-config-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container link-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container downstream-frequency {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container downstream-modulation {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container upstream-frequency {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container upstream-modulation {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container upstream-channel-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container upstream-power-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container config-file {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container t-f-t-p-server {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container b-p-i-encryption-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wan-cable-link-config-action {
+    description "Service actions";
+    action get-cable-link-config-info {
+      description "Action GetCableLinkConfigInfo";
+      output {
+        leaf new-cable-link-config-state {
+          type leafref {
+            path "../../state/cable-link-config-state";
+          }
+
+          description "Related to CableLinkConfigState";
+        }
+
+        leaf new-link-type {
+          type leafref {
+            path "../../state/link-type";
+          }
+
+          description "Related to LinkType";
+        }
+
+      }
+
+    }
+
+    action get-downstream-frequency {
+      description "Action GetDownstreamFrequency";
+      output {
+        leaf new-downstream-frequency {
+          type leafref {
+            path "../../state/downstream-frequency";
+          }
+
+          description "Related to DownstreamFrequency";
+        }
+
+      }
+
+    }
+
+    action get-downstream-modulation {
+      description "Action GetDownstreamModulation";
+    }
+
+    action get-upstream-frequency {
+      description "Action GetUpstreamFrequency";
+      output {
+        leaf new-upstream-frequency {
+          type leafref {
+            path "../../state/upstream-frequency";
+          }
+
+          description "Related to UpstreamFrequency";
+        }
+
+      }
+
+    }
+
+    action get-upstream-modulation {
+      description "Action GetUpstreamModulation";
+      output {
+        leaf new-upstream-modulation {
+          type leafref {
+            path "../../state/upstream-modulation";
+          }
+
+          description "Related to UpstreamModulation";
+        }
+
+      }
+
+    }
+
+    action get-upstream-channel-i-d {
+      description "Action GetUpstreamChannelID";
+      output {
+        leaf new-upstream-channel-i-d {
+          type leafref {
+            path "../../state/upstream-channel-i-d";
+          }
+
+          description "Related to UpstreamChannelID";
+        }
+
+      }
+
+    }
+
+    action get-upstream-power-level {
+      description "Action GetUpstreamPowerLevel";
+      output {
+        leaf new-upstream-power-level {
+          type leafref {
+            path "../../state/upstream-power-level";
+          }
+
+          description "Related to UpstreamPowerLevel";
+        }
+
+      }
+
+    }
+
+    action get-b-p-i-encryption-enabled {
+      description "Action GetBPIEncryptionEnabled";
+      output {
+        leaf new-b-p-i-encryption-enabled {
+          type leafref {
+            path "../../state/b-p-i-encryption-enabled";
+          }
+
+          description "Related to BPIEncryptionEnabled";
+        }
+
+      }
+
+    }
+
+    action get-config-file {
+      description "Action GetConfigFile";
+      output {
+        leaf new-config-file {
+          type leafref {
+            path "../../state/config-file";
+          }
+
+          description "Related to ConfigFile";
+        }
+
+      }
+
+    }
+
+    action get-t-f-t-p-server {
+      description "Action GetTFTPServer";
+      output {
+        leaf new-t-f-t-p-server {
+          type leafref {
+            path "../../state/t-f-t-p-server";
+          }
+
+          description "Related to TFTPServer";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping wan-cable-link-config-top {
+    description "Service top";
+    container wan-cable-link-config {
+      description "Service";
+      uses wan-cable-link-config-state-top;
+      uses wan-cable-link-config-state-attributes-top;
+      uses wan-cable-link-config-action;
+    }
+
+  }
+
+  grouping wan-cable-link-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wan-cable-link-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

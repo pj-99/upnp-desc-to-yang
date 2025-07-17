@@ -1,0 +1,371 @@
+module wan-ipv6-firewall-control {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wan-ipv6-firewall-control";
+  prefix "wan-ipv6-firewall-control";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wan-ipv6-firewall-control";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wan-ipv6-firewall-control-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wan-ipv6-firewall-control-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf firewall-enabled {
+        type boolean;
+        config false;
+        description "FirewallEnabled";
+      }
+
+      leaf inbound-pinhole-allowed {
+        type boolean;
+        config false;
+        description "InboundPinholeAllowed";
+      }
+
+      leaf a-arg-type-outboundpinholetimeout {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_OutboundPinholeTimeout";
+      }
+
+      leaf a-arg-type-ipv6address {
+        type string;
+        config false;
+        description "A_ARG_TYPE_IPv6Address";
+      }
+
+      leaf a-arg-type-port {
+        type uint16;
+        config false;
+        description "A_ARG_TYPE_Port";
+      }
+
+      leaf a-arg-type-protocol {
+        type uint16;
+        config false;
+        description "A_ARG_TYPE_Protocol";
+      }
+
+      leaf a-arg-type-leasetime {
+        type uint32 {
+          range "1 .. 86400";
+        }
+
+        config false;
+        description "A_ARG_TYPE_LeaseTime";
+      }
+
+      leaf a-arg-type-uniqueid {
+        type uint16;
+        config false;
+        description "A_ARG_TYPE_UniqueID";
+      }
+
+      leaf a-arg-type-pinholepackets {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_PinholePackets";
+      }
+
+      leaf a-arg-type-boolean {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_Boolean";
+      }
+
+    }
+
+  }
+
+  grouping wan-ipv6-firewall-control-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container firewall-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container inbound-pinhole-allowed {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-outboundpinholetimeout {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-ipv6address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-port {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-protocol {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-leasetime {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uniqueid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-pinholepackets {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-boolean {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wan-ipv6-firewall-control-action {
+    description "Service actions";
+    action get-firewall-status {
+      description "Action GetFirewallStatus";
+      output {
+        leaf firewall-enabled {
+          type leafref {
+            path "../../state/firewall-enabled";
+          }
+
+          description "Related to FirewallEnabled";
+        }
+
+        leaf inbound-pinhole-allowed {
+          type leafref {
+            path "../../state/inbound-pinhole-allowed";
+          }
+
+          description "Related to InboundPinholeAllowed";
+        }
+
+      }
+
+    }
+
+    action get-outbound-pinhole-timeout {
+      description "Action GetOutboundPinholeTimeout";
+      input {
+        leaf remote-host {
+          type string;
+          description "Related to A_ARG_TYPE_IPv6Address";
+        }
+
+        leaf remote-port {
+          type uint16;
+          description "Related to A_ARG_TYPE_Port";
+        }
+
+        leaf internal-client {
+          type string;
+          description "Related to A_ARG_TYPE_IPv6Address";
+        }
+
+        leaf internal-port {
+          type uint16;
+          description "Related to A_ARG_TYPE_Port";
+        }
+
+        leaf protocol {
+          type uint16;
+          description "Related to A_ARG_TYPE_Protocol";
+        }
+
+      }
+
+      output {
+        leaf outbound-pinhole-timeout {
+          type leafref {
+            path "../../state/a-arg-type-outboundpinholetimeout";
+          }
+
+          description "Related to A_ARG_TYPE_OutboundPinholeTimeout";
+        }
+
+      }
+
+    }
+
+    action add-pinhole {
+      description "Action AddPinhole";
+      input {
+        leaf remote-host {
+          type string;
+          description "Related to A_ARG_TYPE_IPv6Address";
+        }
+
+        leaf remote-port {
+          type uint16;
+          description "Related to A_ARG_TYPE_Port";
+        }
+
+        leaf internal-client {
+          type string;
+          description "Related to A_ARG_TYPE_IPv6Address";
+        }
+
+        leaf internal-port {
+          type uint16;
+          description "Related to A_ARG_TYPE_Port";
+        }
+
+        leaf protocol {
+          type uint16;
+          description "Related to A_ARG_TYPE_Protocol";
+        }
+
+        leaf lease-time {
+          type uint32;
+          description "Related to A_ARG_TYPE_LeaseTime";
+        }
+
+      }
+
+      output {
+        leaf unique-i-d {
+          type leafref {
+            path "../../state/a-arg-type-uniqueid";
+          }
+
+          description "Related to A_ARG_TYPE_UniqueID";
+        }
+
+      }
+
+    }
+
+    action update-pinhole {
+      description "Action UpdatePinhole";
+      input {
+        leaf unique-i-d {
+          type uint16;
+          description "Related to A_ARG_TYPE_UniqueID";
+        }
+
+        leaf new-lease-time {
+          type uint32;
+          description "Related to A_ARG_TYPE_LeaseTime";
+        }
+
+      }
+
+    }
+
+    action delete-pinhole {
+      description "Action DeletePinhole";
+      input {
+        leaf unique-i-d {
+          type uint16;
+          description "Related to A_ARG_TYPE_UniqueID";
+        }
+
+      }
+
+    }
+
+    action get-pinhole-packets {
+      description "Action GetPinholePackets";
+      input {
+        leaf unique-i-d {
+          type uint16;
+          description "Related to A_ARG_TYPE_UniqueID";
+        }
+
+      }
+
+      output {
+        leaf pinhole-packets {
+          type leafref {
+            path "../../state/a-arg-type-pinholepackets";
+          }
+
+          description "Related to A_ARG_TYPE_PinholePackets";
+        }
+
+      }
+
+    }
+
+    action check-pinhole-working {
+      description "Action CheckPinholeWorking";
+      input {
+        leaf unique-i-d {
+          type uint16;
+          description "Related to A_ARG_TYPE_UniqueID";
+        }
+
+      }
+
+      output {
+        leaf is-working {
+          type leafref {
+            path "../../state/a-arg-type-boolean";
+          }
+
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping wan-ipv6-firewall-control-top {
+    description "Service top";
+    container wan-ipv6-firewall-control {
+      description "Service";
+      uses wan-ipv6-firewall-control-state-top;
+      uses wan-ipv6-firewall-control-state-attributes-top;
+      uses wan-ipv6-firewall-control-action;
+    }
+
+  }
+
+  grouping wan-ipv6-firewall-control-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wan-ipv6-firewall-control-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

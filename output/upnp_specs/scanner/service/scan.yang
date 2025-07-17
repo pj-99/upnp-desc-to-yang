@@ -1,0 +1,837 @@
+module scan {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/scan";
+  prefix "scan";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "scan";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses scan-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping scan-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf job-name {
+        type string;
+        config false;
+        description "JobName";
+      }
+
+      leaf failure-code {
+        type enumeration {
+          enum  NO_ERROR {
+            description "No Error";
+          }
+
+          enum  JAMMED {
+            description "Jammed";
+          }
+
+          enum  TIMEOUT_REACHED {
+            description "Timeout Reached";
+          }
+
+          enum  ERRED_TIMEOUT_REACHED {
+            description "ErredTimeout Reached";
+          }
+
+          enum  DESTINATION_NOT_REACHABLE {
+            description "Destination Not Reachable";
+          }
+
+        }
+
+        default NO_ERROR;
+        config false;
+        description "FailureCode";
+      }
+
+      leaf state {
+        type enumeration {
+          enum  IDLE {
+            description "Idle";
+          }
+
+          enum  RESERVED {
+            description "Reserved";
+          }
+
+          enum  NOT_READY {
+            description "NotReady";
+          }
+
+          enum  PENDING {
+            description "Pending";
+          }
+
+          enum  SCANNING {
+            description "Scanning";
+          }
+
+          enum  FINISHING {
+            description "Finishing";
+          }
+
+          enum  ERRED {
+            description "Erred";
+          }
+
+        }
+
+        default IDLE;
+        config false;
+        description "State";
+      }
+
+      leaf state-reason {
+        type string;
+        config false;
+        description "StateReason";
+      }
+
+      leaf image-format {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  IMAGE/JPEG {
+            description "image/jpeg";
+          }
+
+        }
+
+        default IMAGE/JPEG;
+        config false;
+        description "ImageFormat";
+      }
+
+      leaf compression-factor {
+        type int32 {
+          range "-1 .. 100";
+        }
+
+        default 100;
+        config false;
+        description "CompressionFactor";
+      }
+
+      leaf image-type {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  MIXED {
+            description "Mixed";
+          }
+
+        }
+
+        default MIXED;
+        config false;
+        description "ImageType";
+      }
+
+      leaf color-type {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  COLOR {
+            description "Color";
+          }
+
+        }
+
+        default COLOR;
+        config false;
+        description "ColorType";
+      }
+
+      leaf bit-depth {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  8 {
+            description "8";
+          }
+
+        }
+
+        default 8;
+        config false;
+        description "BitDepth";
+      }
+
+      leaf color-space {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  S_RGB {
+            description "sRGB";
+          }
+
+        }
+
+        default S_RGB;
+        config false;
+        description "ColorSpace";
+      }
+
+      leaf use-feeder {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  0 {
+            description "0";
+          }
+
+        }
+
+        default 0;
+        config false;
+        description "UseFeeder";
+      }
+
+      leaf base-name {
+        type string;
+        default pull-relative;
+        config false;
+        description "BaseName";
+      }
+
+      leaf append-side-number {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  0 {
+            description "0";
+          }
+
+        }
+
+        default 0;
+        config false;
+        description "AppendSideNumber";
+      }
+
+      leaf side-count {
+        type int32;
+        default 0;
+        config false;
+        description "SideCount";
+      }
+
+      leaf side-number {
+        type int32;
+        default 1;
+        config false;
+        description "SideNumber";
+      }
+
+      leaf destination {
+        type string;
+        config false;
+        description "Destination";
+      }
+
+      leaf timeout {
+        type int32;
+        config false;
+        description "Timeout";
+      }
+
+      leaf error-timeout {
+        type int32;
+        config false;
+        description "ErrorTimeout";
+      }
+
+      leaf resolution {
+        type string;
+        config false;
+        description "Resolution";
+      }
+
+      leaf scan-length {
+        type int32;
+        default 0;
+        config false;
+        description "ScanLength";
+      }
+
+      leaf device-i-d {
+        type string;
+        config false;
+        description "DeviceID";
+      }
+
+      leaf height-limit {
+        type int32;
+        config false;
+        description "HeightLimit";
+      }
+
+      leaf width-limit {
+        type int32;
+        config false;
+        description "WidthLimit";
+      }
+
+      leaf x-value-limit {
+        type int32;
+        config false;
+        description "XValueLimit";
+      }
+
+      leaf y-value-limit {
+        type int32;
+        config false;
+        description "YValueLimit";
+      }
+
+      leaf registration-i-d {
+        type uint32;
+        config false;
+        description "RegistrationID";
+      }
+
+      leaf job-i-d {
+        type uint32;
+        config false;
+        description "JobID";
+      }
+
+      leaf destination-i-d {
+        type uint32;
+        config false;
+        description "DestinationID";
+      }
+
+    }
+
+  }
+
+  grouping scan-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container job-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container failure-code {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container state-reason {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container image-format {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container compression-factor {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container image-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container color-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container bit-depth {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container color-space {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container use-feeder {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container base-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container append-side-number {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container side-count {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container side-number {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container destination {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container timeout {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container error-timeout {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container resolution {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container scan-length {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container height-limit {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container width-limit {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container x-value-limit {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container y-value-limit {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container registration-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container destination-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping scan-action {
+    description "Service actions";
+    action start-scan {
+      description "Action StartScan";
+      input {
+        leaf registration-i-d-in {
+          type uint32;
+          description "Related to RegistrationID";
+        }
+
+        leaf use-feeder-in {
+          type string;
+          description "Related to UseFeeder";
+        }
+
+        leaf side-count-in {
+          type int32;
+          description "Related to SideCount";
+        }
+
+        leaf job-name-in {
+          type string;
+          description "Related to JobName";
+        }
+
+        leaf resolution-in {
+          type string;
+          description "Related to Resolution";
+        }
+
+        leaf image-x-offset-in {
+          type int32;
+          description "Related to XValueLimit";
+        }
+
+        leaf image-y-offset-in {
+          type int32;
+          description "Related to YValueLimit";
+        }
+
+        leaf image-width-in {
+          type int32;
+          description "Related to WidthLimit";
+        }
+
+        leaf image-height-in {
+          type int32;
+          description "Related to HeightLimit";
+        }
+
+        leaf image-format-in {
+          type string;
+          description "Related to ImageFormat";
+        }
+
+        leaf compression-factor-in {
+          type int32;
+          description "Related to CompressionFactor";
+        }
+
+        leaf image-type-in {
+          type string;
+          description "Related to ImageType";
+        }
+
+        leaf color-type-in {
+          type string;
+          description "Related to ColorType";
+        }
+
+        leaf bit-depth-in {
+          type string;
+          description "Related to BitDepth";
+        }
+
+        leaf color-space-in {
+          type string;
+          description "Related to ColorSpace";
+        }
+
+        leaf base-name-in {
+          type string;
+          description "Related to BaseName";
+        }
+
+        leaf append-side-number-in {
+          type string;
+          description "Related to AppendSideNumber";
+        }
+
+        leaf timeout-in {
+          type int32;
+          description "Related to Timeout";
+        }
+
+      }
+
+      output {
+        leaf actual-timeout-out {
+          type leafref {
+            path "../../state/timeout";
+          }
+
+          description "Related to Timeout";
+        }
+
+        leaf job-i-d-out {
+          type leafref {
+            path "../../state/job-i-d";
+          }
+
+          description "Related to JobID";
+        }
+
+        leaf actual-width-out {
+          type leafref {
+            path "../../state/width-limit";
+          }
+
+          description "Related to WidthLimit";
+        }
+
+        leaf actual-height-out {
+          type leafref {
+            path "../../state/height-limit";
+          }
+
+          description "Related to HeightLimit";
+        }
+
+      }
+
+    }
+
+    action get-configuration {
+      description "Action GetConfiguration";
+      output {
+        leaf job-name-out {
+          type leafref {
+            path "../../state/job-name";
+          }
+
+          description "Related to JobName";
+        }
+
+        leaf resolution-out {
+          type leafref {
+            path "../../state/resolution";
+          }
+
+          description "Related to Resolution";
+        }
+
+        leaf image-x-offset-out {
+          type leafref {
+            path "../../state/x-value-limit";
+          }
+
+          description "Related to XValueLimit";
+        }
+
+        leaf image-y-offset-out {
+          type leafref {
+            path "../../state/y-value-limit";
+          }
+
+          description "Related to YValueLimit";
+        }
+
+        leaf image-width-out {
+          type leafref {
+            path "../../state/width-limit";
+          }
+
+          description "Related to WidthLimit";
+        }
+
+        leaf image-height-out {
+          type leafref {
+            path "../../state/height-limit";
+          }
+
+          description "Related to HeightLimit";
+        }
+
+        leaf image-format-out {
+          type leafref {
+            path "../../state/image-format";
+          }
+
+          description "Related to ImageFormat";
+        }
+
+        leaf compression-factor-out {
+          type leafref {
+            path "../../state/compression-factor";
+          }
+
+          description "Related to CompressionFactor";
+        }
+
+        leaf image-type-out {
+          type leafref {
+            path "../../state/image-type";
+          }
+
+          description "Related to ImageType";
+        }
+
+        leaf color-type-out {
+          type leafref {
+            path "../../state/color-type";
+          }
+
+          description "Related to ColorType";
+        }
+
+        leaf bit-depth-out {
+          type leafref {
+            path "../../state/bit-depth";
+          }
+
+          description "Related to BitDepth";
+        }
+
+        leaf color-space-out {
+          type leafref {
+            path "../../state/color-space";
+          }
+
+          description "Related to ColorSpace";
+        }
+
+        leaf base-name-out {
+          type leafref {
+            path "../../state/base-name";
+          }
+
+          description "Related to BaseName";
+        }
+
+        leaf append-side-number-out {
+          type leafref {
+            path "../../state/append-side-number";
+          }
+
+          description "Related to AppendSideNumber";
+        }
+
+        leaf timeout-out {
+          type leafref {
+            path "../../state/timeout";
+          }
+
+          description "Related to Timeout";
+        }
+
+      }
+
+    }
+
+    action get-side-information {
+      description "Action GetSideInformation";
+      output {
+        leaf side-number-out {
+          type leafref {
+            path "../../state/side-number";
+          }
+
+          description "Related to SideNumber";
+        }
+
+        leaf side-count-out {
+          type leafref {
+            path "../../state/side-count";
+          }
+
+          description "Related to SideCount";
+        }
+
+        leaf scan-length-out {
+          type leafref {
+            path "../../state/scan-length";
+          }
+
+          description "Related to ScanLength";
+        }
+
+      }
+
+    }
+
+    action get-state {
+      description "Action GetState";
+      output {
+        leaf state-out {
+          type leafref {
+            path "../../state/state";
+          }
+
+          description "Related to State";
+        }
+
+        leaf state-reason-out {
+          type leafref {
+            path "../../state/state-reason";
+          }
+
+          description "Related to StateReason";
+        }
+
+        leaf failure-code-out {
+          type leafref {
+            path "../../state/failure-code";
+          }
+
+          description "Related to FailureCode";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping scan-top {
+    description "Service top";
+    container scan {
+      description "Service";
+      uses scan-state-top;
+      uses scan-state-attributes-top;
+      uses scan-action;
+    }
+
+  }
+
+  grouping scan-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses scan-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

@@ -1,0 +1,399 @@
+module calendar {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/calendar";
+  prefix "calendar";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "calendar";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses calendar-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping calendar-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf calendar-item {
+        type string;
+        config false;
+        description "CalendarItem";
+      }
+
+      leaf triggered-item {
+        type string;
+        config false;
+        description "TriggeredItem";
+      }
+
+      leaf memo-info {
+        type string;
+        config false;
+        description "MemoInfo";
+      }
+
+      leaf a-arg-type-calitems {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CalItems";
+      }
+
+      leaf a-arg-type-triggereditems {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TriggeredItems";
+      }
+
+      leaf a-arg-type-itemids {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ItemIDs";
+      }
+
+      leaf a-arg-type-memo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Memo";
+      }
+
+      leaf a-arg-type-memoid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MemoID";
+      }
+
+      leaf a-arg-type-memoinfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MemoInfoList";
+      }
+
+      leaf a-arg-type-itemdeliverymethod {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ItemDeliveryMethod";
+      }
+
+      leaf a-arg-type-telcpname {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TelCPName";
+      }
+
+      leaf a-arg-type-telcpnamelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TelCPNameList";
+      }
+
+      leaf a-arg-type-expires {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_Expires";
+      }
+
+    }
+
+  }
+
+  grouping calendar-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container calendar-item {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container triggered-item {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container memo-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-calitems {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-triggereditems {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-itemids {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-memo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-memoid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-memoinfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-itemdeliverymethod {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-telcpname {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-telcpnamelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-expires {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping calendar-action {
+    description "Service actions";
+    action add-calendar-items {
+      description "Action AddCalendarItems";
+      input {
+        leaf caltems {
+          type string;
+          description "Related to A_ARG_TYPE_CalItems";
+        }
+
+      }
+
+      output {
+        leaf item-i-ds {
+          type leafref {
+            path "../../state/a-arg-type-itemids";
+          }
+
+          description "Related to A_ARG_TYPE_ItemIDs";
+        }
+
+      }
+
+    }
+
+    action delete-calendar-items {
+      description "Action DeleteCalendarItems";
+      input {
+        leaf item-i-ds {
+          type string;
+          description "Related to A_ARG_TYPE_ItemIDs";
+        }
+
+      }
+
+    }
+
+    action update-calendar-items {
+      description "Action UpdateCalendarItems";
+      input {
+        leaf caltems {
+          type string;
+          description "Related to A_ARG_TYPE_CalItems";
+        }
+
+      }
+
+    }
+
+    action get-calendar-items {
+      description "Action GetCalendarItems";
+      input {
+        leaf item-i-ds {
+          type string;
+          description "Related to A_ARG_TYPE_ItemIDs";
+        }
+
+      }
+
+      output {
+        leaf caltems {
+          type leafref {
+            path "../../state/a-arg-type-calitems";
+          }
+
+          description "Related to A_ARG_TYPE_CalItems";
+        }
+
+      }
+
+    }
+
+    action get-triggered-items {
+      description "Action GetTriggeredItems";
+      output {
+        leaf triggered-item-i-ds {
+          type leafref {
+            path "../../state/a-arg-type-triggereditems";
+          }
+
+          description "Related to A_ARG_TYPE_TriggeredItems";
+        }
+
+      }
+
+    }
+
+    action post-memo {
+      description "Action PostMemo";
+      input {
+        leaf memo {
+          type string;
+          description "Related to A_ARG_TYPE_Memo";
+        }
+
+      }
+
+      output {
+        leaf memo-i-d {
+          type leafref {
+            path "../../state/a-arg-type-memoid";
+          }
+
+          description "Related to A_ARG_TYPE_MemoID";
+        }
+
+      }
+
+    }
+
+    action register-item-delivery {
+      description "Action RegisterItemDelivery";
+      input {
+        leaf item-delivery-method {
+          type string;
+          description "Related to A_ARG_TYPE_ItemDeliveryMethod";
+        }
+
+        leaf expires {
+          type uint32;
+          description "Related to A_ARG_TYPE_Expires";
+        }
+
+      }
+
+    }
+
+    action get-memo {
+      description "Action GetMemo";
+      input {
+        leaf memo-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_MemoID";
+        }
+
+      }
+
+      output {
+        leaf memo-info-list {
+          type leafref {
+            path "../../state/a-arg-type-memoinfolist";
+          }
+
+          description "Related to A_ARG_TYPE_MemoInfoList";
+        }
+
+      }
+
+    }
+
+    action register-tel-c-p-name {
+      description "Action RegisterTelCPName";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+      }
+
+    }
+
+    action unregister-tel-c-p-name {
+      description "Action UnregisterTelCPName";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+      }
+
+    }
+
+    action get-tel-c-p-name-list {
+      description "Action GetTelCPNameList";
+      output {
+        leaf tel-c-p-name {
+          type leafref {
+            path "../../state/a-arg-type-telcpnamelist";
+          }
+
+          description "Related to A_ARG_TYPE_TelCPNameList";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping calendar-top {
+    description "Service top";
+    container calendar {
+      description "Service";
+      uses calendar-state-top;
+      uses calendar-state-attributes-top;
+      uses calendar-action;
+    }
+
+  }
+
+  grouping calendar-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses calendar-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

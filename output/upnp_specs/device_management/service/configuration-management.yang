@@ -1,0 +1,732 @@
+module configuration-management {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/configuration-management";
+  prefix "configuration-management";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "configuration-management";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses configuration-management-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping configuration-management-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf configuration-update {
+        type string;
+        config false;
+        description "ConfigurationUpdate";
+      }
+
+      leaf current-configuration-version {
+        type uint32;
+        config false;
+        description "CurrentConfigurationVersion";
+      }
+
+      leaf supported-data-models-update {
+        type string;
+        config false;
+        description "SupportedDataModelsUpdate";
+      }
+
+      leaf supported-parameters-update {
+        type string;
+        config false;
+        description "SupportedParametersUpdate";
+      }
+
+      leaf attribute-values-update {
+        type string;
+        config false;
+        description "AttributeValuesUpdate";
+      }
+
+      leaf inconsistent-status {
+        type boolean;
+        config false;
+        description "InconsistentStatus";
+      }
+
+      leaf alarms-enabled {
+        type boolean;
+        description "AlarmsEnabled";
+      }
+
+      leaf a-arg-type-structurepath {
+        type string;
+        config false;
+        description "A_ARG_TYPE_StructurePath";
+      }
+
+      leaf a-arg-type-structurepathlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_StructurePathList";
+      }
+
+      leaf a-arg-type-partialpath {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PartialPath";
+      }
+
+      leaf a-arg-type-parametervaluelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ParameterValueList";
+      }
+
+      leaf a-arg-type-nodeattributevaluelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_NodeAttributeValueList";
+      }
+
+      leaf a-arg-type-parameterinitialvaluelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ParameterInitialValueList";
+      }
+
+      leaf a-arg-type-filter {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Filter";
+      }
+
+      leaf a-arg-type-supporteddatamodels {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SupportedDataModels";
+      }
+
+      leaf a-arg-type-searchdepth {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_SearchDepth";
+      }
+
+      leaf a-arg-type-changestatus {
+        type enumeration {
+          enum  CHANGES_COMMITTED {
+            description "ChangesCommitted";
+          }
+
+          enum  CHANGES_APPLIED {
+            description "ChangesApplied";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_ChangeStatus";
+      }
+
+      leaf a-arg-type-instancepathlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_InstancePathList";
+      }
+
+      leaf a-arg-type-contentpathlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ContentPathList";
+      }
+
+      leaf a-arg-type-multiinstancepath {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MultiInstancePath";
+      }
+
+      leaf a-arg-type-instancepath {
+        type string;
+        config false;
+        description "A_ARG_TYPE_InstancePath";
+      }
+
+      leaf a-arg-type-nodeattributepathlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_NodeAttributePathList";
+      }
+
+      leaf a-arg-type-acldatapathlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ACLDataPathList";
+      }
+
+      leaf a-arg-type-acl {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ACL";
+      }
+
+    }
+
+  }
+
+  grouping configuration-management-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container configuration-update {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-configuration-version {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container supported-data-models-update {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container supported-parameters-update {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container attribute-values-update {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container inconsistent-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container alarms-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-structurepath {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-structurepathlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-partialpath {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-parametervaluelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-nodeattributevaluelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-parameterinitialvaluelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-filter {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-supporteddatamodels {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-searchdepth {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-changestatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-instancepathlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-contentpathlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-multiinstancepath {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-instancepath {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-nodeattributepathlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-acldatapathlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-acl {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping configuration-management-action {
+    description "Service actions";
+    action get-supported-data-models {
+      description "Action GetSupportedDataModels";
+      output {
+        leaf supported-data-models {
+          type leafref {
+            path "../../state/a-arg-type-supporteddatamodels";
+          }
+
+          description "Related to A_ARG_TYPE_SupportedDataModels";
+        }
+
+      }
+
+    }
+
+    action get-supported-parameters {
+      description "Action GetSupportedParameters";
+      input {
+        leaf starting-node {
+          type string;
+          description "Related to A_ARG_TYPE_StructurePath";
+        }
+
+        leaf search-depth {
+          type uint32;
+          description "Related to A_ARG_TYPE_SearchDepth";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-structurepathlist";
+          }
+
+          description "Related to A_ARG_TYPE_StructurePathList";
+        }
+
+      }
+
+    }
+
+    action get-instances {
+      description "Action GetInstances";
+      input {
+        leaf starting-node {
+          type string;
+          description "Related to A_ARG_TYPE_PartialPath";
+        }
+
+        leaf search-depth {
+          type uint32;
+          description "Related to A_ARG_TYPE_SearchDepth";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-instancepathlist";
+          }
+
+          description "Related to A_ARG_TYPE_InstancePathList";
+        }
+
+      }
+
+    }
+
+    action get-values {
+      description "Action GetValues";
+      input {
+        leaf parameters {
+          type string;
+          description "Related to A_ARG_TYPE_ContentPathList";
+        }
+
+      }
+
+      output {
+        leaf parameter-value-list {
+          type leafref {
+            path "../../state/a-arg-type-parametervaluelist";
+          }
+
+          description "Related to A_ARG_TYPE_ParameterValueList";
+        }
+
+      }
+
+    }
+
+    action get-selected-values {
+      description "Action GetSelectedValues";
+      input {
+        leaf starting-node {
+          type string;
+          description "Related to A_ARG_TYPE_StructurePath";
+        }
+
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_Filter";
+        }
+
+      }
+
+      output {
+        leaf parameter-value-list {
+          type leafref {
+            path "../../state/a-arg-type-parametervaluelist";
+          }
+
+          description "Related to A_ARG_TYPE_ParameterValueList";
+        }
+
+      }
+
+    }
+
+    action set-values {
+      description "Action SetValues";
+      input {
+        leaf parameter-value-list {
+          type string;
+          description "Related to A_ARG_TYPE_ParameterValueList";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-changestatus";
+          }
+
+          description "Related to A_ARG_TYPE_ChangeStatus";
+        }
+
+      }
+
+    }
+
+    action create-instance {
+      description "Action CreateInstance";
+      input {
+        leaf multi-instance-name {
+          type string;
+          description "Related to A_ARG_TYPE_MultiInstancePath";
+        }
+
+        leaf children-initialization {
+          type string;
+          description "Related to A_ARG_TYPE_ParameterInitialValueList";
+        }
+
+      }
+
+      output {
+        leaf instance-identifier {
+          type leafref {
+            path "../../state/a-arg-type-instancepath";
+          }
+
+          description "Related to A_ARG_TYPE_InstancePath";
+        }
+
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-changestatus";
+          }
+
+          description "Related to A_ARG_TYPE_ChangeStatus";
+        }
+
+      }
+
+    }
+
+    action delete-instance {
+      description "Action DeleteInstance";
+      input {
+        leaf instance-identifier {
+          type string;
+          description "Related to A_ARG_TYPE_InstancePath";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-changestatus";
+          }
+
+          description "Related to A_ARG_TYPE_ChangeStatus";
+        }
+
+      }
+
+    }
+
+    action get-attributes {
+      description "Action GetAttributes";
+      input {
+        leaf parameters {
+          type string;
+          description "Related to A_ARG_TYPE_NodeAttributePathList";
+        }
+
+      }
+
+      output {
+        leaf node-attribute-value-list {
+          type leafref {
+            path "../../state/a-arg-type-nodeattributevaluelist";
+          }
+
+          description "Related to A_ARG_TYPE_NodeAttributeValueList";
+        }
+
+      }
+
+    }
+
+    action set-attributes {
+      description "Action SetAttributes";
+      input {
+        leaf node-attribute-value-list {
+          type string;
+          description "Related to A_ARG_TYPE_NodeAttributeValueList";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-changestatus";
+          }
+
+          description "Related to A_ARG_TYPE_ChangeStatus";
+        }
+
+      }
+
+    }
+
+    action get-inconsistent-status {
+      description "Action GetInconsistentStatus";
+      output {
+        leaf state-variable-value {
+          type leafref {
+            path "../../state/inconsistent-status";
+          }
+
+          description "Related to InconsistentStatus";
+        }
+
+      }
+
+    }
+
+    action get-configuration-update {
+      description "Action GetConfigurationUpdate";
+      output {
+        leaf state-variable-value {
+          type leafref {
+            path "../../state/configuration-update";
+          }
+
+          description "Related to ConfigurationUpdate";
+        }
+
+      }
+
+    }
+
+    action get-current-configuration-version {
+      description "Action GetCurrentConfigurationVersion";
+      output {
+        leaf state-variable-value {
+          type leafref {
+            path "../../state/current-configuration-version";
+          }
+
+          description "Related to CurrentConfigurationVersion";
+        }
+
+      }
+
+    }
+
+    action get-supported-data-models-update {
+      description "Action GetSupportedDataModelsUpdate";
+      output {
+        leaf state-variable-value {
+          type leafref {
+            path "../../state/supported-data-models-update";
+          }
+
+          description "Related to SupportedDataModelsUpdate";
+        }
+
+      }
+
+    }
+
+    action get-supported-parameters-update {
+      description "Action GetSupportedParametersUpdate";
+      output {
+        leaf state-variable-value {
+          type leafref {
+            path "../../state/supported-parameters-update";
+          }
+
+          description "Related to SupportedParametersUpdate";
+        }
+
+      }
+
+    }
+
+    action get-attribute-values-update {
+      description "Action GetAttributeValuesUpdate";
+      output {
+        leaf state-variable-value {
+          type leafref {
+            path "../../state/attribute-values-update";
+          }
+
+          description "Related to AttributeValuesUpdate";
+        }
+
+      }
+
+    }
+
+    action get-alarms-enabled {
+      description "Action GetAlarmsEnabled";
+      output {
+        leaf state-variable-value {
+          type leafref {
+            path "../../state/alarms-enabled";
+          }
+
+          description "Related to AlarmsEnabled";
+        }
+
+      }
+
+    }
+
+    action set-alarms-enabled {
+      description "Action SetAlarmsEnabled";
+      input {
+        leaf state-variable-value {
+          type boolean;
+          description "Related to AlarmsEnabled";
+        }
+
+      }
+
+    }
+
+    action get-a-c-l-data {
+      description "Action GetACLData";
+      input {
+        leaf starting-nodes {
+          type string;
+          description "Related to A_ARG_TYPE_ACLDataPathList";
+        }
+
+      }
+
+      output {
+        leaf a-c-l {
+          type leafref {
+            path "../../state/a-arg-type-acl";
+          }
+
+          description "Related to A_ARG_TYPE_ACL";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping configuration-management-top {
+    description "Service top";
+    container configuration-management {
+      description "Service";
+      uses configuration-management-state-top;
+      uses configuration-management-state-attributes-top;
+      uses configuration-management-action;
+    }
+
+  }
+
+  grouping configuration-management-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses configuration-management-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

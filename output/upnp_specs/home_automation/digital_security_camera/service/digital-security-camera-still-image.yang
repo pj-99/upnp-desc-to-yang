@@ -1,0 +1,376 @@
+module digital-security-camera-still-image {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/digital-security-camera-still-image";
+  prefix "digital-security-camera-still-image";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "digital-security-camera-still-image";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses digital-security-camera-still-image-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping digital-security-camera-still-image-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf available-encodings {
+        type string;
+        config false;
+        description "AvailableEncodings";
+      }
+
+      leaf default-encoding {
+        type string;
+        description "DefaultEncoding";
+      }
+
+      leaf available-compression-levels {
+        type string;
+        config false;
+        description "AvailableCompressionLevels";
+      }
+
+      leaf default-compression-level {
+        type string;
+        description "DefaultCompressionLevel";
+      }
+
+      leaf available-resolutions {
+        type string;
+        config false;
+        description "AvailableResolutions";
+      }
+
+      leaf default-resolution {
+        type string;
+        description "DefaultResolution";
+      }
+
+      leaf image-u-r-l {
+        type string;
+        config false;
+        description "ImageURL";
+      }
+
+      leaf image-presentation-u-r-l {
+        type string;
+        config false;
+        description "ImagePresentationURL";
+      }
+
+    }
+
+  }
+
+  grouping digital-security-camera-still-image-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container available-encodings {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container default-encoding {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container available-compression-levels {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container default-compression-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container available-resolutions {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container default-resolution {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container image-u-r-l {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container image-presentation-u-r-l {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping digital-security-camera-still-image-action {
+    description "Service actions";
+    action get-available-encodings {
+      description "Action GetAvailableEncodings";
+      output {
+        leaf ret-available-encodings {
+          type leafref {
+            path "../../state/available-encodings";
+          }
+
+          description "Related to AvailableEncodings";
+        }
+
+      }
+
+    }
+
+    action get-default-encoding {
+      description "Action GetDefaultEncoding";
+      output {
+        leaf ret-encoding {
+          type leafref {
+            path "../../state/default-encoding";
+          }
+
+          description "Related to DefaultEncoding";
+        }
+
+      }
+
+    }
+
+    action set-default-encoding {
+      description "Action SetDefaultEncoding";
+      input {
+        leaf req-encoding {
+          type string;
+          description "Related to DefaultEncoding";
+        }
+
+      }
+
+    }
+
+    action get-available-compression-levels {
+      description "Action GetAvailableCompressionLevels";
+      output {
+        leaf ret-available-compression-levels {
+          type leafref {
+            path "../../state/available-compression-levels";
+          }
+
+          description "Related to AvailableCompressionLevels";
+        }
+
+      }
+
+    }
+
+    action get-default-compression-level {
+      description "Action GetDefaultCompressionLevel";
+      output {
+        leaf ret-compression-level {
+          type leafref {
+            path "../../state/default-compression-level";
+          }
+
+          description "Related to DefaultCompressionLevel";
+        }
+
+      }
+
+    }
+
+    action set-default-compression-level {
+      description "Action SetDefaultCompressionLevel";
+      input {
+        leaf req-compression-level {
+          type string;
+          description "Related to DefaultCompressionLevel";
+        }
+
+      }
+
+    }
+
+    action get-available-resolutions {
+      description "Action GetAvailableResolutions";
+      output {
+        leaf ret-available-resolutions {
+          type leafref {
+            path "../../state/available-resolutions";
+          }
+
+          description "Related to AvailableResolutions";
+        }
+
+      }
+
+    }
+
+    action get-default-resolution {
+      description "Action GetDefaultResolution";
+      output {
+        leaf ret-resolution {
+          type leafref {
+            path "../../state/default-resolution";
+          }
+
+          description "Related to DefaultResolution";
+        }
+
+      }
+
+    }
+
+    action set-default-resolution {
+      description "Action SetDefaultResolution";
+      input {
+        leaf req-resolution {
+          type string;
+          description "Related to DefaultResolution";
+        }
+
+      }
+
+    }
+
+    action get-image-u-r-l {
+      description "Action GetImageURL";
+      input {
+        leaf req-encoding {
+          type string;
+          description "Related to DefaultEncoding";
+        }
+
+        leaf req-compression {
+          type string;
+          description "Related to DefaultCompressionLevel";
+        }
+
+        leaf req-resolution {
+          type string;
+          description "Related to DefaultResolution";
+        }
+
+      }
+
+      output {
+        leaf ret-image-u-r-l {
+          type leafref {
+            path "../../state/image-u-r-l";
+          }
+
+          description "Related to ImageURL";
+        }
+
+      }
+
+    }
+
+    action get-default-image-u-r-l {
+      description "Action GetDefaultImageURL";
+      output {
+        leaf ret-image-u-r-l {
+          type leafref {
+            path "../../state/image-u-r-l";
+          }
+
+          description "Related to ImageURL";
+        }
+
+      }
+
+    }
+
+    action get-image-presentation-u-r-l {
+      description "Action GetImagePresentationURL";
+      input {
+        leaf req-encoding {
+          type string;
+          description "Related to DefaultEncoding";
+        }
+
+        leaf req-compression {
+          type string;
+          description "Related to DefaultCompressionLevel";
+        }
+
+        leaf req-resolution {
+          type string;
+          description "Related to DefaultResolution";
+        }
+
+      }
+
+      output {
+        leaf ret-image-presentation-u-r-l {
+          type leafref {
+            path "../../state/image-presentation-u-r-l";
+          }
+
+          description "Related to ImagePresentationURL";
+        }
+
+      }
+
+    }
+
+    action get-default-image-presentation-u-r-l {
+      description "Action GetDefaultImagePresentationURL";
+      output {
+        leaf ret-image-presentation-u-r-l {
+          type leafref {
+            path "../../state/image-presentation-u-r-l";
+          }
+
+          description "Related to ImagePresentationURL";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping digital-security-camera-still-image-top {
+    description "Service top";
+    container digital-security-camera-still-image {
+      description "Service";
+      uses digital-security-camera-still-image-state-top;
+      uses digital-security-camera-still-image-state-attributes-top;
+      uses digital-security-camera-still-image-action;
+    }
+
+  }
+
+  grouping digital-security-camera-still-image-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses digital-security-camera-still-image-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

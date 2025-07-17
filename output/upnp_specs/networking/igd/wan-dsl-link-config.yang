@@ -1,0 +1,300 @@
+module wan-dsl-link-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wan-dsl-link-config";
+  prefix "wan-dsl-link-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wan-dsl-link-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wan-dsl-link-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wan-dsl-link-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf link-type {
+        type string;
+        config false;
+        description "LinkType";
+      }
+
+      leaf link-status {
+        type enumeration {
+          enum  UP {
+            description "Up";
+          }
+
+          enum  DOWN {
+            description "Down";
+          }
+
+        }
+
+        config false;
+        description "LinkStatus";
+      }
+
+      leaf modulation-type {
+        type string;
+        config false;
+        description "ModulationType";
+      }
+
+      leaf destination-address {
+        type string;
+        config false;
+        description "DestinationAddress";
+      }
+
+      leaf a-t-m-encapsulation {
+        type string;
+        description "ATMEncapsulation";
+      }
+
+      leaf f-c-s-preserved {
+        type boolean;
+        description "FCSPreserved";
+      }
+
+      leaf auto-config {
+        type boolean;
+        config false;
+        description "AutoConfig";
+      }
+
+    }
+
+  }
+
+  grouping wan-dsl-link-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container link-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container link-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container modulation-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container destination-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-t-m-encapsulation {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container f-c-s-preserved {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container auto-config {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wan-dsl-link-config-action {
+    description "Service actions";
+    action set-d-s-l-link-type {
+      description "Action SetDSLLinkType";
+      input {
+        leaf new-link-type {
+          type string;
+          description "Related to LinkType";
+        }
+
+      }
+
+    }
+
+    action get-d-s-l-link-info {
+      description "Action GetDSLLinkInfo";
+      output {
+        leaf new-link-type {
+          type leafref {
+            path "../../state/link-type";
+          }
+
+          description "Related to LinkType";
+        }
+
+        leaf new-link-status {
+          type leafref {
+            path "../../state/link-status";
+          }
+
+          description "Related to LinkStatus";
+        }
+
+      }
+
+    }
+
+    action get-auto-config {
+      description "Action GetAutoConfig";
+      output {
+        leaf new-auto-config {
+          type leafref {
+            path "../../state/auto-config";
+          }
+
+          description "Related to AutoConfig";
+        }
+
+      }
+
+    }
+
+    action get-modulation-type {
+      description "Action GetModulationType";
+      output {
+        leaf new-modulation-type {
+          type leafref {
+            path "../../state/modulation-type";
+          }
+
+          description "Related to ModulationType";
+        }
+
+      }
+
+    }
+
+    action set-destination-address {
+      description "Action SetDestinationAddress";
+      input {
+        leaf new-destination-address {
+          type string;
+          description "Related to DestinationAddress";
+        }
+
+      }
+
+    }
+
+    action get-destination-address {
+      description "Action GetDestinationAddress";
+      output {
+        leaf new-destination-address {
+          type leafref {
+            path "../../state/destination-address";
+          }
+
+          description "Related to DestinationAddress";
+        }
+
+      }
+
+    }
+
+    action set-a-t-m-encapsulation {
+      description "Action SetATMEncapsulation";
+      input {
+        leaf new-a-t-m-encapsulation {
+          type string;
+          description "Related to ATMEncapsulation";
+        }
+
+      }
+
+    }
+
+    action get-a-t-m-encapsulation {
+      description "Action GetATMEncapsulation";
+      output {
+        leaf new-a-t-m-encapsulation {
+          type leafref {
+            path "../../state/a-t-m-encapsulation";
+          }
+
+          description "Related to ATMEncapsulation";
+        }
+
+      }
+
+    }
+
+    action set-f-c-s-preserved {
+      description "Action SetFCSPreserved";
+      input {
+        leaf new-f-c-s-preserved {
+          type boolean;
+          description "Related to FCSPreserved";
+        }
+
+      }
+
+    }
+
+    action get-f-c-s-preserved {
+      description "Action GetFCSPreserved";
+      output {
+        leaf new-f-c-s-preserved {
+          type leafref {
+            path "../../state/f-c-s-preserved";
+          }
+
+          description "Related to FCSPreserved";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping wan-dsl-link-config-top {
+    description "Service top";
+    container wan-dsl-link-config {
+      description "Service";
+      uses wan-dsl-link-config-state-top;
+      uses wan-dsl-link-config-state-attributes-top;
+      uses wan-dsl-link-config-action;
+    }
+
+  }
+
+  grouping wan-dsl-link-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wan-dsl-link-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

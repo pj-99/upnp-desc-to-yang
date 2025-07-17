@@ -1,0 +1,202 @@
+module rada-sync {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/rada-sync";
+  prefix "rada-sync";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "rada-sync";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses rada-sync-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping rada-sync-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf system-info {
+        type string;
+        config false;
+        description "SystemInfo";
+      }
+
+      leaf a-arg-type-dddlocation {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DDDLocation";
+      }
+
+      leaf a-arg-type-deviceinfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DeviceInfoList";
+      }
+
+      leaf a-arg-type-uuid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_UUID";
+      }
+
+      leaf a-arg-type-networkaddressinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_NetworkAddressInfo";
+      }
+
+    }
+
+  }
+
+  grouping rada-sync-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container system-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-dddlocation {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-deviceinfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uuid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-networkaddressinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping rada-sync-action {
+    description "Service actions";
+    action add-remote-devices {
+      description "Action AddRemoteDevices";
+      input {
+        leaf device-list {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceInfoList";
+        }
+
+        leaf i-d {
+          type string;
+          description "Related to A_ARG_TYPE_UUID";
+        }
+
+      }
+
+    }
+
+    action remove-remote-devices {
+      description "Action RemoveRemoteDevices";
+      input {
+        leaf device-list {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceInfoList";
+        }
+
+        leaf i-d {
+          type string;
+          description "Related to A_ARG_TYPE_UUID";
+        }
+
+      }
+
+    }
+
+    action set-d-d-d-location {
+      description "Action SetDDDLocation";
+      input {
+        leaf d-d-d-location {
+          type string;
+          description "Related to A_ARG_TYPE_DDDLocation";
+        }
+
+        leaf i-d {
+          type string;
+          description "Related to A_ARG_TYPE_UUID";
+        }
+
+      }
+
+    }
+
+    action heartbeat-update {
+      description "Action HeartbeatUpdate";
+      input {
+        leaf i-d {
+          type string;
+          description "Related to A_ARG_TYPE_UUID";
+        }
+
+      }
+
+    }
+
+    action get-local-network-address-info {
+      description "Action GetLocalNetworkAddressInfo";
+      output {
+        leaf local-network-address {
+          type leafref {
+            path "../../state/a-arg-type-networkaddressinfo";
+          }
+
+          description "Related to A_ARG_TYPE_NetworkAddressInfo";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping rada-sync-top {
+    description "Service top";
+    container rada-sync {
+      description "Service";
+      uses rada-sync-state-top;
+      uses rada-sync-state-attributes-top;
+      uses rada-sync-action;
+    }
+
+  }
+
+  grouping rada-sync-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses rada-sync-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

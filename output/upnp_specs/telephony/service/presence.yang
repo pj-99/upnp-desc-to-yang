@@ -1,0 +1,305 @@
+module presence {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/presence";
+  prefix "presence";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "presence";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses presence-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping presence-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf user-presence-info {
+        type string;
+        config false;
+        description "UserPresenceInfo";
+      }
+
+      leaf presence-of-contacts-update {
+        type string;
+        config false;
+        description "PresenceOfContactsUpdate";
+      }
+
+      leaf watcher {
+        type string;
+        config false;
+        description "Watcher";
+      }
+
+      leaf a-arg-type-watcherlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_WatcherList";
+      }
+
+      leaf a-arg-type-userpresenceinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_UserPresenceInfo";
+      }
+
+      leaf a-arg-type-presenceofcontactslist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PresenceOfContactsList";
+      }
+
+      leaf a-arg-type-contactid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ContactId";
+      }
+
+      leaf a-arg-type-registrationresult {
+        type string;
+        config false;
+        description "A_ARG_TYPE_RegistrationResult";
+      }
+
+      leaf a-arg-type-expires {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_Expires";
+      }
+
+    }
+
+  }
+
+  grouping presence-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container user-presence-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container presence-of-contacts-update {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container watcher {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-watcherlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-userpresenceinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-presenceofcontactslist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-contactid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-registrationresult {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-expires {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping presence-action {
+    description "Service actions";
+    action get-presence {
+      description "Action GetPresence";
+      output {
+        leaf user-presence {
+          type leafref {
+            path "../../state/a-arg-type-userpresenceinfo";
+          }
+
+          description "Related to A_ARG_TYPE_UserPresenceInfo";
+        }
+
+      }
+
+    }
+
+    action update-presence {
+      description "Action UpdatePresence";
+      input {
+        leaf updated-user-presence {
+          type string;
+          description "Related to A_ARG_TYPE_UserPresenceInfo";
+        }
+
+      }
+
+    }
+
+    action get-contact-presence {
+      description "Action GetContactPresence";
+      input {
+        leaf target-contact {
+          type string;
+          description "Related to A_ARG_TYPE_ContactId";
+        }
+
+      }
+
+      output {
+        leaf contact-presence {
+          type leafref {
+            path "../../state/a-arg-type-presenceofcontactslist";
+          }
+
+          description "Related to A_ARG_TYPE_PresenceOfContactsList";
+        }
+
+      }
+
+    }
+
+    action get-presence-of-contacts-update {
+      description "Action GetPresenceOfContactsUpdate";
+      output {
+        leaf contact-presence-update {
+          type leafref {
+            path "../../state/a-arg-type-presenceofcontactslist";
+          }
+
+          description "Related to A_ARG_TYPE_PresenceOfContactsList";
+        }
+
+      }
+
+    }
+
+    action register-for-contact-presence {
+      description "Action RegisterForContactPresence";
+      input {
+        leaf contact {
+          type string;
+          description "Related to A_ARG_TYPE_ContactId";
+        }
+
+        leaf expire {
+          type int32;
+          description "Related to A_ARG_TYPE_Expires";
+        }
+
+      }
+
+      output {
+        leaf registration-result {
+          type leafref {
+            path "../../state/a-arg-type-registrationresult";
+          }
+
+          description "Related to A_ARG_TYPE_RegistrationResult";
+        }
+
+      }
+
+    }
+
+    action authorize-presence-reactive {
+      description "Action AuthorizePresenceReactive";
+      input {
+        leaf contact {
+          type string;
+          description "Related to A_ARG_TYPE_ContactId";
+        }
+
+        leaf expire {
+          type int32;
+          description "Related to A_ARG_TYPE_Expires";
+        }
+
+        leaf user-presence-info {
+          type string;
+          description "Related to A_ARG_TYPE_UserPresenceInfo";
+        }
+
+      }
+
+    }
+
+    action authorize-presence-proactive {
+      description "Action AuthorizePresenceProactive";
+      input {
+        leaf user-presence-info {
+          type string;
+          description "Related to A_ARG_TYPE_UserPresenceInfo";
+        }
+
+        leaf expire {
+          type int32;
+          description "Related to A_ARG_TYPE_Expires";
+        }
+
+        leaf watcher-list {
+          type string;
+          description "Related to A_ARG_TYPE_WatcherList";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping presence-top {
+    description "Service top";
+    container presence {
+      description "Service";
+      uses presence-state-top;
+      uses presence-state-attributes-top;
+      uses presence-action;
+    }
+
+  }
+
+  grouping presence-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses presence-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

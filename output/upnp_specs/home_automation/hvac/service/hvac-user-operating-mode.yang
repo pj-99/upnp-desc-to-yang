@@ -1,0 +1,271 @@
+module hvac-user-operating-mode {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/hvac-user-operating-mode";
+  prefix "hvac-user-operating-mode";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "hvac-user-operating-mode";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses hvac-user-operating-mode-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping hvac-user-operating-mode-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf mode-target {
+        type enumeration {
+          enum  OFF {
+            description "Off";
+          }
+
+          enum  HEAT_ON {
+            description "HeatOn";
+          }
+
+          enum  COOL_ON {
+            description "CoolOn";
+          }
+
+          enum  AUTO_CHANGE_OVER {
+            description "AutoChangeOver";
+          }
+
+          enum  AUX_HEAT_ON {
+            description "AuxHeatOn";
+          }
+
+          enum  ECONOMY_HEAT_ON {
+            description "EconomyHeatOn";
+          }
+
+          enum  EMERGENCY_HEAT_ON {
+            description "EmergencyHeatOn";
+          }
+
+          enum  AUX_COOL_ON {
+            description "AuxCoolOn";
+          }
+
+          enum  ECONOMY_COOL_ON {
+            description "EconomyCoolOn";
+          }
+
+          enum  BUILDING_PROTECTION {
+            description "BuildingProtection";
+          }
+
+          enum  ENERGY_SAVINGS_MODE {
+            description "EnergySavingsMode";
+          }
+
+        }
+
+        default OFF;
+        description "ModeTarget";
+      }
+
+      leaf mode-status {
+        type enumeration {
+          enum  OFF {
+            description "Off";
+          }
+
+          enum  IN_DEAD_BAND {
+            description "InDeadBand";
+          }
+
+          enum  HEAT_ON {
+            description "HeatOn";
+          }
+
+          enum  COOL_ON {
+            description "CoolOn";
+          }
+
+          enum  AUTO_CHANGE_OVER {
+            description "AutoChangeOver";
+          }
+
+          enum  AUX_HEAT_ON {
+            description "AuxHeatOn";
+          }
+
+          enum  ECONOMY_HEAT_ON {
+            description "EconomyHeatOn";
+          }
+
+          enum  EMERGENCY_HEAT_ON {
+            description "EmergencyHeatOn";
+          }
+
+          enum  AUX_COOL_ON {
+            description "AuxCoolOn";
+          }
+
+          enum  ECONOMY_COOL_ON {
+            description "EconomyCoolOn";
+          }
+
+          enum  BUILDING_PROTECTION {
+            description "BuildingProtection";
+          }
+
+          enum  ENERGY_SAVINGS_HEATING {
+            description "EnergySavingsHeating";
+          }
+
+          enum  ENERGY_SAVINGS_COOLING {
+            description "EnergySavingsCooling";
+          }
+
+        }
+
+        default OFF;
+        config false;
+        description "ModeStatus";
+      }
+
+      leaf name {
+        type string;
+        description "Name";
+      }
+
+    }
+
+  }
+
+  grouping hvac-user-operating-mode-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container mode-target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container mode-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping hvac-user-operating-mode-action {
+    description "Service actions";
+    action set-mode-target {
+      description "Action SetModeTarget";
+      input {
+        leaf new-mode-target {
+          type string;
+          description "Related to ModeTarget";
+        }
+
+      }
+
+    }
+
+    action get-mode-target {
+      description "Action GetModeTarget";
+      output {
+        leaf current-mode-target {
+          type leafref {
+            path "../../state/mode-target";
+          }
+
+          description "Related to ModeTarget";
+        }
+
+      }
+
+    }
+
+    action get-mode-status {
+      description "Action GetModeStatus";
+      output {
+        leaf current-mode-status {
+          type leafref {
+            path "../../state/mode-status";
+          }
+
+          description "Related to ModeStatus";
+        }
+
+      }
+
+    }
+
+    action get-name {
+      description "Action GetName";
+      output {
+        leaf current-name {
+          type leafref {
+            path "../../state/name";
+          }
+
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+    action set-name {
+      description "Action SetName";
+      input {
+        leaf new-name {
+          type string;
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping hvac-user-operating-mode-top {
+    description "Service top";
+    container hvac-user-operating-mode {
+      description "Service";
+      uses hvac-user-operating-mode-state-top;
+      uses hvac-user-operating-mode-state-attributes-top;
+      uses hvac-user-operating-mode-action;
+    }
+
+  }
+
+  grouping hvac-user-operating-mode-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses hvac-user-operating-mode-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

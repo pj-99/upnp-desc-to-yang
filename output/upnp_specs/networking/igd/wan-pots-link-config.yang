@@ -1,0 +1,352 @@
+module wan-pots-link-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wan-pots-link-config";
+  prefix "wan-pots-link-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wan-pots-link-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wan-pots-link-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wan-pots-link-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf i-s-p-phone-number {
+        type string;
+        config false;
+        description "ISPPhoneNumber";
+      }
+
+      leaf i-s-p-info {
+        type string;
+        description "ISPInfo";
+      }
+
+      leaf link-type {
+        type enumeration {
+          enum  PPP_DIALUP {
+            description "PPP_Dialup";
+          }
+
+        }
+
+        config false;
+        description "LinkType";
+      }
+
+      leaf number-of-retries {
+        type uint32;
+        config false;
+        description "NumberOfRetries";
+      }
+
+      leaf delay-between-retries {
+        type uint32;
+        config false;
+        description "DelayBetweenRetries";
+      }
+
+      leaf fclass {
+        type string;
+        config false;
+        description "Fclass";
+      }
+
+      leaf data-modulation-supported {
+        type string;
+        config false;
+        description "DataModulationSupported";
+      }
+
+      leaf data-protocol {
+        type string;
+        config false;
+        description "DataProtocol";
+      }
+
+      leaf data-compression {
+        type string;
+        config false;
+        description "DataCompression";
+      }
+
+      leaf plus-v-t-r-command-supported {
+        type boolean;
+        config false;
+        description "PlusVTRCommandSupported";
+      }
+
+    }
+
+  }
+
+  grouping wan-pots-link-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container i-s-p-phone-number {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container i-s-p-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container link-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container number-of-retries {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container delay-between-retries {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container fclass {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container data-modulation-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container data-protocol {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container data-compression {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container plus-v-t-r-command-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wan-pots-link-config-action {
+    description "Service actions";
+    action set-i-s-p-info {
+      description "Action SetISPInfo";
+      input {
+        leaf new-i-s-p-phone-number {
+          type string;
+          description "Related to ISPPhoneNumber";
+        }
+
+        leaf new-i-s-p-info {
+          type string;
+          description "Related to ISPInfo";
+        }
+
+        leaf new-link-type {
+          type string;
+          description "Related to LinkType";
+        }
+
+      }
+
+    }
+
+    action set-call-retry-info {
+      description "Action SetCallRetryInfo";
+      input {
+        leaf new-number-of-retries {
+          type uint32;
+          description "Related to NumberOfRetries";
+        }
+
+        leaf new-delay-between-retries {
+          type uint32;
+          description "Related to DelayBetweenRetries";
+        }
+
+      }
+
+    }
+
+    action get-i-s-p-info {
+      description "Action GetISPInfo";
+      output {
+        leaf new-i-s-p-phone-number {
+          type leafref {
+            path "../../state/i-s-p-phone-number";
+          }
+
+          description "Related to ISPPhoneNumber";
+        }
+
+        leaf new-i-s-p-info {
+          type leafref {
+            path "../../state/i-s-p-info";
+          }
+
+          description "Related to ISPInfo";
+        }
+
+        leaf new-link-type {
+          type leafref {
+            path "../../state/link-type";
+          }
+
+          description "Related to LinkType";
+        }
+
+      }
+
+    }
+
+    action get-call-retry-info {
+      description "Action GetCallRetryInfo";
+      output {
+        leaf new-number-of-retries {
+          type leafref {
+            path "../../state/number-of-retries";
+          }
+
+          description "Related to NumberOfRetries";
+        }
+
+        leaf new-delay-between-retries {
+          type leafref {
+            path "../../state/delay-between-retries";
+          }
+
+          description "Related to DelayBetweenRetries";
+        }
+
+      }
+
+    }
+
+    action get-fclass {
+      description "Action GetFclass";
+      output {
+        leaf new-fclass {
+          type leafref {
+            path "../../state/fclass";
+          }
+
+          description "Related to Fclass";
+        }
+
+      }
+
+    }
+
+    action get-data-modulation-supported {
+      description "Action GetDataModulationSupported";
+      output {
+        leaf new-data-modulation-supported {
+          type leafref {
+            path "../../state/data-modulation-supported";
+          }
+
+          description "Related to DataModulationSupported";
+        }
+
+      }
+
+    }
+
+    action get-data-protocol {
+      description "Action GetDataProtocol";
+      output {
+        leaf new-data-protocol {
+          type leafref {
+            path "../../state/data-protocol";
+          }
+
+          description "Related to DataProtocol";
+        }
+
+      }
+
+    }
+
+    action get-data-compression {
+      description "Action GetDataCompression";
+      output {
+        leaf new-data-compression {
+          type leafref {
+            path "../../state/data-compression";
+          }
+
+          description "Related to DataCompression";
+        }
+
+      }
+
+    }
+
+    action get-plus-v-t-r-command-supported {
+      description "Action GetPlusVTRCommandSupported";
+      output {
+        leaf new-plus-v-t-r-command-supported {
+          type leafref {
+            path "../../state/plus-v-t-r-command-supported";
+          }
+
+          description "Related to PlusVTRCommandSupported";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping wan-pots-link-config-top {
+    description "Service top";
+    container wan-pots-link-config {
+      description "Service";
+      uses wan-pots-link-config-state-top;
+      uses wan-pots-link-config-state-attributes-top;
+      uses wan-pots-link-config-action;
+    }
+
+  }
+
+  grouping wan-pots-link-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wan-pots-link-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

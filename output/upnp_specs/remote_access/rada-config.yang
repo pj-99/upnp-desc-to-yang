@@ -1,0 +1,231 @@
+module rada-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/rada-config";
+  prefix "rada-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "rada-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses rada-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping rada-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf system-info {
+        type string;
+        config false;
+        description "SystemInfo";
+      }
+
+      leaf system-info-update-i-d {
+        type uint32;
+        config false;
+        description "SystemInfoUpdateID";
+      }
+
+      leaf a-arg-type-uuid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_UUID";
+      }
+
+      leaf a-arg-type-filterlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_FilterList";
+      }
+
+      leaf a-arg-type-virtualdevicedescr {
+        type string;
+        config false;
+        description "A_ARG_TYPE_VirtualDeviceDescr";
+      }
+
+      leaf a-arg-type-virtualdeviceid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_VirtualDeviceID";
+      }
+
+      leaf a-arg-type-virtualdevicelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_VirtualDeviceList";
+      }
+
+    }
+
+  }
+
+  grouping rada-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container system-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container system-info-update-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uuid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-filterlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-virtualdevicedescr {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-virtualdeviceid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-virtualdevicelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping rada-config-action {
+    description "Service actions";
+    action edit-filter {
+      description "Action EditFilter";
+      input {
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_FilterList";
+        }
+
+      }
+
+    }
+
+    action get-system-info {
+      description "Action GetSystemInfo";
+      input {
+        leaf i-d {
+          type string;
+          description "Related to A_ARG_TYPE_UUID";
+        }
+
+      }
+
+      output {
+        leaf system-info {
+          type leafref {
+            path "../../state/system-info";
+          }
+
+          description "Related to SystemInfo";
+        }
+
+      }
+
+    }
+
+    action create-virtual-device {
+      description "Action CreateVirtualDevice";
+      input {
+        leaf virtual-device-descr {
+          type string;
+          description "Related to A_ARG_TYPE_VirtualDeviceDescr";
+        }
+
+      }
+
+      output {
+        leaf virtual-device-i-d {
+          type leafref {
+            path "../../state/a-arg-type-virtualdeviceid";
+          }
+
+          description "Related to A_ARG_TYPE_VirtualDeviceID";
+        }
+
+      }
+
+    }
+
+    action get-virtual-devices {
+      description "Action GetVirtualDevices";
+      output {
+        leaf virtual-device-list {
+          type leafref {
+            path "../../state/a-arg-type-virtualdevicelist";
+          }
+
+          description "Related to A_ARG_TYPE_VirtualDeviceList";
+        }
+
+      }
+
+    }
+
+    action destroy-virtual-device {
+      description "Action DestroyVirtualDevice";
+      input {
+        leaf virtual-device-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_VirtualDeviceID";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping rada-config-top {
+    description "Service top";
+    container rada-config {
+      description "Service";
+      uses rada-config-state-top;
+      uses rada-config-state-attributes-top;
+      uses rada-config-action;
+    }
+
+  }
+
+  grouping rada-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses rada-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

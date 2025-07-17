@@ -1,0 +1,1041 @@
+module print-enhanced {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/print-enhanced";
+  prefix "print-enhanced";
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "print-enhanced";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses print-enhanced-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping print-enhanced-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-criticalattriblist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CriticalAttribList";
+      }
+
+      leaf a-arg-type-medialist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MediaList";
+      }
+
+      leaf a-arg-type-printerabortreason {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PrinterAbortReason";
+      }
+
+      leaf char-rep-supported {
+        type string;
+        config false;
+        description "CharRepSupported";
+      }
+
+      leaf color-supported {
+        type boolean;
+        config false;
+        description "ColorSupported";
+      }
+
+      leaf content-complete-list {
+        type string;
+        config false;
+        description "ContentCompleteList";
+      }
+
+      leaf copies {
+        type int32 {
+          range "0 .. 2147483647";
+        }
+
+        config false;
+        description "Copies";
+      }
+
+      leaf critical-attributes-supported {
+        type string;
+        config false;
+        description "CriticalAttributesSupported";
+      }
+
+      leaf data-sink {
+        type inet:uri;
+        config false;
+        description "DataSink";
+      }
+
+      leaf device-id {
+        type string;
+        config false;
+        description "DeviceId";
+      }
+
+      leaf document-format {
+        type enumeration {
+          enum  UNKNOWN {
+            description "unknown";
+          }
+
+          enum  APPLICATION/XHTML-PRINT {
+            description "application/xhtml-print";
+          }
+
+          enum  APPLICATION/XHTML-PRINT-E {
+            description "application/xhtml-print-e";
+          }
+
+        }
+
+        config false;
+        description "DocumentFormat";
+      }
+
+      leaf document-u-t-f16-supported {
+        type string;
+        config false;
+        description "DocumentUTF16Supported";
+      }
+
+      leaf full-bleed-supported {
+        type boolean;
+        config false;
+        description "FullBleedSupported";
+      }
+
+      leaf internet-connect-state {
+        type string;
+        config false;
+        description "InternetConnectState";
+      }
+
+      leaf job-abort-state {
+        type string;
+        config false;
+        description "JobAbortState";
+      }
+
+      leaf job-end-state {
+        type string;
+        config false;
+        description "JobEndState";
+      }
+
+      leaf job-id {
+        type int32 {
+          range "0 .. 2147483647";
+        }
+
+        default 0;
+        config false;
+        description "JobId";
+      }
+
+      leaf job-id-list {
+        type string;
+        config false;
+        description "JobIdList";
+      }
+
+      leaf job-media-sheets-completed {
+        type int32 {
+          range "-1 .. 2147483647";
+        }
+
+        config false;
+        description "JobMediaSheetsCompleted";
+      }
+
+      leaf job-name {
+        type string;
+        config false;
+        description "JobName";
+      }
+
+      leaf job-originating-user-name {
+        type string;
+        config false;
+        description "JobOriginatingUserName";
+      }
+
+      leaf media-size {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+        }
+
+        config false;
+        description "MediaSize";
+      }
+
+      leaf media-type {
+        type enumeration {
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+          enum  NONE {
+            description "none";
+          }
+
+        }
+
+        config false;
+        description "MediaType";
+      }
+
+      leaf number-up {
+        type enumeration {
+          enum  1 {
+            description "1";
+          }
+
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+        }
+
+        default 1;
+        config false;
+        description "NumberUp";
+      }
+
+      leaf orientation-requested {
+        type enumeration {
+          enum  PORTRAIT {
+            description "portrait";
+          }
+
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+        }
+
+        config false;
+        description "OrientationRequested";
+      }
+
+      leaf page-margins {
+        type string;
+        config false;
+        description "PageMargins";
+      }
+
+      leaf printer-location {
+        type string;
+        config false;
+        description "PrinterLocation";
+      }
+
+      leaf printer-name {
+        type string;
+        config false;
+        description "PrinterName";
+      }
+
+      leaf print-quality {
+        type enumeration {
+          enum  NORMAL {
+            description "normal";
+          }
+
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+        }
+
+        config false;
+        description "PrintQuality";
+      }
+
+      leaf printer-state {
+        type enumeration {
+          enum  IDLE {
+            description "idle";
+          }
+
+          enum  PROCESSING {
+            description "processing";
+          }
+
+          enum  STOPPED {
+            description "stopped";
+          }
+
+        }
+
+        default IDLE;
+        config false;
+        description "PrinterState";
+      }
+
+      leaf printer-state-reasons {
+        type enumeration {
+          enum  NONE {
+            description "none";
+          }
+
+          enum  ATTENTION-REQUIRED {
+            description "attention-required";
+          }
+
+          enum  MEDIA-JAM {
+            description "media-jam";
+          }
+
+          enum  PAUSED {
+            description "paused";
+          }
+
+          enum  DOOR-OPEN {
+            description "door-open";
+          }
+
+          enum  MEDIA-LOW {
+            description "media-low";
+          }
+
+          enum  MEDIA-EMPTY {
+            description "media-empty";
+          }
+
+          enum  OUTPUT-AREA-ALMOST-FULL {
+            description "output-area-almost-full";
+          }
+
+          enum  OUTPUT-AREA-FULL {
+            description "output-area-full";
+          }
+
+          enum  MARKER-SUPPLY-LOW {
+            description "marker-supply-low";
+          }
+
+          enum  MARKER-SUPPLY-EMPTY {
+            description "marker-supply-empty";
+          }
+
+          enum  MARKER-FAILURE {
+            description "marker-failure";
+          }
+
+          enum  MEDIA-CHANGE-REQUEST {
+            description "media-change-request";
+          }
+
+        }
+
+        default NONE;
+        config false;
+        description "PrinterStateReasons";
+      }
+
+      leaf sides {
+        type enumeration {
+          enum  ONE-SIDED {
+            description "one-sided";
+          }
+
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+        }
+
+        config false;
+        description "Sides";
+      }
+
+      leaf source-u-r-i {
+        type inet:uri;
+        config false;
+        description "SourceURI";
+      }
+
+      leaf x-h-t-m-l-image-supported {
+        type enumeration {
+          enum  IMAGE/JPEG {
+            description "image/jpeg";
+          }
+
+        }
+
+        default IMAGE/JPEG;
+        config false;
+        description "XHTMLImageSupported";
+      }
+
+    }
+
+  }
+
+  grouping print-enhanced-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-criticalattriblist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-medialist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-printerabortreason {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container char-rep-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container color-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container content-complete-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container copies {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container critical-attributes-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container data-sink {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-id {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container document-format {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container document-u-t-f16-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container full-bleed-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container internet-connect-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-abort-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-end-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-id {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-id-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-media-sheets-completed {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-originating-user-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container media-size {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container media-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container number-up {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container orientation-requested {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container page-margins {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container printer-location {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container printer-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container print-quality {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container printer-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container printer-state-reasons {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sides {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container source-u-r-i {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container x-h-t-m-l-image-supported {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping print-enhanced-action {
+    description "Service actions";
+    action cancel-job {
+      description "Action CancelJob";
+      input {
+        leaf job-id {
+          type int32;
+          description "Related to JobId";
+        }
+
+      }
+
+    }
+
+    action create-job {
+      description "Action CreateJob";
+      input {
+        leaf job-name {
+          type string;
+          description "Related to JobName";
+        }
+
+        leaf job-originating-user-name {
+          type string;
+          description "Related to JobOriginatingUserName";
+        }
+
+        leaf document-format {
+          type string;
+          description "Related to DocumentFormat";
+        }
+
+        leaf copies {
+          type int32;
+          description "Related to Copies";
+        }
+
+        leaf sides {
+          type string;
+          description "Related to Sides";
+        }
+
+        leaf number-up {
+          type string;
+          description "Related to NumberUp";
+        }
+
+        leaf orientation-requested {
+          type string;
+          description "Related to OrientationRequested";
+        }
+
+        leaf media-size {
+          type string;
+          description "Related to MediaSize";
+        }
+
+        leaf media-type {
+          type string;
+          description "Related to MediaType";
+        }
+
+        leaf print-quality {
+          type string;
+          description "Related to PrintQuality";
+        }
+
+      }
+
+      output {
+        leaf job-id {
+          type leafref {
+            path "../../state/job-id";
+          }
+
+          description "Related to JobId";
+        }
+
+        leaf data-sink {
+          type leafref {
+            path "../../state/data-sink";
+          }
+
+          description "Related to DataSink";
+        }
+
+      }
+
+    }
+
+    action create-job-v2 {
+      description "Action CreateJobV2";
+      input {
+        leaf job-name {
+          type string;
+          description "Related to JobName";
+        }
+
+        leaf job-originating-user-name {
+          type string;
+          description "Related to JobOriginatingUserName";
+        }
+
+        leaf document-format {
+          type string;
+          description "Related to DocumentFormat";
+        }
+
+        leaf copies {
+          type int32;
+          description "Related to Copies";
+        }
+
+        leaf sides {
+          type string;
+          description "Related to Sides";
+        }
+
+        leaf number-up {
+          type string;
+          description "Related to NumberUp";
+        }
+
+        leaf orientation-requested {
+          type string;
+          description "Related to OrientationRequested";
+        }
+
+        leaf media-size {
+          type string;
+          description "Related to MediaSize";
+        }
+
+        leaf media-type {
+          type string;
+          description "Related to MediaType";
+        }
+
+        leaf print-quality {
+          type string;
+          description "Related to PrintQuality";
+        }
+
+        leaf critical-attributes-list {
+          type string;
+          description "Related to A_ARG_TYPE_CriticalAttribList";
+        }
+
+      }
+
+      output {
+        leaf job-id {
+          type leafref {
+            path "../../state/job-id";
+          }
+
+          description "Related to JobId";
+        }
+
+        leaf data-sink {
+          type leafref {
+            path "../../state/data-sink";
+          }
+
+          description "Related to DataSink";
+        }
+
+      }
+
+    }
+
+    action create-u-r-i-job {
+      description "Action CreateURIJob";
+      input {
+        leaf job-name {
+          type string;
+          description "Related to JobName";
+        }
+
+        leaf job-originating-user-name {
+          type string;
+          description "Related to JobOriginatingUserName";
+        }
+
+        leaf document-format {
+          type string;
+          description "Related to DocumentFormat";
+        }
+
+        leaf copies {
+          type int32;
+          description "Related to Copies";
+        }
+
+        leaf sides {
+          type string;
+          description "Related to Sides";
+        }
+
+        leaf number-up {
+          type string;
+          description "Related to NumberUp";
+        }
+
+        leaf orientation-requested {
+          type string;
+          description "Related to OrientationRequested";
+        }
+
+        leaf media-size {
+          type string;
+          description "Related to MediaSize";
+        }
+
+        leaf media-type {
+          type string;
+          description "Related to MediaType";
+        }
+
+        leaf print-quality {
+          type string;
+          description "Related to PrintQuality";
+        }
+
+        leaf critical-attributes-list {
+          type string;
+          description "Related to A_ARG_TYPE_CriticalAttribList";
+        }
+
+        leaf source-u-r-i {
+          type inet:uri;
+          description "Related to SourceURI";
+        }
+
+      }
+
+      output {
+        leaf job-id {
+          type leafref {
+            path "../../state/job-id";
+          }
+
+          description "Related to JobId";
+        }
+
+      }
+
+    }
+
+    action get-job-attributes {
+      description "Action GetJobAttributes";
+      input {
+        leaf job-id {
+          type int32;
+          description "Related to JobId";
+        }
+
+      }
+
+      output {
+        leaf job-name {
+          type leafref {
+            path "../../state/job-name";
+          }
+
+          description "Related to JobName";
+        }
+
+        leaf job-originating-user-name {
+          type leafref {
+            path "../../state/job-originating-user-name";
+          }
+
+          description "Related to JobOriginatingUserName";
+        }
+
+        leaf job-media-sheets-completed {
+          type leafref {
+            path "../../state/job-media-sheets-completed";
+          }
+
+          description "Related to JobMediaSheetsCompleted";
+        }
+
+      }
+
+    }
+
+    action get-margins {
+      description "Action GetMargins";
+      input {
+        leaf media-size {
+          type string;
+          description "Related to MediaSize";
+        }
+
+        leaf media-type {
+          type string;
+          description "Related to MediaType";
+        }
+
+      }
+
+      output {
+        leaf page-margins {
+          type leafref {
+            path "../../state/page-margins";
+          }
+
+          description "Related to PageMargins";
+        }
+
+        leaf full-bleed-supported {
+          type leafref {
+            path "../../state/full-bleed-supported";
+          }
+
+          description "Related to FullBleedSupported";
+        }
+
+      }
+
+    }
+
+    action get-media-list {
+      description "Action GetMediaList";
+      input {
+        leaf media-size {
+          type string;
+          description "Related to MediaSize";
+        }
+
+        leaf media-type {
+          type string;
+          description "Related to MediaType";
+        }
+
+      }
+
+      output {
+        leaf media-list {
+          type leafref {
+            path "../../state/a-arg-type-medialist";
+          }
+
+          description "Related to A_ARG_TYPE_MediaList";
+        }
+
+      }
+
+    }
+
+    action get-printer-attributes {
+      description "Action GetPrinterAttributes";
+      output {
+        leaf printer-state {
+          type leafref {
+            path "../../state/printer-state";
+          }
+
+          description "Related to PrinterState";
+        }
+
+        leaf printer-state-reasons {
+          type leafref {
+            path "../../state/printer-state-reasons";
+          }
+
+          description "Related to PrinterStateReasons";
+        }
+
+        leaf job-id-list {
+          type leafref {
+            path "../../state/job-id-list";
+          }
+
+          description "Related to JobIdList";
+        }
+
+        leaf job-id {
+          type leafref {
+            path "../../state/job-id";
+          }
+
+          description "Related to JobId";
+        }
+
+      }
+
+    }
+
+    action get-printer-attributes-v2 {
+      description "Action GetPrinterAttributesV2";
+      output {
+        leaf printer-state {
+          type leafref {
+            path "../../state/printer-state";
+          }
+
+          description "Related to PrinterState";
+        }
+
+        leaf printer-state-reasons {
+          type leafref {
+            path "../../state/printer-state-reasons";
+          }
+
+          description "Related to PrinterStateReasons";
+        }
+
+        leaf job-id-list {
+          type leafref {
+            path "../../state/job-id-list";
+          }
+
+          description "Related to JobIdList";
+        }
+
+        leaf job-id {
+          type leafref {
+            path "../../state/job-id";
+          }
+
+          description "Related to JobId";
+        }
+
+        leaf internet-connect-state {
+          type leafref {
+            path "../../state/internet-connect-state";
+          }
+
+          description "Related to InternetConnectState";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping print-enhanced-top {
+    description "Service top";
+    container print-enhanced {
+      description "Service";
+      uses print-enhanced-state-top;
+      uses print-enhanced-state-attributes-top;
+      uses print-enhanced-action;
+    }
+
+  }
+
+  grouping print-enhanced-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses print-enhanced-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

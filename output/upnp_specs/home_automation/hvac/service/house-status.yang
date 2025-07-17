@@ -1,0 +1,225 @@
+module house-status {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/house-status";
+  prefix "house-status";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "house-status";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses house-status-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping house-status-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf occupancy-state {
+        type enumeration {
+          enum  OCCUPIED {
+            description "Occupied";
+          }
+
+          enum  UNOCCUPIED {
+            description "Unoccupied";
+          }
+
+          enum  INDETERMINATE {
+            description "Indeterminate";
+          }
+
+        }
+
+        default OCCUPIED;
+        description "OccupancyState";
+      }
+
+      leaf activity-level {
+        type enumeration {
+          enum  REGULAR {
+            description "Regular";
+          }
+
+          enum  ASLEEP {
+            description "Asleep";
+          }
+
+          enum  HIGH_ACTIVITY {
+            description "HighActivity";
+          }
+
+        }
+
+        default REGULAR;
+        description "ActivityLevel";
+      }
+
+      leaf dormancy-level {
+        type enumeration {
+          enum  REGULAR {
+            description "Regular";
+          }
+
+          enum  VACATION {
+            description "Vacation";
+          }
+
+          enum  PETS_AT_HOME {
+            description "PetsAtHome";
+          }
+
+        }
+
+        default REGULAR;
+        description "DormancyLevel";
+      }
+
+    }
+
+  }
+
+  grouping house-status-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container occupancy-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container activity-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container dormancy-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping house-status-action {
+    description "Service actions";
+    action get-occupancy-state {
+      description "Action GetOccupancyState";
+      output {
+        leaf current-occupancy-state {
+          type leafref {
+            path "../../state/occupancy-state";
+          }
+
+          description "Related to OccupancyState";
+        }
+
+      }
+
+    }
+
+    action get-activity-level {
+      description "Action GetActivityLevel";
+      output {
+        leaf current-activity-level {
+          type leafref {
+            path "../../state/activity-level";
+          }
+
+          description "Related to ActivityLevel";
+        }
+
+      }
+
+    }
+
+    action get-dormancy-level {
+      description "Action GetDormancyLevel";
+      output {
+        leaf current-dormancy-level {
+          type leafref {
+            path "../../state/dormancy-level";
+          }
+
+          description "Related to DormancyLevel";
+        }
+
+      }
+
+    }
+
+    action set-occupancy-state {
+      description "Action SetOccupancyState";
+      input {
+        leaf new-occupancy-state {
+          type string;
+          description "Related to OccupancyState";
+        }
+
+      }
+
+    }
+
+    action set-activity-level {
+      description "Action SetActivityLevel";
+      input {
+        leaf new-activity-level {
+          type string;
+          description "Related to ActivityLevel";
+        }
+
+      }
+
+    }
+
+    action set-dormancy-level {
+      description "Action SetDormancyLevel";
+      input {
+        leaf new-dormancy-level {
+          type string;
+          description "Related to DormancyLevel";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping house-status-top {
+    description "Service top";
+    container house-status {
+      description "Service";
+      uses house-status-state-top;
+      uses house-status-state-attributes-top;
+      uses house-status-action;
+    }
+
+  }
+
+  grouping house-status-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses house-status-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

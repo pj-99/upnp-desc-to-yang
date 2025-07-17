@@ -1,0 +1,195 @@
+module hvac-fan-operating-mode {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/hvac-fan-operating-mode";
+  prefix "hvac-fan-operating-mode";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "hvac-fan-operating-mode";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses hvac-fan-operating-mode-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping hvac-fan-operating-mode-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf mode {
+        type enumeration {
+          enum  AUTO {
+            description "Auto";
+          }
+
+          enum  CONTINUOUS_ON {
+            description "ContinuousOn";
+          }
+
+          enum  PERIODIC_ON {
+            description "PeriodicOn";
+          }
+
+        }
+
+        default AUTO;
+        description "Mode";
+      }
+
+      leaf fan-status {
+        type enumeration {
+          enum  ON {
+            description "On";
+          }
+
+          enum  OFF {
+            description "Off";
+          }
+
+        }
+
+        default ON;
+        config false;
+        description "FanStatus";
+      }
+
+      leaf name {
+        type string;
+        description "Name";
+      }
+
+    }
+
+  }
+
+  grouping hvac-fan-operating-mode-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container fan-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping hvac-fan-operating-mode-action {
+    description "Service actions";
+    action set-mode {
+      description "Action SetMode";
+      input {
+        leaf new-mode {
+          type string;
+          description "Related to Mode";
+        }
+
+      }
+
+    }
+
+    action get-mode {
+      description "Action GetMode";
+      output {
+        leaf current-mode {
+          type leafref {
+            path "../../state/mode";
+          }
+
+          description "Related to Mode";
+        }
+
+      }
+
+    }
+
+    action get-fan-status {
+      description "Action GetFanStatus";
+      output {
+        leaf current-status {
+          type leafref {
+            path "../../state/fan-status";
+          }
+
+          description "Related to FanStatus";
+        }
+
+      }
+
+    }
+
+    action get-name {
+      description "Action GetName";
+      output {
+        leaf current-name {
+          type leafref {
+            path "../../state/name";
+          }
+
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+    action set-name {
+      description "Action SetName";
+      input {
+        leaf new-name {
+          type string;
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping hvac-fan-operating-mode-top {
+    description "Service top";
+    container hvac-fan-operating-mode {
+      description "Service";
+      uses hvac-fan-operating-mode-state-top;
+      uses hvac-fan-operating-mode-state-attributes-top;
+      uses hvac-fan-operating-mode-action;
+    }
+
+  }
+
+  grouping hvac-fan-operating-mode-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses hvac-fan-operating-mode-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

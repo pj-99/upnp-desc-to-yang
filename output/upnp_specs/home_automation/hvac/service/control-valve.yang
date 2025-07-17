@@ -1,0 +1,264 @@
+module control-valve {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/control-valve";
+  prefix "control-valve";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "control-valve";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses control-valve-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping control-valve-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf position-target {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        config false;
+        description "PositionTarget";
+      }
+
+      leaf position-status {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        config false;
+        description "PositionStatus";
+      }
+
+      leaf control-mode {
+        type enumeration {
+          enum  OPEN {
+            description "OPEN";
+          }
+
+          enum  CLOSED {
+            description "CLOSED";
+          }
+
+          enum  AUTO {
+            description "AUTO";
+          }
+
+        }
+
+        default CLOSED;
+        config false;
+        description "ControlMode";
+      }
+
+      leaf min-position {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        config false;
+        description "MinPosition";
+      }
+
+      leaf max-position {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 100;
+        config false;
+        description "MaxPosition";
+      }
+
+    }
+
+  }
+
+  grouping control-valve-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container position-target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container position-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container control-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container min-position {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container max-position {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping control-valve-action {
+    description "Service actions";
+    action get-position-target {
+      description "Action GetPositionTarget";
+      output {
+        leaf current-position-target {
+          type leafref {
+            path "../../state/position-target";
+          }
+
+          description "Related to PositionTarget";
+        }
+
+      }
+
+    }
+
+    action set-position {
+      description "Action SetPosition";
+      input {
+        leaf new-position-target {
+          type uint8;
+          description "Related to PositionTarget";
+        }
+
+      }
+
+    }
+
+    action get-position {
+      description "Action GetPosition";
+      output {
+        leaf current-position-status {
+          type leafref {
+            path "../../state/position-status";
+          }
+
+          description "Related to PositionStatus";
+        }
+
+      }
+
+    }
+
+    action get-min-max {
+      description "Action GetMinMax";
+      output {
+        leaf current-min-position {
+          type leafref {
+            path "../../state/min-position";
+          }
+
+          description "Related to MinPosition";
+        }
+
+        leaf current-max-position {
+          type leafref {
+            path "../../state/max-position";
+          }
+
+          description "Related to MaxPosition";
+        }
+
+      }
+
+    }
+
+    action set-min-max {
+      description "Action SetMinMax";
+      input {
+        leaf new-min-position {
+          type uint8;
+          description "Related to MinPosition";
+        }
+
+        leaf new-max-position {
+          type uint8;
+          description "Related to MaxPosition";
+        }
+
+      }
+
+    }
+
+    action get-mode {
+      description "Action GetMode";
+      output {
+        leaf current-control-mode {
+          type leafref {
+            path "../../state/control-mode";
+          }
+
+          description "Related to ControlMode";
+        }
+
+      }
+
+    }
+
+    action set-mode {
+      description "Action SetMode";
+      input {
+        leaf new-control-mode {
+          type string;
+          description "Related to ControlMode";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping control-valve-top {
+    description "Service top";
+    container control-valve {
+      description "Service";
+      uses control-valve-state-top;
+      uses control-valve-state-attributes-top;
+      uses control-valve-action;
+    }
+
+  }
+
+  grouping control-valve-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses control-valve-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

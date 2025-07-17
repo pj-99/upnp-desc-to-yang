@@ -1,0 +1,325 @@
+module cloud-transport {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/cloud-transport";
+  prefix "cloud-transport";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "cloud-transport";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses cloud-transport-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping cloud-transport-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-host {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Host";
+      }
+
+      leaf a-arg-type-headers {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Headers";
+      }
+
+      leaf a-arg-type-identifier {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Identifier";
+      }
+
+      leaf a-arg-type-body {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Body";
+      }
+
+      leaf a-arg-type-ui4 {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_UI4";
+      }
+
+      leaf a-arg-type-flag {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_Flag";
+      }
+
+    }
+
+  }
+
+  grouping cloud-transport-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-host {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-headers {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-identifier {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-body {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-ui4 {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-flag {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping cloud-transport-action {
+    description "Service actions";
+    action connect-method {
+      description "Action ConnectMethod";
+      input {
+        leaf host {
+          type string;
+          description "Related to A_ARG_TYPE_Host";
+        }
+
+        leaf method-line {
+          type string;
+          description "Related to A_ARG_TYPE_Headers";
+        }
+
+      }
+
+      output {
+        leaf identifier {
+          type leafref {
+            path "../../state/a-arg-type-identifier";
+          }
+
+          description "Related to A_ARG_TYPE_Identifier";
+        }
+
+        leaf connect-write-cout {
+          type leafref {
+            path "../../state/a-arg-type-ui4";
+          }
+
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+      }
+
+    }
+
+    action h-t-t-p-write-headers {
+      description "Action HTTPWriteHeaders";
+      input {
+        leaf identifier {
+          type string;
+          description "Related to A_ARG_TYPE_Identifier";
+        }
+
+        leaf headers {
+          type string;
+          description "Related to A_ARG_TYPE_Headers";
+        }
+
+      }
+
+      output {
+        leaf connect-write-count {
+          type leafref {
+            path "../../state/a-arg-type-ui4";
+          }
+
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+      }
+
+    }
+
+    action h-t-t-p-read-headers {
+      description "Action HTTPReadHeaders";
+      input {
+        leaf identifier {
+          type string;
+          description "Related to A_ARG_TYPE_Identifier";
+        }
+
+        leaf c-r-l-f-flag {
+          type boolean;
+          description "Related to A_ARG_TYPE_Flag";
+        }
+
+      }
+
+      output {
+        leaf headers {
+          type leafref {
+            path "../../state/a-arg-type-headers";
+          }
+
+          description "Related to A_ARG_TYPE_Headers";
+        }
+
+        leaf read-length {
+          type leafref {
+            path "../../state/a-arg-type-ui4";
+          }
+
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+        leaf connect-read-count {
+          type leafref {
+            path "../../state/a-arg-type-ui4";
+          }
+
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+      }
+
+    }
+
+    action h-t-t-p-read-body {
+      description "Action HTTPReadBody";
+      input {
+        leaf identifier {
+          type string;
+          description "Related to A_ARG_TYPE_Identifier";
+        }
+
+        leaf size {
+          type uint32;
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+        leaf c-r-l-f-flag {
+          type boolean;
+          description "Related to A_ARG_TYPE_Flag";
+        }
+
+      }
+
+      output {
+        leaf body {
+          type leafref {
+            path "../../state/a-arg-type-body";
+          }
+
+          description "Related to A_ARG_TYPE_Body";
+        }
+
+        leaf read-length {
+          type leafref {
+            path "../../state/a-arg-type-ui4";
+          }
+
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+        leaf connect-read-count {
+          type leafref {
+            path "../../state/a-arg-type-ui4";
+          }
+
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+      }
+
+    }
+
+    action h-t-t-p-write-body {
+      description "Action HTTPWriteBody";
+      input {
+        leaf identifier {
+          type string;
+          description "Related to A_ARG_TYPE_Identifier";
+        }
+
+        leaf body {
+          type string;
+          description "Related to A_ARG_TYPE_Body";
+        }
+
+        leaf size {
+          type uint32;
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+      }
+
+      output {
+        leaf connect-write-count {
+          type leafref {
+            path "../../state/a-arg-type-ui4";
+          }
+
+          description "Related to A_ARG_TYPE_UI4";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping cloud-transport-top {
+    description "Service top";
+    container cloud-transport {
+      description "Service";
+      uses cloud-transport-state-top;
+      uses cloud-transport-state-attributes-top;
+      uses cloud-transport-action;
+    }
+
+  }
+
+  grouping cloud-transport-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses cloud-transport-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

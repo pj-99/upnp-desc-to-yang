@@ -1,0 +1,184 @@
+module remote-ui-server {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/remote-ui-server";
+  prefix "remote-ui-server";
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "remote-ui-server";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses remote-ui-server-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping remote-ui-server-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf u-i-listing-update {
+        type string;
+        config false;
+        description "UIListingUpdate";
+      }
+
+      leaf a-arg-type-deviceprofile {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DeviceProfile";
+      }
+
+      leaf a-arg-type-uri {
+        type inet:uri;
+        config false;
+        description "A_ARG_TYPE_URI";
+      }
+
+      leaf a-arg-type-compatibleuis {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CompatibleUIs";
+      }
+
+      leaf a-arg-type-string {
+        type string;
+        config false;
+        description "A_ARG_TYPE_String";
+      }
+
+      leaf a-arg-type-int {
+        type int64;
+        config false;
+        description "A_ARG_TYPE_Int";
+      }
+
+    }
+
+  }
+
+  grouping remote-ui-server-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container u-i-listing-update {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-deviceprofile {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uri {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-compatibleuis {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-string {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-int {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping remote-ui-server-action {
+    description "Service actions";
+    action get-compatible-u-is {
+      description "Action GetCompatibleUIs";
+      input {
+        leaf input-device-profile {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceProfile";
+        }
+
+        leaf u-i-filter {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+      output {
+        leaf u-i-listing {
+          type leafref {
+            path "../../state/a-arg-type-compatibleuis";
+          }
+
+          description "Related to A_ARG_TYPE_CompatibleUIs";
+        }
+
+      }
+
+    }
+
+    action set-u-i-lifetime {
+      description "Action SetUILifetime";
+      input {
+        leaf u-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+        leaf lifetime {
+          type int64;
+          description "Related to A_ARG_TYPE_Int";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping remote-ui-server-top {
+    description "Service top";
+    container remote-ui-server {
+      description "Service";
+      uses remote-ui-server-state-top;
+      uses remote-ui-server-state-attributes-top;
+      uses remote-ui-server-action;
+    }
+
+  }
+
+  grouping remote-ui-server-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses remote-ui-server-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

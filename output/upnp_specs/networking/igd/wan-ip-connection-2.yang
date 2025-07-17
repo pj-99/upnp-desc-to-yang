@@ -1,0 +1,934 @@
+module wan-ip-connection-2 {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wan-ip-connection-2";
+  prefix "wan-ip-connection-2";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wan-ip-connection-2";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wan-ip-connection-2-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wan-ip-connection-2-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf connection-type {
+        type string;
+        description "ConnectionType";
+      }
+
+      leaf possible-connection-types {
+        type string;
+        config false;
+        description "PossibleConnectionTypes";
+      }
+
+      leaf connection-status {
+        type enumeration {
+          enum  UNCONFIGURED {
+            description "Unconfigured";
+          }
+
+          enum  CONNECTING {
+            description "Connecting";
+          }
+
+          enum  CONNECTED {
+            description "Connected";
+          }
+
+          enum  PENDING_DISCONNECT {
+            description "PendingDisconnect";
+          }
+
+          enum  DISCONNECTING {
+            description "Disconnecting";
+          }
+
+          enum  DISCONNECTED {
+            description "Disconnected";
+          }
+
+        }
+
+        config false;
+        description "ConnectionStatus";
+      }
+
+      leaf uptime {
+        type uint32;
+        config false;
+        description "Uptime";
+      }
+
+      leaf last-connection-error {
+        type enumeration {
+          enum  ERROR_NONE {
+            description "ERROR_NONE";
+          }
+
+          enum  ERROR_COMMAND_ABORTED {
+            description "ERROR_COMMAND_ABORTED";
+          }
+
+          enum  ERROR_NOT_ENABLED_FOR_INTERNET {
+            description "ERROR_NOT_ENABLED_FOR_INTERNET";
+          }
+
+          enum  ERROR_USER_DISCONNECT {
+            description "ERROR_USER_DISCONNECT";
+          }
+
+          enum  ERROR_ISP_DISCONNECT {
+            description "ERROR_ISP_DISCONNECT";
+          }
+
+          enum  ERROR_IDLE_DISCONNECT {
+            description "ERROR_IDLE_DISCONNECT";
+          }
+
+          enum  ERROR_FORCED_DISCONNECT {
+            description "ERROR_FORCED_DISCONNECT";
+          }
+
+          enum  ERROR_NO_CARRIER {
+            description "ERROR_NO_CARRIER";
+          }
+
+          enum  ERROR_IP_CONFIGURATION {
+            description "ERROR_IP_CONFIGURATION";
+          }
+
+          enum  ERROR_UNKNOWN {
+            description "ERROR_UNKNOWN";
+          }
+
+        }
+
+        config false;
+        description "LastConnectionError";
+      }
+
+      leaf auto-disconnect-time {
+        type uint32;
+        description "AutoDisconnectTime";
+      }
+
+      leaf idle-disconnect-time {
+        type uint32;
+        description "IdleDisconnectTime";
+      }
+
+      leaf warn-disconnect-delay {
+        type uint32;
+        description "WarnDisconnectDelay";
+      }
+
+      leaf r-s-i-p-available {
+        type boolean;
+        config false;
+        description "RSIPAvailable";
+      }
+
+      leaf n-a-t-enabled {
+        type boolean;
+        config false;
+        description "NATEnabled";
+      }
+
+      leaf external-i-p-address {
+        type string;
+        config false;
+        description "ExternalIPAddress";
+      }
+
+      leaf port-mapping-number-of-entries {
+        type uint16;
+        config false;
+        description "PortMappingNumberOfEntries";
+      }
+
+      leaf port-mapping-enabled {
+        type boolean;
+        config false;
+        description "PortMappingEnabled";
+      }
+
+      leaf port-mapping-lease-duration {
+        type uint32;
+        config false;
+        description "PortMappingLeaseDuration";
+      }
+
+      leaf remote-host {
+        type string;
+        config false;
+        description "RemoteHost";
+      }
+
+      leaf external-port {
+        type uint16;
+        config false;
+        description "ExternalPort";
+      }
+
+      leaf internal-port {
+        type uint16;
+        config false;
+        description "InternalPort";
+      }
+
+      leaf port-mapping-protocol {
+        type enumeration {
+          enum  TCP {
+            description "TCP";
+          }
+
+          enum  UDP {
+            description "UDP";
+          }
+
+        }
+
+        config false;
+        description "PortMappingProtocol";
+      }
+
+      leaf internal-client {
+        type string;
+        config false;
+        description "InternalClient";
+      }
+
+      leaf port-mapping-description {
+        type string;
+        config false;
+        description "PortMappingDescription";
+      }
+
+      leaf system-update-i-d {
+        type uint32;
+        config false;
+        description "SystemUpdateID";
+      }
+
+      leaf a-arg-type-manage {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_Manage";
+      }
+
+      leaf a-arg-type-portlisting {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PortListing";
+      }
+
+    }
+
+  }
+
+  grouping wan-ip-connection-2-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container connection-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container possible-connection-types {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container connection-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container uptime {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container last-connection-error {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container auto-disconnect-time {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container idle-disconnect-time {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container warn-disconnect-delay {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container r-s-i-p-available {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container n-a-t-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container external-i-p-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container port-mapping-number-of-entries {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container port-mapping-enabled {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container port-mapping-lease-duration {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container remote-host {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container external-port {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container internal-port {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container port-mapping-protocol {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container internal-client {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container port-mapping-description {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container system-update-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-manage {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-portlisting {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wan-ip-connection-2-action {
+    description "Service actions";
+    action set-connection-type {
+      description "Action SetConnectionType";
+      input {
+        leaf new-connection-type {
+          type string;
+          description "Related to ConnectionType";
+        }
+
+      }
+
+    }
+
+    action get-connection-type-info {
+      description "Action GetConnectionTypeInfo";
+      output {
+        leaf new-connection-type {
+          type leafref {
+            path "../../state/connection-type";
+          }
+
+          description "Related to ConnectionType";
+        }
+
+        leaf new-possible-connection-types {
+          type leafref {
+            path "../../state/possible-connection-types";
+          }
+
+          description "Related to PossibleConnectionTypes";
+        }
+
+      }
+
+    }
+
+    action request-connection {
+      description "Action RequestConnection";
+    }
+
+    action request-termination {
+      description "Action RequestTermination";
+    }
+
+    action force-termination {
+      description "Action ForceTermination";
+    }
+
+    action set-auto-disconnect-time {
+      description "Action SetAutoDisconnectTime";
+      input {
+        leaf new-auto-disconnect-time {
+          type uint32;
+          description "Related to AutoDisconnectTime";
+        }
+
+      }
+
+    }
+
+    action set-idle-disconnect-time {
+      description "Action SetIdleDisconnectTime";
+      input {
+        leaf new-idle-disconnect-time {
+          type uint32;
+          description "Related to IdleDisconnectTime";
+        }
+
+      }
+
+    }
+
+    action set-warn-disconnect-delay {
+      description "Action SetWarnDisconnectDelay";
+      input {
+        leaf new-warn-disconnect-delay {
+          type uint32;
+          description "Related to WarnDisconnectDelay";
+        }
+
+      }
+
+    }
+
+    action get-status-info {
+      description "Action GetStatusInfo";
+      output {
+        leaf new-connection-status {
+          type leafref {
+            path "../../state/connection-status";
+          }
+
+          description "Related to ConnectionStatus";
+        }
+
+        leaf new-last-connection-error {
+          type leafref {
+            path "../../state/last-connection-error";
+          }
+
+          description "Related to LastConnectionError";
+        }
+
+        leaf new-uptime {
+          type leafref {
+            path "../../state/uptime";
+          }
+
+          description "Related to Uptime";
+        }
+
+      }
+
+    }
+
+    action get-auto-disconnect-time {
+      description "Action GetAutoDisconnectTime";
+      output {
+        leaf new-auto-disconnect-time {
+          type leafref {
+            path "../../state/auto-disconnect-time";
+          }
+
+          description "Related to AutoDisconnectTime";
+        }
+
+      }
+
+    }
+
+    action get-idle-disconnect-time {
+      description "Action GetIdleDisconnectTime";
+      output {
+        leaf new-idle-disconnect-time {
+          type leafref {
+            path "../../state/idle-disconnect-time";
+          }
+
+          description "Related to IdleDisconnectTime";
+        }
+
+      }
+
+    }
+
+    action get-warn-disconnect-delay {
+      description "Action GetWarnDisconnectDelay";
+      output {
+        leaf new-warn-disconnect-delay {
+          type leafref {
+            path "../../state/warn-disconnect-delay";
+          }
+
+          description "Related to WarnDisconnectDelay";
+        }
+
+      }
+
+    }
+
+    action get-n-a-t-r-s-i-p-status {
+      description "Action GetNATRSIPStatus";
+      output {
+        leaf new-r-s-i-p-available {
+          type leafref {
+            path "../../state/r-s-i-p-available";
+          }
+
+          description "Related to RSIPAvailable";
+        }
+
+        leaf new-n-a-t-enabled {
+          type leafref {
+            path "../../state/n-a-t-enabled";
+          }
+
+          description "Related to NATEnabled";
+        }
+
+      }
+
+    }
+
+    action get-generic-port-mapping-entry {
+      description "Action GetGenericPortMappingEntry";
+      input {
+        leaf new-port-mapping-index {
+          type uint16;
+          description "Related to PortMappingNumberOfEntries";
+        }
+
+      }
+
+      output {
+        leaf new-remote-host {
+          type leafref {
+            path "../../state/remote-host";
+          }
+
+          description "Related to RemoteHost";
+        }
+
+        leaf new-external-port {
+          type leafref {
+            path "../../state/external-port";
+          }
+
+          description "Related to ExternalPort";
+        }
+
+        leaf new-protocol {
+          type leafref {
+            path "../../state/port-mapping-protocol";
+          }
+
+          description "Related to PortMappingProtocol";
+        }
+
+        leaf new-internal-port {
+          type leafref {
+            path "../../state/internal-port";
+          }
+
+          description "Related to InternalPort";
+        }
+
+        leaf new-internal-client {
+          type leafref {
+            path "../../state/internal-client";
+          }
+
+          description "Related to InternalClient";
+        }
+
+        leaf new-enabled {
+          type leafref {
+            path "../../state/port-mapping-enabled";
+          }
+
+          description "Related to PortMappingEnabled";
+        }
+
+        leaf new-port-mapping-description {
+          type leafref {
+            path "../../state/port-mapping-description";
+          }
+
+          description "Related to PortMappingDescription";
+        }
+
+        leaf new-lease-duration {
+          type leafref {
+            path "../../state/port-mapping-lease-duration";
+          }
+
+          description "Related to PortMappingLeaseDuration";
+        }
+
+      }
+
+    }
+
+    action get-specific-port-mapping-entry {
+      description "Action GetSpecificPortMappingEntry";
+      input {
+        leaf new-remote-host {
+          type string;
+          description "Related to RemoteHost";
+        }
+
+        leaf new-external-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-protocol {
+          type string;
+          description "Related to PortMappingProtocol";
+        }
+
+      }
+
+      output {
+        leaf new-internal-port {
+          type leafref {
+            path "../../state/internal-port";
+          }
+
+          description "Related to InternalPort";
+        }
+
+        leaf new-internal-client {
+          type leafref {
+            path "../../state/internal-client";
+          }
+
+          description "Related to InternalClient";
+        }
+
+        leaf new-enabled {
+          type leafref {
+            path "../../state/port-mapping-enabled";
+          }
+
+          description "Related to PortMappingEnabled";
+        }
+
+        leaf new-port-mapping-description {
+          type leafref {
+            path "../../state/port-mapping-description";
+          }
+
+          description "Related to PortMappingDescription";
+        }
+
+        leaf new-lease-duration {
+          type leafref {
+            path "../../state/port-mapping-lease-duration";
+          }
+
+          description "Related to PortMappingLeaseDuration";
+        }
+
+      }
+
+    }
+
+    action add-port-mapping {
+      description "Action AddPortMapping";
+      input {
+        leaf new-remote-host {
+          type string;
+          description "Related to RemoteHost";
+        }
+
+        leaf new-external-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-protocol {
+          type string;
+          description "Related to PortMappingProtocol";
+        }
+
+        leaf new-internal-port {
+          type uint16;
+          description "Related to InternalPort";
+        }
+
+        leaf new-internal-client {
+          type string;
+          description "Related to InternalClient";
+        }
+
+        leaf new-enabled {
+          type boolean;
+          description "Related to PortMappingEnabled";
+        }
+
+        leaf new-port-mapping-description {
+          type string;
+          description "Related to PortMappingDescription";
+        }
+
+        leaf new-lease-duration {
+          type uint32;
+          description "Related to PortMappingLeaseDuration";
+        }
+
+      }
+
+    }
+
+    action delete-port-mapping {
+      description "Action DeletePortMapping";
+      input {
+        leaf new-remote-host {
+          type string;
+          description "Related to RemoteHost";
+        }
+
+        leaf new-external-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-protocol {
+          type string;
+          description "Related to PortMappingProtocol";
+        }
+
+      }
+
+    }
+
+    action delete-port-mapping-range {
+      description "Action DeletePortMappingRange";
+      input {
+        leaf new-start-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-end-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-protocol {
+          type string;
+          description "Related to PortMappingProtocol";
+        }
+
+        leaf new-manage {
+          type boolean;
+          description "Related to A_ARG_TYPE_Manage";
+        }
+
+      }
+
+    }
+
+    action get-external-i-p-address {
+      description "Action GetExternalIPAddress";
+      output {
+        leaf new-external-i-p-address {
+          type leafref {
+            path "../../state/external-i-p-address";
+          }
+
+          description "Related to ExternalIPAddress";
+        }
+
+      }
+
+    }
+
+    action get-list-of-port-mappings {
+      description "Action GetListOfPortMappings";
+      input {
+        leaf new-start-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-end-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-protocol {
+          type string;
+          description "Related to PortMappingProtocol";
+        }
+
+        leaf new-manage {
+          type boolean;
+          description "Related to A_ARG_TYPE_Manage";
+        }
+
+        leaf new-number-of-ports {
+          type uint16;
+          description "Related to PortMappingNumberOfEntries";
+        }
+
+      }
+
+      output {
+        leaf new-port-listing {
+          type leafref {
+            path "../../state/a-arg-type-portlisting";
+          }
+
+          description "Related to A_ARG_TYPE_PortListing";
+        }
+
+      }
+
+    }
+
+    action add-any-port-mapping {
+      description "Action AddAnyPortMapping";
+      input {
+        leaf new-remote-host {
+          type string;
+          description "Related to RemoteHost";
+        }
+
+        leaf new-external-port {
+          type uint16;
+          description "Related to ExternalPort";
+        }
+
+        leaf new-protocol {
+          type string;
+          description "Related to PortMappingProtocol";
+        }
+
+        leaf new-internal-port {
+          type uint16;
+          description "Related to InternalPort";
+        }
+
+        leaf new-internal-client {
+          type string;
+          description "Related to InternalClient";
+        }
+
+        leaf new-enabled {
+          type boolean;
+          description "Related to PortMappingEnabled";
+        }
+
+        leaf new-port-mapping-description {
+          type string;
+          description "Related to PortMappingDescription";
+        }
+
+        leaf new-lease-duration {
+          type uint32;
+          description "Related to PortMappingLeaseDuration";
+        }
+
+      }
+
+      output {
+        leaf new-reserved-port {
+          type leafref {
+            path "../../state/external-port";
+          }
+
+          description "Related to ExternalPort";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping wan-ip-connection-2-top {
+    description "Service top";
+    container wan-ip-connection-2 {
+      description "Service";
+      uses wan-ip-connection-2-state-top;
+      uses wan-ip-connection-2-state-attributes-top;
+      uses wan-ip-connection-2-action;
+    }
+
+  }
+
+  grouping wan-ip-connection-2-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wan-ip-connection-2-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

@@ -1,0 +1,105 @@
+module wan-ethernet-link-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wan-ethernet-link-config";
+  prefix "wan-ethernet-link-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wan-ethernet-link-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wan-ethernet-link-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wan-ethernet-link-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf ethernet-link-status {
+        type enumeration {
+          enum  UP {
+            description "Up";
+          }
+
+          enum  DOWN {
+            description "Down";
+          }
+
+        }
+
+        config false;
+        description "EthernetLinkStatus";
+      }
+
+    }
+
+  }
+
+  grouping wan-ethernet-link-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container ethernet-link-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wan-ethernet-link-config-action {
+    description "Service actions";
+    action get-ethernet-link-status {
+      description "Action GetEthernetLinkStatus";
+      output {
+        leaf new-ethernet-link-status {
+          type leafref {
+            path "../../state/ethernet-link-status";
+          }
+
+          description "Related to EthernetLinkStatus";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping wan-ethernet-link-config-top {
+    description "Service top";
+    container wan-ethernet-link-config {
+      description "Service";
+      uses wan-ethernet-link-config-state-top;
+      uses wan-ethernet-link-config-state-attributes-top;
+      uses wan-ethernet-link-config-action;
+    }
+
+  }
+
+  grouping wan-ethernet-link-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wan-ethernet-link-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

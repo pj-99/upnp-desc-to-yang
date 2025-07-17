@@ -1,0 +1,106 @@
+module layer-3-forwarding {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/layer-3-forwarding";
+  prefix "layer-3-forwarding";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "layer-3-forwarding";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses layer-3-forwarding-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping layer-3-forwarding-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf default-connection-service {
+        type string;
+        description "DefaultConnectionService";
+      }
+
+    }
+
+  }
+
+  grouping layer-3-forwarding-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container default-connection-service {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping layer-3-forwarding-action {
+    description "Service actions";
+    action set-default-connection-service {
+      description "Action SetDefaultConnectionService";
+      input {
+        leaf new-default-connection-service {
+          type string;
+          description "Related to DefaultConnectionService";
+        }
+
+      }
+
+    }
+
+    action get-default-connection-service {
+      description "Action GetDefaultConnectionService";
+      output {
+        leaf new-default-connection-service {
+          type leafref {
+            path "../../state/default-connection-service";
+          }
+
+          description "Related to DefaultConnectionService";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping layer-3-forwarding-top {
+    description "Service top";
+    container layer-3-forwarding {
+      description "Service";
+      uses layer-3-forwarding-state-top;
+      uses layer-3-forwarding-state-attributes-top;
+      uses layer-3-forwarding-action;
+    }
+
+  }
+
+  grouping layer-3-forwarding-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses layer-3-forwarding-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

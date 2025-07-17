@@ -1,0 +1,352 @@
+module remote-ui-client {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/remote-ui-client";
+  prefix "remote-ui-client";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "remote-ui-client";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses remote-ui-client-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping remote-ui-client-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-compatibleuis {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CompatibleUIs";
+      }
+
+      leaf a-arg-type-displaymessagetype {
+        type enumeration {
+          enum  TEXT/PLAIN {
+            description "text/plain";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_DisplayMessageType";
+      }
+
+      leaf a-arg-type-int {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_Int";
+      }
+
+      leaf a-arg-type-inputdatatype {
+        type enumeration {
+          enum  ASCII {
+            description "ASCII";
+          }
+
+          enum  UNICODE {
+            description "UNICODE";
+          }
+
+          enum  ISO10646 {
+            description "ISO10646";
+          }
+
+          enum  ISO8859 {
+            description "ISO8859";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_InputDataType";
+      }
+
+      leaf current-connections-event {
+        type string;
+        config false;
+        description "CurrentConnectionsEvent";
+      }
+
+      leaf current-connections {
+        type string;
+        config false;
+        description "CurrentConnections";
+      }
+
+      leaf device-profile {
+        type string;
+        config false;
+        description "DeviceProfile";
+      }
+
+      leaf compatible-u-is-update-i-d-event {
+        type int32;
+        config false;
+        description "CompatibleUIsUpdateIDEvent";
+      }
+
+      leaf a-arg-type-string {
+        type string;
+        config false;
+        description "A_ARG_TYPE_String";
+      }
+
+    }
+
+  }
+
+  grouping remote-ui-client-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-compatibleuis {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-displaymessagetype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-int {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-inputdatatype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-connections-event {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-connections {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-profile {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container compatible-u-is-update-i-d-event {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-string {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping remote-ui-client-action {
+    description "Service actions";
+    action add-u-i-listing {
+      description "Action AddUIListing";
+      input {
+        leaf input-u-i-list {
+          type string;
+          description "Related to A_ARG_TYPE_CompatibleUIs";
+        }
+
+      }
+
+      output {
+        leaf time-to-live {
+          type leafref {
+            path "../../state/a-arg-type-int";
+          }
+
+          description "Related to A_ARG_TYPE_Int";
+        }
+
+      }
+
+    }
+
+    action connect {
+      description "Action Connect";
+      input {
+        leaf requested-connections {
+          type string;
+          description "Related to CurrentConnections";
+        }
+
+      }
+
+      output {
+        leaf current-connections-list {
+          type leafref {
+            path "../../state/current-connections";
+          }
+
+          description "Related to CurrentConnections";
+        }
+
+      }
+
+    }
+
+    action disconnect {
+      description "Action Disconnect";
+      input {
+        leaf requested-disconnects {
+          type string;
+          description "Related to CurrentConnections";
+        }
+
+      }
+
+      output {
+        leaf current-connections-list {
+          type leafref {
+            path "../../state/current-connections";
+          }
+
+          description "Related to CurrentConnections";
+        }
+
+      }
+
+    }
+
+    action display-message {
+      description "Action DisplayMessage";
+      input {
+        leaf message-type {
+          type string;
+          description "Related to A_ARG_TYPE_DisplayMessageType";
+        }
+
+        leaf message {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action get-current-connections {
+      description "Action GetCurrentConnections";
+      output {
+        leaf current-connections-list {
+          type leafref {
+            path "../../state/current-connections";
+          }
+
+          description "Related to CurrentConnections";
+        }
+
+      }
+
+    }
+
+    action get-device-profile {
+      description "Action GetDeviceProfile";
+      output {
+        leaf static-device-info {
+          type leafref {
+            path "../../state/device-profile";
+          }
+
+          description "Related to DeviceProfile";
+        }
+
+      }
+
+    }
+
+    action get-u-i-listing {
+      description "Action GetUIListing";
+      output {
+        leaf compatible-u-i-list {
+          type leafref {
+            path "../../state/a-arg-type-compatibleuis";
+          }
+
+          description "Related to A_ARG_TYPE_CompatibleUIs";
+        }
+
+      }
+
+    }
+
+    action process-input {
+      description "Action ProcessInput";
+      input {
+        leaf input-data-type {
+          type string;
+          description "Related to A_ARG_TYPE_InputDataType";
+        }
+
+        leaf input-data {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action remove-u-i-listing {
+      description "Action RemoveUIListing";
+      input {
+        leaf remove-u-i-list {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping remote-ui-client-top {
+    description "Service top";
+    container remote-ui-client {
+      description "Service";
+      uses remote-ui-client-state-top;
+      uses remote-ui-client-state-attributes-top;
+      uses remote-ui-client-action;
+    }
+
+  }
+
+  grouping remote-ui-client-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses remote-ui-client-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

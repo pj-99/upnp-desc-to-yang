@@ -1,0 +1,1470 @@
+module content-directory {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/content-directory";
+  prefix "content-directory";
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "content-directory";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses content-directory-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping content-directory-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf search-capabilities {
+        type string;
+        config false;
+        description "SearchCapabilities";
+      }
+
+      leaf sort-capabilities {
+        type string;
+        config false;
+        description "SortCapabilities";
+      }
+
+      leaf sort-extension-capabilities {
+        type string;
+        config false;
+        description "SortExtensionCapabilities";
+      }
+
+      leaf system-update-i-d {
+        type uint32;
+        config false;
+        description "SystemUpdateID";
+      }
+
+      leaf container-update-i-ds {
+        type string;
+        config false;
+        description "ContainerUpdateIDs";
+      }
+
+      leaf service-reset-token {
+        type string;
+        config false;
+        description "ServiceResetToken";
+      }
+
+      leaf last-change {
+        type string;
+        config false;
+        description "LastChange";
+      }
+
+      leaf transfer-i-ds {
+        type string;
+        config false;
+        description "TransferIDs";
+      }
+
+      leaf feature-list {
+        type string;
+        config false;
+        description "FeatureList";
+      }
+
+      leaf permissions-info {
+        type string;
+        config false;
+        description "PermissionsInfo";
+      }
+
+      leaf device-mode {
+        type string;
+        config false;
+        description "DeviceMode";
+      }
+
+      leaf device-mode-status {
+        type string;
+        config false;
+        description "DeviceModeStatus";
+      }
+
+      leaf a-arg-type-objectid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ObjectID";
+      }
+
+      leaf a-arg-type-result {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Result";
+      }
+
+      leaf a-arg-type-searchcriteria {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SearchCriteria";
+      }
+
+      leaf a-arg-type-browseflag {
+        type enumeration {
+          enum  BROWSE_METADATA {
+            description "BrowseMetadata";
+          }
+
+          enum  BROWSE_DIRECT_CHILDREN {
+            description "BrowseDirectChildren";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_BrowseFlag";
+      }
+
+      leaf a-arg-type-filter {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Filter";
+      }
+
+      leaf a-arg-type-sortcriteria {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SortCriteria";
+      }
+
+      leaf a-arg-type-index {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_Index";
+      }
+
+      leaf a-arg-type-count {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_Count";
+      }
+
+      leaf a-arg-type-updateid {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_UpdateID";
+      }
+
+      leaf a-arg-type-transferid {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_TransferID";
+      }
+
+      leaf a-arg-type-transferstatus {
+        type enumeration {
+          enum  COMPLETED {
+            description "COMPLETED";
+          }
+
+          enum  ERROR {
+            description "ERROR";
+          }
+
+          enum  IN_PROGRESS {
+            description "IN_PROGRESS";
+          }
+
+          enum  STOPPED {
+            description "STOPPED";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_TransferStatus";
+      }
+
+      leaf a-arg-type-transferlength {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransferLength";
+      }
+
+      leaf a-arg-type-transfertotal {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransferTotal";
+      }
+
+      leaf a-arg-type-tagvaluelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TagValueList";
+      }
+
+      leaf a-arg-type-uri {
+        type inet:uri;
+        config false;
+        description "A_ARG_TYPE_URI";
+      }
+
+      leaf a-arg-type-cdsview {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_CDSView";
+      }
+
+      leaf a-arg-type-queryrequest {
+        type string;
+        config false;
+        description "A_ARG_TYPE_QueryRequest";
+      }
+
+      leaf a-arg-type-queryresult {
+        type string;
+        config false;
+        description "A_ARG_TYPE_QueryResult";
+      }
+
+      leaf a-arg-type-ffqcapabilities {
+        type string;
+        config false;
+        description "A_ARG_TYPE_FFQCapabilities";
+      }
+
+      leaf a-arg-type-devicemoderequest {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DeviceModeRequest";
+      }
+
+      leaf a-arg-type-cpid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CPID";
+      }
+
+      leaf a-arg-type-devicemodeid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DeviceModeID";
+      }
+
+      leaf a-arg-type-transformtaskid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransformTaskID";
+      }
+
+      leaf a-arg-type-allowedtransforms {
+        type string;
+        config false;
+        description "A_ARG_TYPE_AllowedTransforms";
+      }
+
+      leaf a-arg-type-transformsettings {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransformSettings";
+      }
+
+      leaf a-arg-type-transformresourcedescription {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransformResourceDescription";
+      }
+
+      leaf a-arg-type-transformresourceobject {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransformResourceObject";
+      }
+
+      leaf transform-status {
+        type string;
+        config false;
+        description "TransformStatus";
+      }
+
+      leaf a-arg-type-transformtaskresult {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransformTaskResult";
+      }
+
+      leaf a-arg-type-transformtaskresultfilter {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransformTaskResultFilter";
+      }
+
+      leaf a-arg-type-transformoverwrite {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_TransformOverwrite";
+      }
+
+      leaf a-arg-type-transformrollback {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_TransformRollback";
+      }
+
+      leaf a-arg-type-transformevaluationresult {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TransformEvaluationResult";
+      }
+
+    }
+
+  }
+
+  grouping content-directory-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container search-capabilities {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sort-capabilities {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sort-extension-capabilities {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container system-update-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container container-update-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container service-reset-token {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container last-change {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container transfer-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container feature-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container permissions-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-mode-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-objectid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-result {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-searchcriteria {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-browseflag {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-filter {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sortcriteria {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-index {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-count {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-updateid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transferid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transferstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transferlength {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transfertotal {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-tagvaluelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uri {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-cdsview {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-queryrequest {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-queryresult {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-ffqcapabilities {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-devicemoderequest {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-cpid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-devicemodeid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformtaskid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-allowedtransforms {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformsettings {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformresourcedescription {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformresourceobject {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container transform-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformtaskresult {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformtaskresultfilter {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformoverwrite {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformrollback {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-transformevaluationresult {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping content-directory-action {
+    description "Service actions";
+    action get-search-capabilities {
+      description "Action GetSearchCapabilities";
+      output {
+        leaf search-caps {
+          type leafref {
+            path "../../state/search-capabilities";
+          }
+
+          description "Related to SearchCapabilities";
+        }
+
+      }
+
+    }
+
+    action get-sort-capabilities {
+      description "Action GetSortCapabilities";
+      output {
+        leaf sort-caps {
+          type leafref {
+            path "../../state/sort-capabilities";
+          }
+
+          description "Related to SortCapabilities";
+        }
+
+      }
+
+    }
+
+    action get-sort-extension-capabilities {
+      description "Action GetSortExtensionCapabilities";
+      output {
+        leaf sort-extension-caps {
+          type leafref {
+            path "../../state/sort-extension-capabilities";
+          }
+
+          description "Related to SortExtensionCapabilities";
+        }
+
+      }
+
+    }
+
+    action get-feature-list {
+      description "Action GetFeatureList";
+      output {
+        leaf feature-list {
+          type leafref {
+            path "../../state/feature-list";
+          }
+
+          description "Related to FeatureList";
+        }
+
+      }
+
+    }
+
+    action get-system-update-i-d {
+      description "Action GetSystemUpdateID";
+      output {
+        leaf id {
+          type leafref {
+            path "../../state/system-update-i-d";
+          }
+
+          description "Related to SystemUpdateID";
+        }
+
+      }
+
+    }
+
+    action get-service-reset-token {
+      description "Action GetServiceResetToken";
+      output {
+        leaf reset-token {
+          type leafref {
+            path "../../state/service-reset-token";
+          }
+
+          description "Related to ServiceResetToken";
+        }
+
+      }
+
+    }
+
+    action browse {
+      description "Action Browse";
+      input {
+        leaf object-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf browse-flag {
+          type string;
+          description "Related to A_ARG_TYPE_BrowseFlag";
+        }
+
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_Filter";
+        }
+
+        leaf starting-index {
+          type uint32;
+          description "Related to A_ARG_TYPE_Index";
+        }
+
+        leaf requested-count {
+          type uint32;
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf sort-criteria {
+          type string;
+          description "Related to A_ARG_TYPE_SortCriteria";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-result";
+          }
+
+          description "Related to A_ARG_TYPE_Result";
+        }
+
+        leaf number-returned {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf total-matches {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/a-arg-type-updateid";
+          }
+
+          description "Related to A_ARG_TYPE_UpdateID";
+        }
+
+      }
+
+    }
+
+    action search {
+      description "Action Search";
+      input {
+        leaf container-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf search-criteria {
+          type string;
+          description "Related to A_ARG_TYPE_SearchCriteria";
+        }
+
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_Filter";
+        }
+
+        leaf starting-index {
+          type uint32;
+          description "Related to A_ARG_TYPE_Index";
+        }
+
+        leaf requested-count {
+          type uint32;
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf sort-criteria {
+          type string;
+          description "Related to A_ARG_TYPE_SortCriteria";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-result";
+          }
+
+          description "Related to A_ARG_TYPE_Result";
+        }
+
+        leaf number-returned {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf total-matches {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/a-arg-type-updateid";
+          }
+
+          description "Related to A_ARG_TYPE_UpdateID";
+        }
+
+      }
+
+    }
+
+    action create-object {
+      description "Action CreateObject";
+      input {
+        leaf container-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf elements {
+          type string;
+          description "Related to A_ARG_TYPE_Result";
+        }
+
+      }
+
+      output {
+        leaf object-i-d {
+          type leafref {
+            path "../../state/a-arg-type-objectid";
+          }
+
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-result";
+          }
+
+          description "Related to A_ARG_TYPE_Result";
+        }
+
+      }
+
+    }
+
+    action destroy-object {
+      description "Action DestroyObject";
+      input {
+        leaf object-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action update-object {
+      description "Action UpdateObject";
+      input {
+        leaf object-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf current-tag-value {
+          type string;
+          description "Related to A_ARG_TYPE_TagValueList";
+        }
+
+        leaf new-tag-value {
+          type string;
+          description "Related to A_ARG_TYPE_TagValueList";
+        }
+
+      }
+
+    }
+
+    action move-object {
+      description "Action MoveObject";
+      input {
+        leaf object-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf new-parent-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+      output {
+        leaf new-object-i-d {
+          type leafref {
+            path "../../state/a-arg-type-objectid";
+          }
+
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action import-resource {
+      description "Action ImportResource";
+      input {
+        leaf source-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+        leaf destination-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+      }
+
+      output {
+        leaf transfer-i-d {
+          type leafref {
+            path "../../state/a-arg-type-transferid";
+          }
+
+          description "Related to A_ARG_TYPE_TransferID";
+        }
+
+      }
+
+    }
+
+    action export-resource {
+      description "Action ExportResource";
+      input {
+        leaf source-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+        leaf destination-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+      }
+
+      output {
+        leaf transfer-i-d {
+          type leafref {
+            path "../../state/a-arg-type-transferid";
+          }
+
+          description "Related to A_ARG_TYPE_TransferID";
+        }
+
+      }
+
+    }
+
+    action delete-resource {
+      description "Action DeleteResource";
+      input {
+        leaf resource-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+      }
+
+    }
+
+    action stop-transfer-resource {
+      description "Action StopTransferResource";
+      input {
+        leaf transfer-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TransferID";
+        }
+
+      }
+
+    }
+
+    action get-transfer-progress {
+      description "Action GetTransferProgress";
+      input {
+        leaf transfer-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TransferID";
+        }
+
+      }
+
+      output {
+        leaf transfer-status {
+          type leafref {
+            path "../../state/a-arg-type-transferstatus";
+          }
+
+          description "Related to A_ARG_TYPE_TransferStatus";
+        }
+
+        leaf transfer-length {
+          type leafref {
+            path "../../state/a-arg-type-transferlength";
+          }
+
+          description "Related to A_ARG_TYPE_TransferLength";
+        }
+
+        leaf transfer-total {
+          type leafref {
+            path "../../state/a-arg-type-transfertotal";
+          }
+
+          description "Related to A_ARG_TYPE_TransferTotal";
+        }
+
+      }
+
+    }
+
+    action create-reference {
+      description "Action CreateReference";
+      input {
+        leaf container-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf object-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+      output {
+        leaf new-i-d {
+          type leafref {
+            path "../../state/a-arg-type-objectid";
+          }
+
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action free-form-query {
+      description "Action FreeFormQuery";
+      input {
+        leaf container-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf c-d-s-view {
+          type uint32;
+          description "Related to A_ARG_TYPE_CDSView";
+        }
+
+        leaf query-request {
+          type string;
+          description "Related to A_ARG_TYPE_QueryRequest";
+        }
+
+      }
+
+      output {
+        leaf query-result {
+          type leafref {
+            path "../../state/a-arg-type-queryresult";
+          }
+
+          description "Related to A_ARG_TYPE_QueryResult";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/a-arg-type-updateid";
+          }
+
+          description "Related to A_ARG_TYPE_UpdateID";
+        }
+
+      }
+
+    }
+
+    action get-free-form-query-capabilities {
+      description "Action GetFreeFormQueryCapabilities";
+      output {
+        leaf f-f-q-capabilities {
+          type leafref {
+            path "../../state/a-arg-type-ffqcapabilities";
+          }
+
+          description "Related to A_ARG_TYPE_FFQCapabilities";
+        }
+
+      }
+
+    }
+
+    action get-permissions-info {
+      description "Action GetPermissionsInfo";
+      output {
+        leaf permissions-info {
+          type leafref {
+            path "../../state/permissions-info";
+          }
+
+          description "Related to PermissionsInfo";
+        }
+
+      }
+
+    }
+
+    action request-device-mode {
+      description "Action RequestDeviceMode";
+      input {
+        leaf c-p-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CPID";
+        }
+
+        leaf device-mode-request {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceModeRequest";
+        }
+
+      }
+
+      output {
+        leaf device-mode-i-d {
+          type leafref {
+            path "../../state/a-arg-type-devicemodeid";
+          }
+
+          description "Related to A_ARG_TYPE_DeviceModeID";
+        }
+
+        leaf device-mode-status {
+          type leafref {
+            path "../../state/device-mode-status";
+          }
+
+          description "Related to DeviceModeStatus";
+        }
+
+      }
+
+    }
+
+    action get-device-mode {
+      description "Action GetDeviceMode";
+      output {
+        leaf device-mode {
+          type leafref {
+            path "../../state/device-mode";
+          }
+
+          description "Related to DeviceMode";
+        }
+
+      }
+
+    }
+
+    action get-device-mode-status {
+      description "Action GetDeviceModeStatus";
+      output {
+        leaf device-mode-status {
+          type leafref {
+            path "../../state/device-mode-status";
+          }
+
+          description "Related to DeviceModeStatus";
+        }
+
+      }
+
+    }
+
+    action cancel-device-mode {
+      description "Action CancelDeviceMode";
+      input {
+        leaf device-mode-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceModeID";
+        }
+
+      }
+
+    }
+
+    action extend-device-mode {
+      description "Action ExtendDeviceMode";
+      input {
+        leaf device-mode-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceModeID";
+        }
+
+        leaf device-mode-request {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceModeRequest";
+        }
+
+      }
+
+      output {
+        leaf device-mode-status {
+          type leafref {
+            path "../../state/device-mode-status";
+          }
+
+          description "Related to DeviceModeStatus";
+        }
+
+      }
+
+    }
+
+    action get-all-available-transforms {
+      description "Action GetAllAvailableTransforms";
+      output {
+        leaf all-available-transforms {
+          type leafref {
+            path "../../state/a-arg-type-allowedtransforms";
+          }
+
+          description "Related to A_ARG_TYPE_AllowedTransforms";
+        }
+
+      }
+
+    }
+
+    action get-allowed-transforms {
+      description "Action GetAllowedTransforms";
+      input {
+        leaf transform-resource-object-desc {
+          type string;
+          description "Related to A_ARG_TYPE_TransformResourceObject";
+        }
+
+      }
+
+      output {
+        leaf allowed-transforms {
+          type leafref {
+            path "../../state/a-arg-type-allowedtransforms";
+          }
+
+          description "Related to A_ARG_TYPE_AllowedTransforms";
+        }
+
+      }
+
+    }
+
+    action get-current-transform-status-list {
+      description "Action GetCurrentTransformStatusList";
+      output {
+        leaf transform-status {
+          type leafref {
+            path "../../state/transform-status";
+          }
+
+          description "Related to TransformStatus";
+        }
+
+      }
+
+    }
+
+    action start-transform-task {
+      description "Action StartTransformTask";
+      input {
+        leaf transform-resource-desc {
+          type string;
+          description "Related to A_ARG_TYPE_TransformResourceDescription";
+        }
+
+        leaf transform-settings {
+          type string;
+          description "Related to A_ARG_TYPE_TransformSettings";
+        }
+
+        leaf transform-overwrite {
+          type boolean;
+          description "Related to A_ARG_TYPE_TransformOverwrite";
+        }
+
+        leaf transform-rollback {
+          type boolean;
+          description "Related to A_ARG_TYPE_TransformRollback";
+        }
+
+      }
+
+      output {
+        leaf transform-task-i-d {
+          type leafref {
+            path "../../state/a-arg-type-transformtaskid";
+          }
+
+          description "Related to A_ARG_TYPE_TransformTaskID";
+        }
+
+      }
+
+    }
+
+    action get-transforms {
+      description "Action GetTransforms";
+      input {
+        leaf transform-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TransformTaskID";
+        }
+
+      }
+
+      output {
+        leaf current-transform-settings {
+          type leafref {
+            path "../../state/a-arg-type-transformsettings";
+          }
+
+          description "Related to A_ARG_TYPE_TransformSettings";
+        }
+
+      }
+
+    }
+
+    action get-transform-task-result {
+      description "Action GetTransformTaskResult";
+      input {
+        leaf transform-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TransformTaskID";
+        }
+
+        leaf transform-task-result-filter {
+          type string;
+          description "Related to A_ARG_TYPE_TransformTaskResultFilter";
+        }
+
+      }
+
+      output {
+        leaf transform-task-result {
+          type leafref {
+            path "../../state/a-arg-type-transformtaskresult";
+          }
+
+          description "Related to A_ARG_TYPE_TransformTaskResult";
+        }
+
+      }
+
+    }
+
+    action cancel-transform-task {
+      description "Action CancelTransformTask";
+      input {
+        leaf transform-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TransformTaskID";
+        }
+
+      }
+
+    }
+
+    action pause-transform-task {
+      description "Action PauseTransformTask";
+      input {
+        leaf transform-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TransformTaskID";
+        }
+
+      }
+
+    }
+
+    action resume-transform-task {
+      description "Action ResumeTransformTask";
+      input {
+        leaf transform-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TransformTaskID";
+        }
+
+      }
+
+    }
+
+    action rollback-transform-task {
+      description "Action RollbackTransformTask";
+      input {
+        leaf transform-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TransformTaskID";
+        }
+
+      }
+
+    }
+
+    action evaluate-transforms {
+      description "Action EvaluateTransforms";
+      input {
+        leaf transform-resource-desc {
+          type string;
+          description "Related to A_ARG_TYPE_TransformResourceDescription";
+        }
+
+        leaf transform-settings {
+          type string;
+          description "Related to A_ARG_TYPE_TransformSettings";
+        }
+
+      }
+
+      output {
+        leaf evaluation-result {
+          type leafref {
+            path "../../state/a-arg-type-transformevaluationresult";
+          }
+
+          description "Related to A_ARG_TYPE_TransformEvaluationResult";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping content-directory-top {
+    description "Service top";
+    container content-directory {
+      description "Service";
+      uses content-directory-state-top;
+      uses content-directory-state-attributes-top;
+      uses content-directory-action;
+    }
+
+  }
+
+  grouping content-directory-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses content-directory-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

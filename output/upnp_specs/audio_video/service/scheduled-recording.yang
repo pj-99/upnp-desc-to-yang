@@ -1,0 +1,723 @@
+module scheduled-recording {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/scheduled-recording";
+  prefix "scheduled-recording";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "scheduled-recording";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses scheduled-recording-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping scheduled-recording-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf sort-capabilities {
+        type string;
+        config false;
+        description "SortCapabilities";
+      }
+
+      leaf sort-level-capability {
+        type uint32;
+        config false;
+        description "SortLevelCapability";
+      }
+
+      leaf state-update-i-d {
+        type uint32;
+        config false;
+        description "StateUpdateID";
+      }
+
+      leaf last-change {
+        type string;
+        config false;
+        description "LastChange";
+      }
+
+      leaf a-arg-type-propertylist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PropertyList";
+      }
+
+      leaf a-arg-type-datatypeid {
+        type enumeration {
+          enum  A_ARG_TYPE_RECORD_SCHEDULE {
+            description "A_ARG_TYPE_RecordSchedule";
+          }
+
+          enum  A_ARG_TYPE_RECORD_TASK {
+            description "A_ARG_TYPE_RecordTask";
+          }
+
+          enum  A_ARG_TYPE_RECORD_SCHEDULE_PARTS {
+            description "A_ARG_TYPE_RecordScheduleParts";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_DataTypeID";
+      }
+
+      leaf a-arg-type-objectid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ObjectID";
+      }
+
+      leaf a-arg-type-objectidlist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ObjectIDList";
+      }
+
+      leaf a-arg-type-propertyinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PropertyInfo";
+      }
+
+      leaf a-arg-type-index {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_Index";
+      }
+
+      leaf a-arg-type-count {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_Count";
+      }
+
+      leaf a-arg-type-sortcriteria {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SortCriteria";
+      }
+
+      leaf a-arg-type-recordschedule {
+        type string;
+        config false;
+        description "A_ARG_TYPE_RecordSchedule";
+      }
+
+      leaf a-arg-type-recordtask {
+        type string;
+        config false;
+        description "A_ARG_TYPE_RecordTask";
+      }
+
+      leaf a-arg-type-recordscheduleparts {
+        type string;
+        config false;
+        description "A_ARG_TYPE_RecordScheduleParts";
+      }
+
+    }
+
+  }
+
+  grouping scheduled-recording-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container sort-capabilities {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sort-level-capability {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container state-update-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container last-change {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-propertylist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatypeid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-objectid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-objectidlist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-propertyinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-index {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-count {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sortcriteria {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-recordschedule {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-recordtask {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-recordscheduleparts {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping scheduled-recording-action {
+    description "Service actions";
+    action get-sort-capabilities {
+      description "Action GetSortCapabilities";
+      output {
+        leaf sort-caps {
+          type leafref {
+            path "../../state/sort-capabilities";
+          }
+
+          description "Related to SortCapabilities";
+        }
+
+        leaf sort-level-cap {
+          type leafref {
+            path "../../state/sort-level-capability";
+          }
+
+          description "Related to SortLevelCapability";
+        }
+
+      }
+
+    }
+
+    action get-property-list {
+      description "Action GetPropertyList";
+      input {
+        leaf data-type-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTypeID";
+        }
+
+      }
+
+      output {
+        leaf property-list {
+          type leafref {
+            path "../../state/a-arg-type-propertylist";
+          }
+
+          description "Related to A_ARG_TYPE_PropertyList";
+        }
+
+      }
+
+    }
+
+    action get-allowed-values {
+      description "Action GetAllowedValues";
+      input {
+        leaf data-type-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTypeID";
+        }
+
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_PropertyList";
+        }
+
+      }
+
+      output {
+        leaf property-info {
+          type leafref {
+            path "../../state/a-arg-type-propertyinfo";
+          }
+
+          description "Related to A_ARG_TYPE_PropertyInfo";
+        }
+
+      }
+
+    }
+
+    action get-state-update-i-d {
+      description "Action GetStateUpdateID";
+      output {
+        leaf id {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+    action browse-record-schedules {
+      description "Action BrowseRecordSchedules";
+      input {
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_PropertyList";
+        }
+
+        leaf starting-index {
+          type uint32;
+          description "Related to A_ARG_TYPE_Index";
+        }
+
+        leaf requested-count {
+          type uint32;
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf sort-criteria {
+          type string;
+          description "Related to A_ARG_TYPE_SortCriteria";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-recordschedule";
+          }
+
+          description "Related to A_ARG_TYPE_RecordSchedule";
+        }
+
+        leaf number-returned {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf total-matches {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+    action browse-record-tasks {
+      description "Action BrowseRecordTasks";
+      input {
+        leaf record-schedule-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_PropertyList";
+        }
+
+        leaf starting-index {
+          type uint32;
+          description "Related to A_ARG_TYPE_Index";
+        }
+
+        leaf requested-count {
+          type uint32;
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf sort-criteria {
+          type string;
+          description "Related to A_ARG_TYPE_SortCriteria";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-recordtask";
+          }
+
+          description "Related to A_ARG_TYPE_RecordTask";
+        }
+
+        leaf number-returned {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf total-matches {
+          type leafref {
+            path "../../state/a-arg-type-count";
+          }
+
+          description "Related to A_ARG_TYPE_Count";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+    action create-record-schedule {
+      description "Action CreateRecordSchedule";
+      input {
+        leaf elements {
+          type string;
+          description "Related to A_ARG_TYPE_RecordScheduleParts";
+        }
+
+      }
+
+      output {
+        leaf record-schedule-i-d {
+          type leafref {
+            path "../../state/a-arg-type-objectid";
+          }
+
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-recordschedule";
+          }
+
+          description "Related to A_ARG_TYPE_RecordSchedule";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+    action delete-record-schedule {
+      description "Action DeleteRecordSchedule";
+      input {
+        leaf record-schedule-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action get-record-schedule {
+      description "Action GetRecordSchedule";
+      input {
+        leaf record-schedule-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_PropertyList";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-recordschedule";
+          }
+
+          description "Related to A_ARG_TYPE_RecordSchedule";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+    action enable-record-schedule {
+      description "Action EnableRecordSchedule";
+      input {
+        leaf record-schedule-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action disable-record-schedule {
+      description "Action DisableRecordSchedule";
+      input {
+        leaf record-schedule-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action delete-record-task {
+      description "Action DeleteRecordTask";
+      input {
+        leaf record-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action get-record-task {
+      description "Action GetRecordTask";
+      input {
+        leaf record-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+        leaf filter {
+          type string;
+          description "Related to A_ARG_TYPE_PropertyList";
+        }
+
+      }
+
+      output {
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-recordtask";
+          }
+
+          description "Related to A_ARG_TYPE_RecordTask";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+    action enable-record-task {
+      description "Action EnableRecordTask";
+      input {
+        leaf record-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action disable-record-task {
+      description "Action DisableRecordTask";
+      input {
+        leaf record-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action reset-record-task {
+      description "Action ResetRecordTask";
+      input {
+        leaf record-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+    }
+
+    action get-record-schedule-conflicts {
+      description "Action GetRecordScheduleConflicts";
+      input {
+        leaf record-schedule-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+      output {
+        leaf record-schedule-conflict-i-d-list {
+          type leafref {
+            path "../../state/a-arg-type-objectidlist";
+          }
+
+          description "Related to A_ARG_TYPE_ObjectIDList";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+    action get-record-task-conflicts {
+      description "Action GetRecordTaskConflicts";
+      input {
+        leaf record-task-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ObjectID";
+        }
+
+      }
+
+      output {
+        leaf record-task-conflict-i-d-list {
+          type leafref {
+            path "../../state/a-arg-type-objectidlist";
+          }
+
+          description "Related to A_ARG_TYPE_ObjectIDList";
+        }
+
+        leaf update-i-d {
+          type leafref {
+            path "../../state/state-update-i-d";
+          }
+
+          description "Related to StateUpdateID";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping scheduled-recording-top {
+    description "Service top";
+    container scheduled-recording {
+      description "Service";
+      uses scheduled-recording-state-top;
+      uses scheduled-recording-state-attributes-top;
+      uses scheduled-recording-action;
+    }
+
+  }
+
+  grouping scheduled-recording-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses scheduled-recording-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

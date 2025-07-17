@@ -1,0 +1,429 @@
+module lan-host-config-management {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/lan-host-config-management";
+  prefix "lan-host-config-management";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "lan-host-config-management";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses lan-host-config-management-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping lan-host-config-management-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf d-h-c-p-server-configurable {
+        type boolean;
+        description "DHCPServerConfigurable";
+      }
+
+      leaf d-h-c-p-relay {
+        type boolean;
+        description "DHCPRelay";
+      }
+
+      leaf subnet-mask {
+        type string;
+        description "SubnetMask";
+      }
+
+      leaf i-p-routers {
+        type string;
+        config false;
+        description "IPRouters";
+      }
+
+      leaf d-n-s-servers {
+        type string;
+        config false;
+        description "DNSServers";
+      }
+
+      leaf domain-name {
+        type string;
+        description "DomainName";
+      }
+
+      leaf min-address {
+        type string;
+        config false;
+        description "MinAddress";
+      }
+
+      leaf max-address {
+        type string;
+        config false;
+        description "MaxAddress";
+      }
+
+      leaf reserved-addresses {
+        type string;
+        config false;
+        description "ReservedAddresses";
+      }
+
+    }
+
+  }
+
+  grouping lan-host-config-management-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container d-h-c-p-server-configurable {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container d-h-c-p-relay {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container subnet-mask {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container i-p-routers {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container d-n-s-servers {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container domain-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container min-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container max-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container reserved-addresses {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping lan-host-config-management-action {
+    description "Service actions";
+    action set-d-h-c-p-server-configurable {
+      description "Action SetDHCPServerConfigurable";
+      input {
+        leaf new-d-h-c-p-server-configurable {
+          type boolean;
+          description "Related to DHCPServerConfigurable";
+        }
+
+      }
+
+    }
+
+    action get-d-h-c-p-server-configurable {
+      description "Action GetDHCPServerConfigurable";
+      output {
+        leaf new-d-h-c-p-server-configurable {
+          type leafref {
+            path "../../state/d-h-c-p-server-configurable";
+          }
+
+          description "Related to DHCPServerConfigurable";
+        }
+
+      }
+
+    }
+
+    action set-d-h-c-p-relay {
+      description "Action SetDHCPRelay";
+      input {
+        leaf new-d-h-c-p-relay {
+          type boolean;
+          description "Related to DHCPRelay";
+        }
+
+      }
+
+    }
+
+    action get-d-h-c-p-relay {
+      description "Action GetDHCPRelay";
+      output {
+        leaf new-d-h-c-p-relay {
+          type leafref {
+            path "../../state/d-h-c-p-relay";
+          }
+
+          description "Related to DHCPRelay";
+        }
+
+      }
+
+    }
+
+    action set-subnet-mask {
+      description "Action SetSubnetMask";
+      input {
+        leaf new-subnet-mask {
+          type string;
+          description "Related to SubnetMask";
+        }
+
+      }
+
+    }
+
+    action get-subnet-mask {
+      description "Action GetSubnetMask";
+      output {
+        leaf new-subnet-mask {
+          type leafref {
+            path "../../state/subnet-mask";
+          }
+
+          description "Related to SubnetMask";
+        }
+
+      }
+
+    }
+
+    action set-i-p-router {
+      description "Action SetIPRouter";
+      input {
+        leaf new-i-p-routers {
+          type string;
+          description "Related to IPRouters";
+        }
+
+      }
+
+    }
+
+    action delete-i-p-router {
+      description "Action DeleteIPRouter";
+      input {
+        leaf new-i-p-routers {
+          type string;
+          description "Related to IPRouters";
+        }
+
+      }
+
+    }
+
+    action get-i-p-routers-list {
+      description "Action GetIPRoutersList";
+      output {
+        leaf new-i-p-routers {
+          type leafref {
+            path "../../state/i-p-routers";
+          }
+
+          description "Related to IPRouters";
+        }
+
+      }
+
+    }
+
+    action set-domain-name {
+      description "Action SetDomainName";
+      input {
+        leaf new-domain-name {
+          type string;
+          description "Related to DomainName";
+        }
+
+      }
+
+    }
+
+    action get-domain-name {
+      description "Action GetDomainName";
+      output {
+        leaf new-domain-name {
+          type leafref {
+            path "../../state/domain-name";
+          }
+
+          description "Related to DomainName";
+        }
+
+      }
+
+    }
+
+    action set-address-range {
+      description "Action SetAddressRange";
+      input {
+        leaf new-min-address {
+          type string;
+          description "Related to MinAddress";
+        }
+
+        leaf new-max-address {
+          type string;
+          description "Related to MaxAddress";
+        }
+
+      }
+
+    }
+
+    action get-address-range {
+      description "Action GetAddressRange";
+      output {
+        leaf new-min-address {
+          type leafref {
+            path "../../state/min-address";
+          }
+
+          description "Related to MinAddress";
+        }
+
+        leaf new-max-address {
+          type leafref {
+            path "../../state/max-address";
+          }
+
+          description "Related to MaxAddress";
+        }
+
+      }
+
+    }
+
+    action set-reserved-address {
+      description "Action SetReservedAddress";
+      input {
+        leaf new-reserved-addresses {
+          type string;
+          description "Related to ReservedAddresses";
+        }
+
+      }
+
+    }
+
+    action delete-reserved-address {
+      description "Action DeleteReservedAddress";
+      input {
+        leaf new-reserved-addresses {
+          type string;
+          description "Related to ReservedAddresses";
+        }
+
+      }
+
+    }
+
+    action get-reserved-addresses {
+      description "Action GetReservedAddresses";
+      output {
+        leaf new-reserved-addresses {
+          type leafref {
+            path "../../state/reserved-addresses";
+          }
+
+          description "Related to ReservedAddresses";
+        }
+
+      }
+
+    }
+
+    action set-d-n-s-server {
+      description "Action SetDNSServer";
+      input {
+        leaf new-d-n-s-servers {
+          type string;
+          description "Related to DNSServers";
+        }
+
+      }
+
+    }
+
+    action delete-d-n-s-server {
+      description "Action DeleteDNSServer";
+      input {
+        leaf new-d-n-s-servers {
+          type string;
+          description "Related to DNSServers";
+        }
+
+      }
+
+    }
+
+    action get-d-n-s-servers {
+      description "Action GetDNSServers";
+      output {
+        leaf new-d-n-s-servers {
+          type leafref {
+            path "../../state/d-n-s-servers";
+          }
+
+          description "Related to DNSServers";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping lan-host-config-management-top {
+    description "Service top";
+    container lan-host-config-management {
+      description "Service";
+      uses lan-host-config-management-state-top;
+      uses lan-host-config-management-state-attributes-top;
+      uses lan-host-config-management-action;
+    }
+
+  }
+
+  grouping lan-host-config-management-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses lan-host-config-management-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

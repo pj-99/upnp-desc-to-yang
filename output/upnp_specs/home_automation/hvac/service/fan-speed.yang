@@ -1,0 +1,207 @@
+module fan-speed {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/fan-speed";
+  prefix "fan-speed";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "fan-speed";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses fan-speed-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping fan-speed-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf fan-speed-target {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        config false;
+        description "FanSpeedTarget";
+      }
+
+      leaf fan-speed-status {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        config false;
+        description "FanSpeedStatus";
+      }
+
+      leaf direction-target {
+        type boolean;
+        default false;
+        config false;
+        description "DirectionTarget";
+      }
+
+      leaf direction-status {
+        type boolean;
+        default false;
+        config false;
+        description "DirectionStatus";
+      }
+
+    }
+
+  }
+
+  grouping fan-speed-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container fan-speed-target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container fan-speed-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container direction-target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container direction-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping fan-speed-action {
+    description "Service actions";
+    action set-fan-speed {
+      description "Action SetFanSpeed";
+      input {
+        leaf new-fan-speed-target {
+          type uint8;
+          description "Related to FanSpeedTarget";
+        }
+
+      }
+
+    }
+
+    action get-fan-speed {
+      description "Action GetFanSpeed";
+      output {
+        leaf current-fan-speed-status {
+          type leafref {
+            path "../../state/fan-speed-status";
+          }
+
+          description "Related to FanSpeedStatus";
+        }
+
+      }
+
+    }
+
+    action get-fan-speed-target {
+      description "Action GetFanSpeedTarget";
+      output {
+        leaf current-fan-speed-target {
+          type leafref {
+            path "../../state/fan-speed-target";
+          }
+
+          description "Related to FanSpeedTarget";
+        }
+
+      }
+
+    }
+
+    action set-fan-direction {
+      description "Action SetFanDirection";
+      input {
+        leaf new-direction-target {
+          type boolean;
+          description "Related to DirectionTarget";
+        }
+
+      }
+
+    }
+
+    action get-fan-direction {
+      description "Action GetFanDirection";
+      output {
+        leaf current-direction-status {
+          type leafref {
+            path "../../state/direction-status";
+          }
+
+          description "Related to DirectionStatus";
+        }
+
+      }
+
+    }
+
+    action get-fan-direction-target {
+      description "Action GetFanDirectionTarget";
+      output {
+        leaf current-direction-target {
+          type leafref {
+            path "../../state/direction-target";
+          }
+
+          description "Related to DirectionTarget";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping fan-speed-top {
+    description "Service top";
+    container fan-speed {
+      description "Service";
+      uses fan-speed-state-top;
+      uses fan-speed-state-attributes-top;
+      uses fan-speed-action;
+    }
+
+  }
+
+  grouping fan-speed-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses fan-speed-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

@@ -1,0 +1,448 @@
+module dimming {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/dimming";
+  prefix "dimming";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "dimming";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses dimming-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping dimming-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf load-level-target {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        description "LoadLevelTarget";
+      }
+
+      leaf load-level-status {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        config false;
+        description "LoadLevelStatus";
+      }
+
+      leaf on-effect-level {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 100;
+        description "OnEffectLevel";
+      }
+
+      leaf on-effect {
+        type enumeration {
+          enum  ON_EFFECT_LEVEL {
+            description "OnEffectLevel";
+          }
+
+          enum  LAST_SETTING {
+            description "LastSetting";
+          }
+
+          enum  DEFAULT {
+            description "Default";
+          }
+
+        }
+
+        default DEFAULT;
+        description "OnEffect";
+      }
+
+      leaf valid-output-values {
+        type string;
+        config false;
+        description "ValidOutputValues";
+      }
+
+      leaf step-delta {
+        type uint8 {
+          range "1 .. 100";
+        }
+
+        default 1;
+        description "StepDelta";
+      }
+
+      leaf ramp-rate {
+        type uint8 {
+          range "0 .. 100";
+        }
+
+        default 0;
+        description "RampRate";
+      }
+
+      leaf ramp-time {
+        type uint32 {
+          range "0 .. 4294967295";
+        }
+
+        default 0;
+        config false;
+        description "RampTime";
+      }
+
+      leaf is-ramping {
+        type boolean;
+        default false;
+        config false;
+        description "IsRamping";
+      }
+
+      leaf ramp-paused {
+        type boolean;
+        default false;
+        config false;
+        description "RampPaused";
+      }
+
+    }
+
+  }
+
+  grouping dimming-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container load-level-target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container load-level-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container on-effect-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container on-effect {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container valid-output-values {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container step-delta {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container ramp-rate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container ramp-time {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container is-ramping {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container ramp-paused {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping dimming-action {
+    description "Service actions";
+    action set-load-level-target {
+      description "Action SetLoadLevelTarget";
+      input {
+        leaf new-loadlevel-target {
+          type uint8;
+          description "Related to LoadLevelTarget";
+        }
+
+      }
+
+    }
+
+    action get-load-level-target {
+      description "Action GetLoadLevelTarget";
+      output {
+        leaf get-loadlevel-target {
+          type leafref {
+            path "../../state/load-level-target";
+          }
+
+          description "Related to LoadLevelTarget";
+        }
+
+      }
+
+    }
+
+    action get-load-level-status {
+      description "Action GetLoadLevelStatus";
+      output {
+        leaf ret-loadlevel-status {
+          type leafref {
+            path "../../state/load-level-status";
+          }
+
+          description "Related to LoadLevelStatus";
+        }
+
+      }
+
+    }
+
+    action set-on-effect-level {
+      description "Action SetOnEffectLevel";
+      input {
+        leaf new-on-effect-level {
+          type uint8;
+          description "Related to OnEffectLevel";
+        }
+
+      }
+
+    }
+
+    action set-on-effect {
+      description "Action SetOnEffect";
+      input {
+        leaf new-on-effect {
+          type string;
+          description "Related to OnEffect";
+        }
+
+      }
+
+    }
+
+    action get-on-effect-parameters {
+      description "Action GetOnEffectParameters";
+      output {
+        leaf ret-on-effect {
+          type leafref {
+            path "../../state/on-effect";
+          }
+
+          description "Related to OnEffect";
+        }
+
+        leaf ret-on-effect-level {
+          type leafref {
+            path "../../state/on-effect-level";
+          }
+
+          description "Related to OnEffectLevel";
+        }
+
+      }
+
+    }
+
+    action step-up {
+      description "Action StepUp";
+    }
+
+    action step-down {
+      description "Action StepDown";
+    }
+
+    action start-ramp-up {
+      description "Action StartRampUp";
+    }
+
+    action start-ramp-down {
+      description "Action StartRampDown";
+    }
+
+    action stop-ramp {
+      description "Action StopRamp";
+    }
+
+    action start-ramp-to-level {
+      description "Action StartRampToLevel";
+      input {
+        leaf new-load-level-target {
+          type uint8;
+          description "Related to LoadLevelTarget";
+        }
+
+        leaf new-ramp-time {
+          type uint32;
+          description "Related to RampTime";
+        }
+
+      }
+
+    }
+
+    action set-step-delta {
+      description "Action SetStepDelta";
+      input {
+        leaf new-step-delta {
+          type uint8;
+          description "Related to StepDelta";
+        }
+
+      }
+
+    }
+
+    action get-step-delta {
+      description "Action GetStepDelta";
+      output {
+        leaf ret-step-delta {
+          type leafref {
+            path "../../state/step-delta";
+          }
+
+          description "Related to StepDelta";
+        }
+
+      }
+
+    }
+
+    action set-ramp-rate {
+      description "Action SetRampRate";
+      input {
+        leaf new-ramp-rate {
+          type uint8;
+          description "Related to RampRate";
+        }
+
+      }
+
+    }
+
+    action get-ramp-rate {
+      description "Action GetRampRate";
+      output {
+        leaf ret-ramp-rate {
+          type leafref {
+            path "../../state/ramp-rate";
+          }
+
+          description "Related to RampRate";
+        }
+
+      }
+
+    }
+
+    action pause-ramp {
+      description "Action PauseRamp";
+    }
+
+    action resume-ramp {
+      description "Action ResumeRamp";
+    }
+
+    action get-is-ramping {
+      description "Action GetIsRamping";
+      output {
+        leaf ret-is-ramping {
+          type leafref {
+            path "../../state/is-ramping";
+          }
+
+          description "Related to IsRamping";
+        }
+
+      }
+
+    }
+
+    action get-ramp-paused {
+      description "Action GetRampPaused";
+      output {
+        leaf ret-ramp-paused {
+          type leafref {
+            path "../../state/ramp-paused";
+          }
+
+          description "Related to RampPaused";
+        }
+
+      }
+
+    }
+
+    action get-ramp-time {
+      description "Action GetRampTime";
+      output {
+        leaf ret-ramp-time {
+          type leafref {
+            path "../../state/ramp-time";
+          }
+
+          description "Related to RampTime";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping dimming-top {
+    description "Service top";
+    container dimming {
+      description "Service";
+      uses dimming-state-top;
+      uses dimming-state-attributes-top;
+      uses dimming-action;
+    }
+
+  }
+
+  grouping dimming-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses dimming-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

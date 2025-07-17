@@ -1,0 +1,301 @@
+module cloud-proxy {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/cloud-proxy";
+  prefix "cloud-proxy";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "cloud-proxy";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses cloud-proxy-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping cloud-proxy-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf cloud-proxy-update {
+        type string;
+        config false;
+        description "CloudProxyUpdate";
+      }
+
+      leaf device-list {
+        type string;
+        config false;
+        description "DeviceList";
+      }
+
+      leaf proxy-list {
+        type string;
+        config false;
+        description "ProxyList";
+      }
+
+      leaf u-c-s-list {
+        type string;
+        config false;
+        description "UCSList";
+      }
+
+      leaf a-arg-type-devid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DevId";
+      }
+
+      leaf a-arg-type-barejid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_BareJID";
+      }
+
+      leaf a-arg-type-fulljid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_FullJID";
+      }
+
+      leaf a-arg-type-string {
+        type string;
+        config false;
+        description "A_ARG_TYPE_String";
+      }
+
+      leaf a-arg-type-port {
+        type uint16;
+        config false;
+        description "A_ARG_TYPE_Port";
+      }
+
+    }
+
+  }
+
+  grouping cloud-proxy-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container cloud-proxy-update {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container proxy-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container u-c-s-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-devid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-barejid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-fulljid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-string {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-port {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping cloud-proxy-action {
+    description "Service actions";
+    action add-u-c-s-account {
+      description "Action AddUCSAccount";
+      input {
+        leaf user-at-cloud {
+          type string;
+          description "Related to A_ARG_TYPE_BareJID";
+        }
+
+        leaf port {
+          type uint16;
+          description "Related to A_ARG_TYPE_Port";
+        }
+
+      }
+
+      output {
+        leaf u-c-s-j-i-d {
+          type leafref {
+            path "../../state/a-arg-type-barejid";
+          }
+
+          description "Related to A_ARG_TYPE_BareJID";
+        }
+
+        leaf password {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action add-proxy-device {
+      description "Action AddProxyDevice";
+      input {
+        leaf device-id {
+          type string;
+          description "Related to A_ARG_TYPE_DevId";
+        }
+
+        leaf user-at-cloud {
+          type string;
+          description "Related to A_ARG_TYPE_BareJID";
+        }
+
+      }
+
+      output {
+        leaf device-j-i-d {
+          type leafref {
+            path "../../state/a-arg-type-fulljid";
+          }
+
+          description "Related to A_ARG_TYPE_FullJID";
+        }
+
+      }
+
+    }
+
+    action delete-u-c-s-account {
+      description "Action DeleteUCSAccount";
+      input {
+        leaf bare-j-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_BareJID";
+        }
+
+      }
+
+    }
+
+    action delete-proxy-device {
+      description "Action DeleteProxyDevice";
+      input {
+        leaf device-j-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_FullJID";
+        }
+
+      }
+
+    }
+
+    action get-device-list {
+      description "Action GetDeviceList";
+      output {
+        leaf device-list {
+          type leafref {
+            path "../../state/device-list";
+          }
+
+          description "Related to DeviceList";
+        }
+
+      }
+
+    }
+
+    action get-proxy-list {
+      description "Action GetProxyList";
+      output {
+        leaf proxy-list {
+          type leafref {
+            path "../../state/proxy-list";
+          }
+
+          description "Related to ProxyList";
+        }
+
+      }
+
+    }
+
+    action get-u-c-s-list {
+      description "Action GetUCSList";
+      output {
+        leaf u-c-s-list {
+          type leafref {
+            path "../../state/u-c-s-list";
+          }
+
+          description "Related to UCSList";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping cloud-proxy-top {
+    description "Service top";
+    container cloud-proxy {
+      description "Service";
+      uses cloud-proxy-state-top;
+      uses cloud-proxy-state-attributes-top;
+      uses cloud-proxy-action;
+    }
+
+  }
+
+  grouping cloud-proxy-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses cloud-proxy-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

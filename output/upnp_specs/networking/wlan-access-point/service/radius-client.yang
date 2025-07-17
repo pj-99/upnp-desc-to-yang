@@ -1,0 +1,227 @@
+module radius-client {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/radius-client";
+  prefix "radius-client";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "radius-client";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses radius-client-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping radius-client-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf number-of-authentication-server-entries {
+        type uint16;
+        config false;
+        description "NumberOfAuthenticationServerEntries";
+      }
+
+      leaf authentication-server-i-p-address {
+        type string;
+        config false;
+        description "AuthenticationServerIPAddress";
+      }
+
+      leaf authentication-server-port-number {
+        type uint16;
+        config false;
+        description "AuthenticationServerPortNumber";
+      }
+
+      leaf authentication-server-shared-secret {
+        type string;
+        config false;
+        description "AuthenticationServerSharedSecret";
+      }
+
+    }
+
+  }
+
+  grouping radius-client-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container number-of-authentication-server-entries {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container authentication-server-i-p-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container authentication-server-port-number {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container authentication-server-shared-secret {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping radius-client-action {
+    description "Service actions";
+    action get-generic-authentication-server-entry {
+      description "Action GetGenericAuthenticationServerEntry";
+      input {
+        leaf new-authentication-server-index {
+          type uint16;
+          description "Related to NumberOfAuthenticationServerEntries";
+        }
+
+      }
+
+      output {
+        leaf new-authentication-server-i-p-address {
+          type leafref {
+            path "../../state/authentication-server-i-p-address";
+          }
+
+          description "Related to AuthenticationServerIPAddress";
+        }
+
+        leaf new-authentication-server-port-number {
+          type leafref {
+            path "../../state/authentication-server-port-number";
+          }
+
+          description "Related to AuthenticationServerPortNumber";
+        }
+
+        leaf new-authentication-server-shared-secret {
+          type leafref {
+            path "../../state/authentication-server-shared-secret";
+          }
+
+          description "Related to AuthenticationServerSharedSecret";
+        }
+
+      }
+
+    }
+
+    action get-specific-authentication-server-entry {
+      description "Action GetSpecificAuthenticationServerEntry";
+      input {
+        leaf new-authentication-server-i-p-address {
+          type string;
+          description "Related to AuthenticationServerIPAddress";
+        }
+
+        leaf new-authentication-server-port-number {
+          type uint16;
+          description "Related to AuthenticationServerPortNumber";
+        }
+
+      }
+
+      output {
+        leaf new-authentication-server-shared-secret {
+          type leafref {
+            path "../../state/authentication-server-shared-secret";
+          }
+
+          description "Related to AuthenticationServerSharedSecret";
+        }
+
+      }
+
+    }
+
+    action add-authentication-server-entry {
+      description "Action AddAuthenticationServerEntry";
+      input {
+        leaf new-authentication-server-i-p-address {
+          type string;
+          description "Related to AuthenticationServerIPAddress";
+        }
+
+        leaf new-authentication-server-port-number {
+          type uint16;
+          description "Related to AuthenticationServerPortNumber";
+        }
+
+        leaf new-authentication-server-shared-secret {
+          type string;
+          description "Related to AuthenticationServerSharedSecret";
+        }
+
+      }
+
+    }
+
+    action delete-authentication-server-entry {
+      description "Action DeleteAuthenticationServerEntry";
+      input {
+        leaf new-authentication-server-i-p-address {
+          type string;
+          description "Related to AuthenticationServerIPAddress";
+        }
+
+        leaf new-authentication-server-port-number {
+          type uint16;
+          description "Related to AuthenticationServerPortNumber";
+        }
+
+      }
+
+    }
+
+    action factory-default-reset {
+      description "Action FactoryDefaultReset";
+    }
+
+    action reset-authentication {
+      description "Action ResetAuthentication";
+    }
+
+  }
+
+  grouping radius-client-top {
+    description "Service top";
+    container radius-client {
+      description "Service";
+      uses radius-client-state-top;
+      uses radius-client-state-attributes-top;
+      uses radius-client-action;
+    }
+
+  }
+
+  grouping radius-client-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses radius-client-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

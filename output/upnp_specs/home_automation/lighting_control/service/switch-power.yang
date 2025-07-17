@@ -1,0 +1,134 @@
+module switch-power {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/switch-power";
+  prefix "switch-power";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "switch-power";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses switch-power-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping switch-power-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf target {
+        type boolean;
+        default false;
+        description "Target";
+      }
+
+      leaf status {
+        type boolean;
+        default false;
+        config false;
+        description "Status";
+      }
+
+    }
+
+  }
+
+  grouping switch-power-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping switch-power-action {
+    description "Service actions";
+    action set-target {
+      description "Action SetTarget";
+      input {
+        leaf new-target-value {
+          type boolean;
+          description "Related to Target";
+        }
+
+      }
+
+    }
+
+    action get-target {
+      description "Action GetTarget";
+      output {
+        leaf ret-target-value {
+          type leafref {
+            path "../../state/target";
+          }
+
+          description "Related to Target";
+        }
+
+      }
+
+    }
+
+    action get-status {
+      description "Action GetStatus";
+      output {
+        leaf result-status {
+          type leafref {
+            path "../../state/status";
+          }
+
+          description "Related to Status";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping switch-power-top {
+    description "Service top";
+    container switch-power {
+      description "Service";
+      uses switch-power-state-top;
+      uses switch-power-state-attributes-top;
+      uses switch-power-action;
+    }
+
+  }
+
+  grouping switch-power-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses switch-power-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

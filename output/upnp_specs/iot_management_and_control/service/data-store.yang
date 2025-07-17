@@ -1,0 +1,586 @@
+module data-store {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/data-store";
+  prefix "data-store";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "data-store";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses data-store-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping data-store-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf last-change {
+        type string;
+        config false;
+        description "LastChange";
+      }
+
+      leaf a-arg-type-datarecordcount {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_DataRecordCount";
+      }
+
+      leaf a-arg-type-datarecordindex {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataRecordIndex";
+      }
+
+      leaf a-arg-type-datarecordfilter {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataRecordFilter";
+      }
+
+      leaf a-arg-type-datatableid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataTableID";
+      }
+
+      leaf a-arg-type-datatableinfoelement {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataTableInfoElement";
+      }
+
+      leaf a-arg-type-datarecordpropresolve {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_DataRecordPropResolve";
+      }
+
+      leaf a-arg-type-datatableinfofragment {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataTableInfoFragment";
+      }
+
+      leaf a-arg-type-datatablekeyname {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataTableKeyName";
+      }
+
+      leaf a-arg-type-datatablekeyvalue {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataTableKeyValue";
+      }
+
+      leaf a-arg-type-datatableinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataTableInfo";
+      }
+
+      leaf a-arg-type-datastoreinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataStoreInfo";
+      }
+
+      leaf a-arg-type-datatableresetreq {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_DataTableResetReq";
+      }
+
+      leaf a-arg-type-datastoregroups {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataStoreGroups";
+      }
+
+      leaf a-arg-type-datarecords {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataRecords";
+      }
+
+      leaf a-arg-type-datarecordsstatus {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataRecordsStatus";
+      }
+
+      leaf a-arg-type-datatransporturl {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DataTransportURL";
+      }
+
+    }
+
+  }
+
+  grouping data-store-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container last-change {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecordcount {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecordindex {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecordfilter {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatableid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatableinfoelement {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecordpropresolve {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatableinfofragment {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatablekeyname {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatablekeyvalue {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatableinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datastoreinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatableresetreq {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datastoregroups {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecords {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datarecordsstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datatransporturl {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping data-store-action {
+    description "Service actions";
+    action create-data-store-groups {
+      description "Action CreateDataStoreGroups";
+      input {
+        leaf data-store-group-list {
+          type string;
+          description "Related to A_ARG_TYPE_DataStoreGroups";
+        }
+
+      }
+
+    }
+
+    action create-data-store-table {
+      description "Action CreateDataStoreTable";
+      input {
+        leaf data-table-info {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableInfo";
+        }
+
+      }
+
+      output {
+        leaf data-table-i-d {
+          type leafref {
+            path "../../state/a-arg-type-datatableid";
+          }
+
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+      }
+
+    }
+
+    action delete-data-store-groups {
+      description "Action DeleteDataStoreGroups";
+      input {
+        leaf data-store-group-list {
+          type string;
+          description "Related to A_ARG_TYPE_DataStoreGroups";
+        }
+
+      }
+
+    }
+
+    action delete-data-store-table {
+      description "Action DeleteDataStoreTable";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+      }
+
+    }
+
+    action get-data-store-table-key-value {
+      description "Action GetDataStoreTableKeyValue";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+        leaf data-table-key-name {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableKeyName";
+        }
+
+      }
+
+      output {
+        leaf data-table-key-value {
+          type leafref {
+            path "../../state/a-arg-type-datatablekeyvalue";
+          }
+
+          description "Related to A_ARG_TYPE_DataTableKeyValue";
+        }
+
+      }
+
+    }
+
+    action get-data-store-groups {
+      description "Action GetDataStoreGroups";
+      output {
+        leaf data-store-group-list {
+          type leafref {
+            path "../../state/a-arg-type-datastoregroups";
+          }
+
+          description "Related to A_ARG_TYPE_DataStoreGroups";
+        }
+
+      }
+
+    }
+
+    action get-data-store-info {
+      description "Action GetDataStoreInfo";
+      output {
+        leaf data-store-info {
+          type leafref {
+            path "../../state/a-arg-type-datastoreinfo";
+          }
+
+          description "Related to A_ARG_TYPE_DataStoreInfo";
+        }
+
+      }
+
+    }
+
+    action get-data-store-table-info {
+      description "Action GetDataStoreTableInfo";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+      }
+
+      output {
+        leaf data-table-info {
+          type leafref {
+            path "../../state/a-arg-type-datatableinfo";
+          }
+
+          description "Related to A_ARG_TYPE_DataTableInfo";
+        }
+
+      }
+
+    }
+
+    action get-data-store-transport-u-r-l {
+      description "Action GetDataStoreTransportURL";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+      }
+
+      output {
+        leaf data-transport-u-r-l {
+          type leafref {
+            path "../../state/a-arg-type-datatransporturl";
+          }
+
+          description "Related to A_ARG_TYPE_DataTransportURL";
+        }
+
+      }
+
+    }
+
+    action modify-data-store-table {
+      description "Action ModifyDataStoreTable";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+        leaf data-table-info-element-orig {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableInfoElement";
+        }
+
+        leaf data-table-info-element-new {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableInfoElement";
+        }
+
+      }
+
+    }
+
+    action read-data-store-table-records {
+      description "Action ReadDataStoreTableRecords";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+        leaf data-record-filter {
+          type string;
+          description "Related to A_ARG_TYPE_DataRecordFilter";
+        }
+
+        leaf data-record-start {
+          type string;
+          description "Related to A_ARG_TYPE_DataRecordIndex";
+        }
+
+        leaf data-record-count {
+          type uint32;
+          description "Related to A_ARG_TYPE_DataRecordCount";
+        }
+
+        leaf data-record-prop-resolve {
+          type boolean;
+          description "Related to A_ARG_TYPE_DataRecordPropResolve";
+        }
+
+      }
+
+      output {
+        leaf data-records {
+          type leafref {
+            path "../../state/a-arg-type-datarecords";
+          }
+
+          description "Related to A_ARG_TYPE_DataRecords";
+        }
+
+        leaf data-record-continue {
+          type leafref {
+            path "../../state/a-arg-type-datarecordindex";
+          }
+
+          description "Related to A_ARG_TYPE_DataRecordIndex";
+        }
+
+      }
+
+    }
+
+    action remove-data-store-table-key-value {
+      description "Action RemoveDataStoreTableKeyValue";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+        leaf data-table-key-name {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableKeyName";
+        }
+
+      }
+
+    }
+
+    action reset-data-store-table {
+      description "Action ResetDataStoreTable";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+        leaf reset-data-table-records {
+          type boolean;
+          description "Related to A_ARG_TYPE_DataTableResetReq";
+        }
+
+        leaf reset-data-table-dictionary {
+          type boolean;
+          description "Related to A_ARG_TYPE_DataTableResetReq";
+        }
+
+        leaf reset-data-table-transport {
+          type boolean;
+          description "Related to A_ARG_TYPE_DataTableResetReq";
+        }
+
+      }
+
+    }
+
+    action set-data-store-table-key-value {
+      description "Action SetDataStoreTableKeyValue";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+        leaf data-table-key-name {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableKeyName";
+        }
+
+        leaf data-table-key-value {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableKeyValue";
+        }
+
+      }
+
+    }
+
+    action write-data-store-table-records {
+      description "Action WriteDataStoreTableRecords";
+      input {
+        leaf data-table-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_DataTableID";
+        }
+
+        leaf data-records {
+          type string;
+          description "Related to A_ARG_TYPE_DataRecords";
+        }
+
+      }
+
+      output {
+        leaf data-records-status {
+          type leafref {
+            path "../../state/a-arg-type-datarecordsstatus";
+          }
+
+          description "Related to A_ARG_TYPE_DataRecordsStatus";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping data-store-top {
+    description "Service top";
+    container data-store {
+      description "Service";
+      uses data-store-state-top;
+      uses data-store-state-attributes-top;
+      uses data-store-action;
+    }
+
+  }
+
+  grouping data-store-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses data-store-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

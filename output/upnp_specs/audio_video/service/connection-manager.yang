@@ -1,0 +1,495 @@
+module connection-manager {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/connection-manager";
+  prefix "connection-manager";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "connection-manager";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses connection-manager-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping connection-manager-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf source-protocol-info {
+        type string;
+        config false;
+        description "SourceProtocolInfo";
+      }
+
+      leaf sink-protocol-info {
+        type string;
+        config false;
+        description "SinkProtocolInfo";
+      }
+
+      leaf current-connection-i-ds {
+        type string;
+        config false;
+        description "CurrentConnectionIDs";
+      }
+
+      leaf feature-list {
+        type string;
+        config false;
+        description "FeatureList";
+      }
+
+      leaf clock-update-i-d {
+        type uint32;
+        config false;
+        description "ClockUpdateID";
+      }
+
+      leaf device-clock-info-updates {
+        type string;
+        config false;
+        description "DeviceClockInfoUpdates";
+      }
+
+      leaf a-arg-type-connectionstatus {
+        type enumeration {
+          enum  OK {
+            description "OK";
+          }
+
+          enum  CONTENT_FORMAT_MISMATCH {
+            description "ContentFormatMismatch";
+          }
+
+          enum  INSUFFICIENT_BANDWIDTH {
+            description "InsufficientBandwidth";
+          }
+
+          enum  UNRELIABLE_CHANNEL {
+            description "UnreliableChannel";
+          }
+
+          enum  UNKNOWN {
+            description "Unknown";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_ConnectionStatus";
+      }
+
+      leaf a-arg-type-connectionmanager {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ConnectionManager";
+      }
+
+      leaf a-arg-type-direction {
+        type enumeration {
+          enum  INPUT {
+            description "Input";
+          }
+
+          enum  OUTPUT {
+            description "Output";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_Direction";
+      }
+
+      leaf a-arg-type-protocolinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ProtocolInfo";
+      }
+
+      leaf a-arg-type-connectionid {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_ConnectionID";
+      }
+
+      leaf a-arg-type-avtransportid {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_AVTransportID";
+      }
+
+      leaf a-arg-type-rcsid {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_RcsID";
+      }
+
+      leaf a-arg-type-iteminfofilter {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ItemInfoFilter";
+      }
+
+      leaf a-arg-type-result {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Result";
+      }
+
+      leaf a-arg-type-renderinginfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_RenderingInfoList";
+      }
+
+    }
+
+  }
+
+  grouping connection-manager-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container source-protocol-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sink-protocol-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-connection-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container feature-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container clock-update-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container device-clock-info-updates {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-connectionstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-connectionmanager {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-direction {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-protocolinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-connectionid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-avtransportid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-rcsid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-iteminfofilter {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-result {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-renderinginfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping connection-manager-action {
+    description "Service actions";
+    action get-protocol-info {
+      description "Action GetProtocolInfo";
+      output {
+        leaf source {
+          type leafref {
+            path "../../state/source-protocol-info";
+          }
+
+          description "Related to SourceProtocolInfo";
+        }
+
+        leaf sink {
+          type leafref {
+            path "../../state/sink-protocol-info";
+          }
+
+          description "Related to SinkProtocolInfo";
+        }
+
+      }
+
+    }
+
+    action prepare-for-connection {
+      description "Action PrepareForConnection";
+      input {
+        leaf remote-protocol-info {
+          type string;
+          description "Related to A_ARG_TYPE_ProtocolInfo";
+        }
+
+        leaf peer-connection-manager {
+          type string;
+          description "Related to A_ARG_TYPE_ConnectionManager";
+        }
+
+        leaf peer-connection-i-d {
+          type int32;
+          description "Related to A_ARG_TYPE_ConnectionID";
+        }
+
+        leaf direction {
+          type string;
+          description "Related to A_ARG_TYPE_Direction";
+        }
+
+      }
+
+      output {
+        leaf connection-i-d {
+          type leafref {
+            path "../../state/a-arg-type-connectionid";
+          }
+
+          description "Related to A_ARG_TYPE_ConnectionID";
+        }
+
+        leaf a-v-transport-i-d {
+          type leafref {
+            path "../../state/a-arg-type-avtransportid";
+          }
+
+          description "Related to A_ARG_TYPE_AVTransportID";
+        }
+
+        leaf rcs-i-d {
+          type leafref {
+            path "../../state/a-arg-type-rcsid";
+          }
+
+          description "Related to A_ARG_TYPE_RcsID";
+        }
+
+      }
+
+    }
+
+    action connection-complete {
+      description "Action ConnectionComplete";
+      input {
+        leaf connection-i-d {
+          type int32;
+          description "Related to A_ARG_TYPE_ConnectionID";
+        }
+
+      }
+
+    }
+
+    action get-current-connection-i-ds {
+      description "Action GetCurrentConnectionIDs";
+      output {
+        leaf connection-i-ds {
+          type leafref {
+            path "../../state/current-connection-i-ds";
+          }
+
+          description "Related to CurrentConnectionIDs";
+        }
+
+      }
+
+    }
+
+    action get-current-connection-info {
+      description "Action GetCurrentConnectionInfo";
+      input {
+        leaf connection-i-d {
+          type int32;
+          description "Related to A_ARG_TYPE_ConnectionID";
+        }
+
+      }
+
+      output {
+        leaf rcs-i-d {
+          type leafref {
+            path "../../state/a-arg-type-rcsid";
+          }
+
+          description "Related to A_ARG_TYPE_RcsID";
+        }
+
+        leaf a-v-transport-i-d {
+          type leafref {
+            path "../../state/a-arg-type-avtransportid";
+          }
+
+          description "Related to A_ARG_TYPE_AVTransportID";
+        }
+
+        leaf protocol-info {
+          type leafref {
+            path "../../state/a-arg-type-protocolinfo";
+          }
+
+          description "Related to A_ARG_TYPE_ProtocolInfo";
+        }
+
+        leaf peer-connection-manager {
+          type leafref {
+            path "../../state/a-arg-type-connectionmanager";
+          }
+
+          description "Related to A_ARG_TYPE_ConnectionManager";
+        }
+
+        leaf peer-connection-i-d {
+          type leafref {
+            path "../../state/a-arg-type-connectionid";
+          }
+
+          description "Related to A_ARG_TYPE_ConnectionID";
+        }
+
+        leaf direction {
+          type leafref {
+            path "../../state/a-arg-type-direction";
+          }
+
+          description "Related to A_ARG_TYPE_Direction";
+        }
+
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-connectionstatus";
+          }
+
+          description "Related to A_ARG_TYPE_ConnectionStatus";
+        }
+
+      }
+
+    }
+
+    action get-renderer-item-info {
+      description "Action GetRendererItemInfo";
+      input {
+        leaf item-info-filter {
+          type string;
+          description "Related to A_ARG_TYPE_ItemInfoFilter";
+        }
+
+        leaf item-metadata-list {
+          type string;
+          description "Related to A_ARG_TYPE_Result";
+        }
+
+      }
+
+      output {
+        leaf item-rendering-info-list {
+          type leafref {
+            path "../../state/a-arg-type-renderinginfolist";
+          }
+
+          description "Related to A_ARG_TYPE_RenderingInfoList";
+        }
+
+      }
+
+    }
+
+    action get-feature-list {
+      description "Action GetFeatureList";
+      output {
+        leaf feature-list {
+          type leafref {
+            path "../../state/feature-list";
+          }
+
+          description "Related to FeatureList";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping connection-manager-top {
+    description "Service top";
+    container connection-manager {
+      description "Service";
+      uses connection-manager-state-top;
+      uses connection-manager-state-attributes-top;
+      uses connection-manager-action;
+    }
+
+  }
+
+  grouping connection-manager-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses connection-manager-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

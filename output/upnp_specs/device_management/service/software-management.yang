@@ -1,0 +1,854 @@
+module software-management {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/software-management";
+  prefix "software-management";
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "software-management";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses software-management-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping software-management-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf operation-i-ds {
+        type string;
+        config false;
+        description "OperationIDs";
+      }
+
+      leaf d-u-i-ds {
+        type string;
+        config false;
+        description "DUIDs";
+      }
+
+      leaf e-u-i-ds {
+        type string;
+        config false;
+        description "EUIDs";
+      }
+
+      leaf active-e-u-i-ds {
+        type string;
+        config false;
+        description "ActiveEUIDs";
+      }
+
+      leaf running-e-u-i-ds {
+        type string;
+        config false;
+        description "RunningEUIDs";
+      }
+
+      leaf error-e-u-i-ds {
+        type string;
+        config false;
+        description "ErrorEUIDs";
+      }
+
+      leaf a-arg-type-boolean {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_Boolean";
+      }
+
+      leaf a-arg-type-string {
+        type string;
+        config false;
+        description "A_ARG_TYPE_String";
+      }
+
+      leaf a-arg-type-id {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_ID";
+      }
+
+      leaf a-arg-type-ids {
+        type string;
+        config false;
+        description "A_ARG_TYPE_IDs";
+      }
+
+      leaf a-arg-type-operationstate {
+        type enumeration {
+          enum  REQUESTED {
+            description "Requested";
+          }
+
+          enum  IN_PROGRESS {
+            description "InProgress";
+          }
+
+          enum  COMPLETED {
+            description "Completed";
+          }
+
+          enum  ERROR {
+            description "Error";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_OperationState";
+      }
+
+      leaf a-arg-type-uri {
+        type inet:uri;
+        config false;
+        description "A_ARG_TYPE_URI";
+      }
+
+      leaf a-arg-type-action {
+        type enumeration {
+          enum  INSTALL {
+            description "Install";
+          }
+
+          enum  UPDATE {
+            description "Update";
+          }
+
+          enum  UNINSTALL {
+            description "Uninstall";
+          }
+
+          enum  START {
+            description "Start";
+          }
+
+          enum  STOP {
+            description "Stop";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_Action";
+      }
+
+      leaf a-arg-type-errordescription {
+        type enumeration {
+          enum  ERROR_NONE {
+            description "Error_None";
+          }
+
+          enum  ERROR_CONCURRENT_ACCESS {
+            description "Error_ConcurrentAccess";
+          }
+
+          enum  ERROR_MISSING_DEPENDENCY {
+            description "Error_MissingDependency";
+          }
+
+          enum  ERROR_NETWORK {
+            description "Error_Network";
+          }
+
+          enum  ERROR_CORRUPTED_FILE {
+            description "Error_CorruptedFile";
+          }
+
+          enum  ERROR_DISK_FULL {
+            description "Error_DiskFull";
+          }
+
+          enum  ERROR_OTHER {
+            description "Error_Other";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_ErrorDescription";
+      }
+
+      leaf a-arg-type-dutype {
+        type enumeration {
+          enum  FIRMWARE {
+            description "Firmware";
+          }
+
+          enum  APPLICATION {
+            description "Application";
+          }
+
+          enum  CONFIGURATION {
+            description "Configuration";
+          }
+
+          enum  OTHER {
+            description "Other";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_DUType";
+      }
+
+      leaf a-arg-type-name {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Name";
+      }
+
+      leaf a-arg-type-version {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Version";
+      }
+
+      leaf a-arg-type-dustate {
+        type enumeration {
+          enum  INSTALLING {
+            description "Installing";
+          }
+
+          enum  UNRESOLVED {
+            description "Unresolved";
+          }
+
+          enum  INSTALLED {
+            description "Installed";
+          }
+
+          enum  UNINSTALLING {
+            description "Uninstalling";
+          }
+
+          enum  UNINSTALLED {
+            description "Uninstalled";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_DUState";
+      }
+
+      leaf a-arg-type-eurequestedstate {
+        type enumeration {
+          enum  ACTIVE {
+            description "Active";
+          }
+
+          enum  INACTIVE {
+            description "Inactive";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_EURequestedState";
+      }
+
+      leaf a-arg-type-eurunningstate {
+        type enumeration {
+          enum  RUNNING {
+            description "Running";
+          }
+
+          enum  STOPPED {
+            description "Stopped";
+          }
+
+          enum  STARTING {
+            description "Starting";
+          }
+
+          enum  STOPPING {
+            description "Stopping";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_EURunningState";
+      }
+
+      leaf a-arg-type-acl {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ACL";
+      }
+
+    }
+
+  }
+
+  grouping software-management-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container operation-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container d-u-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container e-u-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container active-e-u-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container running-e-u-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container error-e-u-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-boolean {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-string {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-id {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-ids {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-operationstate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uri {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-action {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-errordescription {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-dutype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-version {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-dustate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-eurequestedstate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-eurunningstate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-acl {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping software-management-action {
+    description "Service actions";
+    action install {
+      description "Action Install";
+      input {
+        leaf d-u-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+        leaf d-u-type {
+          type string;
+          description "Related to A_ARG_TYPE_DUType";
+        }
+
+        leaf handle-dependencies {
+          type boolean;
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+      }
+
+      output {
+        leaf operation-i-d {
+          type leafref {
+            path "../../state/a-arg-type-id";
+          }
+
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+    }
+
+    action update {
+      description "Action Update";
+      input {
+        leaf d-u-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+        leaf new-d-u-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+        leaf handle-dependencies {
+          type boolean;
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+      }
+
+      output {
+        leaf operation-i-d {
+          type leafref {
+            path "../../state/a-arg-type-id";
+          }
+
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+    }
+
+    action uninstall {
+      description "Action Uninstall";
+      input {
+        leaf d-u-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+        leaf handle-dependencies {
+          type boolean;
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+      }
+
+      output {
+        leaf operation-i-d {
+          type leafref {
+            path "../../state/a-arg-type-id";
+          }
+
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+    }
+
+    action start {
+      description "Action Start";
+      input {
+        leaf e-u-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+        leaf handle-dependencies {
+          type boolean;
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+      }
+
+      output {
+        leaf operation-i-d {
+          type leafref {
+            path "../../state/a-arg-type-id";
+          }
+
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+    }
+
+    action stop {
+      description "Action Stop";
+      input {
+        leaf e-u-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+        leaf handle-dependencies {
+          type boolean;
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+      }
+
+      output {
+        leaf operation-i-d {
+          type leafref {
+            path "../../state/a-arg-type-id";
+          }
+
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+    }
+
+    action get-d-u-i-ds {
+      description "Action GetDUIDs";
+      output {
+        leaf d-u-i-ds {
+          type leafref {
+            path "../../state/d-u-i-ds";
+          }
+
+          description "Related to DUIDs";
+        }
+
+      }
+
+    }
+
+    action get-e-u-i-ds {
+      description "Action GetEUIDs";
+      output {
+        leaf e-u-i-ds {
+          type leafref {
+            path "../../state/e-u-i-ds";
+          }
+
+          description "Related to EUIDs";
+        }
+
+      }
+
+    }
+
+    action get-active-e-u-i-ds {
+      description "Action GetActiveEUIDs";
+      output {
+        leaf active-e-u-i-ds {
+          type leafref {
+            path "../../state/active-e-u-i-ds";
+          }
+
+          description "Related to ActiveEUIDs";
+        }
+
+      }
+
+    }
+
+    action get-running-e-u-i-ds {
+      description "Action GetRunningEUIDs";
+      output {
+        leaf running-e-u-i-ds {
+          type leafref {
+            path "../../state/running-e-u-i-ds";
+          }
+
+          description "Related to RunningEUIDs";
+        }
+
+      }
+
+    }
+
+    action get-operation-info {
+      description "Action GetOperationInfo";
+      input {
+        leaf operation-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+      output {
+        leaf operation-state {
+          type leafref {
+            path "../../state/a-arg-type-operationstate";
+          }
+
+          description "Related to A_ARG_TYPE_OperationState";
+        }
+
+        leaf targeted-i-ds {
+          type leafref {
+            path "../../state/a-arg-type-ids";
+          }
+
+          description "Related to A_ARG_TYPE_IDs";
+        }
+
+        leaf action {
+          type leafref {
+            path "../../state/a-arg-type-action";
+          }
+
+          description "Related to A_ARG_TYPE_Action";
+        }
+
+        leaf error-description {
+          type leafref {
+            path "../../state/a-arg-type-errordescription";
+          }
+
+          description "Related to A_ARG_TYPE_ErrorDescription";
+        }
+
+        leaf additional-info {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action get-operation-i-ds {
+      description "Action GetOperationIDs";
+      output {
+        leaf operation-i-ds {
+          type leafref {
+            path "../../state/operation-i-ds";
+          }
+
+          description "Related to OperationIDs";
+        }
+
+      }
+
+    }
+
+    action get-error-e-u-i-ds {
+      description "Action GetErrorEUIDs";
+      output {
+        leaf error-e-u-i-ds {
+          type leafref {
+            path "../../state/error-e-u-i-ds";
+          }
+
+          description "Related to ErrorEUIDs";
+        }
+
+      }
+
+    }
+
+    action get-d-u-info {
+      description "Action GetDUInfo";
+      input {
+        leaf d-u-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+      output {
+        leaf d-u-name {
+          type leafref {
+            path "../../state/a-arg-type-name";
+          }
+
+          description "Related to A_ARG_TYPE_Name";
+        }
+
+        leaf d-u-version {
+          type leafref {
+            path "../../state/a-arg-type-version";
+          }
+
+          description "Related to A_ARG_TYPE_Version";
+        }
+
+        leaf d-u-type {
+          type leafref {
+            path "../../state/a-arg-type-dutype";
+          }
+
+          description "Related to A_ARG_TYPE_DUType";
+        }
+
+        leaf d-u-state {
+          type leafref {
+            path "../../state/a-arg-type-dustate";
+          }
+
+          description "Related to A_ARG_TYPE_DUState";
+        }
+
+        leaf d-u-u-r-i {
+          type leafref {
+            path "../../state/a-arg-type-uri";
+          }
+
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+      }
+
+    }
+
+    action get-e-u-info {
+      description "Action GetEUInfo";
+      input {
+        leaf e-u-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ID";
+        }
+
+      }
+
+      output {
+        leaf e-u-name {
+          type leafref {
+            path "../../state/a-arg-type-name";
+          }
+
+          description "Related to A_ARG_TYPE_Name";
+        }
+
+        leaf e-u-version {
+          type leafref {
+            path "../../state/a-arg-type-version";
+          }
+
+          description "Related to A_ARG_TYPE_Version";
+        }
+
+        leaf e-u-requested-state {
+          type leafref {
+            path "../../state/a-arg-type-eurequestedstate";
+          }
+
+          description "Related to A_ARG_TYPE_EURequestedState";
+        }
+
+        leaf e-u-running-state {
+          type leafref {
+            path "../../state/a-arg-type-eurunningstate";
+          }
+
+          description "Related to A_ARG_TYPE_EURunningState";
+        }
+
+      }
+
+    }
+
+    action get-a-c-l-data {
+      description "Action GetACLData";
+      output {
+        leaf a-c-l {
+          type leafref {
+            path "../../state/a-arg-type-acl";
+          }
+
+          description "Related to A_ARG_TYPE_ACL";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping software-management-top {
+    description "Service top";
+    container software-management {
+      description "Service";
+      uses software-management-state-top;
+      uses software-management-state-attributes-top;
+      uses software-management-action;
+    }
+
+  }
+
+  grouping software-management-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses software-management-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

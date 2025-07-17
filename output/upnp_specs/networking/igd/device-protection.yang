@@ -1,0 +1,418 @@
+module device-protection {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/device-protection";
+  prefix "device-protection";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "device-protection";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses device-protection-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping device-protection-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf setup-ready {
+        type boolean;
+        config false;
+        description "SetupReady";
+      }
+
+      leaf supported-protocols {
+        type string;
+        config false;
+        description "SupportedProtocols";
+      }
+
+      leaf a-arg-type-acl {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ACL";
+      }
+
+      leaf a-arg-type-identitylist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_IdentityList";
+      }
+
+      leaf a-arg-type-identity {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Identity";
+      }
+
+      leaf a-arg-type-base64 {
+        type binary;
+        config false;
+        description "A_ARG_TYPE_Base64";
+      }
+
+      leaf a-arg-type-string {
+        type string;
+        config false;
+        description "A_ARG_TYPE_String";
+      }
+
+    }
+
+  }
+
+  grouping device-protection-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container setup-ready {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container supported-protocols {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-acl {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-identitylist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-identity {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-base64 {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-string {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping device-protection-action {
+    description "Service actions";
+    action send-setup-message {
+      description "Action SendSetupMessage";
+      input {
+        leaf protocol-type {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf in-message {
+          type binary;
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+      }
+
+      output {
+        leaf out-message {
+          type leafref {
+            path "../../state/a-arg-type-base64";
+          }
+
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+      }
+
+    }
+
+    action get-supported-protocols {
+      description "Action GetSupportedProtocols";
+      output {
+        leaf protocol-list {
+          type leafref {
+            path "../../state/supported-protocols";
+          }
+
+          description "Related to SupportedProtocols";
+        }
+
+      }
+
+    }
+
+    action get-assigned-roles {
+      description "Action GetAssignedRoles";
+      output {
+        leaf role-list {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action get-roles-for-action {
+      description "Action GetRolesForAction";
+      input {
+        leaf device-u-d-n {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf service-id {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf action-name {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+      output {
+        leaf role-list {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf restricted-role-list {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action get-user-login-challenge {
+      description "Action GetUserLoginChallenge";
+      input {
+        leaf protocol-type {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf name {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+      output {
+        leaf salt {
+          type leafref {
+            path "../../state/a-arg-type-base64";
+          }
+
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+        leaf challenge {
+          type leafref {
+            path "../../state/a-arg-type-base64";
+          }
+
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+      }
+
+    }
+
+    action user-login {
+      description "Action UserLogin";
+      input {
+        leaf protocol-type {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf challenge {
+          type binary;
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+        leaf authenticator {
+          type binary;
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+      }
+
+    }
+
+    action user-logout {
+      description "Action UserLogout";
+    }
+
+    action get-a-c-l-data {
+      description "Action GetACLData";
+      output {
+        leaf a-c-l {
+          type leafref {
+            path "../../state/a-arg-type-acl";
+          }
+
+          description "Related to A_ARG_TYPE_ACL";
+        }
+
+      }
+
+    }
+
+    action add-identity-list {
+      description "Action AddIdentityList";
+      input {
+        leaf identity-list {
+          type string;
+          description "Related to A_ARG_TYPE_IdentityList";
+        }
+
+      }
+
+      output {
+        leaf identity-list-result {
+          type leafref {
+            path "../../state/a-arg-type-identitylist";
+          }
+
+          description "Related to A_ARG_TYPE_IdentityList";
+        }
+
+      }
+
+    }
+
+    action remove-identity {
+      description "Action RemoveIdentity";
+      input {
+        leaf identity {
+          type string;
+          description "Related to A_ARG_TYPE_Identity";
+        }
+
+      }
+
+    }
+
+    action set-user-login-password {
+      description "Action SetUserLoginPassword";
+      input {
+        leaf protocol-type {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf name {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf stored {
+          type binary;
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+        leaf salt {
+          type binary;
+          description "Related to A_ARG_TYPE_Base64";
+        }
+
+      }
+
+    }
+
+    action add-roles-for-identity {
+      description "Action AddRolesForIdentity";
+      input {
+        leaf identity {
+          type string;
+          description "Related to A_ARG_TYPE_Identity";
+        }
+
+        leaf role-list {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action remove-roles-for-identity {
+      description "Action RemoveRolesForIdentity";
+      input {
+        leaf identity {
+          type string;
+          description "Related to A_ARG_TYPE_Identity";
+        }
+
+        leaf role-list {
+          type string;
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping device-protection-top {
+    description "Service top";
+    container device-protection {
+      description "Service";
+      uses device-protection-state-top;
+      uses device-protection-state-attributes-top;
+      uses device-protection-action;
+    }
+
+  }
+
+  grouping device-protection-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses device-protection-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

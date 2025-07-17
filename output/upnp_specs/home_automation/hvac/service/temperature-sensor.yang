@@ -1,0 +1,192 @@
+module temperature-sensor {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/temperature-sensor";
+  prefix "temperature-sensor";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "temperature-sensor";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses temperature-sensor-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping temperature-sensor-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf current-temperature {
+        type int32 {
+          range "0 .. 4000";
+        }
+
+        default 2000;
+        config false;
+        description "CurrentTemperature";
+      }
+
+      leaf application {
+        type enumeration {
+          enum  ROOM {
+            description "Room";
+          }
+
+          enum  OUTDOOR {
+            description "Outdoor";
+          }
+
+          enum  PIPE {
+            description "Pipe";
+          }
+
+          enum  AIR_DUCT {
+            description "AirDuct";
+          }
+
+        }
+
+        default ROOM;
+        description "Application";
+      }
+
+      leaf name {
+        type string;
+        description "Name";
+      }
+
+    }
+
+  }
+
+  grouping temperature-sensor-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container current-temperature {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container application {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping temperature-sensor-action {
+    description "Service actions";
+    action get-application {
+      description "Action GetApplication";
+      output {
+        leaf current-application {
+          type leafref {
+            path "../../state/application";
+          }
+
+          description "Related to Application";
+        }
+
+      }
+
+    }
+
+    action set-application {
+      description "Action SetApplication";
+      input {
+        leaf new-application {
+          type string;
+          description "Related to Application";
+        }
+
+      }
+
+    }
+
+    action get-current-temperature {
+      description "Action GetCurrentTemperature";
+      output {
+        leaf current-temp {
+          type leafref {
+            path "../../state/current-temperature";
+          }
+
+          description "Related to CurrentTemperature";
+        }
+
+      }
+
+    }
+
+    action get-name {
+      description "Action GetName";
+      output {
+        leaf current-name {
+          type leafref {
+            path "../../state/name";
+          }
+
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+    action set-name {
+      description "Action SetName";
+      input {
+        leaf new-name {
+          type string;
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping temperature-sensor-top {
+    description "Service top";
+    container temperature-sensor {
+      description "Service";
+      uses temperature-sensor-state-top;
+      uses temperature-sensor-state-attributes-top;
+      uses temperature-sensor-action;
+    }
+
+  }
+
+  grouping temperature-sensor-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses temperature-sensor-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

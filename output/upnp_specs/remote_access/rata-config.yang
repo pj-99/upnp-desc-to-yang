@@ -1,0 +1,270 @@
+module rata-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/rata-config";
+  prefix "rata-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "rata-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses rata-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping rata-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf system-info {
+        type string;
+        config false;
+        description "SystemInfo";
+      }
+
+      leaf transport-agent-capabilities {
+        type string;
+        config false;
+        description "TransportAgentCapabilities";
+      }
+
+      leaf credential-delivery {
+        type string;
+        config false;
+        description "CredentialDelivery";
+      }
+
+      leaf credentials-list {
+        type string;
+        config false;
+        description "CredentialsList";
+      }
+
+      leaf profile-list {
+        type string;
+        config false;
+        description "ProfileList";
+      }
+
+      leaf a-arg-type-profileconfiginfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ProfileConfigInfo";
+      }
+
+      leaf a-arg-type-profileid {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_ProfileID";
+      }
+
+    }
+
+  }
+
+  grouping rata-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container system-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container transport-agent-capabilities {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container credential-delivery {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container credentials-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container profile-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-profileconfiginfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-profileid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping rata-config-action {
+    description "Service actions";
+    action get-transport-agent-capabilities {
+      description "Action GetTransportAgentCapabilities";
+      output {
+        leaf transport-agent-capabilities {
+          type leafref {
+            path "../../state/transport-agent-capabilities";
+          }
+
+          description "Related to TransportAgentCapabilities";
+        }
+
+      }
+
+    }
+
+    action get-supported-credential-delivery {
+      description "Action GetSupportedCredentialDelivery";
+      output {
+        leaf supported-credential-delivery {
+          type leafref {
+            path "../../state/credential-delivery";
+          }
+
+          description "Related to CredentialDelivery";
+        }
+
+      }
+
+    }
+
+    action get-credentials-list {
+      description "Action GetCredentialsList";
+      output {
+        leaf current-credentials-list {
+          type leafref {
+            path "../../state/credentials-list";
+          }
+
+          description "Related to CredentialsList";
+        }
+
+      }
+
+    }
+
+    action get-profile-list {
+      description "Action GetProfileList";
+      output {
+        leaf profile-list {
+          type leafref {
+            path "../../state/profile-list";
+          }
+
+          description "Related to ProfileList";
+        }
+
+      }
+
+    }
+
+    action add-profile {
+      description "Action AddProfile";
+      input {
+        leaf new-profile-config-info {
+          type string;
+          description "Related to A_ARG_TYPE_ProfileConfigInfo";
+        }
+
+      }
+
+    }
+
+    action edit-profile {
+      description "Action EditProfile";
+      input {
+        leaf profile-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ProfileID";
+        }
+
+        leaf updated-profile-config-info {
+          type string;
+          description "Related to A_ARG_TYPE_ProfileConfigInfo";
+        }
+
+      }
+
+    }
+
+    action delete-profile {
+      description "Action DeleteProfile";
+      input {
+        leaf profile-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ProfileID";
+        }
+
+      }
+
+    }
+
+    action get-profile-config-info {
+      description "Action GetProfileConfigInfo";
+      input {
+        leaf profile-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_ProfileID";
+        }
+
+      }
+
+      output {
+        leaf profile-config-info {
+          type leafref {
+            path "../../state/a-arg-type-profileconfiginfo";
+          }
+
+          description "Related to A_ARG_TYPE_ProfileConfigInfo";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping rata-config-top {
+    description "Service top";
+    container rata-config {
+      description "Service";
+      uses rata-config-state-top;
+      uses rata-config-state-attributes-top;
+      uses rata-config-action;
+    }
+
+  }
+
+  grouping rata-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses rata-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

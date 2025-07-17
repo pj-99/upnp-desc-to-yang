@@ -1,0 +1,207 @@
+module temperature-setpoint {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/temperature-setpoint";
+  prefix "temperature-setpoint";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "temperature-setpoint";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses temperature-setpoint-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping temperature-setpoint-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf application {
+        type string;
+        description "Application";
+      }
+
+      leaf current-setpoint {
+        type int32;
+        description "CurrentSetpoint";
+      }
+
+      leaf setpoint-achieved {
+        type boolean;
+        default false;
+        config false;
+        description "SetpointAchieved";
+      }
+
+      leaf name {
+        type string;
+        description "Name";
+      }
+
+    }
+
+  }
+
+  grouping temperature-setpoint-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container application {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-setpoint {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container setpoint-achieved {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping temperature-setpoint-action {
+    description "Service actions";
+    action get-application {
+      description "Action GetApplication";
+      output {
+        leaf current-application {
+          type leafref {
+            path "../../state/application";
+          }
+
+          description "Related to Application";
+        }
+
+      }
+
+    }
+
+    action set-application {
+      description "Action SetApplication";
+      input {
+        leaf new-application {
+          type string;
+          description "Related to Application";
+        }
+
+      }
+
+    }
+
+    action set-current-setpoint {
+      description "Action SetCurrentSetpoint";
+      input {
+        leaf new-current-setpoint {
+          type int32;
+          description "Related to CurrentSetpoint";
+        }
+
+      }
+
+    }
+
+    action get-current-setpoint {
+      description "Action GetCurrentSetpoint";
+      output {
+        leaf current-s-p {
+          type leafref {
+            path "../../state/current-setpoint";
+          }
+
+          description "Related to CurrentSetpoint";
+        }
+
+      }
+
+    }
+
+    action get-setpoint-achieved {
+      description "Action GetSetpointAchieved";
+      output {
+        leaf current-s-p-a {
+          type leafref {
+            path "../../state/setpoint-achieved";
+          }
+
+          description "Related to SetpointAchieved";
+        }
+
+      }
+
+    }
+
+    action get-name {
+      description "Action GetName";
+      output {
+        leaf current-name {
+          type leafref {
+            path "../../state/name";
+          }
+
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+    action set-name {
+      description "Action SetName";
+      input {
+        leaf new-name {
+          type string;
+          description "Related to Name";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping temperature-setpoint-top {
+    description "Service top";
+    container temperature-setpoint {
+      description "Service";
+      uses temperature-setpoint-state-top;
+      uses temperature-setpoint-state-attributes-top;
+      uses temperature-setpoint-action;
+    }
+
+  }
+
+  grouping temperature-setpoint-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses temperature-setpoint-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

@@ -1,0 +1,753 @@
+module messaging {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/messaging";
+  prefix "messaging";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "messaging";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses messaging-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping messaging-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-telephonyserveridentity {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TelephonyServerIdentity";
+      }
+
+      leaf a-arg-type-messagingcapabilities {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MessagingCapabilities";
+      }
+
+      leaf new-messages {
+        type string;
+        config false;
+        description "NewMessages";
+      }
+
+      leaf session-updates {
+        type string;
+        config false;
+        description "SessionUpdates";
+      }
+
+      leaf a-arg-type-messageid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MessageID";
+      }
+
+      leaf a-arg-type-messageclass {
+        type enumeration {
+          enum  E-MAIL {
+            description "e-Mail";
+          }
+
+          enum  SMS {
+            description "SMS";
+          }
+
+          enum  MMS {
+            description "MMS";
+          }
+
+          enum  INSTANT_MESSAGE {
+            description "Instant Message";
+          }
+
+          enum  ANY {
+            description "ANY";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_MessageClass";
+      }
+
+      leaf a-arg-type-messagefolder {
+        type enumeration {
+          enum  RECEIVED {
+            description "Received";
+          }
+
+          enum  OUTGOING {
+            description "Outgoing";
+          }
+
+          enum  SENT {
+            description "Sent";
+          }
+
+          enum  DELETED {
+            description "Deleted";
+          }
+
+          enum  CLOSED_SESSION {
+            description "ClosedSession";
+          }
+
+          enum  ANY {
+            description "ANY";
+          }
+
+        }
+
+        default RECEIVED;
+        config false;
+        description "A_ARG_TYPE_MessageFolder";
+      }
+
+      leaf a-arg-type-messagestatus {
+        type enumeration {
+          enum  READ {
+            description "Read";
+          }
+
+          enum  UNREAD {
+            description "Unread";
+          }
+
+          enum  ANY {
+            description "ANY";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_MessageStatus";
+      }
+
+      leaf a-arg-type-message {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Message";
+      }
+
+      leaf a-arg-type-messagelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MessageList";
+      }
+
+      leaf a-arg-type-sessionid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SessionID";
+      }
+
+      leaf a-arg-type-sessionclass {
+        type enumeration {
+          enum  E-MAIL {
+            description "e-Mail";
+          }
+
+          enum  SMS {
+            description "SMS";
+          }
+
+          enum  MMS {
+            description "MMS";
+          }
+
+          enum  CHAT {
+            description "Chat";
+          }
+
+          enum  FILE-TRANSFER {
+            description "File-Transfer";
+          }
+
+          enum  MIXED {
+            description "Mixed";
+          }
+
+          enum  ANY {
+            description "ANY";
+          }
+
+        }
+
+        default CHAT;
+        config false;
+        description "A_ARG_TYPE_SessionClass";
+      }
+
+      leaf a-arg-type-recipientslist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_RecipientsList";
+      }
+
+      leaf a-arg-type-sessioninfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SessionInfo";
+      }
+
+      leaf a-arg-type-sessionslist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SessionsList";
+      }
+
+      leaf a-arg-type-supportedcontenttype {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SupportedContentType";
+      }
+
+      leaf a-arg-type-subject {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Subject";
+      }
+
+      leaf a-arg-type-sessionstatus {
+        type enumeration {
+          enum  PENDING {
+            description "Pending";
+          }
+
+          enum  RUNNING {
+            description "Running";
+          }
+
+          enum  PARKED {
+            description "Parked";
+          }
+
+          enum  CLOSED {
+            description "Closed";
+          }
+
+          enum  ANY {
+            description "ANY";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_SessionStatus";
+      }
+
+      leaf a-arg-type-fileinfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_FileInfoList";
+      }
+
+    }
+
+  }
+
+  grouping messaging-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-telephonyserveridentity {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-messagingcapabilities {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container new-messages {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container session-updates {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-messageid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-messageclass {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-messagefolder {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-messagestatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-message {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-messagelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sessionid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sessionclass {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-recipientslist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sessioninfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sessionslist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-supportedcontenttype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-subject {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sessionstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-fileinfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping messaging-action {
+    description "Service actions";
+    action get-telephony-identity {
+      description "Action GetTelephonyIdentity";
+      output {
+        leaf telephony-identity {
+          type leafref {
+            path "../../state/a-arg-type-telephonyserveridentity";
+          }
+
+          description "Related to A_ARG_TYPE_TelephonyServerIdentity";
+        }
+
+      }
+
+    }
+
+    action get-messaging-capabilities {
+      description "Action GetMessagingCapabilities";
+      output {
+        leaf supported-capabilities {
+          type leafref {
+            path "../../state/a-arg-type-messagingcapabilities";
+          }
+
+          description "Related to A_ARG_TYPE_MessagingCapabilities";
+        }
+
+      }
+
+    }
+
+    action get-new-messages {
+      description "Action GetNewMessages";
+      output {
+        leaf new-messages {
+          type leafref {
+            path "../../state/new-messages";
+          }
+
+          description "Related to NewMessages";
+        }
+
+      }
+
+    }
+
+    action search-messages {
+      description "Action SearchMessages";
+      input {
+        leaf message-class {
+          type string;
+          description "Related to A_ARG_TYPE_MessageClass";
+        }
+
+        leaf message-folder {
+          type string;
+          description "Related to A_ARG_TYPE_MessageFolder";
+        }
+
+        leaf message-status {
+          type string;
+          description "Related to A_ARG_TYPE_MessageStatus";
+        }
+
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+      output {
+        leaf message-list {
+          type leafref {
+            path "../../state/a-arg-type-messagelist";
+          }
+
+          description "Related to A_ARG_TYPE_MessageList";
+        }
+
+      }
+
+    }
+
+    action read-message {
+      description "Action ReadMessage";
+      input {
+        leaf message-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_MessageID";
+        }
+
+      }
+
+      output {
+        leaf message-requested {
+          type leafref {
+            path "../../state/a-arg-type-message";
+          }
+
+          description "Related to A_ARG_TYPE_Message";
+        }
+
+      }
+
+    }
+
+    action send-message {
+      description "Action SendMessage";
+      input {
+        leaf message-to-send {
+          type string;
+          description "Related to A_ARG_TYPE_Message";
+        }
+
+      }
+
+      output {
+        leaf message-i-d {
+          type leafref {
+            path "../../state/a-arg-type-messageid";
+          }
+
+          description "Related to A_ARG_TYPE_MessageID";
+        }
+
+      }
+
+    }
+
+    action delete-message {
+      description "Action DeleteMessage";
+      input {
+        leaf message-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_MessageID";
+        }
+
+      }
+
+    }
+
+    action create-session {
+      description "Action CreateSession";
+      input {
+        leaf session-class {
+          type string;
+          description "Related to A_ARG_TYPE_SessionClass";
+        }
+
+        leaf session-recipients {
+          type string;
+          description "Related to A_ARG_TYPE_RecipientsList";
+        }
+
+        leaf subject {
+          type string;
+          description "Related to A_ARG_TYPE_Subject";
+        }
+
+        leaf supported-content-type {
+          type string;
+          description "Related to A_ARG_TYPE_SupportedContentType";
+        }
+
+      }
+
+      output {
+        leaf session-i-d {
+          type leafref {
+            path "../../state/a-arg-type-sessionid";
+          }
+
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+    }
+
+    action modify-session {
+      description "Action ModifySession";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+        leaf session-recipients-to-add {
+          type string;
+          description "Related to A_ARG_TYPE_RecipientsList";
+        }
+
+        leaf session-recipients-to-remove {
+          type string;
+          description "Related to A_ARG_TYPE_RecipientsList";
+        }
+
+        leaf subject {
+          type string;
+          description "Related to A_ARG_TYPE_Subject";
+        }
+
+        leaf supported-content-type {
+          type string;
+          description "Related to A_ARG_TYPE_SupportedContentType";
+        }
+
+        leaf session-class {
+          type string;
+          description "Related to A_ARG_TYPE_SessionClass";
+        }
+
+      }
+
+    }
+
+    action accept-session {
+      description "Action AcceptSession";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+    }
+
+    action get-session-updates {
+      description "Action GetSessionUpdates";
+      output {
+        leaf session-updates {
+          type leafref {
+            path "../../state/session-updates";
+          }
+
+          description "Related to SessionUpdates";
+        }
+
+      }
+
+    }
+
+    action get-sessions {
+      description "Action GetSessions";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+        leaf session-class {
+          type string;
+          description "Related to A_ARG_TYPE_SessionClass";
+        }
+
+        leaf session-status {
+          type string;
+          description "Related to A_ARG_TYPE_SessionStatus";
+        }
+
+      }
+
+      output {
+        leaf sessions-list {
+          type leafref {
+            path "../../state/a-arg-type-sessionslist";
+          }
+
+          description "Related to A_ARG_TYPE_SessionsList";
+        }
+
+      }
+
+    }
+
+    action join-session {
+      description "Action JoinSession";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+    }
+
+    action leave-session {
+      description "Action LeaveSession";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+    }
+
+    action close-session {
+      description "Action CloseSession";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+    }
+
+    action start-file-transfer {
+      description "Action StartFileTransfer";
+      input {
+        leaf file-info-list {
+          type string;
+          description "Related to A_ARG_TYPE_FileInfoList";
+        }
+
+      }
+
+    }
+
+    action cancel-file-transfer {
+      description "Action CancelFileTransfer";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+    }
+
+    action get-file-transfer-session {
+      description "Action GetFileTransferSession";
+      input {
+        leaf session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_SessionID";
+        }
+
+      }
+
+      output {
+        leaf file-info-list {
+          type leafref {
+            path "../../state/a-arg-type-fileinfolist";
+          }
+
+          description "Related to A_ARG_TYPE_FileInfoList";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping messaging-top {
+    description "Service top";
+    container messaging {
+      description "Service";
+      uses messaging-state-top;
+      uses messaging-state-attributes-top;
+      uses messaging-action;
+    }
+
+  }
+
+  grouping messaging-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses messaging-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

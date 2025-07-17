@@ -1,0 +1,368 @@
+module application-management {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/application-management";
+  prefix "application-management";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "application-management";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses application-management-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping application-management-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-appids {
+        type string;
+        config false;
+        description "A_ARG_TYPE_AppIDs";
+      }
+
+      leaf app-info-list {
+        type string;
+        config false;
+        description "AppInfoList";
+      }
+
+      leaf a-arg-type-appinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_AppInfo";
+      }
+
+      leaf supported-target-fields {
+        type string;
+        config false;
+        description "SupportedTargetFields";
+      }
+
+      leaf a-arg-type-target {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Target";
+      }
+
+      leaf a-arg-type-targetfields {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TargetFields";
+      }
+
+      leaf running-app-list {
+        type string;
+        config false;
+        description "RunningAppList";
+      }
+
+      leaf a-arg-type-uri {
+        type string;
+        config false;
+        description "A_ARG_TYPE_URI";
+      }
+
+      leaf a-arg-type-parameters {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Parameters";
+      }
+
+    }
+
+  }
+
+  grouping application-management-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-appids {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container app-info-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-appinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container supported-target-fields {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-targetfields {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container running-app-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uri {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-parameters {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping application-management-action {
+    description "Service actions";
+    action get-app-info-by-i-ds {
+      description "Action GetAppInfoByIDs";
+      input {
+        leaf app-i-ds {
+          type string;
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+      }
+
+      output {
+        leaf app-info {
+          type leafref {
+            path "../../state/a-arg-type-appinfo";
+          }
+
+          description "Related to A_ARG_TYPE_AppInfo";
+        }
+
+      }
+
+    }
+
+    action get-supported-target-fields {
+      description "Action GetSupportedTargetFields";
+      output {
+        leaf supported-target-fields {
+          type leafref {
+            path "../../state/supported-target-fields";
+          }
+
+          description "Related to SupportedTargetFields";
+        }
+
+      }
+
+    }
+
+    action get-app-i-d-list {
+      description "Action GetAppIDList";
+      input {
+        leaf target {
+          type string;
+          description "Related to A_ARG_TYPE_Target";
+        }
+
+        leaf target-fields {
+          type string;
+          description "Related to A_ARG_TYPE_TargetFields";
+        }
+
+      }
+
+      output {
+        leaf app-i-ds {
+          type leafref {
+            path "../../state/a-arg-type-appids";
+          }
+
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+      }
+
+    }
+
+    action get-running-app-list {
+      description "Action GetRunningAppList";
+      output {
+        leaf running-app-list {
+          type leafref {
+            path "../../state/running-app-list";
+          }
+
+          description "Related to RunningAppList";
+        }
+
+      }
+
+    }
+
+    action get-running-status {
+      description "Action GetRunningStatus";
+      input {
+        leaf app-i-ds {
+          type string;
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+      }
+
+      output {
+        leaf running-status {
+          type leafref {
+            path "../../state/a-arg-type-appinfo";
+          }
+
+          description "Related to A_ARG_TYPE_AppInfo";
+        }
+
+      }
+
+    }
+
+    action start-app-by-i-d {
+      description "Action StartAppByID";
+      input {
+        leaf app-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+        leaf start-parameters {
+          type string;
+          description "Related to A_ARG_TYPE_Parameters";
+        }
+
+      }
+
+    }
+
+    action start-app-by-u-r-i {
+      description "Action StartAppByURI";
+      input {
+        leaf start-u-r-i {
+          type string;
+          description "Related to A_ARG_TYPE_URI";
+        }
+
+        leaf app-info {
+          type string;
+          description "Related to A_ARG_TYPE_AppInfo";
+        }
+
+        leaf start-parameters {
+          type string;
+          description "Related to A_ARG_TYPE_Parameters";
+        }
+
+      }
+
+      output {
+        leaf app-i-d {
+          type leafref {
+            path "../../state/a-arg-type-appids";
+          }
+
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+      }
+
+    }
+
+    action stop-app {
+      description "Action StopApp";
+      input {
+        leaf app-i-ds {
+          type string;
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+      }
+
+      output {
+        leaf stopped-app-i-ds {
+          type leafref {
+            path "../../state/a-arg-type-appids";
+          }
+
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+      }
+
+    }
+
+    action get-app-connection-info {
+      description "Action GetAppConnectionInfo";
+      input {
+        leaf app-i-ds {
+          type string;
+          description "Related to A_ARG_TYPE_AppIDs";
+        }
+
+      }
+
+      output {
+        leaf connection-info {
+          type leafref {
+            path "../../state/a-arg-type-appinfo";
+          }
+
+          description "Related to A_ARG_TYPE_AppInfo";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping application-management-top {
+    description "Service top";
+    container application-management {
+      description "Service";
+      uses application-management-state-top;
+      uses application-management-state-attributes-top;
+      uses application-management-action;
+    }
+
+  }
+
+  grouping application-management-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses application-management-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

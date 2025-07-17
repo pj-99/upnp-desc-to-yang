@@ -1,0 +1,1381 @@
+module rendering-control {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/rendering-control";
+  prefix "rendering-control";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "rendering-control";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses rendering-control-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping rendering-control-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf last-change {
+        type string;
+        config false;
+        description "LastChange";
+      }
+
+      leaf preset-name-list {
+        type string;
+        config false;
+        description "PresetNameList";
+      }
+
+      leaf brightness {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "Brightness";
+      }
+
+      leaf contrast {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "Contrast";
+      }
+
+      leaf sharpness {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "Sharpness";
+      }
+
+      leaf red-video-gain {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "RedVideoGain";
+      }
+
+      leaf green-video-gain {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "GreenVideoGain";
+      }
+
+      leaf blue-video-gain {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "BlueVideoGain";
+      }
+
+      leaf red-video-black-level {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "RedVideoBlackLevel";
+      }
+
+      leaf green-video-black-level {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "GreenVideoBlackLevel";
+      }
+
+      leaf blue-video-black-level {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "BlueVideoBlackLevel";
+      }
+
+      leaf color-temperature {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "ColorTemperature";
+      }
+
+      leaf horizontal-keystone {
+        type int16 {
+          range "min .. max";
+        }
+
+        description "HorizontalKeystone";
+      }
+
+      leaf vertical-keystone {
+        type int16 {
+          range "min .. max";
+        }
+
+        description "VerticalKeystone";
+      }
+
+      leaf mute {
+        type boolean;
+        description "Mute";
+      }
+
+      leaf volume {
+        type uint16 {
+          range "0 .. max";
+        }
+
+        description "Volume";
+      }
+
+      leaf volume-d-b {
+        type int16;
+        description "VolumeDB";
+      }
+
+      leaf loudness {
+        type boolean;
+        description "Loudness";
+      }
+
+      leaf allowed-transform-settings {
+        type string;
+        config false;
+        description "AllowedTransformSettings";
+      }
+
+      leaf transform-settings {
+        type string;
+        config false;
+        description "TransformSettings";
+      }
+
+      leaf allowed-default-transform-settings {
+        type string;
+        config false;
+        description "AllowedDefaultTransformSettings";
+      }
+
+      leaf default-transform-settings {
+        type string;
+        config false;
+        description "DefaultTransformSettings";
+      }
+
+      leaf a-arg-type-channel {
+        type enumeration {
+          enum  MASTER {
+            description "Master";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_Channel";
+      }
+
+      leaf a-arg-type-instanceid {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_InstanceID";
+      }
+
+      leaf a-arg-type-presetname {
+        type enumeration {
+          enum  FACTORY_DEFAULTS {
+            description "FactoryDefaults";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_PresetName";
+      }
+
+      leaf a-arg-type-deviceudn {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DeviceUDN";
+      }
+
+      leaf a-arg-type-servicetype {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ServiceType";
+      }
+
+      leaf a-arg-type-serviceid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ServiceID";
+      }
+
+      leaf a-arg-type-statevariablevaluepairs {
+        type string;
+        config false;
+        description "A_ARG_TYPE_StateVariableValuePairs";
+      }
+
+      leaf a-arg-type-statevariablelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_StateVariableList";
+      }
+
+    }
+
+  }
+
+  grouping rendering-control-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container last-change {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container preset-name-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container brightness {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container contrast {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sharpness {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container red-video-gain {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container green-video-gain {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container blue-video-gain {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container red-video-black-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container green-video-black-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container blue-video-black-level {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container color-temperature {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container horizontal-keystone {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container vertical-keystone {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container mute {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container volume {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container volume-d-b {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container loudness {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container allowed-transform-settings {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container transform-settings {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container allowed-default-transform-settings {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container default-transform-settings {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-channel {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-instanceid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-presetname {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-deviceudn {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-servicetype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-serviceid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-statevariablevaluepairs {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-statevariablelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping rendering-control-action {
+    description "Service actions";
+    action list-presets {
+      description "Action ListPresets";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-preset-name-list {
+          type leafref {
+            path "../../state/preset-name-list";
+          }
+
+          description "Related to PresetNameList";
+        }
+
+      }
+
+    }
+
+    action select-preset {
+      description "Action SelectPreset";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf preset-name {
+          type string;
+          description "Related to A_ARG_TYPE_PresetName";
+        }
+
+      }
+
+    }
+
+    action get-brightness {
+      description "Action GetBrightness";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-brightness {
+          type leafref {
+            path "../../state/brightness";
+          }
+
+          description "Related to Brightness";
+        }
+
+      }
+
+    }
+
+    action set-brightness {
+      description "Action SetBrightness";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-brightness {
+          type uint16;
+          description "Related to Brightness";
+        }
+
+      }
+
+    }
+
+    action get-contrast {
+      description "Action GetContrast";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-contrast {
+          type leafref {
+            path "../../state/contrast";
+          }
+
+          description "Related to Contrast";
+        }
+
+      }
+
+    }
+
+    action set-contrast {
+      description "Action SetContrast";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-contrast {
+          type uint16;
+          description "Related to Contrast";
+        }
+
+      }
+
+    }
+
+    action get-sharpness {
+      description "Action GetSharpness";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-sharpness {
+          type leafref {
+            path "../../state/sharpness";
+          }
+
+          description "Related to Sharpness";
+        }
+
+      }
+
+    }
+
+    action set-sharpness {
+      description "Action SetSharpness";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-sharpness {
+          type uint16;
+          description "Related to Sharpness";
+        }
+
+      }
+
+    }
+
+    action get-red-video-gain {
+      description "Action GetRedVideoGain";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-red-video-gain {
+          type leafref {
+            path "../../state/red-video-gain";
+          }
+
+          description "Related to RedVideoGain";
+        }
+
+      }
+
+    }
+
+    action set-red-video-gain {
+      description "Action SetRedVideoGain";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-red-video-gain {
+          type uint16;
+          description "Related to RedVideoGain";
+        }
+
+      }
+
+    }
+
+    action get-green-video-gain {
+      description "Action GetGreenVideoGain";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-green-video-gain {
+          type leafref {
+            path "../../state/green-video-gain";
+          }
+
+          description "Related to GreenVideoGain";
+        }
+
+      }
+
+    }
+
+    action set-green-video-gain {
+      description "Action SetGreenVideoGain";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-green-video-gain {
+          type uint16;
+          description "Related to GreenVideoGain";
+        }
+
+      }
+
+    }
+
+    action get-blue-video-gain {
+      description "Action GetBlueVideoGain";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-blue-video-gain {
+          type leafref {
+            path "../../state/blue-video-gain";
+          }
+
+          description "Related to BlueVideoGain";
+        }
+
+      }
+
+    }
+
+    action set-blue-video-gain {
+      description "Action SetBlueVideoGain";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-blue-video-gain {
+          type uint16;
+          description "Related to BlueVideoGain";
+        }
+
+      }
+
+    }
+
+    action get-red-video-black-level {
+      description "Action GetRedVideoBlackLevel";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-red-video-black-level {
+          type leafref {
+            path "../../state/red-video-black-level";
+          }
+
+          description "Related to RedVideoBlackLevel";
+        }
+
+      }
+
+    }
+
+    action set-red-video-black-level {
+      description "Action SetRedVideoBlackLevel";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-red-video-black-level {
+          type uint16;
+          description "Related to RedVideoBlackLevel";
+        }
+
+      }
+
+    }
+
+    action get-green-video-black-level {
+      description "Action GetGreenVideoBlackLevel";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-green-video-black-level {
+          type leafref {
+            path "../../state/green-video-black-level";
+          }
+
+          description "Related to GreenVideoBlackLevel";
+        }
+
+      }
+
+    }
+
+    action set-green-video-black-level {
+      description "Action SetGreenVideoBlackLevel";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-green-video-black-level {
+          type uint16;
+          description "Related to GreenVideoBlackLevel";
+        }
+
+      }
+
+    }
+
+    action get-blue-video-black-level {
+      description "Action GetBlueVideoBlackLevel";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-blue-video-black-level {
+          type leafref {
+            path "../../state/blue-video-black-level";
+          }
+
+          description "Related to BlueVideoBlackLevel";
+        }
+
+      }
+
+    }
+
+    action set-blue-video-black-level {
+      description "Action SetBlueVideoBlackLevel";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-blue-video-black-level {
+          type uint16;
+          description "Related to BlueVideoBlackLevel";
+        }
+
+      }
+
+    }
+
+    action get-color-temperature {
+      description "Action GetColorTemperature";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-color-temperature {
+          type leafref {
+            path "../../state/color-temperature";
+          }
+
+          description "Related to ColorTemperature";
+        }
+
+      }
+
+    }
+
+    action set-color-temperature {
+      description "Action SetColorTemperature";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-color-temperature {
+          type uint16;
+          description "Related to ColorTemperature";
+        }
+
+      }
+
+    }
+
+    action get-horizontal-keystone {
+      description "Action GetHorizontalKeystone";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-horizontal-keystone {
+          type leafref {
+            path "../../state/horizontal-keystone";
+          }
+
+          description "Related to HorizontalKeystone";
+        }
+
+      }
+
+    }
+
+    action set-horizontal-keystone {
+      description "Action SetHorizontalKeystone";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-horizontal-keystone {
+          type int16;
+          description "Related to HorizontalKeystone";
+        }
+
+      }
+
+    }
+
+    action get-vertical-keystone {
+      description "Action GetVerticalKeystone";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-vertical-keystone {
+          type leafref {
+            path "../../state/vertical-keystone";
+          }
+
+          description "Related to VerticalKeystone";
+        }
+
+      }
+
+    }
+
+    action set-vertical-keystone {
+      description "Action SetVerticalKeystone";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-vertical-keystone {
+          type int16;
+          description "Related to VerticalKeystone";
+        }
+
+      }
+
+    }
+
+    action get-mute {
+      description "Action GetMute";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+      }
+
+      output {
+        leaf current-mute {
+          type leafref {
+            path "../../state/mute";
+          }
+
+          description "Related to Mute";
+        }
+
+      }
+
+    }
+
+    action set-mute {
+      description "Action SetMute";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+        leaf desired-mute {
+          type boolean;
+          description "Related to Mute";
+        }
+
+      }
+
+    }
+
+    action get-volume {
+      description "Action GetVolume";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+      }
+
+      output {
+        leaf current-volume {
+          type leafref {
+            path "../../state/volume";
+          }
+
+          description "Related to Volume";
+        }
+
+      }
+
+    }
+
+    action set-volume {
+      description "Action SetVolume";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+        leaf desired-volume {
+          type uint16;
+          description "Related to Volume";
+        }
+
+      }
+
+    }
+
+    action get-volume-d-b {
+      description "Action GetVolumeDB";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+      }
+
+      output {
+        leaf current-volume {
+          type leafref {
+            path "../../state/volume-d-b";
+          }
+
+          description "Related to VolumeDB";
+        }
+
+      }
+
+    }
+
+    action set-volume-d-b {
+      description "Action SetVolumeDB";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+        leaf desired-volume {
+          type int16;
+          description "Related to VolumeDB";
+        }
+
+      }
+
+    }
+
+    action get-volume-d-b-range {
+      description "Action GetVolumeDBRange";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+      }
+
+      output {
+        leaf min-value {
+          type leafref {
+            path "../../state/volume-d-b";
+          }
+
+          description "Related to VolumeDB";
+        }
+
+        leaf max-value {
+          type leafref {
+            path "../../state/volume-d-b";
+          }
+
+          description "Related to VolumeDB";
+        }
+
+      }
+
+    }
+
+    action get-loudness {
+      description "Action GetLoudness";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+      }
+
+      output {
+        leaf current-loudness {
+          type leafref {
+            path "../../state/loudness";
+          }
+
+          description "Related to Loudness";
+        }
+
+      }
+
+    }
+
+    action set-loudness {
+      description "Action SetLoudness";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf channel {
+          type string;
+          description "Related to A_ARG_TYPE_Channel";
+        }
+
+        leaf desired-loudness {
+          type boolean;
+          description "Related to Loudness";
+        }
+
+      }
+
+    }
+
+    action get-state-variables {
+      description "Action GetStateVariables";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf state-variable-list {
+          type string;
+          description "Related to A_ARG_TYPE_StateVariableList";
+        }
+
+      }
+
+      output {
+        leaf state-variable-value-pairs {
+          type leafref {
+            path "../../state/a-arg-type-statevariablevaluepairs";
+          }
+
+          description "Related to A_ARG_TYPE_StateVariableValuePairs";
+        }
+
+      }
+
+    }
+
+    action set-state-variables {
+      description "Action SetStateVariables";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf rendering-control-u-d-n {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceUDN";
+        }
+
+        leaf service-type {
+          type string;
+          description "Related to A_ARG_TYPE_ServiceType";
+        }
+
+        leaf service-id {
+          type string;
+          description "Related to A_ARG_TYPE_ServiceID";
+        }
+
+        leaf state-variable-value-pairs {
+          type string;
+          description "Related to A_ARG_TYPE_StateVariableValuePairs";
+        }
+
+      }
+
+      output {
+        leaf state-variable-list {
+          type leafref {
+            path "../../state/a-arg-type-statevariablelist";
+          }
+
+          description "Related to A_ARG_TYPE_StateVariableList";
+        }
+
+      }
+
+    }
+
+    action get-allowed-transforms {
+      description "Action GetAllowedTransforms";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-allowed-transform-settings {
+          type leafref {
+            path "../../state/allowed-transform-settings";
+          }
+
+          description "Related to AllowedTransformSettings";
+        }
+
+      }
+
+    }
+
+    action set-transforms {
+      description "Action SetTransforms";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf desired-transform-values {
+          type string;
+          description "Related to TransformSettings";
+        }
+
+      }
+
+    }
+
+    action get-transforms {
+      description "Action GetTransforms";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-transform-values {
+          type leafref {
+            path "../../state/transform-settings";
+          }
+
+          description "Related to TransformSettings";
+        }
+
+      }
+
+    }
+
+    action get-all-available-transforms {
+      description "Action GetAllAvailableTransforms";
+      output {
+        leaf all-allowed-transform-settings {
+          type leafref {
+            path "../../state/allowed-transform-settings";
+          }
+
+          description "Related to AllowedTransformSettings";
+        }
+
+      }
+
+    }
+
+    action get-allowed-default-transforms {
+      description "Action GetAllowedDefaultTransforms";
+      output {
+        leaf allowed-default-transform-settings {
+          type leafref {
+            path "../../state/allowed-default-transform-settings";
+          }
+
+          description "Related to AllowedDefaultTransformSettings";
+        }
+
+      }
+
+    }
+
+    action get-default-transforms {
+      description "Action GetDefaultTransforms";
+      output {
+        leaf current-default-transform-settings {
+          type leafref {
+            path "../../state/default-transform-settings";
+          }
+
+          description "Related to DefaultTransformSettings";
+        }
+
+      }
+
+    }
+
+    action set-default-transforms {
+      description "Action SetDefaultTransforms";
+      input {
+        leaf desired-default-transform-settings {
+          type string;
+          description "Related to DefaultTransformSettings";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping rendering-control-top {
+    description "Service top";
+    container rendering-control {
+      description "Service";
+      uses rendering-control-state-top;
+      uses rendering-control-state-attributes-top;
+      uses rendering-control-action;
+    }
+
+  }
+
+  grouping rendering-control-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses rendering-control-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

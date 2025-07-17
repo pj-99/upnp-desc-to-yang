@@ -1,0 +1,384 @@
+module feeder {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/feeder";
+  prefix "feeder";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "feeder";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses feeder-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping feeder-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf model {
+        type string;
+        config false;
+        description "Model";
+      }
+
+      leaf state {
+        type enumeration {
+          enum  UNLOADED {
+            description "Unloaded";
+          }
+
+          enum  LOADED {
+            description "Loaded";
+          }
+
+          enum  BUSY {
+            description "Busy";
+          }
+
+          enum  ERRED {
+            description "Erred";
+          }
+
+        }
+
+        default UNLOADED;
+        config false;
+        description "State";
+      }
+
+      leaf failure-code {
+        type enumeration {
+          enum  NONE {
+            description "None";
+          }
+
+          enum  JAMMED {
+            description "Jammed";
+          }
+
+          enum  TIMEOUT {
+            description "Timeout";
+          }
+
+        }
+
+        default NONE;
+        config false;
+        description "FailureCode";
+      }
+
+      leaf more-pages {
+        type boolean;
+        default false;
+        config false;
+        description "MorePages";
+      }
+
+      leaf feeder-mode {
+        type enumeration {
+          enum  SIMPLEX {
+            description "Simplex";
+          }
+
+        }
+
+        default SIMPLEX;
+        description "FeederMode";
+      }
+
+      leaf job-i-d {
+        type uint32;
+        default 0;
+        config false;
+        description "JobID";
+      }
+
+      leaf sheet-width {
+        type uint32;
+        config false;
+        description "SheetWidth";
+      }
+
+      leaf sheet-height {
+        type uint32;
+        config false;
+        description "SheetHeight";
+      }
+
+      leaf input-justification {
+        type string;
+        config false;
+        description "InputJustification";
+      }
+
+      leaf entire-document {
+        type enumeration {
+          enum  1 {
+            description "1";
+          }
+
+          enum  0 {
+            description "0";
+          }
+
+          enum  DEVICE-SETTING {
+            description "device-setting";
+          }
+
+        }
+
+        default 1;
+        config false;
+        description "EntireDocument";
+      }
+
+      leaf timeout {
+        type uint32;
+        config false;
+        description "Timeout";
+      }
+
+    }
+
+  }
+
+  grouping feeder-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container model {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container failure-code {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container more-pages {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container feeder-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container job-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sheet-width {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sheet-height {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container input-justification {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container entire-document {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container timeout {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping feeder-action {
+    description "Service actions";
+    action load {
+      description "Action Load";
+      input {
+        leaf job-i-d-in {
+          type uint32;
+          description "Related to JobID";
+        }
+
+      }
+
+      output {
+        leaf state-out {
+          type leafref {
+            path "../../state/state";
+          }
+
+          description "Related to State";
+        }
+
+      }
+
+    }
+
+    action eject {
+      description "Action Eject";
+      input {
+        leaf job-i-d-in {
+          type uint32;
+          description "Related to JobID";
+        }
+
+        leaf entire-document-in {
+          type string;
+          description "Related to EntireDocument";
+        }
+
+      }
+
+      output {
+        leaf state-out {
+          type leafref {
+            path "../../state/state";
+          }
+
+          description "Related to State";
+        }
+
+      }
+
+    }
+
+    action reset {
+      description "Action Reset";
+      input {
+        leaf job-i-d-in {
+          type uint32;
+          description "Related to JobID";
+        }
+
+      }
+
+      output {
+        leaf state-out {
+          type leafref {
+            path "../../state/state";
+          }
+
+          description "Related to State";
+        }
+
+      }
+
+    }
+
+    action get-state {
+      description "Action GetState";
+      output {
+        leaf state-out {
+          type leafref {
+            path "../../state/state";
+          }
+
+          description "Related to State";
+        }
+
+        leaf more-pages-out {
+          type leafref {
+            path "../../state/more-pages";
+          }
+
+          description "Related to MorePages";
+        }
+
+        leaf failure-code-out {
+          type leafref {
+            path "../../state/failure-code";
+          }
+
+          description "Related to FailureCode";
+        }
+
+      }
+
+    }
+
+    action set-feeder-mode {
+      description "Action SetFeederMode";
+      input {
+        leaf job-i-d-in {
+          type uint32;
+          description "Related to JobID";
+        }
+
+        leaf feeder-mode-in {
+          type string;
+          description "Related to FeederMode";
+        }
+
+      }
+
+    }
+
+    action get-feeder-mode {
+      description "Action GetFeederMode";
+      output {
+        leaf feeder-mode-out {
+          type leafref {
+            path "../../state/feeder-mode";
+          }
+
+          description "Related to FeederMode";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping feeder-top {
+    description "Service top";
+    container feeder {
+      description "Service";
+      uses feeder-state-top;
+      uses feeder-state-attributes-top;
+      uses feeder-action;
+    }
+
+  }
+
+  grouping feeder-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses feeder-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

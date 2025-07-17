@@ -1,0 +1,2292 @@
+module av-transport {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/av-transport";
+  prefix "av-transport";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "av-transport";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses av-transport-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping av-transport-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf transport-state {
+        type enumeration {
+          enum  STOPPED {
+            description "STOPPED";
+          }
+
+          enum  PAUSED_PLAYBACK {
+            description "PAUSED_PLAYBACK";
+          }
+
+          enum  PAUSED_RECORDING {
+            description "PAUSED_RECORDING";
+          }
+
+          enum  PLAYING {
+            description "PLAYING";
+          }
+
+          enum  RECORDING {
+            description "RECORDING";
+          }
+
+          enum  TRANSITIONING {
+            description "TRANSITIONING";
+          }
+
+          enum  NO_MEDIA_PRESENT {
+            description "NO_MEDIA_PRESENT";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "TransportState";
+      }
+
+      leaf transport-status {
+        type enumeration {
+          enum  OK {
+            description "OK";
+          }
+
+          enum  ERROR_OCCURRED {
+            description "ERROR_OCCURRED";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "TransportStatus";
+      }
+
+      leaf current-media-category {
+        type enumeration {
+          enum  NO_MEDIA {
+            description "NO_MEDIA";
+          }
+
+          enum  TRACK_AWARE {
+            description "TRACK_AWARE";
+          }
+
+          enum  TRACK_UNAWARE {
+            description "TRACK_UNAWARE";
+          }
+
+        }
+
+        config false;
+        description "CurrentMediaCategory";
+      }
+
+      leaf playback-storage-medium {
+        type enumeration {
+          enum  UNKNOWN {
+            description "UNKNOWN";
+          }
+
+          enum  DV {
+            description "DV";
+          }
+
+          enum
+          MINI-DV {
+            description "
+            MINI-DV";
+          }
+
+          enum  VHS {
+            description "VHS";
+          }
+
+          enum  W-VHS {
+            description "W-VHS";
+          }
+
+          enum
+          S-VHS {
+            description "
+            S-VHS";
+          }
+
+          enum  D-VHS {
+            description "D-VHS";
+          }
+
+          enum  VHSC {
+            description "VHSC";
+          }
+
+          enum
+          VIDEO8 {
+            description "
+            VIDEO8";
+          }
+
+          enum  HI8 {
+            description "HI8";
+          }
+
+          enum  CD-ROM {
+            description "CD-ROM";
+          }
+
+          enum
+          CD-DA {
+            description "
+            CD-DA";
+          }
+
+          enum  CD-R {
+            description "CD-R";
+          }
+
+          enum
+          CD-RW {
+            description "
+            CD-RW";
+          }
+
+          enum
+          VIDEO-CD {
+            description "
+            VIDEO-CD";
+          }
+
+          enum  SACD {
+            description "SACD";
+          }
+
+          enum  MD-AUDIO {
+            description "MD-AUDIO";
+          }
+
+          enum
+          MD-PICTURE {
+            description "
+            MD-PICTURE";
+          }
+
+          enum  DVD-ROM {
+            description "DVD-ROM";
+          }
+
+          enum  DVD-VIDEO {
+            description "DVD-VIDEO";
+          }
+
+          enum
+          DVD+R {
+            description "
+            DVD+R";
+          }
+
+          enum  DVD-R {
+            description "DVD-R";
+          }
+
+          enum  DVD+RW {
+            description "DVD+RW";
+          }
+
+          enum
+          DVD-RW {
+            description "
+            DVD-RW";
+          }
+
+          enum  DVD-RAM {
+            description "DVD-RAM";
+          }
+
+          enum  DVD-AUDIO {
+            description "DVD-AUDIO";
+          }
+
+          enum
+          DAT {
+            description "
+            DAT";
+          }
+
+          enum  LD {
+            description "LD";
+          }
+
+          enum  HDD {
+            description "HDD";
+          }
+
+          enum
+          MICRO-MV {
+            description "
+            MICRO-MV";
+          }
+
+          enum  NETWORK {
+            description "NETWORK";
+          }
+
+          enum  NONE {
+            description "NONE";
+          }
+
+          enum
+          NOT_IMPLEMENTED {
+            description "
+            NOT_IMPLEMENTED";
+          }
+
+          enum  SD {
+            description "SD";
+          }
+
+          enum  PC-CARD {
+            description "PC-CARD";
+          }
+
+          enum
+          MMC {
+            description "
+            MMC";
+          }
+
+          enum  CF {
+            description "CF";
+          }
+
+          enum  BD {
+            description "BD";
+          }
+
+          enum
+          MS {
+            description "
+            MS";
+          }
+
+          enum  HD_DVD {
+            description "HD_DVD";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "PlaybackStorageMedium";
+      }
+
+      leaf record-storage-medium {
+        type enumeration {
+          enum  UNKNOWN {
+            description "UNKNOWN";
+          }
+
+          enum  DV {
+            description "DV";
+          }
+
+          enum
+          MINI-DV {
+            description "
+            MINI-DV";
+          }
+
+          enum  VHS {
+            description "VHS";
+          }
+
+          enum  W-VHS {
+            description "W-VHS";
+          }
+
+          enum
+          S-VHS {
+            description "
+            S-VHS";
+          }
+
+          enum  D-VHS {
+            description "D-VHS";
+          }
+
+          enum  VHSC {
+            description "VHSC";
+          }
+
+          enum
+          VIDEO8 {
+            description "
+            VIDEO8";
+          }
+
+          enum  HI8 {
+            description "HI8";
+          }
+
+          enum  CD-ROM {
+            description "CD-ROM";
+          }
+
+          enum
+          CD-DA {
+            description "
+            CD-DA";
+          }
+
+          enum  CD-R {
+            description "CD-R";
+          }
+
+          enum  CD-RW {
+            description "CD-RW";
+          }
+
+          enum
+          VIDEO-CD {
+            description "
+            VIDEO-CD";
+          }
+
+          enum  SACD {
+            description "SACD";
+          }
+
+          enum  MD-AUDIO {
+            description "MD-AUDIO";
+          }
+
+          enum
+          MD-PICTURE {
+            description "
+            MD-PICTURE";
+          }
+
+          enum  DVD-ROM {
+            description "DVD-ROM";
+          }
+
+          enum  DVD-VIDEO {
+            description "DVD-VIDEO";
+          }
+
+          enum
+          DVD+R {
+            description "
+            DVD+R";
+          }
+
+          enum  DVD-R {
+            description "DVD-R";
+          }
+
+          enum  DVD+RW {
+            description "DVD+RW";
+          }
+
+          enum
+          DVD-RW {
+            description "
+            DVD-RW";
+          }
+
+          enum  DVD-RAM {
+            description "DVD-RAM";
+          }
+
+          enum  DVD-AUDIO {
+            description "DVD-AUDIO";
+          }
+
+          enum
+          DAT {
+            description "
+            DAT";
+          }
+
+          enum  LD {
+            description "LD";
+          }
+
+          enum  HDD {
+            description "HDD";
+          }
+
+          enum
+          MICRO-MV {
+            description "
+            MICRO-MV";
+          }
+
+          enum  NETWORK {
+            description "NETWORK";
+          }
+
+          enum  NONE {
+            description "NONE";
+          }
+
+          enum
+          NOT_IMPLEMENTED {
+            description "
+            NOT_IMPLEMENTED";
+          }
+
+          enum  SD {
+            description "SD";
+          }
+
+          enum
+          PC-CARD {
+            description "
+            PC-CARD";
+          }
+
+          enum  MMC {
+            description "MMC";
+          }
+
+          enum  CF {
+            description "CF";
+          }
+
+          enum
+          BD {
+            description "
+            BD";
+          }
+
+          enum  MS {
+            description "MS";
+          }
+
+          enum  HD_DVD {
+            description "HD_DVD";
+          }
+
+          enum
+          VENDOR-DEFINED {
+            description "
+            vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "RecordStorageMedium";
+      }
+
+      leaf possible-playback-storage-media {
+        type string;
+        config false;
+        description "PossiblePlaybackStorageMedia";
+      }
+
+      leaf possible-record-storage-media {
+        type string;
+        config false;
+        description "PossibleRecordStorageMedia";
+      }
+
+      leaf current-play-mode {
+        type enumeration {
+          enum  NORMAL {
+            description "NORMAL";
+          }
+
+          enum  SHUFFLE {
+            description "SHUFFLE";
+          }
+
+          enum  REPEAT_ONE {
+            description "REPEAT_ONE";
+          }
+
+          enum  REPEAT_ALL {
+            description "REPEAT_ALL";
+          }
+
+          enum  RANDOM {
+            description "RANDOM";
+          }
+
+          enum  DIRECT_1 {
+            description "DIRECT_1";
+          }
+
+          enum  INTRO {
+            description "INTRO";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        default NORMAL;
+        config false;
+        description "CurrentPlayMode";
+      }
+
+      leaf transport-play-speed {
+        type enumeration {
+          enum  1 {
+            description "1";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        default 1
+        ;
+        config false;
+        description "TransportPlaySpeed";
+      }
+
+      leaf record-medium-write-status {
+        type enumeration {
+          enum  WRITABLE {
+            description "WRITABLE";
+          }
+
+          enum  PROTECTED {
+            description "PROTECTED";
+          }
+
+          enum  NOT_WRITABLE {
+            description "NOT_WRITABLE";
+          }
+
+          enum  UNKNOWN {
+            description "UNKNOWN";
+          }
+
+          enum  NOT_IMPLEMENTED {
+            description "NOT_IMPLEMENTED";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "RecordMediumWriteStatus";
+      }
+
+      leaf current-record-quality-mode {
+        type enumeration {
+          enum  0:EP {
+            description "0:EP";
+          }
+
+          enum  1:LP {
+            description "1:LP";
+          }
+
+          enum  2:SP {
+            description "2:SP";
+          }
+
+          enum  0:BASIC {
+            description "0:BASIC";
+          }
+
+          enum  1:MEDIUM {
+            description "1:MEDIUM";
+          }
+
+          enum  2:HIGH {
+            description "2:HIGH";
+          }
+
+          enum  NOT_IMPLEMENTED {
+            description "NOT_IMPLEMENTED";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "CurrentRecordQualityMode";
+      }
+
+      leaf possible-record-quality-modes {
+        type string;
+        config false;
+        description "PossibleRecordQualityModes";
+      }
+
+      leaf number-of-tracks {
+        type uint32 {
+          range "0 .. max";
+        }
+
+        config false;
+        description "NumberOfTracks";
+      }
+
+      leaf current-track {
+        type uint32 {
+          range "0 .. max";
+        }
+
+        config false;
+        description "CurrentTrack";
+      }
+
+      leaf current-track-duration {
+        type string;
+        config false;
+        description "CurrentTrackDuration";
+      }
+
+      leaf current-media-duration {
+        type string;
+        config false;
+        description "CurrentMediaDuration";
+      }
+
+      leaf current-track-meta-data {
+        type string;
+        config false;
+        description "CurrentTrackMetaData";
+      }
+
+      leaf current-track-u-r-i {
+        type string;
+        config false;
+        description "CurrentTrackURI";
+      }
+
+      leaf a-v-transport-u-r-i {
+        type string;
+        description "AVTransportURI";
+      }
+
+      leaf a-v-transport-u-r-i-meta-data {
+        type string;
+        config false;
+        description "AVTransportURIMetaData";
+      }
+
+      leaf next-a-v-transport-u-r-i {
+        type string;
+        description "NextAVTransportURI";
+      }
+
+      leaf next-a-v-transport-u-r-i-meta-data {
+        type string;
+        config false;
+        description "NextAVTransportURIMetaData";
+      }
+
+      leaf relative-time-position {
+        type string;
+        config false;
+        description "RelativeTimePosition";
+      }
+
+      leaf absolute-time-position {
+        type string;
+        config false;
+        description "AbsoluteTimePosition";
+      }
+
+      leaf relative-counter-position {
+        type int32;
+        config false;
+        description "RelativeCounterPosition";
+      }
+
+      leaf absolute-counter-position {
+        type uint32;
+        config false;
+        description "AbsoluteCounterPosition";
+      }
+
+      leaf current-transport-actions {
+        type enumeration {
+          enum  PLAY {
+            description "PLAY";
+          }
+
+          enum  STOP {
+            description "STOP";
+          }
+
+          enum  PAUSE {
+            description "PAUSE";
+          }
+
+          enum  SEEK {
+            description "SEEK";
+          }
+
+          enum  NEXT {
+            description "NEXT";
+          }
+
+          enum  PREVIOUS {
+            description "PREVIOUS";
+          }
+
+          enum  RECORD {
+            description "RECORD";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "CurrentTransportActions";
+      }
+
+      leaf last-change {
+        type string;
+        config false;
+        description "LastChange";
+      }
+
+      leaf d-r-m-state {
+        type enumeration {
+          enum  OK {
+            description "OK";
+          }
+
+          enum  UNKNOWN {
+            description "UNKNOWN";
+          }
+
+          enum  PROCESSING_CONTENT_KEY {
+            description "PROCESSING_CONTENT_KEY";
+          }
+
+          enum  CONTENT_KEY_FAILURE {
+            description "CONTENT_KEY_FAILURE";
+          }
+
+          enum  ATTEMPTING_AUTHENTICATION {
+            description "ATTEMPTING_AUTHENTICATION";
+          }
+
+          enum  FAILED_AUTHENTICATION {
+            description "FAILED_AUTHENTICATION";
+          }
+
+          enum  NOT_AUTHENTICATED {
+            description "NOT_AUTHENTICATED";
+          }
+
+          enum  DEVICE_REVOCATION {
+            description "DEVICE_REVOCATION";
+          }
+
+          enum  DRM_SYSTEM_NOT_SUPPORTED {
+            description "DRM_SYSTEM_NOT_SUPPORTED";
+          }
+
+          enum  LICENSE_DENIED {
+            description "LICENSE_DENIED";
+          }
+
+          enum  LICENSE_EXPIRED {
+            description "LICENSE_EXPIRED";
+          }
+
+          enum  LICENSE_INSUFFICIENT {
+            description "LICENSE_INSUFFICIENT";
+          }
+
+        }
+
+        default UNKNOWN
+        ;
+        config false;
+        description "DRMState";
+      }
+
+      leaf a-arg-type-seekmode {
+        type enumeration {
+          enum  ABS_TIME {
+            description "ABS_TIME";
+          }
+
+          enum  REL_TIME {
+            description "REL_TIME";
+          }
+
+          enum  ABS_COUNT {
+            description "ABS_COUNT";
+          }
+
+          enum  REL_COUNT {
+            description "REL_COUNT";
+          }
+
+          enum  TRACK_NR {
+            description "TRACK_NR";
+          }
+
+          enum  CHANNEL_FREQ {
+            description "CHANNEL_FREQ";
+          }
+
+          enum  TAPE-INDEX {
+            description "TAPE-INDEX";
+          }
+
+          enum  REL_TAPE-INDEX {
+            description "REL_TAPE-INDEX";
+          }
+
+          enum  FRAME {
+            description "FRAME";
+          }
+
+          enum  REL_FRAME {
+            description "REL_FRAME";
+          }
+
+          enum  VENDOR-DEFINED {
+            description " vendor-defined ";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_SeekMode";
+      }
+
+      leaf a-arg-type-seektarget {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SeekTarget";
+      }
+
+      leaf a-arg-type-instanceid {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_InstanceID";
+      }
+
+      leaf a-arg-type-deviceudn {
+        type string;
+        config false;
+        description "A_ARG_TYPE_DeviceUDN";
+      }
+
+      leaf a-arg-type-servicetype {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ServiceType";
+      }
+
+      leaf a-arg-type-serviceid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ServiceID";
+      }
+
+      leaf a-arg-type-statevariablevaluepairs {
+        type string;
+        config false;
+        description "A_ARG_TYPE_StateVariableValuePairs";
+      }
+
+      leaf a-arg-type-statevariablelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_StateVariableList";
+      }
+
+      leaf a-arg-type-playlistdata {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PlaylistData";
+      }
+
+      leaf a-arg-type-playlistdatalength {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_PlaylistDataLength";
+      }
+
+      leaf a-arg-type-playlistoffset {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_PlaylistOffset";
+      }
+
+      leaf a-arg-type-playlisttotallength {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_PlaylistTotalLength";
+      }
+
+      leaf a-arg-type-playlistmimetype {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PlaylistMIMEType";
+      }
+
+      leaf a-arg-type-playlistextendedtype {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PlaylistExtendedType";
+      }
+
+      leaf a-arg-type-playliststep {
+        type enumeration {
+          enum  INITIAL {
+            description "Initial";
+          }
+
+          enum  CONTINUE {
+            description "Continue";
+          }
+
+          enum  STOP {
+            description "Stop";
+          }
+
+          enum  RESET {
+            description "Reset";
+          }
+
+          enum  REPLACE {
+            description "Replace";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_PlaylistStep";
+      }
+
+      leaf a-arg-type-playlisttype {
+        type enumeration {
+          enum  STATIC {
+            description "Static";
+          }
+
+          enum  STATIC_PL_CONTENTS {
+            description "StaticPlContents";
+          }
+
+          enum  STREAMING {
+            description "Streaming";
+          }
+
+          enum  STREAMING_PL_CONTENTS {
+            description "StreamingPlContents";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_PlaylistType";
+      }
+
+      leaf a-arg-type-playlistinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PlaylistInfo";
+      }
+
+      leaf a-arg-type-playliststartobjid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PlaylistStartObjID";
+      }
+
+      leaf a-arg-type-playliststartgroupid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PlaylistStartGroupID";
+      }
+
+      leaf sync-offset {
+        type string;
+        description "SyncOffset";
+      }
+
+      leaf a-arg-type-syncoffsetadj {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SyncOffsetAdj";
+      }
+
+      leaf a-arg-type-presentationtime {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PresentationTime";
+      }
+
+      leaf a-arg-type-clockid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ClockId";
+      }
+
+    }
+
+  }
+
+  grouping av-transport-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container transport-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container transport-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-media-category {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container playback-storage-medium {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container record-storage-medium {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container possible-playback-storage-media {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container possible-record-storage-media {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-play-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container transport-play-speed {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container record-medium-write-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-record-quality-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container possible-record-quality-modes {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container number-of-tracks {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-track {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-track-duration {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-media-duration {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-track-meta-data {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-track-u-r-i {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-v-transport-u-r-i {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-v-transport-u-r-i-meta-data {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container next-a-v-transport-u-r-i {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container next-a-v-transport-u-r-i-meta-data {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container relative-time-position {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container absolute-time-position {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container relative-counter-position {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container absolute-counter-position {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container current-transport-actions {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container last-change {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container d-r-m-state {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-seekmode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-seektarget {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-instanceid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-deviceudn {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-servicetype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-serviceid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-statevariablevaluepairs {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-statevariablelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlistdata {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlistdatalength {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlistoffset {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlisttotallength {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlistmimetype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlistextendedtype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playliststep {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlisttype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playlistinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playliststartobjid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-playliststartgroupid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sync-offset {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-syncoffsetadj {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-presentationtime {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-clockid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping av-transport-action {
+    description "Service actions";
+    action set-a-v-transport-u-r-i {
+      description "Action SetAVTransportURI";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf current-u-r-i {
+          type string;
+          description "Related to AVTransportURI";
+        }
+
+        leaf current-u-r-i-meta-data {
+          type string;
+          description "Related to AVTransportURIMetaData";
+        }
+
+      }
+
+    }
+
+    action set-next-a-v-transport-u-r-i {
+      description "Action SetNextAVTransportURI";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf next-u-r-i {
+          type string;
+          description "Related to NextAVTransportURI";
+        }
+
+        leaf next-u-r-i-meta-data {
+          type string;
+          description "Related to NextAVTransportURIMetaData";
+        }
+
+      }
+
+    }
+
+    action get-media-info {
+      description "Action GetMediaInfo";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf nr-tracks {
+          type leafref {
+            path "../../state/number-of-tracks";
+          }
+
+          description "Related to NumberOfTracks";
+        }
+
+        leaf media-duration {
+          type leafref {
+            path "../../state/current-media-duration";
+          }
+
+          description "Related to CurrentMediaDuration";
+        }
+
+        leaf current-u-r-i {
+          type leafref {
+            path "../../state/a-v-transport-u-r-i";
+          }
+
+          description "Related to AVTransportURI";
+        }
+
+        leaf current-u-r-i-meta-data {
+          type leafref {
+            path "../../state/a-v-transport-u-r-i-meta-data";
+          }
+
+          description "Related to AVTransportURIMetaData";
+        }
+
+        leaf next-u-r-i {
+          type leafref {
+            path "../../state/next-a-v-transport-u-r-i";
+          }
+
+          description "Related to NextAVTransportURI";
+        }
+
+        leaf next-u-r-i-meta-data {
+          type leafref {
+            path "../../state/next-a-v-transport-u-r-i-meta-data";
+          }
+
+          description "Related to NextAVTransportURIMetaData";
+        }
+
+        leaf play-medium {
+          type leafref {
+            path "../../state/playback-storage-medium";
+          }
+
+          description "Related to PlaybackStorageMedium";
+        }
+
+        leaf record-medium {
+          type leafref {
+            path "../../state/record-storage-medium";
+          }
+
+          description "Related to RecordStorageMedium";
+        }
+
+        leaf write-status {
+          type leafref {
+            path "../../state/record-medium-write-status";
+          }
+
+          description "Related to RecordMediumWriteStatus";
+        }
+
+      }
+
+    }
+
+    action getmediainfo-ext {
+      description "Action GetMediaInfo_Ext";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-type {
+          type leafref {
+            path "../../state/current-media-category";
+          }
+
+          description "Related to CurrentMediaCategory";
+        }
+
+        leaf nr-tracks {
+          type leafref {
+            path "../../state/number-of-tracks";
+          }
+
+          description "Related to NumberOfTracks";
+        }
+
+        leaf media-duration {
+          type leafref {
+            path "../../state/current-media-duration";
+          }
+
+          description "Related to CurrentMediaDuration";
+        }
+
+        leaf current-u-r-i {
+          type leafref {
+            path "../../state/a-v-transport-u-r-i";
+          }
+
+          description "Related to AVTransportURI";
+        }
+
+        leaf current-u-r-i-meta-data {
+          type leafref {
+            path "../../state/a-v-transport-u-r-i-meta-data";
+          }
+
+          description "Related to AVTransportURIMetaData";
+        }
+
+        leaf next-u-r-i {
+          type leafref {
+            path "../../state/next-a-v-transport-u-r-i";
+          }
+
+          description "Related to NextAVTransportURI";
+        }
+
+        leaf next-u-r-i-meta-data {
+          type leafref {
+            path "../../state/next-a-v-transport-u-r-i-meta-data";
+          }
+
+          description "Related to NextAVTransportURIMetaData";
+        }
+
+        leaf play-medium {
+          type leafref {
+            path "../../state/playback-storage-medium";
+          }
+
+          description "Related to PlaybackStorageMedium";
+        }
+
+        leaf record-medium {
+          type leafref {
+            path "../../state/record-storage-medium";
+          }
+
+          description "Related to RecordStorageMedium";
+        }
+
+        leaf write-status {
+          type leafref {
+            path "../../state/record-medium-write-status";
+          }
+
+          description "Related to RecordMediumWriteStatus";
+        }
+
+      }
+
+    }
+
+    action get-transport-info {
+      description "Action GetTransportInfo";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-transport-state {
+          type leafref {
+            path "../../state/transport-state";
+          }
+
+          description "Related to TransportState";
+        }
+
+        leaf current-transport-status {
+          type leafref {
+            path "../../state/transport-status";
+          }
+
+          description "Related to TransportStatus";
+        }
+
+        leaf current-speed {
+          type leafref {
+            path "../../state/transport-play-speed";
+          }
+
+          description "Related to TransportPlaySpeed";
+        }
+
+      }
+
+    }
+
+    action get-position-info {
+      description "Action GetPositionInfo";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf track {
+          type leafref {
+            path "../../state/current-track";
+          }
+
+          description "Related to CurrentTrack";
+        }
+
+        leaf track-duration {
+          type leafref {
+            path "../../state/current-track-duration";
+          }
+
+          description "Related to CurrentTrackDuration";
+        }
+
+        leaf track-meta-data {
+          type leafref {
+            path "../../state/current-track-meta-data";
+          }
+
+          description "Related to CurrentTrackMetaData";
+        }
+
+        leaf track-u-r-i {
+          type leafref {
+            path "../../state/current-track-u-r-i";
+          }
+
+          description "Related to CurrentTrackURI";
+        }
+
+        leaf rel-time {
+          type leafref {
+            path "../../state/relative-time-position";
+          }
+
+          description "Related to RelativeTimePosition";
+        }
+
+        leaf abs-time {
+          type leafref {
+            path "../../state/absolute-time-position";
+          }
+
+          description "Related to AbsoluteTimePosition";
+        }
+
+        leaf rel-count {
+          type leafref {
+            path "../../state/relative-counter-position";
+          }
+
+          description "Related to RelativeCounterPosition";
+        }
+
+        leaf abs-count {
+          type leafref {
+            path "../../state/absolute-counter-position";
+          }
+
+          description "Related to AbsoluteCounterPosition";
+        }
+
+      }
+
+    }
+
+    action get-device-capabilities {
+      description "Action GetDeviceCapabilities";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf play-media {
+          type leafref {
+            path "../../state/possible-playback-storage-media";
+          }
+
+          description "Related to PossiblePlaybackStorageMedia";
+        }
+
+        leaf rec-media {
+          type leafref {
+            path "../../state/possible-record-storage-media";
+          }
+
+          description "Related to PossibleRecordStorageMedia";
+        }
+
+        leaf rec-quality-modes {
+          type leafref {
+            path "../../state/possible-record-quality-modes";
+          }
+
+          description "Related to PossibleRecordQualityModes";
+        }
+
+      }
+
+    }
+
+    action get-transport-settings {
+      description "Action GetTransportSettings";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf play-mode {
+          type leafref {
+            path "../../state/current-play-mode";
+          }
+
+          description "Related to CurrentPlayMode";
+        }
+
+        leaf rec-quality-mode {
+          type leafref {
+            path "../../state/current-record-quality-mode";
+          }
+
+          description "Related to CurrentRecordQualityMode";
+        }
+
+      }
+
+    }
+
+    action stop {
+      description "Action Stop";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+    }
+
+    action play {
+      description "Action Play";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf speed {
+          type string;
+          description "Related to TransportPlaySpeed";
+        }
+
+      }
+
+    }
+
+    action pause {
+      description "Action Pause";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+    }
+
+    action record {
+      description "Action Record";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+    }
+
+    action seek {
+      description "Action Seek";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf unit {
+          type string;
+          description "Related to A_ARG_TYPE_SeekMode";
+        }
+
+        leaf target {
+          type string;
+          description "Related to A_ARG_TYPE_SeekTarget";
+        }
+
+      }
+
+    }
+
+    action next {
+      description "Action Next";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+    }
+
+    action previous {
+      description "Action Previous";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+    }
+
+    action set-play-mode {
+      description "Action SetPlayMode";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf new-play-mode {
+          type string;
+          description "Related to CurrentPlayMode";
+        }
+
+      }
+
+    }
+
+    action set-record-quality-mode {
+      description "Action SetRecordQualityMode";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf new-record-quality-mode {
+          type string;
+          description "Related to CurrentRecordQualityMode";
+        }
+
+      }
+
+    }
+
+    action get-current-transport-actions {
+      description "Action GetCurrentTransportActions";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf actions {
+          type leafref {
+            path "../../state/current-transport-actions";
+          }
+
+          description "Related to CurrentTransportActions";
+        }
+
+      }
+
+    }
+
+    action get-d-r-m-state {
+      description "Action GetDRMState";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf curent-d-r-m-state {
+          type leafref {
+            path "../../state/d-r-m-state";
+          }
+
+          description "Related to DRMState";
+        }
+
+      }
+
+    }
+
+    action get-state-variables {
+      description "Action GetStateVariables";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf state-variable-list {
+          type string;
+          description "Related to A_ARG_TYPE_StateVariableList";
+        }
+
+      }
+
+      output {
+        leaf state-variable-value-pairs {
+          type leafref {
+            path "../../state/a-arg-type-statevariablevaluepairs";
+          }
+
+          description "Related to A_ARG_TYPE_StateVariableValuePairs";
+        }
+
+      }
+
+    }
+
+    action set-state-variables {
+      description "Action SetStateVariables";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf a-v-transport-u-d-n {
+          type string;
+          description "Related to A_ARG_TYPE_DeviceUDN";
+        }
+
+        leaf service-type {
+          type string;
+          description "Related to A_ARG_TYPE_ServiceType";
+        }
+
+        leaf service-id {
+          type string;
+          description "Related to A_ARG_TYPE_ServiceID";
+        }
+
+        leaf state-variable-value-pairs {
+          type string;
+          description "Related to A_ARG_TYPE_StateVariableValuePairs";
+        }
+
+      }
+
+      output {
+        leaf state-variable-list {
+          type leafref {
+            path "../../state/a-arg-type-statevariablelist";
+          }
+
+          description "Related to A_ARG_TYPE_StateVariableList";
+        }
+
+      }
+
+    }
+
+    action set-static-playlist {
+      description "Action SetStaticPlaylist";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf playlist-data {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistData";
+        }
+
+        leaf playlist-data-length {
+          type uint32;
+          description "Related to A_ARG_TYPE_PlaylistDataLength";
+        }
+
+        leaf playlist-offset {
+          type uint32;
+          description "Related to A_ARG_TYPE_PlaylistOffset";
+        }
+
+        leaf playlist-total-length {
+          type uint32;
+          description "Related to A_ARG_TYPE_PlaylistTotalLength";
+        }
+
+        leaf playlist-m-i-m-e-type {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistMIMEType";
+        }
+
+        leaf playlist-extended-type {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistExtendedType";
+        }
+
+        leaf playlist-start-obj {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistStartObjID";
+        }
+
+        leaf playlist-start-group {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistStartGroupID";
+        }
+
+      }
+
+    }
+
+    action set-streaming-playlist {
+      description "Action SetStreamingPlaylist";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf playlist-data {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistData";
+        }
+
+        leaf playlist-data-length {
+          type uint32;
+          description "Related to A_ARG_TYPE_PlaylistDataLength";
+        }
+
+        leaf playlist-m-i-m-e-type {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistMIMEType";
+        }
+
+        leaf playlist-extended-type {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistExtendedType";
+        }
+
+        leaf playlist-step {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistStep";
+        }
+
+      }
+
+    }
+
+    action get-playlist-info {
+      description "Action GetPlaylistInfo";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf playlist-type {
+          type string;
+          description "Related to A_ARG_TYPE_PlaylistType";
+        }
+
+      }
+
+      output {
+        leaf playlist-info {
+          type leafref {
+            path "../../state/a-arg-type-playlistinfo";
+          }
+
+          description "Related to A_ARG_TYPE_PlaylistInfo";
+        }
+
+      }
+
+    }
+
+    action adjust-sync-offset {
+      description "Action AdjustSyncOffset";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf adjustment {
+          type string;
+          description "Related to A_ARG_TYPE_SyncOffsetAdj";
+        }
+
+      }
+
+    }
+
+    action get-sync-offset {
+      description "Action GetSyncOffset";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+      }
+
+      output {
+        leaf current-sync-offset {
+          type leafref {
+            path "../../state/sync-offset";
+          }
+
+          description "Related to SyncOffset";
+        }
+
+      }
+
+    }
+
+    action set-sync-offset {
+      description "Action SetSyncOffset";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf new-sync-offset {
+          type string;
+          description "Related to SyncOffset";
+        }
+
+      }
+
+    }
+
+    action sync-play {
+      description "Action SyncPlay";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf speed {
+          type string;
+          description "Related to TransportPlaySpeed";
+        }
+
+        leaf reference-position-units {
+          type string;
+          description "Related to A_ARG_TYPE_SeekMode";
+        }
+
+        leaf reference-position {
+          type string;
+          description "Related to A_ARG_TYPE_SeekTarget";
+        }
+
+        leaf reference-presentation-time {
+          type string;
+          description "Related to A_ARG_TYPE_PresentationTime";
+        }
+
+        leaf reference-clock-id {
+          type string;
+          description "Related to A_ARG_TYPE_ClockId";
+        }
+
+      }
+
+    }
+
+    action sync-pause {
+      description "Action SyncPause";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf pause-time {
+          type string;
+          description "Related to A_ARG_TYPE_PresentationTime";
+        }
+
+        leaf reference-clock-id {
+          type string;
+          description "Related to A_ARG_TYPE_ClockId";
+        }
+
+      }
+
+    }
+
+    action sync-stop {
+      description "Action SyncStop";
+      input {
+        leaf instance-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_InstanceID";
+        }
+
+        leaf stop-time {
+          type string;
+          description "Related to A_ARG_TYPE_PresentationTime";
+        }
+
+        leaf reference-clock-id {
+          type string;
+          description "Related to A_ARG_TYPE_ClockId";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping av-transport-top {
+    description "Service top";
+    container av-transport {
+      description "Service";
+      uses av-transport-state-top;
+      uses av-transport-state-attributes-top;
+      uses av-transport-action;
+    }
+
+  }
+
+  grouping av-transport-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses av-transport-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

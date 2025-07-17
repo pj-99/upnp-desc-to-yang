@@ -1,0 +1,268 @@
+module two-way-motion-motor {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/two-way-motion-motor";
+  prefix "two-way-motion-motor";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "two-way-motion-motor";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses two-way-motion-motor-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping two-way-motion-motor-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf operation-mode {
+        type enumeration {
+          enum  MANUAL_UN_PROTECTED {
+            description "Manual UnProtected";
+          }
+
+          enum  MANUAL_PROTECTED {
+            description "Manual Protected";
+          }
+
+          enum  AUTOMATIC {
+            description "Automatic";
+          }
+
+        }
+
+        default MANUAL_UN_PROTECTED;
+        description "OperationMode";
+      }
+
+      leaf position {
+        type uint8;
+        description "Position";
+      }
+
+      leaf service-locked {
+        type boolean;
+        default true;
+        config false;
+        description "ServiceLocked";
+      }
+
+      leaf arg-type-steps {
+        type uint8 {
+          range "1 .. 30";
+        }
+
+        default 1;
+        config false;
+        description "ARG_TYPE_Steps";
+      }
+
+      leaf a-arg-type-max-usage-time {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_MAX_USAGE_TIME";
+      }
+
+      leaf position-arg-type {
+        type enumeration {
+          enum  END_LIMITS {
+            description "End Limits";
+          }
+
+          enum  CONTINUOUS {
+            description "Continuous";
+          }
+
+        }
+
+        default END_LIMITS;
+        config false;
+        description "PositionArgType";
+      }
+
+    }
+
+  }
+
+  grouping two-way-motion-motor-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container operation-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container position {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container service-locked {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container arg-type-steps {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-max-usage-time {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container position-arg-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping two-way-motion-motor-action {
+    description "Service actions";
+    action open {
+      description "Action Open";
+    }
+
+    action close {
+      description "Action Close";
+    }
+
+    action stop {
+      description "Action Stop";
+    }
+
+    action get-operation-mode {
+      description "Action GetOperationMode";
+      output {
+        leaf ret-operation-mode {
+          type leafref {
+            path "../../state/operation-mode";
+          }
+
+          description "Related to OperationMode";
+        }
+
+      }
+
+    }
+
+    action set-operation-mode {
+      description "Action SetOperationMode";
+      input {
+        leaf new-operation-mode {
+          type string;
+          description "Related to OperationMode";
+        }
+
+      }
+
+    }
+
+    action is-locked {
+      description "Action IsLocked";
+      output {
+        leaf ret-locking {
+          type leafref {
+            path "../../state/service-locked";
+          }
+
+          description "Related to ServiceLocked";
+        }
+
+      }
+
+    }
+
+    action lock {
+      description "Action Lock";
+    }
+
+    action un-lock {
+      description "Action UnLock";
+    }
+
+    action get-position {
+      description "Action GetPosition";
+      output {
+        leaf ret-position {
+          type leafref {
+            path "../../state/position";
+          }
+
+          description "Related to Position";
+        }
+
+      }
+
+    }
+
+    action set-position {
+      description "Action SetPosition";
+      input {
+        leaf new-position {
+          type uint8;
+          description "Related to Position";
+        }
+
+      }
+
+    }
+
+    action get-position-arg-type {
+      description "Action GetPositionArgType";
+      output {
+        leaf ret-arg-type {
+          type leafref {
+            path "../../state/position-arg-type";
+          }
+
+          description "Related to PositionArgType";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping two-way-motion-motor-top {
+    description "Service top";
+    container two-way-motion-motor {
+      description "Service";
+      uses two-way-motion-motor-state-top;
+      uses two-way-motion-motor-state-attributes-top;
+      uses two-way-motion-motor-action;
+    }
+
+  }
+
+  grouping two-way-motion-motor-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses two-way-motion-motor-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

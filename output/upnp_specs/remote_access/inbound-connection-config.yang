@@ -1,0 +1,165 @@
+module inbound-connection-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/inbound-connection-config";
+  prefix "inbound-connection-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "inbound-connection-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses inbound-connection-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping inbound-connection-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf network-topology-info {
+        type string;
+        config false;
+        description "NetworkTopologyInfo";
+      }
+
+      leaf s-t-u-n-server-address {
+        type string;
+        description "STUNServerAddress";
+      }
+
+      leaf dynamic-d-n-s-config-info {
+        type string;
+        description "DynamicDNSConfigInfo";
+      }
+
+      leaf dynamic-d-n-s-supported-protocols {
+        type string;
+        config false;
+        description "DynamicDNSSupportedProtocols";
+      }
+
+    }
+
+  }
+
+  grouping inbound-connection-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container network-topology-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container s-t-u-n-server-address {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container dynamic-d-n-s-config-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container dynamic-d-n-s-supported-protocols {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping inbound-connection-config-action {
+    description "Service actions";
+    action get-dynamic-d-n-s-supported-protocols {
+      description "Action GetDynamicDNSSupportedProtocols";
+      output {
+        leaf dynamic-d-n-s-supported-protocols {
+          type leafref {
+            path "../../state/dynamic-d-n-s-supported-protocols";
+          }
+
+          description "Related to DynamicDNSSupportedProtocols";
+        }
+
+      }
+
+    }
+
+    action get-network-topology-info {
+      description "Action GetNetworkTopologyInfo";
+      output {
+        leaf current-network-topology-info {
+          type leafref {
+            path "../../state/network-topology-info";
+          }
+
+          description "Related to NetworkTopologyInfo";
+        }
+
+      }
+
+    }
+
+    action set-dynamic-d-n-s-config-info {
+      description "Action SetDynamicDNSConfigInfo";
+      input {
+        leaf new-dynamic-d-n-s-config-info {
+          type string;
+          description "Related to DynamicDNSConfigInfo";
+        }
+
+      }
+
+    }
+
+    action set-s-t-u-n-server-address {
+      description "Action SetSTUNServerAddress";
+      input {
+        leaf new-s-t-u-n-server-address {
+          type string;
+          description "Related to STUNServerAddress";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping inbound-connection-config-top {
+    description "Service top";
+    container inbound-connection-config {
+      description "Service";
+      uses inbound-connection-config-state-top;
+      uses inbound-connection-config-state-attributes-top;
+      uses inbound-connection-config-action;
+    }
+
+  }
+
+  grouping inbound-connection-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses inbound-connection-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

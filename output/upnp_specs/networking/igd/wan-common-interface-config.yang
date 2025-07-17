@@ -1,0 +1,440 @@
+module wan-common-interface-config {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/wan-common-interface-config";
+  prefix "wan-common-interface-config";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "wan-common-interface-config";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses wan-common-interface-config-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping wan-common-interface-config-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf w-a-n-access-type {
+        type enumeration {
+          enum  DSL {
+            description "DSL";
+          }
+
+          enum  POTS {
+            description "POTS";
+          }
+
+          enum  CABLE {
+            description "Cable";
+          }
+
+          enum  ETHERNET {
+            description "Ethernet";
+          }
+
+        }
+
+        config false;
+        description "WANAccessType";
+      }
+
+      leaf layer1-upstream-max-bit-rate {
+        type uint32;
+        config false;
+        description "Layer1UpstreamMaxBitRate";
+      }
+
+      leaf layer1-downstream-max-bit-rate {
+        type uint32;
+        config false;
+        description "Layer1DownstreamMaxBitRate";
+      }
+
+      leaf physical-link-status {
+        type enumeration {
+          enum  UP {
+            description "Up";
+          }
+
+          enum  DOWN {
+            description "Down";
+          }
+
+        }
+
+        config false;
+        description "PhysicalLinkStatus";
+      }
+
+      leaf w-a-n-access-provider {
+        type string;
+        config false;
+        description "WANAccessProvider";
+      }
+
+      leaf maximum-active-connections {
+        type uint16 {
+          range "1 .. max";
+        }
+
+        config false;
+        description "MaximumActiveConnections";
+      }
+
+      leaf number-of-active-connections {
+        type uint16;
+        config false;
+        description "NumberOfActiveConnections";
+      }
+
+      leaf active-connection-device-container {
+        type string;
+        config false;
+        description "ActiveConnectionDeviceContainer";
+      }
+
+      leaf active-connection-service-i-d {
+        type string;
+        config false;
+        description "ActiveConnectionServiceID";
+      }
+
+      leaf total-bytes-sent {
+        type uint32;
+        config false;
+        description "TotalBytesSent";
+      }
+
+      leaf total-bytes-received {
+        type uint32;
+        config false;
+        description "TotalBytesReceived";
+      }
+
+      leaf total-packets-sent {
+        type uint32;
+        config false;
+        description "TotalPacketsSent";
+      }
+
+      leaf total-packets-received {
+        type uint32;
+        config false;
+        description "TotalPacketsReceived";
+      }
+
+      leaf enabled-for-internet {
+        type boolean;
+        description "EnabledForInternet";
+      }
+
+    }
+
+  }
+
+  grouping wan-common-interface-config-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container w-a-n-access-type {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container layer1-upstream-max-bit-rate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container layer1-downstream-max-bit-rate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container physical-link-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container w-a-n-access-provider {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container maximum-active-connections {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container number-of-active-connections {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container active-connection-device-container {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container active-connection-service-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-bytes-sent {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-bytes-received {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-packets-sent {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container total-packets-received {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container enabled-for-internet {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping wan-common-interface-config-action {
+    description "Service actions";
+    action set-enabled-for-internet {
+      description "Action SetEnabledForInternet";
+      input {
+        leaf new-enabled-for-internet {
+          type boolean;
+          description "Related to EnabledForInternet";
+        }
+
+      }
+
+    }
+
+    action get-enabled-for-internet {
+      description "Action GetEnabledForInternet";
+      output {
+        leaf new-enabled-for-internet {
+          type leafref {
+            path "../../state/enabled-for-internet";
+          }
+
+          description "Related to EnabledForInternet";
+        }
+
+      }
+
+    }
+
+    action get-common-link-properties {
+      description "Action GetCommonLinkProperties";
+      output {
+        leaf new-w-a-n-access-type {
+          type leafref {
+            path "../../state/w-a-n-access-type";
+          }
+
+          description "Related to WANAccessType";
+        }
+
+        leaf new-layer1-upstream-max-bit-rate {
+          type leafref {
+            path "../../state/layer1-upstream-max-bit-rate";
+          }
+
+          description "Related to Layer1UpstreamMaxBitRate";
+        }
+
+        leaf new-layer1-downstream-max-bit-rate {
+          type leafref {
+            path "../../state/layer1-downstream-max-bit-rate";
+          }
+
+          description "Related to Layer1DownstreamMaxBitRate";
+        }
+
+        leaf new-physical-link-status {
+          type leafref {
+            path "../../state/physical-link-status";
+          }
+
+          description "Related to PhysicalLinkStatus";
+        }
+
+      }
+
+    }
+
+    action get-w-a-n-access-provider {
+      description "Action GetWANAccessProvider";
+      output {
+        leaf new-w-a-n-access-provider {
+          type leafref {
+            path "../../state/w-a-n-access-provider";
+          }
+
+          description "Related to WANAccessProvider";
+        }
+
+      }
+
+    }
+
+    action get-maximum-active-connections {
+      description "Action GetMaximumActiveConnections";
+      output {
+        leaf new-maximum-active-connections {
+          type leafref {
+            path "../../state/maximum-active-connections";
+          }
+
+          description "Related to MaximumActiveConnections";
+        }
+
+      }
+
+    }
+
+    action get-total-bytes-sent {
+      description "Action GetTotalBytesSent";
+      output {
+        leaf new-total-bytes-sent {
+          type leafref {
+            path "../../state/total-bytes-sent";
+          }
+
+          description "Related to TotalBytesSent";
+        }
+
+      }
+
+    }
+
+    action get-total-bytes-received {
+      description "Action GetTotalBytesReceived";
+      output {
+        leaf new-total-bytes-received {
+          type leafref {
+            path "../../state/total-bytes-received";
+          }
+
+          description "Related to TotalBytesReceived";
+        }
+
+      }
+
+    }
+
+    action get-total-packets-sent {
+      description "Action GetTotalPacketsSent";
+      output {
+        leaf new-total-packets-sent {
+          type leafref {
+            path "../../state/total-packets-sent";
+          }
+
+          description "Related to TotalPacketsSent";
+        }
+
+      }
+
+    }
+
+    action get-total-packets-received {
+      description "Action GetTotalPacketsReceived";
+      output {
+        leaf new-total-packets-received {
+          type leafref {
+            path "../../state/total-packets-received";
+          }
+
+          description "Related to TotalPacketsReceived";
+        }
+
+      }
+
+    }
+
+    action get-active-connection {
+      description "Action GetActiveConnection";
+      input {
+        leaf new-active-connection-index {
+          type uint16;
+          description "Related to NumberOfActiveConnections";
+        }
+
+      }
+
+      output {
+        leaf new-active-conn-device-container {
+          type leafref {
+            path "../../state/active-connection-device-container";
+          }
+
+          description "Related to ActiveConnectionDeviceContainer";
+        }
+
+        leaf new-active-connection-service-i-d {
+          type leafref {
+            path "../../state/active-connection-service-i-d";
+          }
+
+          description "Related to ActiveConnectionServiceID";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping wan-common-interface-config-top {
+    description "Service top";
+    container wan-common-interface-config {
+      description "Service";
+      uses wan-common-interface-config-state-top;
+      uses wan-common-interface-config-state-attributes-top;
+      uses wan-common-interface-config-action;
+    }
+
+  }
+
+  grouping wan-common-interface-config-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses wan-common-interface-config-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

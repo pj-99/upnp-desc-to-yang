@@ -1,0 +1,199 @@
+module external-activity {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/external-activity";
+  prefix "external-activity";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "external-activity";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses external-activity-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping external-activity-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf activity {
+        type string;
+        config false;
+        description "Activity";
+      }
+
+      leaf available-registrations {
+        type boolean;
+        default true;
+        config false;
+        description "AvailableRegistrations";
+      }
+
+      leaf display-string {
+        type string;
+        config false;
+        description "DisplayString";
+      }
+
+      leaf display-string-size {
+        type uint32;
+        config false;
+        description "DisplayStringSize";
+      }
+
+      leaf button-name {
+        type enumeration {
+          enum  ALL {
+            description "All";
+          }
+
+          enum  SCAN {
+            description "Scan";
+          }
+
+        }
+
+        default ALL;
+        config false;
+        description "ButtonName";
+      }
+
+      leaf duration {
+        type int32;
+        config false;
+        description "Duration";
+      }
+
+      leaf registration-i-d {
+        type uint32;
+        config false;
+        description "RegistrationID";
+      }
+
+    }
+
+  }
+
+  grouping external-activity-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container activity {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container available-registrations {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container display-string {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container display-string-size {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container button-name {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container duration {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container registration-i-d {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping external-activity-action {
+    description "Service actions";
+    action register {
+      description "Action Register";
+      input {
+        leaf button-name-in {
+          type string;
+          description "Related to ButtonName";
+        }
+
+        leaf display-string-in {
+          type string;
+          description "Related to DisplayString";
+        }
+
+        leaf duration-in {
+          type int32;
+          description "Related to Duration";
+        }
+
+      }
+
+      output {
+        leaf actual-duration-out {
+          type leafref {
+            path "../../state/duration";
+          }
+
+          description "Related to Duration";
+        }
+
+        leaf registration-i-d-out {
+          type leafref {
+            path "../../state/registration-i-d";
+          }
+
+          description "Related to RegistrationID";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping external-activity-top {
+    description "Service top";
+    container external-activity {
+      description "Service";
+      uses external-activity-state-top;
+      uses external-activity-state-attributes-top;
+      uses external-activity-action;
+    }
+
+  }
+
+  grouping external-activity-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses external-activity-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

@@ -1,0 +1,230 @@
+module media-management {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/media-management";
+  prefix "media-management";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "media-management";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses media-management-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping media-management-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf media-session-info {
+        type string;
+        config false;
+        description "MediaSessionInfo";
+      }
+
+      leaf a-arg-type-mediacapabilityinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MediaCapabilityInfo";
+      }
+
+      leaf a-arg-type-mediasessionid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MediaSessionID";
+      }
+
+      leaf a-arg-type-mediasessioninfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MediaSessionInfoList";
+      }
+
+    }
+
+  }
+
+  grouping media-management-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container media-session-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-mediacapabilityinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-mediasessionid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-mediasessioninfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping media-management-action {
+    description "Service actions";
+    action get-media-capabilities {
+      description "Action GetMediaCapabilities";
+      input {
+        leaf t-s-media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+      output {
+        leaf supported-media-capability-info {
+          type leafref {
+            path "../../state/a-arg-type-mediacapabilityinfo";
+          }
+
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+    }
+
+    action get-media-session-info {
+      description "Action GetMediaSessionInfo";
+      input {
+        leaf target-media-session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_MediaSessionID";
+        }
+
+      }
+
+      output {
+        leaf media-session-info-list {
+          type leafref {
+            path "../../state/a-arg-type-mediasessioninfolist";
+          }
+
+          description "Related to A_ARG_TYPE_MediaSessionInfoList";
+        }
+
+      }
+
+    }
+
+    action start-media-session {
+      description "Action StartMediaSession";
+      input {
+        leaf t-s-media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+      output {
+        leaf media-session-i-d {
+          type leafref {
+            path "../../state/a-arg-type-mediasessionid";
+          }
+
+          description "Related to A_ARG_TYPE_MediaSessionID";
+        }
+
+        leaf t-c-media-capability-info {
+          type leafref {
+            path "../../state/a-arg-type-mediacapabilityinfo";
+          }
+
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+    }
+
+    action stop-media-session {
+      description "Action StopMediaSession";
+      input {
+        leaf target-media-session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_MediaSessionID";
+        }
+
+      }
+
+    }
+
+    action modify-media-session {
+      description "Action ModifyMediaSession";
+      input {
+        leaf target-media-session-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_MediaSessionID";
+        }
+
+        leaf new-media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+      output {
+        leaf t-c-media-capability-info {
+          type leafref {
+            path "../../state/a-arg-type-mediacapabilityinfo";
+          }
+
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping media-management-top {
+    description "Service top";
+    container media-management {
+      description "Service";
+      uses media-management-state-top;
+      uses media-management-state-attributes-top;
+      uses media-management-action;
+    }
+
+  }
+
+  grouping media-management-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses media-management-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

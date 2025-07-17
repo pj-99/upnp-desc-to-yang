@@ -1,0 +1,1490 @@
+module basic-management {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/basic-management";
+  prefix "basic-management";
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "basic-management";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses basic-management-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping basic-management-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf device-status {
+        type string;
+        config false;
+        description "DeviceStatus";
+      }
+
+      leaf sequence-mode {
+        type boolean;
+        default false;
+        description "SequenceMode";
+      }
+
+      leaf test-i-ds {
+        type string;
+        config false;
+        description "TestIDs";
+      }
+
+      leaf active-test-i-ds {
+        type string;
+        config false;
+        description "ActiveTestIDs";
+      }
+
+      leaf log-u-r-is {
+        type string;
+        config false;
+        description "LogURIs";
+      }
+
+      leaf a-arg-type-boolean {
+        type boolean;
+        config false;
+        description "A_ARG_TYPE_Boolean";
+      }
+
+      leaf a-arg-type-string {
+        type string;
+        config false;
+        description "A_ARG_TYPE_String";
+      }
+
+      leaf a-arg-type-ushort {
+        type uint16;
+        config false;
+        description "A_ARG_TYPE_UShort";
+      }
+
+      leaf a-arg-type-uint {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_UInt";
+      }
+
+      leaf a-arg-type-datetime {
+        type yang:date-and-time;
+        config false;
+        description "A_ARG_TYPE_DateTime";
+      }
+
+      leaf a-arg-type-msecs {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_MSecs";
+      }
+
+      leaf a-arg-type-rebootstatus {
+        type enumeration {
+          enum  REBOOT_NOW {
+            description "RebootNow";
+          }
+
+          enum  REBOOT_LATER {
+            description "RebootLater";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_RebootStatus";
+      }
+
+      leaf a-arg-type-testid {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_TestID";
+      }
+
+      leaf a-arg-type-testtype {
+        type enumeration {
+          enum  BANDWIDTH_TEST {
+            description "BandwidthTest";
+          }
+
+          enum  INTERFACE_RESET {
+            description "InterfaceReset";
+          }
+
+          enum  NSLOOKUP {
+            description "NSLookup";
+          }
+
+          enum  PING {
+            description "Ping";
+          }
+
+          enum  SELF_TEST {
+            description "SelfTest";
+          }
+
+          enum  TRACEROUTE {
+            description "Traceroute";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_TestType";
+      }
+
+      leaf a-arg-type-teststate {
+        type enumeration {
+          enum  REQUESTED {
+            description "Requested";
+          }
+
+          enum  IN_PROGRESS {
+            description "InProgress";
+          }
+
+          enum  CANCELED {
+            description "Canceled";
+          }
+
+          enum  COMPLETED {
+            description "Completed";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_TestState";
+      }
+
+      leaf a-arg-type-testendpoint {
+        type enumeration {
+          enum  SERVER {
+            description "Server";
+          }
+
+          enum  CLIENT {
+            description "Client";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_TestEndpoint";
+      }
+
+      leaf a-arg-type-testschedule {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TestSchedule";
+      }
+
+      leaf a-arg-type-testsessid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TestSessID";
+      }
+
+      leaf a-arg-type-dscp {
+        type uint8 {
+          range "0 .. 63";
+        }
+
+        config false;
+        description "A_ARG_TYPE_DSCP";
+      }
+
+      leaf a-arg-type-host {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Host";
+      }
+
+      leaf a-arg-type-hosts {
+        type string;
+        config false;
+        description "A_ARG_TYPE_Hosts";
+      }
+
+      leaf a-arg-type-hostname {
+        type string;
+        config false;
+        description "A_ARG_TYPE_HostName";
+      }
+
+      leaf a-arg-type-pingstatus {
+        type enumeration {
+          enum  SUCCESS {
+            description "Success";
+          }
+
+          enum  ERROR_CANNOT_RESOLVE_HOST_NAME {
+            description "Error_CannotResolveHostName";
+          }
+
+          enum  ERROR_INTERNAL {
+            description "Error_Internal";
+          }
+
+          enum  ERROR_OTHER {
+            description "Error_Other";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_PingStatus";
+      }
+
+      leaf a-arg-type-nslookupstatus {
+        type enumeration {
+          enum  SUCCESS {
+            description "Success";
+          }
+
+          enum  ERROR_DNSSERVER_NOT_RESOLVED {
+            description "Error_DNSServerNotResolved";
+          }
+
+          enum  ERROR_INTERNAL {
+            description "Error_Internal";
+          }
+
+          enum  ERROR_OTHER {
+            description "Error_Other";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_NSLookupStatus";
+      }
+
+      leaf a-arg-type-nslookupresult {
+        type string;
+        config false;
+        description "A_ARG_TYPE_NSLookupResult";
+      }
+
+      leaf a-arg-type-traceroutestatus {
+        type enumeration {
+          enum  SUCCESS {
+            description "Success";
+          }
+
+          enum  ERROR_CANNOT_RESOLVE_HOST_NAME {
+            description "Error_CannotResolveHostName";
+          }
+
+          enum  ERROR_MAX_HOP_COUNT_EXCEEDED {
+            description "Error_MaxHopCountExceeded";
+          }
+
+          enum  ERROR_INTERNAL {
+            description "Error_Internal";
+          }
+
+          enum  ERROR_OTHER {
+            description "Error_Other";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_TracerouteStatus";
+      }
+
+      leaf a-arg-type-bandwidthtestinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_BandwidthTestInfo";
+      }
+
+      leaf a-arg-type-bandwidthtestspec {
+        type string;
+        config false;
+        description "A_ARG_TYPE_BandwidthTestSpec";
+      }
+
+      leaf a-arg-type-bandwidthteststatus {
+        type enumeration {
+          enum  SUCCESS {
+            description "Success";
+          }
+
+          enum  ERROR_INIT_CONNECTION_FAILED {
+            description "Error_InitConnectionFailed";
+          }
+
+          enum  ERROR_NO_RESPONSE {
+            description "Error_NoResponse";
+          }
+
+          enum  ERROR_TRANSFER_FAILED {
+            description "Error_TransferFailed";
+          }
+
+          enum  ERROR_PASSWORD_REQUEST_FAILED {
+            description "Error_PasswordRequestFailed";
+          }
+
+          enum  ERROR_LOGIN_FAILED {
+            description "Error_LoginFailed";
+          }
+
+          enum  ERROR_NO_TRANSFER_MODE {
+            description "Error_NoTransferMode";
+          }
+
+          enum  ERROR_INCORRECT_SIZE {
+            description "Error_IncorrectSize";
+          }
+
+          enum  ERROR_NO_TRANSFER_COMPLETE {
+            description "Error_NoTransferComplete";
+          }
+
+          enum  ERROR_TIMEOUT {
+            description "Error_Timeout";
+          }
+
+          enum  ERROR_OTHER {
+            description "Error_Other";
+          }
+
+          enum  ERROR_FTPNO_PASV {
+            description "Error_FTPNoPASV";
+          }
+
+          enum  ERROR_FTPNO_CWD {
+            description "Error_FTPNoCWD";
+          }
+
+          enum  ERROR_FTPNO_STOR {
+            description "Error_FTPNoSTOR";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_BandwidthTestStatus";
+      }
+
+      leaf a-arg-type-bandwidthtestresult {
+        type string;
+        config false;
+        description "A_ARG_TYPE_BandwidthTestResult";
+      }
+
+      leaf a-arg-type-interfaces {
+        type enumeration {
+          enum  ALL_INTERFACES {
+            description "AllInterfaces";
+          }
+
+          enum  REQUEST_INTERFACE {
+            description "RequestInterface";
+          }
+
+          enum  NORTHBOUND_INTERFACES {
+            description "NorthboundInterfaces";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_Interfaces";
+      }
+
+      leaf a-arg-type-interfaceresetstatus {
+        type enumeration {
+          enum  SUCCESS {
+            description "Success";
+          }
+
+          enum  ERROR {
+            description "Error";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_InterfaceResetStatus";
+      }
+
+      leaf a-arg-type-loguri {
+        type inet:uri;
+        config false;
+        description "A_ARG_TYPE_LogURI";
+      }
+
+      leaf a-arg-type-logurl {
+        type inet:uri;
+        config false;
+        description "A_ARG_TYPE_LogURL";
+      }
+
+      leaf a-arg-type-loglevel {
+        type enumeration {
+          enum  EMERGENCY {
+            description "Emergency";
+          }
+
+          enum  ALERT {
+            description "Alert";
+          }
+
+          enum  CRITICAL {
+            description "Critical";
+          }
+
+          enum  ERROR {
+            description "Error";
+          }
+
+          enum  WARNING {
+            description "Warning";
+          }
+
+          enum  NOTICE {
+            description "Notice";
+          }
+
+          enum  INFORMATIONAL {
+            description "Informational";
+          }
+
+          enum  DEBUG {
+            description "Debug";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_LogLevel";
+      }
+
+      leaf a-arg-type-logmaxsize {
+        type uint32;
+        config false;
+        description "A_ARG_TYPE_LogMaxSize";
+      }
+
+      leaf a-arg-type-acl {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ACL";
+      }
+
+    }
+
+  }
+
+  grouping basic-management-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container device-status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container sequence-mode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container test-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container active-test-i-ds {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container log-u-r-is {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-boolean {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-string {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-ushort {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-uint {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-datetime {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-msecs {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-rebootstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-testid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-testtype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-teststate {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-testendpoint {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-testschedule {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-testsessid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-dscp {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-host {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-hosts {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-hostname {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-pingstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-nslookupstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-nslookupresult {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-traceroutestatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-bandwidthtestinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-bandwidthtestspec {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-bandwidthteststatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-bandwidthtestresult {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-interfaces {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-interfaceresetstatus {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-loguri {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-logurl {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-loglevel {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-logmaxsize {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-acl {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping basic-management-action {
+    description "Service actions";
+    action reboot {
+      description "Action Reboot";
+      output {
+        leaf reboot-status {
+          type leafref {
+            path "../../state/a-arg-type-rebootstatus";
+          }
+
+          description "Related to A_ARG_TYPE_RebootStatus";
+        }
+
+      }
+
+    }
+
+    action baseline-reset {
+      description "Action BaselineReset";
+    }
+
+    action get-device-status {
+      description "Action GetDeviceStatus";
+      output {
+        leaf device-status {
+          type leafref {
+            path "../../state/device-status";
+          }
+
+          description "Related to DeviceStatus";
+        }
+
+      }
+
+    }
+
+    action set-sequence-mode {
+      description "Action SetSequenceMode";
+      input {
+        leaf new-sequence-mode {
+          type boolean;
+          description "Related to SequenceMode";
+        }
+
+      }
+
+      output {
+        leaf old-sequence-mode {
+          type leafref {
+            path "../../state/sequence-mode";
+          }
+
+          description "Related to SequenceMode";
+        }
+
+      }
+
+    }
+
+    action get-sequence-mode {
+      description "Action GetSequenceMode";
+      output {
+        leaf sequence-mode {
+          type leafref {
+            path "../../state/sequence-mode";
+          }
+
+          description "Related to SequenceMode";
+        }
+
+      }
+
+    }
+
+    action ping {
+      description "Action Ping";
+      input {
+        leaf host {
+          type string;
+          description "Related to A_ARG_TYPE_Host";
+        }
+
+        leaf number-of-repetitions {
+          type uint32;
+          description "Related to A_ARG_TYPE_UInt";
+        }
+
+        leaf timeout {
+          type uint32;
+          description "Related to A_ARG_TYPE_MSecs";
+        }
+
+        leaf data-block-size {
+          type uint16;
+          description "Related to A_ARG_TYPE_UShort";
+        }
+
+        leaf d-s-c-p {
+          type uint8;
+          description "Related to A_ARG_TYPE_DSCP";
+        }
+
+      }
+
+      output {
+        leaf test-i-d {
+          type leafref {
+            path "../../state/a-arg-type-testid";
+          }
+
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+    }
+
+    action get-ping-result {
+      description "Action GetPingResult";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-pingstatus";
+          }
+
+          description "Related to A_ARG_TYPE_PingStatus";
+        }
+
+        leaf additional-info {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf success-count {
+          type leafref {
+            path "../../state/a-arg-type-uint";
+          }
+
+          description "Related to A_ARG_TYPE_UInt";
+        }
+
+        leaf failure-count {
+          type leafref {
+            path "../../state/a-arg-type-uint";
+          }
+
+          description "Related to A_ARG_TYPE_UInt";
+        }
+
+        leaf average-response-time {
+          type leafref {
+            path "../../state/a-arg-type-msecs";
+          }
+
+          description "Related to A_ARG_TYPE_MSecs";
+        }
+
+        leaf minimum-response-time {
+          type leafref {
+            path "../../state/a-arg-type-msecs";
+          }
+
+          description "Related to A_ARG_TYPE_MSecs";
+        }
+
+        leaf maximum-response-time {
+          type leafref {
+            path "../../state/a-arg-type-msecs";
+          }
+
+          description "Related to A_ARG_TYPE_MSecs";
+        }
+
+      }
+
+    }
+
+    action n-s-lookup {
+      description "Action NSLookup";
+      input {
+        leaf host-name {
+          type string;
+          description "Related to A_ARG_TYPE_HostName";
+        }
+
+        leaf d-n-s-server {
+          type string;
+          description "Related to A_ARG_TYPE_Host";
+        }
+
+        leaf number-of-repetitions {
+          type uint32;
+          description "Related to A_ARG_TYPE_UInt";
+        }
+
+        leaf timeout {
+          type uint32;
+          description "Related to A_ARG_TYPE_MSecs";
+        }
+
+      }
+
+      output {
+        leaf test-i-d {
+          type leafref {
+            path "../../state/a-arg-type-testid";
+          }
+
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+    }
+
+    action get-n-s-lookup-result {
+      description "Action GetNSLookupResult";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-nslookupstatus";
+          }
+
+          description "Related to A_ARG_TYPE_NSLookupStatus";
+        }
+
+        leaf additional-info {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf success-count {
+          type leafref {
+            path "../../state/a-arg-type-uint";
+          }
+
+          description "Related to A_ARG_TYPE_UInt";
+        }
+
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-nslookupresult";
+          }
+
+          description "Related to A_ARG_TYPE_NSLookupResult";
+        }
+
+      }
+
+    }
+
+    action traceroute {
+      description "Action Traceroute";
+      input {
+        leaf host {
+          type string;
+          description "Related to A_ARG_TYPE_Host";
+        }
+
+        leaf timeout {
+          type uint32;
+          description "Related to A_ARG_TYPE_MSecs";
+        }
+
+        leaf data-block-size {
+          type uint16;
+          description "Related to A_ARG_TYPE_UShort";
+        }
+
+        leaf max-hop-count {
+          type uint32;
+          description "Related to A_ARG_TYPE_UInt";
+        }
+
+        leaf d-s-c-p {
+          type uint8;
+          description "Related to A_ARG_TYPE_DSCP";
+        }
+
+      }
+
+      output {
+        leaf test-i-d {
+          type leafref {
+            path "../../state/a-arg-type-testid";
+          }
+
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+    }
+
+    action get-traceroute-result {
+      description "Action GetTracerouteResult";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-traceroutestatus";
+          }
+
+          description "Related to A_ARG_TYPE_TracerouteStatus";
+        }
+
+        leaf additional-info {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf response-time {
+          type leafref {
+            path "../../state/a-arg-type-msecs";
+          }
+
+          description "Related to A_ARG_TYPE_MSecs";
+        }
+
+        leaf hop-hosts {
+          type leafref {
+            path "../../state/a-arg-type-hosts";
+          }
+
+          description "Related to A_ARG_TYPE_Hosts";
+        }
+
+      }
+
+    }
+
+    action get-bandwidth-test-info {
+      description "Action GetBandwidthTestInfo";
+      output {
+        leaf bandwidth-test-info {
+          type leafref {
+            path "../../state/a-arg-type-bandwidthtestinfo";
+          }
+
+          description "Related to A_ARG_TYPE_BandwidthTestInfo";
+        }
+
+      }
+
+    }
+
+    action bandwidth-test {
+      description "Action BandwidthTest";
+      input {
+        leaf bandwidth-test-spec {
+          type string;
+          description "Related to A_ARG_TYPE_BandwidthTestSpec";
+        }
+
+        leaf test-endpoint {
+          type string;
+          description "Related to A_ARG_TYPE_TestEndpoint";
+        }
+
+        leaf test-schedule {
+          type string;
+          description "Related to A_ARG_TYPE_TestSchedule";
+        }
+
+        leaf test-sess-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_TestSessID";
+        }
+
+      }
+
+      output {
+        leaf test-i-d {
+          type leafref {
+            path "../../state/a-arg-type-testid";
+          }
+
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+    }
+
+    action get-bandwidth-test-result {
+      description "Action GetBandwidthTestResult";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+      output {
+        leaf state {
+          type leafref {
+            path "../../state/a-arg-type-teststate";
+          }
+
+          description "Related to A_ARG_TYPE_TestState";
+        }
+
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-bandwidthteststatus";
+          }
+
+          description "Related to A_ARG_TYPE_BandwidthTestStatus";
+        }
+
+        leaf additional-info {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf result {
+          type leafref {
+            path "../../state/a-arg-type-bandwidthtestresult";
+          }
+
+          description "Related to A_ARG_TYPE_BandwidthTestResult";
+        }
+
+      }
+
+    }
+
+    action interface-reset {
+      description "Action InterfaceReset";
+      input {
+        leaf interfaces {
+          type string;
+          description "Related to A_ARG_TYPE_Interfaces";
+        }
+
+      }
+
+      output {
+        leaf test-i-d {
+          type leafref {
+            path "../../state/a-arg-type-testid";
+          }
+
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+    }
+
+    action get-interface-reset-result {
+      description "Action GetInterfaceResetResult";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-interfaceresetstatus";
+          }
+
+          description "Related to A_ARG_TYPE_InterfaceResetStatus";
+        }
+
+        leaf additional-info {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+        leaf number-of-successes {
+          type leafref {
+            path "../../state/a-arg-type-ushort";
+          }
+
+          description "Related to A_ARG_TYPE_UShort";
+        }
+
+        leaf number-of-failures {
+          type leafref {
+            path "../../state/a-arg-type-ushort";
+          }
+
+          description "Related to A_ARG_TYPE_UShort";
+        }
+
+      }
+
+    }
+
+    action self-test {
+      description "Action SelfTest";
+      output {
+        leaf test-i-d {
+          type leafref {
+            path "../../state/a-arg-type-testid";
+          }
+
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+    }
+
+    action get-self-test-result {
+      description "Action GetSelfTestResult";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+      output {
+        leaf status {
+          type leafref {
+            path "../../state/a-arg-type-boolean";
+          }
+
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+        leaf additional-info {
+          type leafref {
+            path "../../state/a-arg-type-string";
+          }
+
+          description "Related to A_ARG_TYPE_String";
+        }
+
+      }
+
+    }
+
+    action get-test-i-ds {
+      description "Action GetTestIDs";
+      output {
+        leaf test-i-ds {
+          type leafref {
+            path "../../state/test-i-ds";
+          }
+
+          description "Related to TestIDs";
+        }
+
+      }
+
+    }
+
+    action get-active-test-i-ds {
+      description "Action GetActiveTestIDs";
+      output {
+        leaf test-i-ds {
+          type leafref {
+            path "../../state/active-test-i-ds";
+          }
+
+          description "Related to ActiveTestIDs";
+        }
+
+      }
+
+    }
+
+    action get-test-info {
+      description "Action GetTestInfo";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+      output {
+        leaf type {
+          type leafref {
+            path "../../state/a-arg-type-testtype";
+          }
+
+          description "Related to A_ARG_TYPE_TestType";
+        }
+
+        leaf state {
+          type leafref {
+            path "../../state/a-arg-type-teststate";
+          }
+
+          description "Related to A_ARG_TYPE_TestState";
+        }
+
+      }
+
+    }
+
+    action cancel-test {
+      description "Action CancelTest";
+      input {
+        leaf test-i-d {
+          type uint32;
+          description "Related to A_ARG_TYPE_TestID";
+        }
+
+      }
+
+    }
+
+    action get-log-u-r-is {
+      description "Action GetLogURIs";
+      output {
+        leaf log-u-r-is {
+          type leafref {
+            path "../../state/log-u-r-is";
+          }
+
+          description "Related to LogURIs";
+        }
+
+      }
+
+    }
+
+    action set-log-info {
+      description "Action SetLogInfo";
+      input {
+        leaf log-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_LogURI";
+        }
+
+        leaf enabled {
+          type boolean;
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+        leaf log-level {
+          type string;
+          description "Related to A_ARG_TYPE_LogLevel";
+        }
+
+      }
+
+    }
+
+    action get-log-info {
+      description "Action GetLogInfo";
+      input {
+        leaf log-u-r-i {
+          type inet:uri;
+          description "Related to A_ARG_TYPE_LogURI";
+        }
+
+      }
+
+      output {
+        leaf configurable {
+          type leafref {
+            path "../../state/a-arg-type-boolean";
+          }
+
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+        leaf enabled {
+          type leafref {
+            path "../../state/a-arg-type-boolean";
+          }
+
+          description "Related to A_ARG_TYPE_Boolean";
+        }
+
+        leaf log-level {
+          type leafref {
+            path "../../state/a-arg-type-loglevel";
+          }
+
+          description "Related to A_ARG_TYPE_LogLevel";
+        }
+
+        leaf log-u-r-l {
+          type leafref {
+            path "../../state/a-arg-type-logurl";
+          }
+
+          description "Related to A_ARG_TYPE_LogURL";
+        }
+
+        leaf max-size {
+          type leafref {
+            path "../../state/a-arg-type-logmaxsize";
+          }
+
+          description "Related to A_ARG_TYPE_LogMaxSize";
+        }
+
+        leaf last-change {
+          type leafref {
+            path "../../state/a-arg-type-datetime";
+          }
+
+          description "Related to A_ARG_TYPE_DateTime";
+        }
+
+      }
+
+    }
+
+    action get-a-c-l-data {
+      description "Action GetACLData";
+      output {
+        leaf a-c-l {
+          type leafref {
+            path "../../state/a-arg-type-acl";
+          }
+
+          description "Related to A_ARG_TYPE_ACL";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping basic-management-top {
+    description "Service top";
+    container basic-management {
+      description "Service";
+      uses basic-management-state-top;
+      uses basic-management-state-attributes-top;
+      uses basic-management-action;
+    }
+
+  }
+
+  grouping basic-management-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses basic-management-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

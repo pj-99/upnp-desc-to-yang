@@ -1,0 +1,1099 @@
+module call-management {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/call-management";
+  prefix "call-management";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "call-management";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses call-management-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping call-management-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf a-arg-type-telephonyserveridentity {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TelephonyServerIdentity";
+      }
+
+      leaf a-arg-type-callbackid {
+        type enumeration {
+          enum  BUSY {
+            description "Busy";
+          }
+
+          enum  NOT_ACCEPTABLE_CAPABILITY {
+            description "Not Acceptable Capability";
+          }
+
+          enum  REJECTED {
+            description "Rejected";
+          }
+
+          enum  CANCELLED {
+            description "Cancelled";
+          }
+
+        }
+
+        config false;
+        description "A_ARG_TYPE_CallBackID";
+      }
+
+      leaf a-arg-type-calleeid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CalleeID";
+      }
+
+      leaf tel-c-p-name-list {
+        type string;
+        config false;
+        description "TelCPNameList";
+      }
+
+      leaf a-arg-type-calllogs {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallLogs";
+      }
+
+      leaf a-arg-type-callbackinfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallBackInfoList";
+      }
+
+      leaf a-arg-type-secretkey {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SecretKey";
+      }
+
+      leaf a-arg-type-mediacapabilityinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_MediaCapabilityInfo";
+      }
+
+      leaf a-arg-type-tclist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TCList";
+      }
+
+      leaf a-arg-type-callinfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallInfoList";
+      }
+
+      leaf a-arg-type-telcpnamelist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TelCPNameList";
+      }
+
+      leaf call-info {
+        type string;
+        config false;
+        description "CallInfo";
+      }
+
+      leaf a-arg-type-expires {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_Expires";
+      }
+
+      leaf a-arg-type-telcpname {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TelCPName";
+      }
+
+      leaf a-arg-type-callid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallID";
+      }
+
+      leaf call-back-availability {
+        type string;
+        config false;
+        description "CallBackAvailability";
+      }
+
+      leaf a-arg-type-callmode {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallMode";
+      }
+
+      leaf a-arg-type-rejectreason {
+        type string;
+        config false;
+        description "A_ARG_TYPE_RejectReason";
+      }
+
+      leaf a-arg-type-callpriority {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallPriority";
+      }
+
+      leaf push-info {
+        type string;
+        config false;
+        description "PushInfo";
+      }
+
+      leaf voice-mail-info {
+        type string;
+        config false;
+        description "VoiceMailInfo";
+      }
+
+      leaf parallel-call-info {
+        type string;
+        config false;
+        description "ParallelCallInfo";
+      }
+
+      leaf a-arg-type-pushinfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_PushInfoList";
+      }
+
+      leaf a-arg-type-voicemailinfolist {
+        type string;
+        config false;
+        description "A_ARG_TYPE_VoiceMailInfoList";
+      }
+
+      leaf a-arg-type-voicemailid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_VoiceMailID";
+      }
+
+      leaf a-arg-type-calltype {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallType";
+      }
+
+      leaf a-arg-type-callerid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_CallerID";
+      }
+
+      leaf a-arg-type-maxwaitingtime {
+        type int32;
+        config false;
+        description "A_ARG_TYPE_MaxWaitingTime";
+      }
+
+    }
+
+  }
+
+  grouping call-management-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container a-arg-type-telephonyserveridentity {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-callbackid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-calleeid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container tel-c-p-name-list {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-calllogs {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-callbackinfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-secretkey {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-mediacapabilityinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-tclist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-callinfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-telcpnamelist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container call-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-expires {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-telcpname {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-callid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container call-back-availability {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-callmode {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-rejectreason {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-callpriority {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container push-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container voice-mail-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container parallel-call-info {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-pushinfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-voicemailinfolist {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-voicemailid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-calltype {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-callerid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-maxwaitingtime {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping call-management-action {
+    description "Service actions";
+    action accept-call {
+      description "Action AcceptCall";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf target-call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+        leaf call-mode {
+          type string;
+          description "Related to A_ARG_TYPE_CallMode";
+        }
+
+      }
+
+    }
+
+    action accept-modify-call {
+      description "Action AcceptModifyCall";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf target-call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+    }
+
+    action change-monopolizer {
+      description "Action ChangeMonopolizer";
+      input {
+        leaf current-monopolizer {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf target-call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf new-monopolizer {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+      }
+
+    }
+
+    action change-tel-c-p-name {
+      description "Action ChangeTelCPName";
+      input {
+        leaf current-tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf current-secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf new-tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+      }
+
+      output {
+        leaf new-secret-key {
+          type leafref {
+            path "../../state/a-arg-type-secretkey";
+          }
+
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf expires {
+          type leafref {
+            path "../../state/a-arg-type-expires";
+          }
+
+          description "Related to A_ARG_TYPE_Expires";
+        }
+
+      }
+
+    }
+
+    action clear-call-back {
+      description "Action ClearCallBack";
+      input {
+        leaf call-back-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallBackID";
+        }
+
+      }
+
+    }
+
+    action clear-call-logs {
+      description "Action ClearCallLogs";
+    }
+
+    action get-call-back-info {
+      description "Action GetCallBackInfo";
+      output {
+        leaf call-back-info {
+          type leafref {
+            path "../../state/a-arg-type-callbackinfolist";
+          }
+
+          description "Related to A_ARG_TYPE_CallBackInfoList";
+        }
+
+      }
+
+    }
+
+    action get-call-info {
+      description "Action GetCallInfo";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf target-call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+      }
+
+      output {
+        leaf call-info-list {
+          type leafref {
+            path "../../state/a-arg-type-callinfolist";
+          }
+
+          description "Related to A_ARG_TYPE_CallInfoList";
+        }
+
+      }
+
+    }
+
+    action get-call-logs {
+      description "Action GetCallLogs";
+      output {
+        leaf call-logs {
+          type leafref {
+            path "../../state/a-arg-type-calllogs";
+          }
+
+          description "Related to A_ARG_TYPE_CallLogs";
+        }
+
+      }
+
+    }
+
+    action get-media-capabilities {
+      description "Action GetMediaCapabilities";
+      input {
+        leaf t-c-media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+      output {
+        leaf supported-media-capability-info {
+          type leafref {
+            path "../../state/a-arg-type-mediacapabilityinfo";
+          }
+
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+    }
+
+    action get-telephony-identity {
+      description "Action GetTelephonyIdentity";
+      output {
+        leaf telephony-identity {
+          type leafref {
+            path "../../state/a-arg-type-telephonyserveridentity";
+          }
+
+          description "Related to A_ARG_TYPE_TelephonyServerIdentity";
+        }
+
+      }
+
+    }
+
+    action get-tel-c-p-name-list {
+      description "Action GetTelCPNameList";
+      output {
+        leaf tel-c-p-name-list {
+          type leafref {
+            path "../../state/a-arg-type-telcpnamelist";
+          }
+
+          description "Related to A_ARG_TYPE_TelCPNameList";
+        }
+
+      }
+
+    }
+
+    action initiate-call {
+      description "Action InitiateCall";
+      input {
+        leaf callee-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CalleeID";
+        }
+
+      }
+
+      output {
+        leaf call-i-d {
+          type leafref {
+            path "../../state/a-arg-type-callid";
+          }
+
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+      }
+
+    }
+
+    action modify-call {
+      description "Action ModifyCall";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf target-call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+    }
+
+    action register-call-back {
+      description "Action RegisterCallBack";
+      input {
+        leaf callee-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CalleeID";
+        }
+
+      }
+
+      output {
+        leaf call-back-i-d {
+          type leafref {
+            path "../../state/a-arg-type-callbackid";
+          }
+
+          description "Related to A_ARG_TYPE_CallBackID";
+        }
+
+      }
+
+    }
+
+    action register-tel-c-p-name {
+      description "Action RegisterTelCPName";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf current-secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+      }
+
+      output {
+        leaf new-secret-key {
+          type leafref {
+            path "../../state/a-arg-type-secretkey";
+          }
+
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf expires {
+          type leafref {
+            path "../../state/a-arg-type-expires";
+          }
+
+          description "Related to A_ARG_TYPE_Expires";
+        }
+
+      }
+
+    }
+
+    action reject-call {
+      description "Action RejectCall";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf target-call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf reject-reason {
+          type string;
+          description "Related to A_ARG_TYPE_RejectReason";
+        }
+
+      }
+
+    }
+
+    action start-call {
+      description "Action StartCall";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf callee-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CalleeID";
+        }
+
+        leaf call-priority {
+          type string;
+          description "Related to A_ARG_TYPE_CallPriority";
+        }
+
+        leaf media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+        leaf call-mode {
+          type string;
+          description "Related to A_ARG_TYPE_CallMode";
+        }
+
+      }
+
+      output {
+        leaf call-i-d {
+          type leafref {
+            path "../../state/a-arg-type-callid";
+          }
+
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+      }
+
+    }
+
+    action start-media-transfer {
+      description "Action StartMediaTransfer";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf target-call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf t-c-list {
+          type string;
+          description "Related to A_ARG_TYPE_TCList";
+        }
+
+        leaf media-capability-info {
+          type string;
+          description "Related to A_ARG_TYPE_MediaCapabilityInfo";
+        }
+
+      }
+
+    }
+
+    action stop-call {
+      description "Action StopCall";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+      }
+
+    }
+
+    action unregister-tel-c-p-name {
+      description "Action UnregisterTelCPName";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+      }
+
+    }
+
+    action change-call-mode {
+      description "Action ChangeCallMode";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf call-mode {
+          type string;
+          description "Related to A_ARG_TYPE_CallMode";
+        }
+
+      }
+
+    }
+
+    action get-push-info {
+      description "Action GetPushInfo";
+      input {
+        leaf push-info-list {
+          type string;
+          description "Related to A_ARG_TYPE_PushInfoList";
+        }
+
+      }
+
+    }
+
+    action ignore-call {
+      description "Action IgnoreCall";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf call-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+        leaf ignore-reason {
+          type string;
+          description "Related to A_ARG_TYPE_RejectReason";
+        }
+
+      }
+
+    }
+
+    action get-voice-mail {
+      description "Action GetVoiceMail";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf voice-mail-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_VoiceMailID";
+        }
+
+      }
+
+      output {
+        leaf voice-mail-info-list {
+          type leafref {
+            path "../../state/a-arg-type-voicemailinfolist";
+          }
+
+          description "Related to A_ARG_TYPE_VoiceMailInfoList";
+        }
+
+      }
+
+    }
+
+    action delete-voice-mail {
+      description "Action DeleteVoiceMail";
+      input {
+        leaf tel-c-p-name {
+          type string;
+          description "Related to A_ARG_TYPE_TelCPName";
+        }
+
+        leaf secret-key {
+          type string;
+          description "Related to A_ARG_TYPE_SecretKey";
+        }
+
+        leaf voice-mail-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_VoiceMailID";
+        }
+
+      }
+
+    }
+
+    action enhanced-initiate-call {
+      description "Action EnhancedInitiateCall";
+      input {
+        leaf callee-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CalleeID";
+        }
+
+        leaf call-type {
+          type string;
+          description "Related to A_ARG_TYPE_CallType";
+        }
+
+      }
+
+      output {
+        leaf call-i-d {
+          type leafref {
+            path "../../state/a-arg-type-callid";
+          }
+
+          description "Related to A_ARG_TYPE_CallID";
+        }
+
+      }
+
+    }
+
+    action waiting-for-call {
+      description "Action WaitingForCall";
+      input {
+        leaf caller-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallerID";
+        }
+
+        leaf max-waiting-time {
+          type int32;
+          description "Related to A_ARG_TYPE_MaxWaitingTime";
+        }
+
+      }
+
+    }
+
+    action initiate-parallel-call {
+      description "Action InitiateParallelCall";
+      input {
+        leaf parallel-caller-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CallerID";
+        }
+
+      }
+
+    }
+
+    action accept-parallel-call {
+      description "Action AcceptParallelCall";
+      input {
+        leaf parallel-callee-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_CalleeID";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping call-management-top {
+    description "Service top";
+    container call-management {
+      description "Service";
+      uses call-management-state-top;
+      uses call-management-state-attributes-top;
+      uses call-management-action;
+    }
+
+  }
+
+  grouping call-management-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses call-management-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}

@@ -1,0 +1,253 @@
+module address-book {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/address-book";
+  prefix "address-book";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "address-book";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  uses address-book-top;
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+  grouping address-book-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf incoming-request {
+        type string;
+        config false;
+        description "IncomingRequest";
+      }
+
+      leaf a-arg-type-incomingrequests {
+        type string;
+        config false;
+        description "A_ARG_TYPE_IncomingRequests";
+      }
+
+      leaf a-arg-type-sharedcontacts {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SharedContacts";
+      }
+
+      leaf a-arg-type-sharedinfo {
+        type string;
+        config false;
+        description "A_ARG_TYPE_SharedInfo";
+      }
+
+      leaf a-arg-type-targetcontacts {
+        type string;
+        config false;
+        description "A_ARG_TYPE_TargetContacts";
+      }
+
+      leaf a-arg-type-reqid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_ReqID";
+      }
+
+      leaf a-arg-type-networkaddressbookid {
+        type string;
+        config false;
+        description "A_ARG_TYPE_NetworkAddressBookID";
+      }
+
+    }
+
+  }
+
+  grouping address-book-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container incoming-request {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-incomingrequests {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sharedcontacts {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-sharedinfo {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-targetcontacts {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-reqid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container a-arg-type-networkaddressbookid {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping address-book-action {
+    description "Service actions";
+    action share-contacts {
+      description "Action ShareContacts";
+      input {
+        leaf shared-contacts {
+          type string;
+          description "Related to A_ARG_TYPE_SharedContacts";
+        }
+
+        leaf shared-info {
+          type string;
+          description "Related to A_ARG_TYPE_SharedInfo";
+        }
+
+        leaf target-contacts {
+          type string;
+          description "Related to A_ARG_TYPE_TargetContacts";
+        }
+
+      }
+
+    }
+
+    action fetchcontact-info {
+      description "Action FetchcontactInfo";
+      input {
+        leaf targetcontacts {
+          type string;
+          description "Related to A_ARG_TYPE_TargetContacts";
+        }
+
+        leaf share-info {
+          type string;
+          description "Related to A_ARG_TYPE_SharedInfo";
+        }
+
+      }
+
+    }
+
+    action share-p-c-c {
+      description "Action SharePCC";
+      input {
+        leaf target-contacts {
+          type string;
+          description "Related to A_ARG_TYPE_TargetContacts";
+        }
+
+        leaf share-info {
+          type string;
+          description "Related to A_ARG_TYPE_SharedInfo";
+        }
+
+      }
+
+    }
+
+    action accept {
+      description "Action Accept";
+      input {
+        leaf request-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ReqID";
+        }
+
+      }
+
+    }
+
+    action reject {
+      description "Action Reject";
+      input {
+        leaf request-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_ReqID";
+        }
+
+      }
+
+    }
+
+    action import-contacts {
+      description "Action ImportContacts";
+      input {
+        leaf network-address-book-i-d {
+          type string;
+          description "Related to A_ARG_TYPE_NetworkAddressBookID";
+        }
+
+      }
+
+    }
+
+    action retrieve-incoming-requests {
+      description "Action RetrieveIncomingRequests";
+      output {
+        leaf active-incoming-requests {
+          type leafref {
+            path "../../state/a-arg-type-incomingrequests";
+          }
+
+          description "Related to A_ARG_TYPE_IncomingRequests";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping address-book-top {
+    description "Service top";
+    container address-book {
+      description "Service";
+      uses address-book-state-top;
+      uses address-book-state-attributes-top;
+      uses address-book-action;
+    }
+
+  }
+
+  grouping address-book-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses address-book-top;
+    }
+
+  }
+
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+}
