@@ -1,0 +1,158 @@
+<!--============================================================
+Title: UPnP RA RATAConfig Service Template
+
+Purpose:
+To identify the required/optional actions and state variables
+and the required allowed values defined by this service type.
+
+Note:
+This file uses tabs (not spaces) for block indentation.
+Any updates to this file should maintain this convention.
+This includes disabling any automatic tab-to-space conversion
+feature provided by your editor. 
+================================================================-->
+<scpd>
+	<serviceStateTable>
+		<stateVariable>
+			<name>SystemInfo</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>TransportAgentCapabilities</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>CredentialDelivery</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>CredentialsList</name>
+			<sendEventsAttribute>yes</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>ProfileList</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>A_ARG_TYPE_ProfileConfigInfo</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>A_ARG_TYPE_ProfileID</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>ui4</dataType>
+		</stateVariable>
+	</serviceStateTable>
+		
+	<actionList>
+		<action>
+			<name>GetTransportAgentCapabilities</name>
+			<argumentList>
+				<argument>
+					<name>TransportAgentCapabilities</name>
+					<direction>out</direction>
+					<relatedStateVariable>TransportAgentCapabilities</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>GetSupportedCredentialDelivery</name>
+			<argumentList>
+				<argument>
+					<name>SupportedCredentialDelivery</name>
+					<direction>out</direction>
+					<relatedStateVariable>CredentialDelivery</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>GetCredentialsList</name>
+			<argumentList>
+				<argument>
+					<name>CurrentCredentialsList</name>
+					<direction>out</direction>
+					<relatedStateVariable>CredentialsList</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>GetProfileList</name>
+			<argumentList>
+				<argument>
+					<name>ProfileList</name>
+					<direction>out</direction>
+					<relatedStateVariable>ProfileList</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>AddProfile</name>
+			<argumentList>
+				<argument>
+					<name>NewProfileConfigInfo</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_ProfileConfigInfo</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>EditProfile</name>
+			<argumentList>
+				<argument>
+					<name>ProfileID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_ProfileID</relatedStateVariable>
+				</argument>
+				<argument>
+					<name>UpdatedProfileConfigInfo</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_ProfileConfigInfo</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>DeleteProfile</name>
+			<argumentList>
+				<argument>
+					<name>ProfileID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_ProfileID</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>GetProfileConfigInfo</name>
+			<argumentList>
+				<argument>
+					<name>ProfileID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_ProfileID</relatedStateVariable>
+				</argument>
+				<argument>
+					<name>ProfileConfigInfo</name>
+					<direction>out</direction>
+					<relatedStateVariable>A_ARG_TYPE_ProfileConfigInfo</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+	</actionList>
+</scpd>

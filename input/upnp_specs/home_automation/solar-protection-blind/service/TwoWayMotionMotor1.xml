@@ -1,0 +1,163 @@
+<scpd>
+	<serviceStateTable>
+
+		<stateVariable>
+			<name>OperationMode</name>
+			<sendEventsAttribute>yes</sendEventsAttribute>
+			<dataType>String</dataType>
+			<defaultValue>Manual UnProtected</defaultValue>
+			<allowedValueList>
+				<allowedValue>Manual UnProtected</allowedValue>
+				<allowedValue>Manual Protected</allowedValue>
+				<allowedValue>Automatic</allowedValue>
+			</allowedValueList>
+		</stateVariable>
+
+		<stateVariable>
+			<Optional />
+			<name>Position</name>
+			<sendEventsAttribute>yes</sendEventsAttribute>
+			<dataType>ui1</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<Optional />
+			<name>ServiceLocked</name>
+			<sendEventsAttribute>yes</sendEventsAttribute>
+			<dataType>Boolean</dataType>
+			<defaultValue>1</defaultValue>
+		</stateVariable>
+
+		<stateVariable>
+			<Optional />
+			<name>ARG_TYPE_Steps</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>ui1</dataType>
+			<!-- The default value is 1, but the spec says 0 -->
+			<defaultValue>1</defaultValue>
+			<allowedValueRange>
+				<minimum>1</minimum>
+				<maximum>30</maximum>
+			</allowedValueRange>
+		</stateVariable>
+
+		<stateVariable>
+			<Optional />
+			<name>A_ARG_TYPE_MAX_USAGE_TIME</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>i4</dataType>
+		</stateVariable>
+
+		<!-- The PositionArgType is not defined in the spec, but it is used in the spec -->
+		<!-- So add it here -->
+		<stateVariable>
+			<name>PositionArgType</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>String</dataType>
+			<defaultValue>End Limits</defaultValue>
+			<allowedValueList>
+				<allowedValue>End Limits</allowedValue>
+				<allowedValue>Continuous</allowedValue>
+			</allowedValueList>
+		</stateVariable>
+
+	</serviceStateTable>
+
+	<actionList>
+
+		<action>
+			<name>Open</name>
+		</action>
+
+		<action>
+			<name>Close</name>
+		</action>
+
+		<action>
+			<name>Stop</name>
+		</action>
+
+		<action>
+			<name>GetOperationMode</name>
+			<argumentList>
+				<argument>
+					<name>RetOperationMode</name>
+					<direction>out</direction>
+					<relatedStateVariable>OperationMode</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>SetOperationMode</name>
+			<argumentList>
+				<argument>
+					<name>NewOperationMode</name>
+					<direction>in</direction>
+					<relatedStateVariable>OperationMode</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<Optional />
+			<name>IsLocked</name>
+			<argumentList>
+				<argument>
+					<name>RetLocking</name>
+					<direction>out</direction>
+					<relatedStateVariable>ServiceLocked</relatedStateVariable>
+				</argument>
+			</argumentList>
+
+		</action>
+
+		<action>
+			<Optional />
+			<name>Lock</name>
+		</action>
+
+		<action>
+			<Optional />
+			<name>UnLock</name>
+		</action>
+
+		<action>
+			<Optional />
+			<name>GetPosition</name>
+			<argumentList>
+				<argument>
+					<name>RetPosition</name>
+					<direction>out</direction>
+					<relatedStateVariable>Position</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<Optional />
+			<name>SetPosition</name>
+			<argumentList>
+				<argument>
+					<name>NewPosition</name>
+					<direction>in</direction>
+					<relatedStateVariable>Position</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<Optional />
+			<name>GetPositionArgType</name>
+			<argumentList>
+				<argument>
+					<name>RetArgType</name>
+					<direction>out</direction>
+					<relatedStateVariable>PositionArgType</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+	</actionList>
+
+</scpd>

@@ -1,0 +1,212 @@
+<scpd>
+    <serviceStateTable>
+
+        <stateVariable>
+          <name>ISPPhoneNumber</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <name>ISPInfo</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <name>LinkType</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+          <allowedValueList>
+            <allowedValue>PPP_Dialup</allowedValue>
+          </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+          <name>NumberOfRetries</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>      
+        </stateVariable>
+
+        <stateVariable>
+          <name>DelayBetweenRetries</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>      
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>Fclass</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>DataModulationSupported</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>DataProtocol</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>DataCompression</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+            <Optional/>
+            <name>PlusVTRCommandSupported</name>
+            <sendEventsAttribute>no</sendEventsAttribute>
+            <dataType>boolean</dataType>      
+        </stateVariable>
+    </serviceStateTable>
+
+    <actionList>
+
+        <action>
+        <Optional/>
+        <name>SetISPInfo</name>
+          <argumentList>
+            <argument>
+              <name>NewISPPhoneNumber</name>
+              <direction>in</direction>
+              <relatedStateVariable>ISPPhoneNumber</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewISPInfo</name>
+              <direction>in</direction>
+              <relatedStateVariable>ISPInfo</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewLinkType</name>
+              <direction>in</direction>
+              <relatedStateVariable>LinkType</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+        <name>SetCallRetryInfo</name>
+          <argumentList>
+            <argument>
+              <name>NewNumberOfRetries</name>
+              <direction>in</direction>
+              <relatedStateVariable>NumberOfRetries</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewDelayBetweenRetries</name>
+              <direction>in</direction>
+            <relatedStateVariable>DelayBetweenRetries</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <name>GetISPInfo</name>
+          <argumentList>
+            <argument>
+              <name>NewISPPhoneNumber</name>
+              <direction>out</direction>
+              <relatedStateVariable>ISPPhoneNumber</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewISPInfo</name>
+              <direction>out</direction>
+              <relatedStateVariable>ISPInfo</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewLinkType</name>
+              <direction>out</direction>
+              <relatedStateVariable>LinkType</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <name>GetCallRetryInfo</name>
+          <argumentList>
+            <argument>
+              <name>NewNumberOfRetries</name>
+              <direction>out</direction>
+              <relatedStateVariable>NumberOfRetries</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewDelayBetweenRetries</name>
+              <direction>out</direction>
+              <relatedStateVariable>DelayBetweenRetries</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+        <name>GetFclass</name>
+          <argumentList>
+            <argument>
+              <name>NewFclass</name>
+              <direction>out</direction>
+              <relatedStateVariable>Fclass</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+        <name>GetDataModulationSupported</name>
+          <argumentList>
+            <argument>
+              <name>NewDataModulationSupported</name>
+              <direction>out</direction>
+              <relatedStateVariable>DataModulationSupported</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+        <name>GetDataProtocol</name>
+          <argumentList>
+            <argument>
+              <name>NewDataProtocol</name>
+              <direction>out</direction>
+              <relatedStateVariable>DataProtocol</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+        <name>GetDataCompression</name>
+          <argumentList>
+            <argument>
+              <name>NewDataCompression</name>
+              <direction>out</direction>
+              <relatedStateVariable>DataCompression</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+        <name>GetPlusVTRCommandSupported</name>
+          <argumentList>
+            <argument>
+              <name>NewPlusVTRCommandSupported</name>
+              <direction>out</direction>
+              <relatedStateVariable>PlusVTRCommandSupported</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+    </actionList>
+</scpd>

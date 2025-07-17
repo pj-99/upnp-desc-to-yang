@@ -1,0 +1,179 @@
+<scpd>
+    <serviceStateTable>
+        <stateVariable>
+            <name>LinkType</name>
+            <sendEventsAttribute>no</sendEventsAttribute>
+            <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+            <name>LinkStatus</name>
+            <dataType>string</dataType>
+            <allowedValueList>
+                <allowedValue>Up</allowedValue>
+                <allowedValue>Down</allowedValue>
+            </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+            <Optional/> 
+            <name>ModulationType</name>
+            <sendEventsAttribute>no</sendEventsAttribute>
+            <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+            <Optional/> 
+            <name> DestinationAddress </name>
+            <sendEventsAttribute>no</sendEventsAttribute>
+            <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+            <Optional/> 
+            <name>ATMEncapsulation</name>
+            <sendEventsAttribute>no</sendEventsAttribute>
+            <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+            <Optional/> 
+            <name>FCSPreserved</name>
+            <sendEventsAttribute>no</sendEventsAttribute>
+            <dataType>boolean</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <name>AutoConfig</name>
+        <dataType>boolean</dataType>
+        </stateVariable>
+
+    </serviceStateTable>
+
+  <actionList>
+
+    <action>
+    <name>SetDSLLinkType</name>
+      <argumentList>
+        <argument>
+          <name>NewLinkType</name>
+          <direction>in</direction>
+          <relatedStateVariable>LinkType</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <name>GetDSLLinkInfo</name>
+      <argumentList>
+        <argument>
+          <name>NewLinkType</name>
+          <direction>out</direction>
+          <relatedStateVariable>LinkType</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>NewLinkStatus</name>
+          <direction>out</direction>
+          <relatedStateVariable>LinkStatus</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <name>GetAutoConfig</name>
+      <argumentList>
+        <argument>
+          <name>NewAutoConfig</name>
+          <direction>out</direction>
+          <relatedStateVariable>AutoConfig</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/> 
+    <name>GetModulationType</name>
+      <argumentList>
+        <argument>
+          <name>NewModulationType</name>
+          <direction>out</direction>
+          <relatedStateVariable>ModulationType</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/> 
+    <name>SetDestinationAddress</name>
+      <argumentList>
+        <argument>
+          <name>NewDestinationAddress</name>
+          <direction>in</direction>
+         <relatedStateVariable>DestinationAddress</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/> 
+    <name>GetDestinationAddress</name>
+      <argumentList>
+        <argument>
+          <name>NewDestinationAddress</name>
+          <direction>out</direction>
+         <relatedStateVariable>DestinationAddress</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/> 
+    <name>SetATMEncapsulation</name>
+      <argumentList>
+        <argument>
+          <name>NewATMEncapsulation</name>
+          <direction>in</direction>
+          <relatedStateVariable>ATMEncapsulation</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/> 
+    <name>GetATMEncapsulation</name>
+      <argumentList>
+        <argument>
+          <name>NewATMEncapsulation</name>
+          <direction>out</direction>
+          <relatedStateVariable>ATMEncapsulation</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/> 
+    <name>SetFCSPreserved</name>
+      <argumentList>
+        <argument>
+          <name>NewFCSPreserved</name>
+          <direction>in</direction>
+          <relatedStateVariable>FCSPreserved</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/> 
+    <name>GetFCSPreserved</name>
+      <argumentList>
+        <argument>
+          <name>NewFCSPreserved</name>
+          <direction>out</direction>
+          <relatedStateVariable>FCSPreserved</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+  </actionList>
+
+</scpd>

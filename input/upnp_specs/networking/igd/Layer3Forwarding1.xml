@@ -1,0 +1,30 @@
+<scpd>
+    <serviceStateTable>
+        <stateVariable>
+            <name>DefaultConnectionService</name>
+            <dataType>string</dataType>
+        </stateVariable>
+    </serviceStateTable>
+    <actionList>
+        <action>
+            <name>SetDefaultConnectionService</name>
+            <argumentList>
+                <argument>
+                <name>NewDefaultConnectionService</name>
+                <direction>in</direction>
+                <relatedStateVariable>DefaultConnectionService</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+        <action>
+            <name>GetDefaultConnectionService</name>
+            <argumentList>
+                <argument>
+                    <name>NewDefaultConnectionService</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>DefaultConnectionService</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+    </actionList>
+</scpd>

@@ -1,0 +1,257 @@
+<scpd>
+    <serviceStateTable>
+
+        <stateVariable>
+          <name>WANAccessType</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+          <allowedValueList>
+            <allowedValue>DSL</allowedValue>
+            <allowedValue>POTS</allowedValue>
+            <allowedValue>Cable</allowedValue>
+            <allowedValue>Ethernet</allowedValue>
+          </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+            <name>Layer1UpstreamMaxBitRate</name>
+            <sendEventsAttribute>no</sendEventsAttribute>
+            <dataType>ui4</dataType>    
+        </stateVariable>
+
+        <stateVariable>
+          <name>Layer1DownstreamMaxBitRate</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <name>PhysicalLinkStatus</name>
+          <dataType>string</dataType>
+          <allowedValueList>
+            <allowedValue>Up</allowedValue>
+            <allowedValue>Down</allowedValue>
+          </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>WANAccessProvider</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>MaximumActiveConnections</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui2</dataType>
+          <allowedValueRange>
+            <minimum>1</minimum>
+            <step>1</step>
+          </allowedValueRange>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>NumberOfActiveConnections</name>
+          <dataType>ui2</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>ActiveConnectionDeviceContainer</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>ActiveConnectionServiceID</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>TotalBytesSent</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>TotalBytesReceived</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>TotalPacketsSent</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+        <Optional/>
+          <name>TotalPacketsReceived</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>EnabledForInternet</name>
+          <dataType>boolean</dataType>      
+        </stateVariable>
+    </serviceStateTable>
+
+    <actionList>
+
+        <action>
+        <Optional/>
+          <name>SetEnabledForInternet</name>
+          <argumentList>
+            <argument>
+              <name>NewEnabledForInternet</name>
+              <direction>in</direction>
+             <relatedStateVariable>EnabledForInternet</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetEnabledForInternet</name>
+          <argumentList>
+            <argument>
+              <name>NewEnabledForInternet</name>
+              <direction>out</direction>
+             <relatedStateVariable>EnabledForInternet</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+          <name>GetCommonLinkProperties</name>
+          <argumentList>
+            <argument>
+              <name>NewWANAccessType</name>
+              <direction>out</direction>
+              <relatedStateVariable>WANAccessType</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewLayer1UpstreamMaxBitRate</name>
+              <direction>out</direction>
+              <relatedStateVariable>Layer1UpstreamMaxBitRate</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewLayer1DownstreamMaxBitRate</name>
+              <direction>out</direction>   <relatedStateVariable>Layer1DownstreamMaxBitRate</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewPhysicalLinkStatus</name>
+              <direction>out</direction>
+             <relatedStateVariable>PhysicalLinkStatus</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetWANAccessProvider</name>
+          <argumentList>
+            <argument>
+              <name>NewWANAccessProvider</name>
+              <direction>out</direction>
+              <relatedStateVariable>WANAccessProvider</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetMaximumActiveConnections</name>
+          <argumentList>
+            <argument>
+              <name>NewMaximumActiveConnections</name>
+              <direction>out</direction>
+              <relatedStateVariable>MaximumActiveConnections</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetTotalBytesSent</name>
+          <argumentList>
+            <argument>
+              <name>NewTotalBytesSent</name>
+              <direction>out</direction>
+              <relatedStateVariable>TotalBytesSent</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetTotalBytesReceived</name>
+          <argumentList>
+            <argument>
+              <name>NewTotalBytesReceived</name>
+              <direction>out</direction>
+              <relatedStateVariable>TotalBytesReceived</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetTotalPacketsSent</name>
+          <argumentList>
+            <argument>
+              <name>NewTotalPacketsSent</name>
+              <direction>out</direction>
+              <relatedStateVariable>TotalPacketsSent</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetTotalPacketsReceived</name>
+          <argumentList>
+            <argument>
+              <name>NewTotalPacketsReceived</name>
+              <direction>out</direction>
+             <relatedStateVariable>TotalPacketsReceived</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+        <action>
+        <Optional/>
+          <name>GetActiveConnection</name>
+          <argumentList>
+            <argument>
+              <name>NewActiveConnectionIndex</name>
+              <direction>in</direction>       
+              <relatedStateVariable>NumberOfActiveConnections</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewActiveConnDeviceContainer</name>
+              <direction>out</direction>
+              <relatedStateVariable>ActiveConnectionDeviceContainer</relatedStateVariable>
+            </argument>
+            <argument>
+              <name>NewActiveConnectionServiceID</name>
+              <direction>out</direction>
+              <relatedStateVariable>ActiveConnectionServiceID</relatedStateVariable>
+            </argument>
+          </argumentList>
+        </action>
+
+  </actionList>
+
+</scpd>

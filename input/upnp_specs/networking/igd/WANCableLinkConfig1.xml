@@ -1,0 +1,229 @@
+<scpd>
+    <serviceStateTable>
+        <stateVariable>
+          <name>CableLinkConfigState</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>      
+          <allowedValueList>
+                <allowedValue>notReady</allowedValue>
+                <allowedValue>dsSyncComplete</allowedValue>
+                <allowedValue>usParamAcquired</allowedValue>
+                <allowedValue>rangingComplete</allowedValue>
+	            <allowedValue>ipComplete</allowedValue>
+                <allowedValue>todEstablished</allowedValue>
+                <allowedValue>paramTransferComplete</allowedValue>
+                <allowedValue>registrationComplete</allowedValue>
+                <allowedValue>operational</allowedValue>
+                <allowedValue>accessDenied</allowedValue>
+          </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+          <name>LinkType</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>      
+          <allowedValueList>
+            <allowedValue>Ethernet</allowedValue>
+          </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>DownstreamFrequency</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>DownstreamModulation</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+          <allowedValueList>
+            <allowedValue>64QAM</allowedValue>
+            <allowedValue>256QAM</allowedValue>
+          </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>UpstreamFrequency</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>UpstreamModulation</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>
+          <allowedValueList>
+            <allowedValue>QPSK</allowedValue>
+            <allowedValue>16QAM</allowedValue>
+          </allowedValueList>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>UpstreamChannelID</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>UpstreamPowerLevel</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>ui4</dataType>
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>ConfigFile</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>      
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>TFTPServer</name>
+          <sendEventsAttribute>no</sendEventsAttribute>
+          <dataType>string</dataType>     
+        </stateVariable>
+
+        <stateVariable>
+          <Optional/>
+          <name>BPIEncryptionEnabled</name>
+          <dataType>boolean</dataType>      
+        </stateVariable>
+
+    </serviceStateTable>
+
+    <actionList>
+        <action>
+            <name>GetCableLinkConfigInfo</name>
+            <argumentList>
+                <argument>
+                  <name>NewCableLinkConfigState</name>
+                  <direction>out</direction>
+                  <relatedStateVariable>CableLinkConfigState</relatedStateVariable>
+                </argument>
+                <argument>
+                  <name>NewLinkType</name>
+                  <direction>out</direction>
+                  <relatedStateVariable>LinkType</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+
+        <action>
+            <Optional/>
+            <name>GetDownstreamFrequency</name>
+              <argumentList>
+                <argument>
+                  <name>NewDownstreamFrequency</name>
+                  <direction>out</direction>
+                  <relatedStateVariable>DownstreamFrequency</relatedStateVariable>
+                </argument>
+              </argumentList>
+        </action>
+
+        <action>
+            <Optional/>
+            <name>GetDownstreamModulation</name>
+            <argumentList>
+                <argument>
+                  <name>NewDownstreamModulation</name>
+                  <direction>out </direction>
+                  <relatedStateVariable>DownstreamModulation</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+
+        <action>
+            <Optional/>
+            <name>GetUpstreamFrequency</name>
+            <argumentList>
+                <argument>
+                  <name>NewUpstreamFrequency</name>
+                  <direction>out</direction>
+                  <relatedStateVariable>UpstreamFrequency</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+
+        <action>
+            <Optional/>
+            <name>GetUpstreamModulation</name>
+            <argumentList>
+                <argument>
+                  <name>NewUpstreamModulation</name>
+                  <direction>out</direction>
+                 <relatedStateVariable>UpstreamModulation</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+    
+        <action>
+            <Optional/>
+            <name>GetUpstreamChannelID</name>
+            <argumentList>
+                <argument>
+                  <name>NewUpstreamChannelID</name>
+                  <direction>out</direction>
+                  <relatedStateVariable>UpstreamChannelID</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+
+        <action>
+            <Optional/>
+            <name>GetUpstreamPowerLevel</name>
+            <argumentList>
+                <argument>
+                  <name>NewUpstreamPowerLevel</name>
+                  <direction>out</direction>
+                 <relatedStateVariable>UpstreamPowerLevel</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+        
+    <action>
+        <Optional/>
+        <name>GetBPIEncryptionEnabled</name>
+        <argumentList>
+            <argument>
+              <name>NewBPIEncryptionEnabled</name>
+              <direction>out</direction>
+              <relatedStateVariable>BPIEncryptionEnabled</relatedStateVariable>
+            </argument>
+        </argumentList>
+    </action>
+
+    <action>
+        <Optional/>
+        <name>GetConfigFile</name>
+        <argumentList>
+            <argument>
+              <name>NewConfigFile</name>
+              <direction>out</direction>
+              <relatedStateVariable>ConfigFile</relatedStateVariable>
+            </argument>
+        </argumentList>
+    </action>
+
+    <action>
+        <Optional/>
+        <name>GetTFTPServer</name>
+        <argumentList>
+            <argument>
+              <name>NewTFTPServer</name>
+              <direction>out</direction>
+              <relatedStateVariable>TFTPServer</relatedStateVariable>
+            </argument>
+        </argumentList>
+    </action>
+  </actionList>
+
+
+</scpd>

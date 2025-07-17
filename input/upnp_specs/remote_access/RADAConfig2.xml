@@ -1,0 +1,119 @@
+<!--============================================================
+Title: UPnP RADAConfig Service Template
+
+Purpose:
+To identify the required/optional actions and state variables
+and the required allowed values defined by this service type.
+
+Note:
+This file uses tabs (not spaces) for block indentation.
+Any updates to this file should maintain this convention.
+This includes disabling any automatic tab-to-space conversion
+feature provided by your editor. 
+================================================================-->
+<scpd>
+	<serviceStateTable>
+		<stateVariable>
+			<name>SystemInfo</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>SystemInfoUpdateID</name>
+			<sendEventsAttribute>yes</sendEventsAttribute>
+			<dataType>ui4</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>A_ARG_TYPE_UUID</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>A_ARG_TYPE_FilterList</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+		<stateVariable>
+			<name>A_ARG_TYPE_VirtualDeviceDescr</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+		<stateVariable>
+			<name>A_ARG_TYPE_VirtualDeviceID</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+		<stateVariable>
+			<name>A_ARG_TYPE_VirtualDeviceList</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+	</serviceStateTable>
+
+	<actionList>
+		<action>
+			<name>EditFilter</name>
+			<argumentList>
+				<argument>
+					<name>Filter</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_FilterList</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>GetSystemInfo</name>
+			<argumentList>
+				<argument>
+					<name>ID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_UUID</relatedStateVariable>
+				</argument>
+				<argument>
+					<name>SystemInfo</name>
+					<direction>out</direction>
+					<relatedStateVariable>SystemInfo</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+		<action>
+			<name>CreateVirtualDevice</name>
+			<argumentList>
+				<argument>
+					<name>VirtualDeviceDescr</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_VirtualDeviceDescr</relatedStateVariable>
+				</argument>
+				<argument>
+					<name>VirtualDeviceID</name>
+					<direction>out</direction>
+					<relatedStateVariable>A_ARG_TYPE_VirtualDeviceID</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+		<action>
+			<name>GetVirtualDevices</name>
+			<argumentList>
+				<argument>
+					<name>VirtualDeviceList</name>
+					<direction>out</direction>
+					<relatedStateVariable>A_ARG_TYPE_VirtualDeviceList</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+		<action>
+			<name>DestroyVirtualDevice</name>
+			<argumentList>
+				<argument>
+					<name>VirtualDeviceID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_VirtualDeviceID</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+	</actionList>
+</scpd>

@@ -1,0 +1,117 @@
+<!--============================================================
+Title: UPnP RADASync Service Template
+
+Purpose:
+To identify the required/optional actions and state variables
+and the required allowed values defined by this service type.
+
+Note:
+This file uses tabs (not spaces) for block indentation.
+Any updates to this file should maintain this convention.
+This includes disabling any automatic tab-to-space conversion
+feature provided by your editor. 
+================================================================-->
+<scpd>
+	<serviceStateTable>
+		<stateVariable>
+			<name>SystemInfo</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>A_ARG_TYPE_DDDLocation</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>A_ARG_TYPE_DeviceInfoList</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+
+		<stateVariable>
+			<name>A_ARG_TYPE_UUID</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+		<stateVariable>
+			<name>A_ARG_TYPE_NetworkAddressInfo</name>
+			<sendEventsAttribute>no</sendEventsAttribute>
+			<dataType>string</dataType>
+		</stateVariable>
+	</serviceStateTable>
+
+	<actionList>
+		<action>
+			<name>AddRemoteDevices</name>
+			<argumentList>
+				<argument>
+					<name>DeviceList</name>
+					<direction>in</direction>          
+					<relatedStateVariable>A_ARG_TYPE_DeviceInfoList</relatedStateVariable>
+				</argument>
+				<argument>
+					<name>ID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_UUID</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>RemoveRemoteDevices</name>
+			<argumentList>
+				<argument>
+					<name>DeviceList</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_DeviceInfoList</relatedStateVariable>
+				</argument>
+				<argument>
+					<name>ID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_UUID</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>SetDDDLocation</name>
+			<argumentList>
+				<argument>
+					<name>DDDLocation</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_DDDLocation</relatedStateVariable>
+				</argument>
+				<argument>
+					<name>ID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_UUID</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>HeartbeatUpdate</name>
+			<argumentList>
+				<argument>
+					<name>ID</name>
+					<direction>in</direction>
+					<relatedStateVariable>A_ARG_TYPE_UUID</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+
+		<action>
+			<name>GetLocalNetworkAddressInfo</name>
+			<argumentList>
+				<argument>
+					<name>LocalNetworkAddress</name>
+					<direction>out</direction>
+					<relatedStateVariable>A_ARG_TYPE_NetworkAddressInfo</relatedStateVariable>
+				</argument>
+			</argumentList>
+		</action>
+	</actionList>
+</scpd>

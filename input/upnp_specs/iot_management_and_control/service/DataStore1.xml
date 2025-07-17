@@ -1,0 +1,625 @@
+
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+
+    <specVersion>
+
+        <major>1</major>
+        <minor>0</minor>
+
+    </specVersion>
+
+    <actionList>
+
+        <action>
+
+            <name>CreateDataStoreGroups</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataStoreGroupList</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataStoreGroups
+
+                    </relatedStateVariable>
+
+                </argument>
+
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>CreateDataStoreTable</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableInfo</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableInfo
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>DeleteDataStoreGroups</name>
+            <argumentList>
+                <argument>
+                    <name>DataStoreGroupList</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+                        A_ARG_TYPE_DataStoreGroups
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>DeleteDataStoreTable</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>GetDataStoreTableKeyValue</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableKeyName</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableKeyName
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableKeyValue</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableKeyValue
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>GetDataStoreGroups</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataStoreGroupList</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataStoreGroups
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>GetDataStoreInfo</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataStoreInfo</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataStoreInfo
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>GetDataStoreTableInfo</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableInfo</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableInfo
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>GetDataStoreTransportURL</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTransportURL</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTransportURL
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>ModifyDataStoreTable</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableInfoElementOrig</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableInfoElement
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableInfoElementNew</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableInfoElement
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>ReadDataStoreTableRecords</name> Copyright UPnP Forum © 2013. All rights reserved.
+            DataStore:1 <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecordFilter</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecordFilter
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecordStart</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecordIndex
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecordCount</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecordCount
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecordPropResolve</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecordPropResolve
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecords</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecords
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecordContinue</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecordIndex
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>RemoveDataStoreTableKeyValue</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableKeyName</name>
+<direction>in</direction>
+<relatedStateVariable>
+                    A_ARG_TYPE_DataTableKeyName
+
+                    </relatedStateVariable>
+                    Copyright UPnP Forum © 2013. All rights reserved. DataStore:1 </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>ResetDataStoreTable</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>ResetDataTableRecords</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableResetReq
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>ResetDataTableDictionary</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableResetReq
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>ResetDataTableTransport</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableResetReq
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>SetDataStoreTableKeyValue</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableKeyName</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableKeyName
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataTableKeyValue</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableKeyValue
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+        <action>
+
+            <name>WriteDataStoreTableRecords</name>
+            <argumentList>
+                <argument>
+
+                    <name>DataTableID</name>
+<direction>in</direction> Copyright UPnP Forum © 2013.
+                    All rights reserved. DataStore:1 <relatedStateVariable>
+
+                        A_ARG_TYPE_DataTableID
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecords</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecords
+
+                    </relatedStateVariable>
+
+                </argument>
+                <argument>
+
+                    <name>DataRecordsStatus</name>
+                    <direction>out</direction>
+                    <relatedStateVariable>
+
+                        A_ARG_TYPE_DataRecordsStatus
+
+                    </relatedStateVariable>
+
+                </argument>
+            </argumentList>
+
+        </action>
+
+    </actionList>
+
+    <serviceStateTable>
+
+        <stateVariable sendEvents="yes">
+
+            <name>LastChange</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataRecordCount</name>
+            <dataType>ui4</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataRecordIndex</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataRecordFilter</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataTableID</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+
+        <!-- This variable is missing in original docs -->
+        <stateVariable sendEvents="no">
+            <name>A_ARG_TYPE_DataTableInfoElement</name>
+            <dataType>string</dataType>
+        </stateVariable>
+
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataRecordPropResolve</name>
+            <dataType>boolean</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataTableInfoFragment</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataTableKeyName</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataTableKeyValue</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataTableInfo</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+
+        <!-- This variable is missing in original docs -->
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataStoreInfo</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataTableResetReq</name>
+            <dataType>boolean</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+            <name>A_ARG_TYPE_DataStoreGroups</name>
+            <dataType>string</dataType>
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataRecords</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataRecordsStatus</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+        <stateVariable sendEvents="no">
+
+            <name>A_ARG_TYPE_DataTransportURL</name>
+            <dataType>string</dataType>
+
+        </stateVariable>
+
+    </serviceStateTable>
+
+</scpd>

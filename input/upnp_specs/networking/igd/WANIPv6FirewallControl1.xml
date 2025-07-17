@@ -1,0 +1,230 @@
+<scpd>
+
+  <serviceStateTable>
+
+    <stateVariable>
+      <name>FirewallEnabled</name>
+      <sendEventsAttribute>yes</sendEventsAttribute>
+      <dataType>boolean</dataType>
+    </stateVariable>
+
+    <stateVariable>
+      <name>InboundPinholeAllowed</name>
+      <sendEventsAttribute>yes</sendEventsAttribute>
+      <dataType>boolean</dataType>
+    </stateVariable>
+
+    <stateVariable>
+      <Optional/>
+      <name>A_ARG_TYPE_OutboundPinholeTimeout</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>ui4</dataType>
+    </stateVariable>
+
+    <stateVariable>
+      <name>A_ARG_TYPE_IPv6Address</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>string</dataType>
+    </stateVariable>
+
+    <stateVariable>
+      <name>A_ARG_TYPE_Port</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>ui2</dataType>
+    </stateVariable>
+
+     <stateVariable>
+      <name>A_ARG_TYPE_Protocol</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>ui2</dataType>
+    </stateVariable>
+
+    <stateVariable>
+      <name>A_ARG_TYPE_LeaseTime</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>ui4</dataType>
+      <allowedValueRange>
+        <minimum>1</minimum>
+        <maximum>86400</maximum>
+      </allowedValueRange>
+    </stateVariable>
+
+    <stateVariable>
+      <name>A_ARG_TYPE_UniqueID</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>ui2</dataType>
+    </stateVariable>
+
+    <stateVariable>
+      <name>A_ARG_TYPE_PinholePackets</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>ui4</dataType>
+    </stateVariable>
+
+    <stateVariable>
+      <name>A_ARG_TYPE_Boolean</name>
+      <sendEventsAttribute>no</sendEventsAttribute>
+      <dataType>boolean</dataType>
+    </stateVariable>
+    
+ </serviceStateTable>
+
+  <actionList>
+
+   <action>
+    <name>GetFirewallStatus</name>
+      <argumentList>
+        <argument>
+          <name>FirewallEnabled</name>
+          <direction>out</direction>
+          <relatedStateVariable>FirewallEnabled</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>InboundPinholeAllowed</name>
+          <direction>out</direction>
+          <relatedStateVariable>InboundPinholeAllowed</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+     
+    <action>
+    <Optional/>
+    <name>GetOutboundPinholeTimeout</name>
+      <argumentList>
+        <argument>
+          <name>RemoteHost</name>
+          <direction>in</direction>
+          <relatedStateVariable>A_ARG_TYPE_IPv6Address</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>RemotePort</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_Port</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>InternalClient</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_IPv6Address</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>InternalPort</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_Port</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>Protocol</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_Protocol</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>OutboundPinholeTimeout</name>
+          <direction>out</direction>     
+          <relatedStateVariable>A_ARG_TYPE_OutboundPinholeTimeout</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <name>AddPinhole</name>
+      <argumentList>
+        <argument>
+          <name>RemoteHost</name>
+          <direction>in</direction>
+          <relatedStateVariable>A_ARG_TYPE_IPv6Address</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>RemotePort</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_Port</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>InternalClient</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_IPv6Address</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>InternalPort</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_Port</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>Protocol</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_Protocol</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>LeaseTime</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_LeaseTime</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>UniqueID</name>
+          <direction>out</direction>     
+          <relatedStateVariable>A_ARG_TYPE_UniqueID</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <name>UpdatePinhole</name>
+      <argumentList>
+        <argument>
+          <name>UniqueID</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_UniqueID</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>NewLeaseTime</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_LeaseTime</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <name>DeletePinhole</name>
+      <argumentList>
+        <argument>
+          <name>UniqueID</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_UniqueID</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <name>GetPinholePackets</name>
+      <argumentList>
+        <argument>
+          <name>UniqueID</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_UniqueID</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>PinholePackets</name>
+          <direction>out</direction>     
+          <relatedStateVariable>A_ARG_TYPE_PinholePackets</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+    <action>
+    <Optional/>
+    <name>CheckPinholeWorking</name>
+      <argumentList>
+        <argument>
+          <name>UniqueID</name>
+          <direction>in</direction>     
+          <relatedStateVariable>A_ARG_TYPE_UniqueID</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>IsWorking</name>
+          <direction>out</direction>     
+          <relatedStateVariable>A_ARG_TYPE_Boolean</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+
+  </actionList>
+
+</scpd>
