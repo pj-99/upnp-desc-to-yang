@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
+    "pyaml>=25.7.0",
     "pytest>=8.4.1",
 ]
 

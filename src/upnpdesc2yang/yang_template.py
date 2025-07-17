@@ -30,6 +30,7 @@ def get_device_top_grouping(device_name) -> str:
 
 
 def combine_uses_statements(groupings):
+    print("combine_uses_statements: ", groupings)
     return "\n".join([f"uses {grouping};" for grouping in groupings])
 
 
@@ -177,6 +178,15 @@ def get_send_events_grouping():
             type boolean;
             description "Send event attribute";
         }
+    }
+    """
+
+
+def get_state_var_attr_grouping():
+    return """
+    grouping state-variable-attributes {
+        description "upnp state variable attributes";
+        uses send-events-grouping;
     }
     """
 

@@ -1,0 +1,253 @@
+module binary-light {
+  yang-version 1.1;
+  namespace "http://example.com/upnp-yang-schema/binary-light";
+  prefix "binary-light";
+  organization "upnp-yang-test";
+  contact "upnp-yang-test";
+  description
+  "binary-light";
+  revision 2024-06-27 {
+    reference "RFC 8407";
+  }
+
+  grouping binary-light-desc-top {
+    description "Device description";
+    container device {
+      config false;
+      description "Device description";
+      leaf device-type {
+        type string;
+        description "Device type";
+      }
+
+      leaf friendly-name {
+        type string;
+        description "Name";
+      }
+
+      leaf manufacturer {
+        type string;
+        description "Manufacturer";
+      }
+
+      leaf manufacturer-URL {
+        type string;
+        description "Manufacturer URL";
+      }
+
+      leaf model-description {
+        type string;
+        description "Model description";
+      }
+
+      leaf model-name {
+        type string;
+        description "Model name";
+      }
+
+      leaf model-number {
+        type string;
+        description "Model number";
+      }
+
+      leaf model-URL {
+        type string;
+        description "Model URL";
+      }
+
+      leaf serial-number {
+        type string;
+        description "Serial number";
+      }
+
+      leaf UDN {
+        type string;
+        description "UUID";
+      }
+
+      leaf UPC {
+        type string;
+        description "UPC";
+      }
+
+      list icon-list {
+        key "url";
+        description  "Icons";
+        leaf mimetype {
+          type string;
+          description "MIME type";
+        }
+
+        leaf width {
+          type uint32;
+          description "Width";
+        }
+
+        leaf height {
+          type uint32;
+          description "Height";
+        }
+
+        leaf depth {
+          type uint32;
+          description "Color depth";
+        }
+
+        leaf url {
+          type string;
+          description "URL";
+        }
+
+      }
+
+      // TODO: check
+      leaf presentation-url {
+        type string;
+        description "Presentation URL";
+      }
+
+    }
+
+  }
+
+  grouping switch-power-state-top {
+    description "State table";
+    container state {
+      description "State table";
+      leaf target {
+        type boolean;
+        default false;
+        description "Target";
+      }
+
+      leaf status {
+        type boolean;
+        default false;
+        config false;
+        description "Status";
+      }
+
+    }
+
+  }
+
+  grouping switch-power-state-attributes-top {
+    description "Table attributes";
+    container state-attributes {
+      config false;
+      description "Read-only attributes";
+      container target {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+      container status {
+        description "Variable attributes";
+        uses state-variable-attributes;
+      }
+
+    }
+
+  }
+
+  grouping switch-power-action {
+    description "Service actions";
+    action set-target {
+      description "Action SetTarget";
+      input {
+        leaf new-target-value {
+          type boolean;
+          description "Related to Target";
+        }
+
+      }
+
+    }
+
+    action get-target {
+      description "Action GetTarget";
+      output {
+        leaf ret-target-value {
+          type leafref {
+            path "../../state/target";
+          }
+
+          description "Related to Target";
+        }
+
+      }
+
+    }
+
+    action get-status {
+      description "Action GetStatus";
+      output {
+        leaf result-status {
+          type leafref {
+            path "../../state/status";
+          }
+
+          description "Related to Status";
+        }
+
+      }
+
+    }
+
+  }
+
+  grouping switch-power-top {
+    description "Service top";
+    container switch-power {
+      description "Service";
+      uses switch-power-state-top;
+      uses switch-power-state-attributes-top;
+      uses switch-power-action;
+    }
+
+  }
+
+  grouping binary-light-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses switch-power-top;
+    }
+
+  }
+
+  grouping binary-light-devices-top {
+    description "Embedded devices";
+    container devices {
+      description "Embedded devices";
+    }
+
+  }
+
+  grouping binary-light-top {
+    description "binary-light";
+    container binary-light {
+      description "binary-light";
+      uses binary-light-desc-top;
+      uses binary-light-services-top;
+      uses binary-light-devices-top;
+    }
+
+  }
+
+  uses binary-light-top;
+  grouping send-events-grouping {
+    description "Send event attribute";
+    leaf send-events {
+      type boolean;
+      description "Send event attribute";
+    }
+
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
+  }
+
+}

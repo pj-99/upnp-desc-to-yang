@@ -4,22 +4,56 @@
 [![Test](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml/badge.svg)](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml)
 ## Use case
 
-- Convert a UPnP service into a YANG file
+**Convert a UPnP service into a YANG file**
+
+Usage:
+```sh
+python convert.py --service [service.xml] --module [output_module_name]
+```
+
+Example:
+```sh
+python convert.py --service input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml --module switch-power
+```
+
+**Convert a UPnP device with service(s) in a single module**
+Usage:
+```sh
+# Single service
+python convert.py --device --services [serviceA.xml] --module [output_module_name]
+# Multiple services
+python convert.py --device --services [serviceA.xml] [serviceB.xml] --module [output_module_name]
+```
+
+Example:
+```sh
+# Single service
+python convert.py --device \
+    --services \
+        input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
+    --module binary-light
+
+# Multiple service
+python convert.py --device \
+    --services \
+        input/upnp_specs/home_automation/lighting_control/service/Dimming1.xml \
+        input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
+    --module dimmable-light
+```
+
+# Nested devices (TODO)
 
 `TODO`
 
-- Convert a UPnP device and service into a YANG file
-
-`TODO`
-
-### Ungroup Options
+### Ungroup options
 
 
 ---
 
-## Useful commands
+## Useful commands by Pyang
 
-- Linting with Pyang
+- Linting
+- Output
 
 ---
 

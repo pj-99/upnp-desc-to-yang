@@ -6,11 +6,10 @@ from typing import Dict, List, Tuple
 
 from common.case_helper import to_enum_upper_case
 from common.util import format
-from yang_template import get_enums_block
+from yang_template import get_enums_block, get_state_var_attr_grouping
 
 from .service import Service
 from .type_convert import upnp_to_yang_type, upnp_type_to_python_type
-from .upnp_common import upnp_common_groupings
 
 
 class YangService:
@@ -58,7 +57,7 @@ class YangService:
             formatted_str += "\n"
         return formatted_str
 
-    def groupings(self) -> str:
+    def groupings(self, has_state_attr_grouping=True) -> str:
         """All groupings definitions for the service"""
 
         grouping_service_top = f"""
@@ -76,15 +75,16 @@ class YangService:
         """
 
         return f"""
-        {upnp_common_groupings()}        
+        {get_state_var_attr_grouping() if has_state_attr_grouping else ""}        
         {self.state_table_top_grouping()}
         {self.state_table_attribute_top_grouping()}
         {self.service_action_grouping()}
         {grouping_service_top}
         """
 
-    def groupings_and_names(self) -> (str, str):
-        return self.groupings(), f"{self.service_name}-top"
+    def groupings_and_names(self, has_state_attr_grouping=True) -> Tuple[str, str]:
+        print("groupings_and_names: ", f"{self.service_name}-top")
+        return self.groupings(has_state_attr_grouping), f"{self.service_name}-top"
 
     def service_state_table_leaves(self):
         def bool_str_if_need(default_val):
