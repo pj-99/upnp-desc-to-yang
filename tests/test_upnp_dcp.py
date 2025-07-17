@@ -19,7 +19,9 @@ class TestServiceFiles:
                 module_name=module_name,
             )
             assert output_path is not None
-            result = subprocess.run(["pyang", "--lint", "--strict", output_path])
+            result = subprocess.run(
+                ["uv", "run", "pyang", "--lint", "--strict", output_path]
+            )
             assert result.returncode == 0
         except Exception as e:
             pytest.fail(f"Failed to handle {service_file}: {e}")
