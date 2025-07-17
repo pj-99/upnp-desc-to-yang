@@ -23,7 +23,7 @@ jobs:
         run: uv sync --locked 
       
       - name: Install the pyang
-        run: uv pip install pyang
+        run: pip install pyang
 
       - name: Run the tests
         run: uv run pytest

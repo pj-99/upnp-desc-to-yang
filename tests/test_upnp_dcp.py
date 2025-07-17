@@ -19,9 +19,22 @@ class TestServiceFiles:
                 module_name=module_name,
             )
             assert output_path is not None
+
+            # Run pyang validation
             result = subprocess.run(
-                ["uv", "run", "pyang", "--lint", "--strict", output_path]
+                ["pyang", "--lint", "--strict", output_path],
+                capture_output=True,
+                text=True,
             )
-            assert result.returncode == 0
+
+            # If pyang validation failed, show the error output
+            if result.returncode != 0:
+                error_msg = f"\npyang validation failed for {output_path}\n"
+                if result.stdout:
+                    error_msg += f"stdout:\n{result.stdout}\n"
+                if result.stderr:
+                    error_msg += f"stderr:\n{result.stderr}\n"
+                pytest.fail(error_msg)
+
         except Exception as e:
-            pytest.fail(f"Failed to handle {service_file}: {e}")
+            pytest.fail(f"Failed to handle {service_file}: {str(e)}")
