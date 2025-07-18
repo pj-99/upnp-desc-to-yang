@@ -41,9 +41,7 @@ def handle_service_conversion(input_service_file_path, module_name):
     print("Written to", output_path)
 
 
-def handle_device_with_services_conversion(
-    input_device_file_path, input_service_file_paths, module_name
-):
+def handle_device_with_services_conversion(input_service_file_paths, module_name):
     """
     Convert a UPnP device and service(s) into a YANG file
     """
@@ -62,10 +60,25 @@ def handle_device_with_services_conversion(
 def handle_embed_device_input(input_yaml):
     # Read the input yaml file
     with open(input_yaml, "r") as f:
-        input_data = yaml.safe_load(f)
-    print(input_data)
+        input_dict = yaml.safe_load(f)
+    print(input_dict)
 
-    # Append to devices?
+    PARENT = "device_name"
+    CHILDREN = "devices"
+    SERVICES = "services"
+
+    ident = 0
+    queue = []
+    queue.append(input_dict)
+
+    # DFS
+    cur = input_dict
+    while cur:
+        if CHILDREN in cur:
+            cur = cur[CHILDREN]
+
+        if CHILDREN not in cur:
+            cur = None
 
 
 if __name__ == "__main__":
@@ -92,8 +105,7 @@ if __name__ == "__main__":
 
     if args.config:
         handle_embed_device_input(args.config)
-
     elif args.service:
         handle_service_conversion(args.service, args.module)
     elif args.device:
-        handle_device_with_services_conversion(args.device, args.services, args.module)
+        handle_device_with_services_conversion(args.services, args.module)

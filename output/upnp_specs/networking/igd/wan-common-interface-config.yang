@@ -11,11 +11,6 @@ module wan-common-interface-config {
   }
 
   uses wan-common-interface-config-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping wan-common-interface-config-state-top {
     description "State table";
     container state {
@@ -435,6 +430,11 @@ module wan-common-interface-config {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

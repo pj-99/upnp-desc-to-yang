@@ -11,11 +11,6 @@ module cloud-proxy {
   }
 
   uses cloud-proxy-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping cloud-proxy-state-top {
     description "State table";
     container state {
@@ -296,6 +291,11 @@ module cloud-proxy {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

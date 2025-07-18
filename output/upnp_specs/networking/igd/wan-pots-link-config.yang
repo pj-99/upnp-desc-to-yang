@@ -11,11 +11,6 @@ module wan-pots-link-config {
   }
 
   uses wan-pots-link-config-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping wan-pots-link-config-state-top {
     description "State table";
     container state {
@@ -347,6 +342,11 @@ module wan-pots-link-config {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

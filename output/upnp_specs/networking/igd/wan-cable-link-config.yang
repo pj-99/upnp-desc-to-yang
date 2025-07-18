@@ -11,11 +11,6 @@ module wan-cable-link-config {
   }
 
   uses wan-cable-link-config-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping wan-cable-link-config-state-top {
     description "State table";
     container state {
@@ -400,6 +395,11 @@ module wan-cable-link-config {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

@@ -11,11 +11,6 @@ module cloud-transport {
   }
 
   uses cloud-transport-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping cloud-transport-state-top {
     description "State table";
     container state {
@@ -320,6 +315,11 @@ module cloud-transport {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

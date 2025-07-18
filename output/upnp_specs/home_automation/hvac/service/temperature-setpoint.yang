@@ -11,11 +11,6 @@ module temperature-setpoint {
   }
 
   uses temperature-setpoint-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping temperature-setpoint-state-top {
     description "State table";
     container state {
@@ -202,6 +197,11 @@ module temperature-setpoint {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

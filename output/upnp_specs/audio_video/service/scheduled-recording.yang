@@ -11,11 +11,6 @@ module scheduled-recording {
   }
 
   uses scheduled-recording-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping scheduled-recording-state-top {
     description "State table";
     container state {
@@ -718,6 +713,11 @@ module scheduled-recording {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

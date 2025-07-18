@@ -11,11 +11,6 @@ module two-way-motion-motor {
   }
 
   uses two-way-motion-motor-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping two-way-motion-motor-state-top {
     description "State table";
     container state {
@@ -263,6 +258,11 @@ module two-way-motion-motor {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

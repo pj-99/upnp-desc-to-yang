@@ -11,11 +11,6 @@ module device-protection {
   }
 
   uses device-protection-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping device-protection-state-top {
     description "State table";
     container state {
@@ -413,6 +408,11 @@ module device-protection {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

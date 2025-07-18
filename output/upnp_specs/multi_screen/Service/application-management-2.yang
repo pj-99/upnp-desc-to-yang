@@ -11,11 +11,6 @@ module application-management-2 {
   }
 
   uses application-management-2-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping application-management-2-state-top {
     description "State table";
     container state {
@@ -576,6 +571,11 @@ module application-management-2 {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

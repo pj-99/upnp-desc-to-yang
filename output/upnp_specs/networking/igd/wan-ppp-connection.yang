@@ -11,11 +11,6 @@ module wan-ppp-connection {
   }
 
   uses wan-ppp-connection-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping wan-ppp-connection-state-top {
     description "State table";
     container state {
@@ -942,6 +937,11 @@ module wan-ppp-connection {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

@@ -15,11 +15,6 @@ module print-enhanced {
   }
 
   uses print-enhanced-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping print-enhanced-state-top {
     description "State table";
     container state {
@@ -1036,6 +1031,11 @@ module print-enhanced {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

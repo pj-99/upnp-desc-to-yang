@@ -11,11 +11,6 @@ module fan-speed {
   }
 
   uses fan-speed-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping fan-speed-state-top {
     description "State table";
     container state {
@@ -202,6 +197,11 @@ module fan-speed {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

@@ -11,11 +11,6 @@ module call-management {
   }
 
   uses call-management-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping call-management-state-top {
     description "State table";
     container state {
@@ -1094,6 +1089,11 @@ module call-management {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

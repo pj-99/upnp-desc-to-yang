@@ -15,11 +15,6 @@ module software-management {
   }
 
   uses software-management-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping software-management-state-top {
     description "State table";
     container state {
@@ -849,6 +844,11 @@ module software-management {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

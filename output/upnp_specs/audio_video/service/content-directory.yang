@@ -15,11 +15,6 @@ module content-directory {
   }
 
   uses content-directory-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping content-directory-state-top {
     description "State table";
     container state {
@@ -1465,6 +1460,11 @@ module content-directory {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

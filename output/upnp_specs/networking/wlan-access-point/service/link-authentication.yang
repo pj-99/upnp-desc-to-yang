@@ -11,11 +11,6 @@ module link-authentication {
   }
 
   uses link-authentication-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping link-authentication-state-top {
     description "State table";
     container state {
@@ -643,6 +638,11 @@ module link-authentication {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

@@ -11,11 +11,6 @@ module hvac-fan-operating-mode {
   }
 
   uses hvac-fan-operating-mode-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping hvac-fan-operating-mode-state-top {
     description "State table";
     container state {
@@ -190,6 +185,11 @@ module hvac-fan-operating-mode {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

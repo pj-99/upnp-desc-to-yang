@@ -34,10 +34,9 @@ def combine_uses_statements(groupings):
     return "\n".join([f"uses {grouping};" for grouping in groupings])
 
 
-def get_children_devices_top_grouping(device_name, devices_groupings):
-    uses_statements = combine_uses_statements(devices_groupings)
-    return (
-        f"""
+def get_children_devices_top_grouping(device_name, devices_groupings_names):
+    uses_statements = combine_uses_statements(devices_groupings_names)
+    return f"""
     grouping {device_name}-devices-top {{
         description "Embedded devices";
         container devices {{
@@ -45,9 +44,7 @@ def get_children_devices_top_grouping(device_name, devices_groupings):
             {uses_statements}
         }}
     }}
-    """,
-        f"{device_name}-devices-top",
-    )
+    """
 
 
 def get_services_top_grouping(device_name, service_groupings):
@@ -159,7 +156,6 @@ def get_device_desc_top_grouping(device_name):
                 }
             }
             
-            // TODO: check
             leaf presentation-url {
                 type string;
                 description "Presentation URL";

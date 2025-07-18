@@ -11,11 +11,6 @@ module digital-security-camera-settings {
   }
 
   uses digital-security-camera-settings-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping digital-security-camera-settings-state-top {
     description "State table";
     container state {
@@ -304,6 +299,11 @@ module digital-security-camera-settings {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

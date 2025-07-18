@@ -11,11 +11,6 @@ module external-activity {
   }
 
   uses external-activity-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping external-activity-state-top {
     description "State table";
     container state {
@@ -194,6 +189,11 @@ module external-activity {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

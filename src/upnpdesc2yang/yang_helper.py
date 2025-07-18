@@ -2,6 +2,7 @@ import unittest
 from dataclasses import dataclass, field
 
 import common.util as util
+from yang_template import get_send_events_grouping, get_state_var_attr_grouping
 
 
 class YangHelperTest(unittest.TestCase):
@@ -170,6 +171,7 @@ class YangContainer:
         self._update_repr()
 
 
+# Refactor: use OOP like by these class
 @dataclass
 class YangLeaf:
     name: str
@@ -255,11 +257,17 @@ class YangModule:
         """
 
     def __repr__(self):
+
+        # # common meta-data groupings
+        meta_data_content = "\n".join(
+            [get_send_events_grouping(), get_state_var_attr_grouping()]
+        )
         return util.format_yang(
             f"""
             module {self.name} {{
                 {self.module_info_str}        
                 {self.content}
+                {meta_data_content}
             }}
             """
         )

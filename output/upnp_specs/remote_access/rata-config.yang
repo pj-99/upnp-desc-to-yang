@@ -11,11 +11,6 @@ module rata-config {
   }
 
   uses rata-config-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping rata-config-state-top {
     description "State table";
     container state {
@@ -265,6 +260,11 @@ module rata-config {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

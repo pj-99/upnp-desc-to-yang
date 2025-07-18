@@ -11,11 +11,6 @@ module rada-sync {
   }
 
   uses rada-sync-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping rada-sync-state-top {
     description "State table";
     container state {
@@ -197,6 +192,11 @@ module rada-sync {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

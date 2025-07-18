@@ -11,11 +11,6 @@ module house-status {
   }
 
   uses house-status-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping house-status-state-top {
     description "State table";
     container state {
@@ -220,6 +215,11 @@ module house-status {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

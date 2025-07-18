@@ -11,11 +11,6 @@ module address-book {
   }
 
   uses address-book-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping address-book-state-top {
     description "State table";
     container state {
@@ -248,6 +243,11 @@ module address-book {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

@@ -11,11 +11,6 @@ module data-store {
   }
 
   uses data-store-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping data-store-state-top {
     description "State table";
     container state {
@@ -581,6 +576,11 @@ module data-store {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

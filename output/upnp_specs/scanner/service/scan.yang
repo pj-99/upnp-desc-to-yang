@@ -11,11 +11,6 @@ module scan {
   }
 
   uses scan-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping scan-state-top {
     description "State table";
     container state {
@@ -832,6 +827,11 @@ module scan {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

@@ -11,11 +11,6 @@ module layer-3-forwarding {
   }
 
   uses layer-3-forwarding-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping layer-3-forwarding-state-top {
     description "State table";
     container state {
@@ -101,6 +96,11 @@ module layer-3-forwarding {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

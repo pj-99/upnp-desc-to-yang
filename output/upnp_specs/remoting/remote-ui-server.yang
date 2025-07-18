@@ -15,11 +15,6 @@ module remote-ui-server {
   }
 
   uses remote-ui-server-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping remote-ui-server-state-top {
     description "State table";
     container state {
@@ -179,6 +174,11 @@ module remote-ui-server {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }

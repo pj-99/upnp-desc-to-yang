@@ -11,11 +11,6 @@ module control-valve {
   }
 
   uses control-valve-top;
-  grouping state-variable-attributes {
-    description "upnp state variable attributes";
-    uses send-events-grouping;
-  }
-
   grouping control-valve-state-top {
     description "State table";
     container state {
@@ -259,6 +254,11 @@ module control-valve {
       description "Send event attribute";
     }
 
+  }
+
+  grouping state-variable-attributes {
+    description "upnp state variable attributes";
+    uses send-events-grouping;
   }
 
 }
