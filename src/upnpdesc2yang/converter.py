@@ -52,11 +52,12 @@ class Device:
         self._set_repr()
 
     def _set_repr(self):
-        contents = self.contents + self.children
         # Make child contents
-        content_str = "\n".join(contents)
+        children_content = "\n".join(list(map(str, self.children)))
 
-        self.__repr = content_str
+        content_str = "\n".join(self.contents)
+
+        self.__repr = content_str + children_content
 
     def __repr__(self) -> str:
         return self.__repr
@@ -114,11 +115,8 @@ def convert_device_with_services(
         root_name, service_xml_files, embed_device_groupings
     )
 
-    module = YangModule(
-        root_name,
-        get_yang_output_namespace(root_name),
-        str(device),
-    )
+    module = wrap_content_to_module(root_name, str(device))
+
     module_output = str(module)
     return module_output
 
@@ -147,11 +145,20 @@ def convert_service(root_name, service_xml) -> str:
             services_top,
         ]
     )
-    yang_output_namespace = get_yang_output_namespace(root_name)
-    module = YangModule(root_name, yang_output_namespace, content)
+    module = wrap_content_to_module(root_name, content)
 
     module_output = str(module)
     return module_output
+
+
+def wrap_content_to_module(root_name, content) -> YangModule:
+    namespace = get_yang_output_namespace(root_name)
+    module = YangModule(
+        root_name,
+        namespace,
+        content,
+    )
+    return module
 
 
 def handle_upnp_spec_file(input_service_file, module_name) -> str:
