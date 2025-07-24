@@ -71,7 +71,7 @@ python convert.py --ungroup <input.yang> --output-path <output.yang>
 python convert.py --ungroup output/runs/binary-light.yang --output-path output/runs/binary-light-ungrouped.yang
 ```
 
-## Pyang Utilities
+## [Pyang](https://github.com/mbj4668/pyang) Utilities
 
 Useful commands for working with generated YANG modules:
 
