@@ -1,87 +1,84 @@
-
-# UPnP service and device description to YANG (RFC 7950)
+# UPnP descriptions to YANG Converter
 
 [![Test](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml/badge.svg)](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml)
-## Use case
 
-### Convert a UPnP service into a single module
+Convert UPnP service and device descriptions to YANG modules (RFC 7950).
 
-Usage:
-```sh
-python convert.py --service [service.xml] --module [output_module_name]
+## Usage
+
+### Service to Module
+Convert a single UPnP service to YANG module:
+
+```bash
+python convert.py --service <service.xml> --module <module_name>
 ```
 
-Example:
-```sh
+**Example:**
+```bash
 python convert.py --service input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml --module switch-power
 ```
 
-### Convert a UPnP device with service(s) into a single module
-Usage:
-```sh
+### Device to Module
+Convert UPnP device with services to YANG module:
+
+```bash
 # Single service
-python convert.py --device --services [serviceA.xml] --module [output_module_name]
-# Multiple services
-python convert.py --device --services [serviceA.xml] [serviceB.xml] --module [output_module_name]
+python convert.py --device --services <service.xml> --module <module_name>
+
+# Multiple services  
+python convert.py --device --services <serviceA.xml> <serviceB.xml> --module <module_name>
 ```
 
-Example:
-```sh
-# Single service
+**Examples:**
+```bash
+# Binary light (single service)
 python convert.py --device \
-    --services \
-        input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
+    --services input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
     --module binary-light \
     --output output/runs
 
-# Multiple service
+# Dimmable light (multiple services)
 python convert.py --device \
-    --services \
-        input/upnp_specs/home_automation/lighting_control/service/Dimming1.xml \
-        input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
+    --services input/upnp_specs/home_automation/lighting_control/service/Dimming1.xml \
+               input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
     --module dimmable-light \
     --output output/runs
 ```
 
-### Convert a UPnP device with embed device(s) into a single module
+### Device with Embedded Devices
+Convert complex device structures using configuration file:
 
-- See `input.yaml` for input structure
-
-Usage
-```sh
-python convert.py --config [config.yaml]
+```bash
+python convert.py --config <config.yaml> --output <output_dir>
 ```
 
-Example:
-```sh
-python convert.py --config input.yaml \
-    --output output/runs
+**Example:**
+```bash
+python convert.py --config input.yaml --output output/runs
 ```
 
-### Ungroup
-- Ungroup the `grouping` and `uses` statements in a yang file, while remaining the structure unchanged.
+> See `input.yaml` for configuration structure.
 
+### Ungrouping
+Remove `grouping` and `uses` statements while preserving structure:
 
-Usage: Ungroup a yang file
-```sh
-python convert.py --ungroup [input.yang] --output-path [path/output.yang]
+```bash
+python convert.py --ungroup <input.yang> --output-path <output.yang>
 ```
 
-Example:
-```sh
+**Example:**
+```bash
 python convert.py --ungroup output/runs/binary-light.yang --output-path output/runs/binary-light-ungrouped.yang
 ```
 
----
+## Pyang Utilities
 
-## Useful commands by Pyang
+Useful commands for working with generated YANG modules:
 
-- Linting
-```sh
-pyang --lint [your-module.yang]
+```bash
+# Validate syntax
+pyang --lint <module.yang>
+
+# Generate tree view
+pyang -f tree <module.yang>
 ```
-- Output tree
-```sh
-pyang -f tree [your-module.yang]
-```
----
