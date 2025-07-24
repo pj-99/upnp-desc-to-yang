@@ -1,3 +1,7 @@
+import inspect
+import unittest
+from pathlib import Path
+
 from xml.etree.ElementTree import Element
 
 
@@ -30,11 +34,6 @@ def format(identifier: str):
         else:
             new_identifier += c.lower()
     return new_identifier
-
-
-import inspect
-import unittest
-from pathlib import Path
 
 
 def format_yang(str_yang):
@@ -112,8 +111,6 @@ def extract_groupings(yang_content, exclude):
             grouping_name = stripped_line.split()[1]
             if grouping_name not in exclude:
                 current_grouping = grouping_name
-
-            # current_grouping = stripped_line.split()[1]
 
         if current_grouping:
             current_content.append(line)

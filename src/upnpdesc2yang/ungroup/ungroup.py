@@ -1,5 +1,5 @@
 # Un-grouping the yang file and make the content smaller
-import src.upnpdesc2yang.common.util as util
+from upnpdesc2yang.common import util
 
 
 class Grouping:
@@ -48,14 +48,7 @@ def replace_top_level_grouping(yang_content, grouping_map, level=1, exclude=[]):
     return replace_top_level_grouping(new_content, grouping_map, level + 1, exclude)
 
 
-def main(yang_file_name):
-    with open(yang_file_name, "r") as f:
-        yang_content = f.read()
-
-    return convert(yang_content)
-
-
-def convert(yang_content, exclude_grouping=["send-events-grouping"]):
+def ungroup(yang_content, exclude_grouping=["send-events-grouping"]):
     grouping_map, clean_content = util.extract_groupings(yang_content, exclude_grouping)
     content = replace_top_level_grouping(
         clean_content, grouping_map, 1, exclude_grouping
@@ -80,7 +73,11 @@ def minify(yang_content):
 
 
 if __name__ == "__main__":
-    output = convert("light-device.yang")
+    yang_file_name = "light-device.yang"
+    with open(yang_file_name, "r") as f:
+        yang_content = f.read()
+
+    output = ungroup(yang_content)
     # Write output to file
     minified = minify(output)
 
