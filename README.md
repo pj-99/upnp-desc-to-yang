@@ -61,7 +61,18 @@ python convert.py --config input.yaml \
 
 
 ### Ungroup options
+- Ungroup the `grouping` and `uses` statements, while remaining the structure unchanged.
 
+
+Usage: Ungroup a yang file
+```sh
+python convert.py --ungroup [input.yang] --output-path [path/output.yang]
+```
+
+Example:
+```sh
+python convert.py --ungroup output/runs/binary-light.yang --output-path binary-light.yang
+```
 
 ---
 

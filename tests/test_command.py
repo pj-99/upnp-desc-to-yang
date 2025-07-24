@@ -1,3 +1,4 @@
+import difflib
 import subprocess
 
 
@@ -95,5 +96,46 @@ class TestCommand:
             result.stdout.find("another-grandchild-device") != -1
         ), "Embed device not found"
 
+        # Clean up
+        subprocess.run(["rm", output_path])
+
+    def test_command_ungroup(self):
+        input_path = "tests/test_input/ungroup-input.yang"
+        output_path = "ungroup-input.yang"
+
+        convert_result = subprocess.run(
+            [
+                "python",
+                "convert.py",
+                "--ungroup",
+                input_path,
+                "--output-path",
+                f"{output_path}",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert convert_result.returncode == 0, "Ungroup failed"
+
+        original_tree = subprocess.run(
+            ["pyang", "-f", "tree", input_path],
+            capture_output=True,
+            text=True,
+        )
+        assert original_tree.returncode == 0, "Original tree failed"
+        ungrouped_tree = subprocess.run(
+            ["pyang", "-f", "tree", output_path],
+            capture_output=True,
+            text=True,
+        )
+        assert ungrouped_tree.returncode == 0, "Ungrouped tree failed"
+
+        diff = list(
+            difflib.unified_diff(
+                original_tree.stdout,
+                ungrouped_tree.stdout,
+            )
+        )
+        assert not diff, "Ungrouping has differences:\n" + "\n".join(diff)
         # Clean up
         subprocess.run(["rm", output_path])

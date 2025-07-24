@@ -48,13 +48,13 @@ def replace_top_level_grouping(yang_content, grouping_map, level=1, exclude=[]):
     return replace_top_level_grouping(new_content, grouping_map, level + 1, exclude)
 
 
-def ungroup(yang_content, exclude_grouping=["send-events-grouping"]):
+def ungroup_content(yang_content, exclude_grouping=["send-events-grouping"]):
     grouping_map, clean_content = util.extract_groupings(yang_content, exclude_grouping)
     content = replace_top_level_grouping(
         clean_content, grouping_map, 1, exclude_grouping
     )
     formatted = util.format_yang(content)
-    return formatted
+    return minify(formatted)
 
 
 def minify(yang_content):
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     with open(yang_file_name, "r") as f:
         yang_content = f.read()
 
-    output = ungroup(yang_content)
+    output = ungroup_content(yang_content)
     # Write output to file
     minified = minify(output)
 

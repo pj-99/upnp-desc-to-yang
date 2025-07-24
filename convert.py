@@ -15,6 +15,8 @@ from src.upnpdesc2yang.converter import (
     wrap_content_to_module,
 )
 
+from src.upnpdesc2yang.ungroup import ungroup_content
+
 
 def get_output_path(module_name, output_dir: str = None) -> Path:
     return (
@@ -32,7 +34,7 @@ def handle_upnp_spec_file(input_service_file, module_name):
 
     output_path = output_dir / (module_name + ".yang")
 
-    output = convert_device_with_services(module_name, input_service_file, minify=False)
+    output = convert_device_with_services(module_name, input_service_file)
 
     write_file(output_path, output)
     print("Written to", output_path)
@@ -101,6 +103,23 @@ def handle_embed_device_input(input_yaml, output_dir=None):
     return root_device
 
 
+def handle_ungroup(yang_file_path, output_path) -> str:
+    """Remove all grouping and uses statements from a yang file, while remaining the structure unchanged.
+
+    Args:
+        yang_file_path (str): Path to the yang file to ungroup
+        output_path (str): Path to the output file
+
+    Returns:
+        str: The ungrouped yang content
+    """
+    with open(yang_file_path, "r") as f:
+        yang_content = f.read()
+    ungrouped = ungroup_content(yang_content)
+    write_file(Path(output_path), ungrouped)
+    return ungrouped
+
+
 def write_file(path: Path, content: str):
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w") as f:
@@ -130,6 +149,14 @@ if __name__ == "__main__":
     # Output directory
     parser.add_argument("--output", type=str, help="Path to the output directory")
 
+    # Ungroup a yang file
+    parser.add_argument("--ungroup", type=str, help="Path to the yang file to ungroup")
+    parser.add_argument(
+        "--output-path",
+        type=str,
+        help="Path to the output file for ungrouping",
+    )
+
     args = parser.parse_args()
 
     if args.config:
@@ -138,3 +165,9 @@ if __name__ == "__main__":
         handle_service_conversion(args.service, args.module, args.output)
     elif args.device:
         handle_device_with_services_conversion(args.services, args.module, args.output)
+    elif args.ungroup:
+        if not args.output_path:
+            raise ValueError(
+                "Output path is required for ungrouping, use --output-path to specify the output path"
+            )
+        handle_ungroup(args.ungroup, args.output_path)
