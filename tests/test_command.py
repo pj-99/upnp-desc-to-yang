@@ -58,3 +58,42 @@ class TestCommand:
 
         # Clean up
         subprocess.run(["rm", output_path])
+
+    def test_command_device_with_embed_devices(self):
+        module_name = "test-embed-device"
+        output_path = f"{module_name}.yang"
+
+        convert_result = subprocess.run(
+            ["python", "convert.py", "--config", "tests/test.yaml"],
+            capture_output=True,
+            text=True,
+        )
+        assert (
+            convert_result.returncode == 0
+        ), "Convert device with embed devices failed"
+
+        result = subprocess.run(
+            ["pyang", "--lint", "--strict", output_path],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, "Lint device with service failed"
+
+        # Use the following command to check if the embed device is present
+        result = subprocess.run(
+            [
+                "pyang",
+                "-f",
+                "tree",
+                f"--tree-path={module_name}/devices/child-device-name/devices/another-grandchild-device",
+                output_path,
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert (
+            result.stdout.find("another-grandchild-device") != -1
+        ), "Embed device not found"
+
+        # Clean up
+        subprocess.run(["rm", output_path])

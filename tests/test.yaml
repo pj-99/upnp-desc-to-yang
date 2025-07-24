@@ -1,0 +1,11 @@
+device_name: test-embed-device
+services:
+  - input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml
+devices:
+  - device_name: child-device-name
+    services:
+      - input/upnp_specs/home_automation/lighting_control/service/Dimming1.xml
+    devices:
+      - device_name: another-grandchild-device
+        services:
+          - input/upnp_specs/home_automation/hvac/service/TemperatureSensor1.xml

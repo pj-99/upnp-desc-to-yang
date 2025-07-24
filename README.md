@@ -4,7 +4,7 @@
 [![Test](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml/badge.svg)](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml)
 ## Use case
 
-**Convert a UPnP service into a YANG file**
+**Convert a UPnP service into a single module**
 
 Usage:
 ```sh
@@ -16,7 +16,7 @@ Example:
 python convert.py --service input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml --module switch-power
 ```
 
-**Convert a UPnP device with service(s) in a single module**
+**Convert a UPnP device with service(s) into a single module**
 Usage:
 ```sh
 # Single service
@@ -41,9 +41,21 @@ python convert.py --device \
     --module dimmable-light
 ```
 
-# Nested devices (TODO)
+**Convert a UPnP device with embed device(s) into a single module**
 
-`TODO`
+- See `input.yaml` for input structure
+
+Usage
+```sh
+python convert.py --config [config.yaml]
+```
+
+Example:
+```sh
+python convert.py --config input.yaml
+```
+
+
 
 ### Ungroup options
 

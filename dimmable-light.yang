@@ -10,6 +10,17 @@ module dimmable-light {
     reference "RFC 8407";
   }
 
+  grouping dimmable-light-top {
+    description "dimmable-light";
+    container dimmable-light {
+      description "dimmable-light";
+      uses dimmable-light-desc-top;
+      uses dimmable-light-services-top;
+      uses dimmable-light-devices-top;
+    }
+
+  }
+
   grouping dimmable-light-desc-top {
     description "Device description";
     container device {
@@ -100,12 +111,21 @@ module dimmable-light {
 
       }
 
-      // TODO: check
       leaf presentation-url {
         type string;
         description "Presentation URL";
       }
 
+    }
+
+  }
+
+  grouping dimmable-light-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses dimming-top;
+      uses switch-power-top;
     }
 
   }
@@ -618,31 +638,10 @@ module dimmable-light {
 
   }
 
-  grouping dimmable-light-services-top {
-    description "Services";
-    container services {
-      description "Services";
-      uses dimming-top;
-      uses switch-power-top;
-    }
-
-  }
-
   grouping dimmable-light-devices-top {
     description "Embedded devices";
     container devices {
       description "Embedded devices";
-    }
-
-  }
-
-  grouping dimmable-light-top {
-    description "dimmable-light";
-    container dimmable-light {
-      description "dimmable-light";
-      uses dimmable-light-desc-top;
-      uses dimmable-light-services-top;
-      uses dimmable-light-devices-top;
     }
 
   }

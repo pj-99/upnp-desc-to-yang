@@ -82,7 +82,6 @@ class YangService:
         """
 
     def groupings_and_names(self) -> Tuple[str, str]:
-        print("groupings_and_names: ", f"{self.service_name}-top")
         return self.groupings(), f"{self.service_name}-top"
 
     def service_state_table_leaves(self):

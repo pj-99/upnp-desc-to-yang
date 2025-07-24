@@ -16,6 +16,7 @@ from yang_template import (
     get_children_devices_top_grouping,
     get_device_desc_top_grouping,
     get_device_top_grouping,
+    get_device_top_uses,
     get_service_top,
     get_services_top_grouping,
 )
@@ -35,42 +36,74 @@ def get_yang_service_groupings(
     return convert_service_to_yang(service).groupings_and_names()
 
 
+def top_grouping_name(root_name):
+    return f"{root_name}-top"
+
+
 class Device:
 
-    def __init__(self, name, contents, children=[]):
+    def __init__(self, name, groupings, uses, device_top_grouping: str):
         self.name = name
-        self.children: List[Device] = children
+        self.groupings: List = groupings
+        self.uses: str = uses
+        self.groupings_name = top_grouping_name(name)
+        self.device_top_grouping = device_top_grouping
 
-        self.contents: List = contents
-        self._repr = None
-        # # TODO: embed device might cause duplicated
-
-        self._set_repr()
+        # Init with no child
+        self.children: List[Device] = []
+        self.devices_top_grouping = get_children_devices_top_grouping(
+            self.name,
+            [],
+        )
 
     def add_child(self, child_device):
         self.children.append(child_device)
-        self._set_repr()
+        self.devices_top_grouping = get_children_devices_top_grouping(
+            self.name,
+            [top_grouping_name(child_device.name) for child_device in self.children],
+        )
 
-    def _set_repr(self):
-        # Make child contents
-        children_content = "\n".join(list(map(str, self.children)))
+    def dump(self):
+        # Collects all children groupings and names
+        children_groupings = []
+        children_groupings_names = []
 
-        content_str = "\n".join(self.contents)
+        # BFS
+        queue = self.children
+        while len(queue):
+            c = queue.pop(0)
+            for grand_child in c.children:
+                queue.append(grand_child)
 
-        self.__repr = content_str + children_content
+            children_groupings.extend(c.groupings)
+            children_groupings.append(c.devices_top_grouping)
+            children_groupings.append(c.device_top_grouping)
+
+            children_groupings_names.append(top_grouping_name(c.name))
+
+        grouping_str = "\n".join(self.groupings)
+        children_groupings_str = "\n".join(children_groupings)
+        content_str = (
+            self.device_top_grouping
+            + grouping_str
+            + self.devices_top_grouping
+            + children_groupings_str
+            + self.uses
+        )
+        return content_str
 
     def __repr__(self) -> str:
-        return self.__repr
+        return self.dump()
 
 
 def make_device_with_services(
     root_name,
     service_xml_files,
-    embed_devices=[],
 ) -> Device:
     """the content without module"""
     # Top level grouping
-    top_grouping_and_uses = get_device_top_grouping(root_name)
+    top_grouping = get_device_top_grouping(root_name)
+    top_uses = get_device_top_uses(root_name)
 
     # Device description
     device_desc_grouping = get_device_desc_top_grouping(root_name)
@@ -90,30 +123,19 @@ def make_device_with_services(
     services_top_grouping = get_services_top_grouping(root_name, all_service_names)
     all_service_groupings = "\n".join(all_service_groupings)
 
-    # Device list
-    # TODO: embed devices
-    all_devices = []
-    devices_grouping = get_children_devices_top_grouping(root_name, all_devices)
-
     contents = [
-        top_grouping_and_uses,
         device_desc_grouping,
         services_top_grouping,
         all_service_groupings,
-        devices_grouping,
     ]
-    device = Device(root_name, contents, children=embed_devices)
+    device = Device(root_name, contents, top_uses, top_grouping)
     return device
 
 
-def convert_device_with_services(
-    root_name, service_xml_files, embed_device_groupings=[]
-) -> str:
+def convert_device_with_services(root_name, service_xml_files) -> str:
     """Convert service and device into a YANG module"""
 
-    device: Device = make_device_with_services(
-        root_name, service_xml_files, embed_device_groupings
-    )
+    device: Device = make_device_with_services(root_name, service_xml_files)
 
     module = wrap_content_to_module(root_name, str(device))
 

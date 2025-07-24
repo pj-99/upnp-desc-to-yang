@@ -25,12 +25,16 @@ def get_device_top_grouping(device_name) -> str:
         }}
     }}
     
-    uses {device_name}-top;
+    """
+
+
+def get_device_top_uses(device_name) -> str:
+    return f"""
+        uses {device_name}-top;
     """
 
 
 def combine_uses_statements(groupings):
-    print("combine_uses_statements: ", groupings)
     return "\n".join([f"uses {grouping};" for grouping in groupings])
 
 

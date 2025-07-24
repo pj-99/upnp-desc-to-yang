@@ -10,6 +10,17 @@ module binary-light {
     reference "RFC 8407";
   }
 
+  grouping binary-light-top {
+    description "binary-light";
+    container binary-light {
+      description "binary-light";
+      uses binary-light-desc-top;
+      uses binary-light-services-top;
+      uses binary-light-devices-top;
+    }
+
+  }
+
   grouping binary-light-desc-top {
     description "Device description";
     container device {
@@ -100,12 +111,20 @@ module binary-light {
 
       }
 
-      // TODO: check
       leaf presentation-url {
         type string;
         description "Presentation URL";
       }
 
+    }
+
+  }
+
+  grouping binary-light-services-top {
+    description "Services";
+    container services {
+      description "Services";
+      uses switch-power-top;
     }
 
   }
@@ -207,30 +226,10 @@ module binary-light {
 
   }
 
-  grouping binary-light-services-top {
-    description "Services";
-    container services {
-      description "Services";
-      uses switch-power-top;
-    }
-
-  }
-
   grouping binary-light-devices-top {
     description "Embedded devices";
     container devices {
       description "Embedded devices";
-    }
-
-  }
-
-  grouping binary-light-top {
-    description "binary-light";
-    container binary-light {
-      description "binary-light";
-      uses binary-light-desc-top;
-      uses binary-light-services-top;
-      uses binary-light-devices-top;
     }
 
   }
