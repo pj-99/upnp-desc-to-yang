@@ -4,7 +4,7 @@
 [![Test](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml/badge.svg)](https://github.com/pj-99/upnp-desc-to-yang/actions/workflows/test.yml)
 ## Use case
 
-**Convert a UPnP service into a single module**
+### Convert a UPnP service into a single module
 
 Usage:
 ```sh
@@ -16,7 +16,7 @@ Example:
 python convert.py --service input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml --module switch-power
 ```
 
-**Convert a UPnP device with service(s) into a single module**
+### Convert a UPnP device with service(s) into a single module
 Usage:
 ```sh
 # Single service
@@ -43,7 +43,7 @@ python convert.py --device \
     --output output/runs
 ```
 
-**Convert a UPnP device with embed device(s) into a single module**
+### Convert a UPnP device with embed device(s) into a single module
 
 - See `input.yaml` for input structure
 
@@ -58,10 +58,8 @@ python convert.py --config input.yaml \
     --output output/runs
 ```
 
-
-
-### Ungroup options
-- Ungroup the `grouping` and `uses` statements, while remaining the structure unchanged.
+### Ungroup
+- Ungroup the `grouping` and `uses` statements in a yang file, while remaining the structure unchanged.
 
 
 Usage: Ungroup a yang file
@@ -71,7 +69,7 @@ python convert.py --ungroup [input.yang] --output-path [path/output.yang]
 
 Example:
 ```sh
-python convert.py --ungroup output/runs/binary-light.yang --output-path binary-light.yang
+python convert.py --ungroup output/runs/binary-light.yang --output-path output/runs/binary-light-ungrouped.yang
 ```
 
 ---
@@ -79,8 +77,11 @@ python convert.py --ungroup output/runs/binary-light.yang --output-path binary-l
 ## Useful commands by Pyang
 
 - Linting
-- Output
-
+```sh
+pyang --lint [your-module.yang]
+```
+- Output tree
+```sh
+pyang -f tree [your-module.yang]
+```
 ---
-
-## Test

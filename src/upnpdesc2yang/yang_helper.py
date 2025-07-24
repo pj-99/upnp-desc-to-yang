@@ -259,10 +259,11 @@ class YangModule:
 
     def __repr__(self):
 
-        # # common meta-data groupings
+        # common meta-data groupings
         meta_data_content = "\n".join(
             [get_send_events_grouping(), get_state_var_attr_grouping()]
         )
+
         return util.format_yang(
             f"""
             module {self.name} {{
