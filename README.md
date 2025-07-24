@@ -31,14 +31,16 @@ Example:
 python convert.py --device \
     --services \
         input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
-    --module binary-light
+    --module binary-light \
+    --output output/runs
 
 # Multiple service
 python convert.py --device \
     --services \
         input/upnp_specs/home_automation/lighting_control/service/Dimming1.xml \
         input/upnp_specs/home_automation/lighting_control/service/SwitchPower1.xml \
-    --module dimmable-light
+    --module dimmable-light \
+    --output output/runs
 ```
 
 **Convert a UPnP device with embed device(s) into a single module**
@@ -52,7 +54,8 @@ python convert.py --config [config.yaml]
 
 Example:
 ```sh
-python convert.py --config input.yaml
+python convert.py --config input.yaml \
+    --output output/runs
 ```
 
 
